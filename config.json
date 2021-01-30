@@ -1,0 +1,39 @@
+{
+    "channel": "race-channel",
+    "pagerRoleId": "632571703398105098",
+    "maxOffsetSeconds": "15",
+    "timeoutMinutes": "45",
+    "minimumNewIntervalMinutes": "1",
+    "defaultLeaderboardSize": "25",
+    "defaultOffset": "10400",
+    "rematchTimeoutSeconds": "8000",
+    "voiceChannelPrefix": "Race-Channel",
+    "defaultCategory": "ALTTPR",
+    "referees": ["Jexreffy", "Jexbot"],
+    "offsets": [{
+            "alias": "psx",
+            "value": 10
+        },
+        {
+            "alias": "xb",
+            "value": 3
+        },
+        {
+            "alias": "saturn",
+            "value": 27
+        },
+        {
+            "alias": "emusaturn",
+            "value": 23
+        },
+        {
+            "alias": "dxc",
+            "value": 4.5
+        }
+    ],
+    "categories": [{
+            "name": "ALTTPR",
+            "aliases": ["alttpr"]
+        }
+    ]
+}
