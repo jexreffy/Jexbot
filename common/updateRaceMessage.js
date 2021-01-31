@@ -1,17 +1,20 @@
 module.exports = (race, channel) => {
-    let output = 'Race Initiated!';
+    let message = {};
+    let embed = {};
+    embed.color = 65280;
+    embed.title = race.status;
+
+    let desc = "The Legend of Zelda: A Link to the Past Randomizer Friday Night Standard Race"
 
     if (race.seed) {
-        output += '\n Seed: ' + race.seed;
+        desc += "\n Seed: " + race.seed;
     }
 
     if (race.kadgar) {
-        output += '\n <' + race.kadgar + '>';
+        desc += "\n Multistream: <" + race.kadgar + ">";
     }
 
-    const centerPad = (str, length, char = ' ') => str.padStart((str.length + length) / 2, char).padEnd(length, char);
-    output += '\n       `' + centerPad(((race.tournament ? 'TOURNAMENT ' : '') + race.status), 33) + '`';
-    output += '\n       `' + centerPad(('Category: ' + race.category), 33) + '`';
+    embed.description = desc;
 
     race.players.sort(function(a, b) {
         if (a.time == null) {
@@ -24,12 +27,12 @@ module.exports = (race, channel) => {
                 return -1;
             }
         }
-        if (b.forfeited == true) {
+        if (b.forfeited) {
             if (!a.forfeited) {
                 return 1;
             }
         }
-        if (a.forfeited == true) {
+        if (a.forfeited) {
             if (!b.forfeited) {
                 return -1;
             }
@@ -37,7 +40,7 @@ module.exports = (race, channel) => {
         if (a.time > b.time) {
             return 1;
         }
-        if (a.time == b.time) {
+        if (a.time === b.time) {
             return 0;
         }
         if (a.time < b.time) {
@@ -46,40 +49,61 @@ module.exports = (race, channel) => {
         return 0;
     });
 
-    for (let i = 0; i < race.players.length; i++) {
-        if (i == 0 && race.players[i].time && race.finished) {
-            output += '\n :first_place:';
-        } else if (i == 1 && race.players[i].time && race.finished) {
-            output += '\n :second_place:';
-        } else if (i == 2 && race.players[i].time && race.finished) {
-            output += '\n :third_place:';
-        } else {
-            output += '\n       ';
+    if (race.players.length > 0) {
+        let names = "";
+        let status = "";
+        let times = "";
+        for (let i = 0; i < race.players.length; i++) {
+            names += ((i !== 0) ? '\n' : '') + race.players[i].username;
+
+            if (race.players[i].time) {
+                let time = race.players[i].time;
+                let seconds = Math.floor((time / 1000) % 60);
+                let minutes = Math.floor((time / (1000 * 60)) % 60);
+                let hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+                status += ((i !== 0) ? '\n' : '') + 'Finished';
+                times += ((i !== 0) ? '\n' : '') + hours.toString().padStart(2, "0") + ':' + minutes.toString().padStart(2, "0") + ':' + seconds.toString().padStart(2, "0");
+            } else if (race.players[i].forfeited) {
+                status += ((i !== 0) ? '\n' : '') + 'Forfeit';
+                times += ((i !== 0) ? '\n' : '') + '---';
+            } else if (race.players[i].ready) {
+                status += ((i !== 0) ? '\n' : '') + 'Ready';
+                times += ((i !== 0) ? '\n' : '') + '---';
+            } else {
+                status += ((i !== 0) ? '\n' : '') + 'Not Ready';
+                times += ((i !== 0) ? '\n' : '') + '---';
+            }
         }
 
-        output += ('` ' + race.players[i].username.replace(/\W/gi, "")).padEnd(20, " ");
-
-        if (race.players[i].time || race.players[i].forfeited) {
-            let time = race.players[i].time;
-            let seconds = Math.floor((time / 1000) % 60);
-            let minutes = Math.floor((time / (1000 * 60)) % 60);
-            let hours = Math.floor((time / (1000 * 60 * 60)) % 24);
-            let rightCol = (race.players[i].forfeited) ? 'forfeited' : hours.toString().padStart(2, "0") + ':' + minutes.toString().padStart(2, "0") + ':' + seconds.toString().padStart(2, "0") + ' ';
-            if (race.finished && race.players[i].adjustment) {
-                rightCol += ' ' + ((race.players[i].adjustment > 0) ? '+' + race.players[i].adjustment : race.players[i].adjustment);
-            }
-            output += (rightCol).padEnd(14, " ");
+        let commands = "";
+        if (race.started) {
+            commands = "Prefixes: `.` or `!`" +
+                       "\n.done/.time/Emote 🏁 - Finishes the race for the player" +
+                       "\n.forfeit/.ff/Emote ❌ - Forfeits the race for the player";
         } else {
-            let rightCol ='';
-            if (!race.started) {
-                rightCol = (race.players[i].ready) ? 'ready ' : ' ';
-            }
-            output += (rightCol).padEnd(14, " ");
+            commands = "Prefixes: `.` or `!`" +
+                "\n.join/Emote ➕ - Joins the current race" +
+                "\n.leave/Unemote ➕ - Leaves the current race" +
+                "\n.ready/Emote ✅ - Sets player ready to start" +
+                "\n.unready/Unemote ✅ - Sets player not ready to start" +
+                "\n.setseed {URL} - Sets the seed for the Race" +
+                "\n.stream {Twitch username} - Changes the Twitch Username if it is different from the Discord Username";
         }
-        output += '`';
+
+        embed.fields = [
+            {'name': 'Commands', 'value': commands, 'inline': false},
+            {'name': 'Player', 'value': names, 'inline': true},
+            {'name': 'Status', 'value': status, 'inline': true},
+            {'name': 'Time', 'value': times, 'inline': true},
+        ];
+    }
+
+    message = {
+        'content': "",
+        'embed': embed
     }
 
     const raceMessage = channel.fetchMessage(race.messageId).then(x =>
-        x.edit(output).then().catch(console.error)).catch(console.error);
+        x.edit(message).then().catch(console.error)).catch(console.error);
     return;
 };

@@ -1,13 +1,9 @@
 const config = require('../config.json');
-const seed = require('../commands/seed');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (race, channel, message) => {
     if ((race.tournament && message.member && message.member.hasPermission('KICK_MEMBERS', false, false)) || race.tournament == false) {
         if (!race.finished) {
-            if (race.category == "Randomizer GSB") {
-                race.seed = seed();
-            }
             race.started = false;
             race.startedAt = null;
             race.initiatedAt = new Date().getTime();

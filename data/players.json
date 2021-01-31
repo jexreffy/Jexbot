@@ -1,6 +1,10 @@
 [
   {
-    "username": "jexreffy"
+    "username": "jexreffy",
+    "ALTTPR": {
+      "elo": 1275,
+      "matches": 9
+    }
   },
   {
     "username": "ZephyrBlayze"
@@ -10,5 +14,16 @@
   },
   {
     "username": "TjMaelstrom"
+  },
+  {
+    "username": "The Lost Carol"
+  },
+  {
+    "username": "Katiebug",
+    "twitch": "Katiebug_931",
+    "ALTTPR": {
+      "elo": 725,
+      "matches": 9
+    }
   }
 ]

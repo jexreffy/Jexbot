@@ -14,6 +14,9 @@ module.exports = (race, channel, username, message) => {
             userTwitch = username;
         }
 
+        let role = message.guild.roles.find(r => r.name === "Racer");
+        message.member.removeRole(role).catch(console.error);
+
         race.kadgar = race.kadgar.replace(new RegExp(userTwitch + '/', 'i'), "");
 
         let allReady = race.players.every(x => x.ready == true);

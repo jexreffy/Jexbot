@@ -2,7 +2,6 @@ const updateRaceMessage = require('../common/updateRaceMessage');
 const data = require('../data/data.js');
 const startRace = require('../common/startRace');
 const config = require('../config.json');
-const lock = require('../commands/lock');
 
 module.exports = (race, channel, message) => {
     if (message.member && message.member.hasPermission('KICK_MEMBERS', false, false) || config.referees.includes(message.author.username)) {
@@ -20,12 +19,11 @@ module.exports = (race, channel, message) => {
     
             race.kadgar = race.kadgar.replace(new RegExp(userTwitch + '/', 'i'), "");
     
-            let allReady = race.players.every(x => x.ready == true);
+            let allReady = race.players.every(x => x.ready === true);
             if (!race.started && allReady && race.players.length > 1) {
                 startRace(race, channel);
             } else {
                 if (race.remainingPlayers < 1) {
-                    lock(channel);
                     race.finished = true;
                     race.status = 'RACE FINISHED';
                     race.players.sort(function(a, b) {
@@ -39,12 +37,12 @@ module.exports = (race, channel, message) => {
                                 return -1;
                             }
                         }
-                        if (b.forfeited == true) {
+                        if (b.forfeited) {
                             if (!a.forfeited) {
                                 return 1;
                             }
                         }
-                        if (a.forfeited == true) {
+                        if (a.forfeited) {
                             if (!b.forfeited) {
                                 return -1;
                             }
@@ -52,7 +50,7 @@ module.exports = (race, channel, message) => {
                         if (a.time > b.time) {
                             return 1;
                         }
-                        if (a.time == b.time) {
+                        if (a.time === b.time) {
                             return 0;
                         }
                         if (a.time < b.time) {

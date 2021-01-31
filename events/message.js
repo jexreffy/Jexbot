@@ -1,7 +1,6 @@
 const config = require('../config.json');
 const newrace = require('../commands/new');
 const togglePager = require('../commands/togglePager');
-const seed = require('../commands/seed');
 const leaderboard = require('../commands/leaderboard');
 const rank = require('../commands/rank');
 const stream = require('../commands/stream');
@@ -19,9 +18,7 @@ const stats = require('../commands/stats');
 const submit = require('../commands/submit');
 const tournament = require('../commands/tournament');
 const kick = require('../commands/kick');
-const category = require('../commands/category');
 const setSeed = require('../commands/setSeed');
-const lock = require('../commands/lock');
 const aliases = require('../commands/aliases');
 
 module.exports = (client, race, message) => {
@@ -29,9 +26,6 @@ module.exports = (client, race, message) => {
 
     if (message.content.match(/^^[.!]((\btoggle\b)|(\btogglePager\b)|(\bpager\b))/i)) {
         return togglePager(message);
-    }
-    if (message.channel === channel && message.content.match(/^[.!](\bseed\b)( ){0,1}((\badventure\b)|(\bagonize\b)|(\boptimize\b)|(\bglitch-hard\b)|(\bglitch\b)){0,1}( ){0,1}(\bbingo\b){0,1}( ){0,1}((\bhex\b)|(\bmission\b)){0,1}( ){0,1}(\brando\b){0,1}/i)) {
-        return seed(message, channel);
     }
     if (message.channel === channel && message.content.match(/^[.!](\bleaderboard\b) ([ a-zA-Z0-9%]{3,20})/i)) {
         return leaderboard(channel, message);
@@ -47,9 +41,6 @@ module.exports = (client, race, message) => {
     }
     if (message.channel === channel && message.content.match(/^[.!]((\bclose\b)|(\bend\b)|(\bexit\b))/i)) {
         return close(race, message, channel);
-    }
-    if (message.channel === channel && message.content.match(/^[.!](\bcategory\b) ("[a-zA-Z0-9% ]{0,40}")/i)) {
-        return category(race, channel, message);
     }
     if (message.channel === channel && message.content.match(/^[.!](\btournament\b)/i)) {
         return tournament(race, message);
@@ -69,7 +60,7 @@ module.exports = (client, race, message) => {
     if (message.channel === channel && message.content.match(/^[.!]((\bdone\b)|(\btime\b))/i)) {
         return done(race, channel, message.author.username, message);
     }
-    if (message.channel === channel && message.content.match(/^[.!](\bforfeit\b)/i)) {
+    if (message.channel === channel && message.content.match(/^[.!](\bforfeit\b)|(\bff\b)/i)) {
         return forfeit(race, channel, message.author.username, message);
     }
     if (message.channel === channel && message.content.match(/^[.!](\brematch\b)/i)) {
@@ -90,11 +81,8 @@ module.exports = (client, race, message) => {
     if (message.channel === channel && message.content.match(/^[.!](\bkick\b)([ ]{0,1})([a-zA-Z0-9%]{0,20})/i)) {
         return kick(race, channel, message);
     }
-    if (message.channel === channel && message.content.match(/^[.!](\bsetseed\b) ("https:\/\/[a-zA-Z0-9_%\/?,.]{4,70}")/i)) {
+    if (message.channel === channel && message.content.match(/^[.!](\bsetseed\b) (https:\/\/[a-zA-Z0-9_%\/?,.]{4,70})/i)) {
         return setSeed(race, channel, message.author.username, message);
-    }
-    if (message.channel === channel && message.content.match(/^[.!](\block\b)/i)) {
-        return lock(channel, message);
     }
     if (message.channel === channel && message.content.match(/^[.!](\baliases\b)([ ]{0,1})("[a-zA-Z0-9% ]{0,40}"){0,1}/i)) {
         return aliases(channel, message);

@@ -1,7 +1,6 @@
 ﻿const updateRaceMessage = require('../common/updateRaceMessage');
 const elo = require('../elo/elo.js');
 const sleep = m => new Promise(r => setTimeout(r, m));
-const lock = require('../commands/lock');
 
 module.exports = (race, channel, username, message) => {
     let player = race.players.find(x => x.username === username);
@@ -19,7 +18,6 @@ module.exports = (race, channel, username, message) => {
         let hours = Math.floor((time / (1000 * 60 * 60)) % 24);
         let outputTime = hours.toString().padStart(2, "0") + ':' + minutes.toString().padStart(2, "0") + ':' + seconds.toString().padStart(2, "0");
         if (race.remainingPlayers < 1) {
-            lock(channel);
             race.finished = true;
             race.status = 'RACE FINISHED';
             race.players.sort(function(a, b) {
@@ -33,12 +31,12 @@ module.exports = (race, channel, username, message) => {
                         return -1;
                     }
                 }
-                if (b.forfeited == true) {
+                if (b.forfeited === true) {
                     if (!a.forfeited) {
                         return 1;
                     }
                 }
-                if (a.forfeited == true) {
+                if (a.forfeited === true) {
                     if (!b.forfeited) {
                         return -1;
                     }
@@ -46,7 +44,7 @@ module.exports = (race, channel, username, message) => {
                 if (a.time > b.time) {
                     return 1;
                 }
-                if (a.time == b.time) {
+                if (a.time === b.time) {
                     return 0;
                 }
                 if (a.time < b.time) {
@@ -58,6 +56,7 @@ module.exports = (race, channel, username, message) => {
             for (let i = 0; i < race.players.length; i++) {
                 race.players[i].adjustment = adjustments[i];
             }
+
             channel.fetchMessage(race.messageId).then(x =>
                 (async() => {
                     await x.clearReactions().then().catch(console.error);

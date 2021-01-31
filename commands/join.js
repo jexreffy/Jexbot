@@ -26,7 +26,7 @@ module.exports = (race, channel, username, message) => {
                     race.remainingPlayers += 1;
 
                     let role = message.guild.roles.find(r => r.name === "Racer");
-                    message.member.addRole(role).catch(console.error);
+                    message.member.addRole(role).then().catch(console.error);
 
                     let userTwitch = data.getPlayerTwitch(username);
                     if (userTwitch) {
@@ -35,7 +35,6 @@ module.exports = (race, channel, username, message) => {
                         race.kadgar += username.replace(/\W/gi, "") + '/';
                     }
 
-                    message.delete().catch(console.error);
                     updateRaceMessage(race, channel);}
                 ).catch(console.error);
             } else if (timedOut) {
@@ -47,7 +46,7 @@ module.exports = (race, channel, username, message) => {
             race.remainingPlayers += 1;
 
             let role = message.guild.roles.find(r => r.name === "Racer");
-            message.member.addRole(role).catch(console.error);
+            message.member.addRole(role).then().catch(console.error);
 
             let userTwitch = data.getPlayerTwitch(username);
             if (userTwitch) {
@@ -56,7 +55,6 @@ module.exports = (race, channel, username, message) => {
                 race.kadgar += username.replace(/\W/gi, "") + '/';
             }
 
-            message.delete().catch(console.error);
             updateRaceMessage(race, channel);
         }
     }

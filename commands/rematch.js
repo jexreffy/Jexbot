@@ -1,21 +1,10 @@
 const config = require('../config.json');
-const seed = require('../commands/seed');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (race, channel, username, message) => {
     let player = race.players.find(x => x.username === username);
 
     if (player && race.finished) {
-        if (race.category == "Randomizer Safe") {
-            race.seed = seed();
-        } else if (race.category == "Bingo") {
-            race.seed = seed(null, null, true, 'hex', false);
-        } else if (race.category == "Randomizer Adventure") {
-            race.seed = seed(null, null, null, null, null, "adventure");
-        } else if (race.category == "Randomizer Speedrun") {
-            race.seed = seed(null, null, null, null, null, "speedrun");
-        }
-        
         race.started = false;
         race.finished = false;
         race.remainingPlayers = race.players.length;
