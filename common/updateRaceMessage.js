@@ -87,7 +87,7 @@ module.exports = (race, channel) => {
                 "\n.ready - Sets player ready to start" +
                 "\n.unready - Sets player not ready to start" +
                 "\n.setseed {URL} - Sets the seed for the Race" +
-                "\n.stream {Twitch username} - Changes the Twitch Username if it is different from the Discord Username";
+                "\n.setStream/twitch {Twitch username} - Changes the Twitch Username if it is different from the Discord Username";
         }
 
         embed.fields = [

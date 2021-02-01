@@ -3,7 +3,7 @@ const newrace = require('../commands/new');
 const togglePager = require('../commands/togglePager');
 const leaderboard = require('../commands/leaderboard');
 const rank = require('../commands/rank');
-const stream = require('../commands/stream');
+const setStream = require('../commands/setStream');
 const join = require('../commands/join');
 const close = require('../commands/close');
 const leave = require('../commands/leave');
@@ -32,8 +32,8 @@ module.exports = (client, race, message) => {
     if (message.channel === channel && message.content.match(/^[.!](\brank\b) ([ a-zA-Z0-9%]{3,20})/i)) {
         return rank(channel, message, message.author.username);
     }
-    if (message.channel === channel && message.content.match(/^[.!]((\bstream\b)|(\btwitch\b)) ([a-zA-Z0-9_]{4,20})/i)) {
-        return stream(race, channel, message, message.author.username);
+    if (message.channel === channel && message.content.match(/^[.!]((\bsetStream\b)|(\btwitch\b)) ([a-zA-Z0-9_]{4,20})/i)) {
+        return setStream(race, channel, message, message.author.username);
     }
     if (message.channel === channel && message.content.match(/^[.!]((\bstartrace\b)|(\bnew\b)|(\benter\b))([ ]{0,1})("[a-zA-Z0-9% ]{0,40}"){0,1}([ ]{0,1})([a-z]{0,10})(\b tournament\b){0,1}/i)) {
         return newrace(race, channel, message);
