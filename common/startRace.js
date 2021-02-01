@@ -44,13 +44,6 @@ module.exports = (race, channel) => {
         await sleep(2000);
         race.status = 'RACE STARTED';
         updateRaceMessage(race, channel);
-        channel.fetchMessage(race.messageId).then(x =>
-            (async() => {
-                await x.clearReactions().then().catch(console.error);
-                await x.react('🏁').then().catch(console.error);
-                await x.react('❌').then().catch(console.error);
-            })()
-        ).catch(console.error);
     })();
 
     return;

@@ -62,12 +62,6 @@ module.exports = (race, channel, message) => {
                     for (let i = 0; i < race.players.length; i++) {
                         race.players[i].adjustment = adjustments[i];
                     }
-                    channel.fetchMessage(race.messageId).then(x =>
-                        (async() => {
-                            await x.clearReactions().then().catch(console.error);
-                            await x.react('↩').then().catch(console.error);
-                        })()
-                    ).catch(console.error);
                 }
                 updateRaceMessage(race, channel);
             }

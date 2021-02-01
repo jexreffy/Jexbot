@@ -7,8 +7,10 @@ module.exports = (race, channel, username, message) => {
 
     if (race.started && player && !player.finished && !player.forfeited) {
         player.forfeited = true;
-
         race.remainingPlayers -= 1;
+
+        let role = message.guild.roles.find(r => r.name === "Racer");
+        message.member.removeRole(role).then().catch(console.error);
 
         if (race.remainingPlayers < 1) {
             race.finished = true;
@@ -49,12 +51,6 @@ module.exports = (race, channel, username, message) => {
             for (let i = 0; i < race.players.length; i++) {
                 race.players[i].adjustment = adjustments[i];
             }
-            channel.fetchMessage(race.messageId).then(x =>
-                (async() => {
-                    await x.clearReactions().then().catch(console.error);
-                    await x.react('↩').then().catch(console.error);
-                })()
-            ).catch(console.error);
         }
 
         updateRaceMessage(race, channel);

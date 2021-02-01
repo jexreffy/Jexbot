@@ -13,7 +13,6 @@ const done = require('../commands/done');
 const forfeit = require('../commands/forfeit');
 const offset = require('../commands/offset');
 const reset = require('../commands/reset');
-const rematch = require('../commands/rematch');
 const stats = require('../commands/stats');
 const submit = require('../commands/submit');
 const tournament = require('../commands/tournament');
@@ -62,9 +61,6 @@ module.exports = (client, race, message) => {
     }
     if (message.channel === channel && message.content.match(/^[.!](\bforfeit\b)|(\bff\b)/i)) {
         return forfeit(race, channel, message.author.username, message);
-    }
-    if (message.channel === channel && message.content.match(/^[.!](\brematch\b)/i)) {
-        return rematch(race, channel, message.author.username, message);
     }
     if (message.channel === channel && message.content.match(/^[.!](\boffset\b) (([0-9]+)|(\bpsx\b)|(\bxb\b))/i)) {
         return offset(race, channel, message);

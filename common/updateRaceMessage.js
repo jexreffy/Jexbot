@@ -78,14 +78,14 @@ module.exports = (race, channel) => {
         let commands = "";
         if (race.started) {
             commands = "Prefixes: `.` or `!`" +
-                       "\n.done/.time/Emote 🏁 - Finishes the race for the player" +
-                       "\n.forfeit/.ff/Emote ❌ - Forfeits the race for the player";
+                       "\n.done/.time - Finishes the race for the player" +
+                       "\n.forfeit/.ff - Forfeits the race for the player";
         } else {
             commands = "Prefixes: `.` or `!`" +
-                "\n.join/Emote ➕ - Joins the current race" +
-                "\n.leave/Unemote ➕ - Leaves the current race" +
-                "\n.ready/Emote ✅ - Sets player ready to start" +
-                "\n.unready/Unemote ✅ - Sets player not ready to start" +
+                "\n.join- Joins the current race" +
+                "\n.leave - Leaves the current race" +
+                "\n.ready - Sets player ready to start" +
+                "\n.unready - Sets player not ready to start" +
                 "\n.setseed {URL} - Sets the seed for the Race" +
                 "\n.stream {Twitch username} - Changes the Twitch Username if it is different from the Discord Username";
         }

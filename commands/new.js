@@ -41,10 +41,6 @@ module.exports = (race, channel, message) => {
                 };
                 channel.send(embed).then(x => {
                     race.messageId = x.id;
-                    (async() => {
-                        await x.react('➕').then().catch(console.error);
-                        await x.react('✅').then().catch(console.error);
-                    })();
                     updateRaceMessage(race, channel);
                     resolve();
                 }).catch((error) => {

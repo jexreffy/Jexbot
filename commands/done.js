@@ -7,16 +7,17 @@ module.exports = (race, channel, username, message) => {
 
     if (race.started && player && !player.finished && !player.forfeited) {
         player.finished = true;
+
         let time = new Date().getTime() - race.startedAt;
         if (time < 0) {
             time = 0;
         }
         player.time = time;
         race.remainingPlayers -= 1;
-        let seconds = Math.floor((time / 1000) % 60);
-        let minutes = Math.floor((time / (1000 * 60)) % 60);
-        let hours = Math.floor((time / (1000 * 60 * 60)) % 24);
-        let outputTime = hours.toString().padStart(2, "0") + ':' + minutes.toString().padStart(2, "0") + ':' + seconds.toString().padStart(2, "0");
+
+        let role = message.guild.roles.find(r => r.name === "Racer");
+        message.member.removeRole(role).then().catch(console.error);
+
         if (race.remainingPlayers < 1) {
             race.finished = true;
             race.status = 'RACE FINISHED';
@@ -56,13 +57,6 @@ module.exports = (race, channel, username, message) => {
             for (let i = 0; i < race.players.length; i++) {
                 race.players[i].adjustment = adjustments[i];
             }
-
-            channel.fetchMessage(race.messageId).then(x =>
-                (async() => {
-                    await x.clearReactions().then().catch(console.error);
-                    await x.react('↩').then().catch(console.error);
-                })()
-            ).catch(console.error);
         }
         updateRaceMessage(race, channel);
     } else {
