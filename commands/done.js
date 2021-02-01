@@ -1,4 +1,5 @@
-﻿const updateRaceMessage = require('../common/updateRaceMessage');
+﻿const config = require('../config.json');
+const updateRaceMessage = require('../common/updateRaceMessage');
 const elo = require('../elo/elo.js');
 const sleep = m => new Promise(r => setTimeout(r, m));
 
@@ -15,7 +16,7 @@ module.exports = (race, channel, username, message) => {
         player.time = time;
         race.remainingPlayers -= 1;
 
-        let role = message.guild.roles.find(r => r.name === "Racer");
+        let role = message.guild.roles.find(r => r.name === config.racerRole);
         message.member.removeRole(role).then().catch(console.error);
 
         if (race.remainingPlayers < 1) {

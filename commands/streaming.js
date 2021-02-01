@@ -2,11 +2,13 @@ const data = require('../data/data.js');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (race, channel, message, username) => {
-    let match = message.content.match(/^[.!]((\bsetstream\b)|(\btwitch\b)) ([a-zA-Z0-9_]{4,20})/i);
-    let stream = match[4];
+    let match = message.content.match(/^[.!](\bstreaming\b) ((\bon\b)|(\boff\b))/i);
+    let isStreaming = match[3] === "on";
 
     let player = race.players.find(x => x.username === username);
     if (player) {
+        data.setPlayerStreaming(username, isStreaming);
+
         let userTwitch = data.getPlayerTwitch(username);
         if (!userTwitch) {
             userTwitch = username;
@@ -14,13 +16,11 @@ module.exports = (race, channel, message, username) => {
 
         race.kadgar = race.kadgar.replace(new RegExp(userTwitch + '/', 'i'), "");
 
-        data.setPlayerTwitch(username, stream);
-
-        if (data.getPlayerStreaming(username)) race.kadgar += stream + '/';
+        if (isStreaming) race.kadgar += userTwitch + '/';
 
         updateRaceMessage(race, channel);
     } else {
-        data.setPlayerTwitch(username, stream);
+        data.setPlayerTwitch(username, isStreaming);
     }
 
     if (message) {

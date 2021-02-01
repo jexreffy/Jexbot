@@ -55,6 +55,15 @@ module.exports = {
         players[playerIndex].twitch = twitch;
         savePlayer(players[playerIndex]);
     },
+    getPlayerStreaming: function(username) {
+        let playerIndex = getPlayerIndexByName(username);
+        return players[playerIndex].streaming;
+    },
+    setPlayerStreaming: function(username, streaming) {
+        let playerIndex = getPlayerIndexByName(username);
+        players[playerIndex].streaming = streaming;
+        savePlayer(players[playerIndex]);
+    },
     getPlayerElo: function(username, category) {
         let playerIndex = getPlayerIndexByName(username);
         if (!players[playerIndex][category]) {

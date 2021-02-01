@@ -1,5 +1,6 @@
 {
-    "channel": "race-channel",
+    "channel": "lttp-race-bot",
+    "racerRole": "Racer",
     "pagerRoleId": "632571703398105098",
     "maxOffsetSeconds": "0",
     "timeoutMinutes": "45",
@@ -9,7 +10,7 @@
     "rematchTimeoutSeconds": "8000",
     "voiceChannelPrefix": "Race-Channel",
     "defaultCategory": "ALTTPR",
-    "referees": ["Jexreffy", "Jexbot"],
+    "referees": ["Jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken"],
     "offsets": [],
     "categories": [{
             "name": "ALTTPR",

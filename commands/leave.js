@@ -1,3 +1,4 @@
+const config = require('../config.json');
 const data = require('../data/data.js');
 const startRace = require('../common/startRace');
 const updateRaceMessage = require('../common/updateRaceMessage');
@@ -14,7 +15,7 @@ module.exports = (race, channel, username, message) => {
             userTwitch = username;
         }
 
-        let role = message.guild.roles.find(r => r.name === "Racer");
+        let role = message.guild.roles.find(r => r.name === config.racerRole);
         message.member.removeRole(role).catch(console.error);
 
         race.kadgar = race.kadgar.replace(new RegExp(userTwitch + '/', 'i'), "");

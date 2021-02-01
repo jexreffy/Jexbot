@@ -25,14 +25,16 @@ module.exports = (race, channel, username, message) => {
                     race.players.push(newPlayer);
                     race.remainingPlayers += 1;
 
-                    let role = message.guild.roles.find(r => r.name === "Racer");
+                    let role = message.guild.roles.find(r => r.name === config.racerRole);
                     message.member.addRole(role).then().catch(console.error);
 
-                    let userTwitch = data.getPlayerTwitch(username);
-                    if (userTwitch) {
-                        race.kadgar += userTwitch + '/';
-                    } else {
-                        race.kadgar += username.replace(/\W/gi, "") + '/';
+                    if (data.getPlayerStreaming(username)) {
+                        let userTwitch = data.getPlayerTwitch(username);
+                        if (userTwitch) {
+                            race.kadgar += userTwitch + '/';
+                        } else {
+                            race.kadgar += username.replace(/\W/gi, "") + '/';
+                        }
                     }
 
                     updateRaceMessage(race, channel);}
