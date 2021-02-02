@@ -2,8 +2,8 @@ const data = require('../data/data.js');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (race, channel, message, username) => {
-    let match = message.content.match(/^[.!]((\bsetstream\b)|(\btwitch\b)) ([a-zA-Z0-9_]{4,20})/i);
-    let stream = match[4];
+    let match = message.content.match(/^[.!](\btwitch\b) ([a-zA-Z0-9_]{4,20})/i);
+    let stream = match[2];
 
     let player = race.players.find(x => x.username === username);
     if (player) {

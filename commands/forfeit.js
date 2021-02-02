@@ -10,8 +10,8 @@ module.exports = (race, channel, username, message) => {
         player.forfeited = true;
         race.remainingPlayers -= 1;
 
-        let role = message.guild.roles.find(r => r.name === config.racerRole);
-        message.member.removeRole(role).then().catch(console.error);
+        let role = message.guild.roles.cache.find(r => r.name === config.racerRole);
+        message.member.roles.remove(role.id).then().catch(console.error);
 
         if (race.remainingPlayers < 1) {
             race.finished = true;

@@ -1,7 +1,6 @@
 {
     "channel": "lttp-race-bot",
     "racerRole": "Racer",
-    "pagerRoleId": "632571703398105098",
     "maxOffsetSeconds": "0",
     "timeoutMinutes": "45",
     "minimumNewIntervalMinutes": "1",

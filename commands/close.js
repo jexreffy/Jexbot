@@ -7,8 +7,6 @@ module.exports = (race, message, channel) => {
             race.finished = true;
             race.seed = null;
             race.status = 'RACE CLOSED';
-            channel.fetchMessage(race.messageId).then(x =>
-                x.clearReactions().then().catch(console.error)).catch(console.error);
             updateRaceMessage(race, channel);
         } else if (race.messageId && !race.finished) {
             channel.send('Can\'t close race this soon!').then().catch(console.error);

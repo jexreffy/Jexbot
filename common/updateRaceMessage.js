@@ -117,11 +117,9 @@ module.exports = (race, channel) => {
     ];
 
     message = {
-        'content': "",
+        'content': "Let's get ready to Rando!!!",
         'embed': embed
     }
 
-    const raceMessage = channel.fetchMessage(race.messageId).then(x =>
-        x.edit(message).then().catch(console.error)).catch(console.error);
-    return;
+    channel.messages.fetch(race.messageId).then(x => x.edit(message).then().catch(console.error)).catch(console.error);
 };

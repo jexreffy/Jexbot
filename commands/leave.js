@@ -15,16 +15,15 @@ module.exports = (race, channel, username, message) => {
             userTwitch = username;
         }
 
-        let role = message.guild.roles.find(r => r.name === config.racerRole);
-        message.member.removeRole(role).catch(console.error);
+        let role = message.guild.roles.cache.find(r => r.name === config.racerRole);
+        message.member.roles.remove(role.id).then().catch(console.error);
 
         race.mutlistream = race.mutlistream.replace(new RegExp(userTwitch + '/', 'i'), "");
 
-        let allReady = race.players.every(x => x.ready == true);
+        let allReady = race.players.every(x => x.ready === true);
         if (allReady && race.players.length > 1) {
             startRace(race, channel);
         } else {
-            let playersReady = race.players.filter(x => x.ready == true).length;
             updateRaceMessage(race, channel);
         }
     } else {

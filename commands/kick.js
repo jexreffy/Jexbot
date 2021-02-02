@@ -11,12 +11,15 @@ module.exports = (race, channel, message) => {
         if (!race.finished && player) {
             race.players.splice(race.players.indexOf(player), 1);
             race.remainingPlayers -= 1;
-    
-            let userTwitch = data.getPlayerTwitch(player.username);
+
+            let userTwitch = data.getPlayerTwitch(username);
             if (!userTwitch) {
-                userTwitch = player.username;
+                userTwitch = username;
             }
-    
+
+            let role = message.guild.roles.cache.find(r => r.name === config.racerRole);
+            message.member.roles.remove(role.id).then().catch(console.error);
+
             race.mutlistream = race.mutlistream.replace(new RegExp(userTwitch + '/', 'i'), "");
     
             let allReady = race.players.every(x => x.ready === true);
