@@ -2,8 +2,8 @@
   {
     "username": "jexreffy",
     "ALTTPR": {
-      "elo": 1310,
-      "matches": 12
+      "elo": 1270,
+      "matches": 13
     },
     "streaming": true
   },
@@ -11,10 +11,21 @@
     "username": "ZephyrBlayze"
   },
   {
-    "username": "PhantomRyu"
+    "username": "PhantomRyu",
+    "streaming": false,
+    "twitch": "phantomryu",
+    "ALTTPR": {
+      "elo": 1115,
+      "matches": 1
+    }
   },
   {
-    "username": "TjMaelstrom"
+    "username": "TjMaelstrom",
+    "streaming": false,
+    "ALTTPR": {
+      "elo": 1215,
+      "matches": 1
+    }
   },
   {
     "username": "The Lost Carol"
@@ -26,5 +37,26 @@
       "elo": 690,
       "matches": 12
     }
+  },
+  {
+    "username": "Antissim",
+    "streaming": false,
+    "ALTTPR": {
+      "elo": 920,
+      "matches": 1
+    }
+  },
+  {
+    "username": "KwehstopherWarken",
+    "streaming": true,
+    "ALTTPR": {
+      "elo": 820,
+      "matches": 1
+    }
+  },
+  {
+    "username": "Web_Mage",
+    "twitch": "Web_Mage",
+    "streaming": true
   }
 ]

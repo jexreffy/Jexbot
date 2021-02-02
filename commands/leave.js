@@ -18,7 +18,7 @@ module.exports = (race, channel, username, message) => {
         let role = message.guild.roles.find(r => r.name === config.racerRole);
         message.member.removeRole(role).catch(console.error);
 
-        race.kadgar = race.kadgar.replace(new RegExp(userTwitch + '/', 'i'), "");
+        race.mutlistream = race.mutlistream.replace(new RegExp(userTwitch + '/', 'i'), "");
 
         let allReady = race.players.every(x => x.ready == true);
         if (allReady && race.players.length > 1) {

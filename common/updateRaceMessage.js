@@ -12,8 +12,8 @@ module.exports = (race, channel) => {
         desc += "\n Seed: " + race.seed;
     }
 
-    if (race.kadgar) {
-        desc += "\n Multistream: <" + race.kadgar + ">";
+    if (race.mutlistream) {
+        desc += "\n Multistream: <" + race.mutlistream + ">";
     }
 
     embed.description = desc;
@@ -53,7 +53,6 @@ module.exports = (race, channel) => {
 
     let commands = "";
     let names = "";
-    let twitch = "";
     let status = "";
     let times = "";
     if (race.players.length > 0) {
@@ -98,7 +97,7 @@ module.exports = (race, channel) => {
     if (race.started) {
         commands = "Prefixes: `.` or `!`" +
             "\n.done/.time - Finishes the race for the player" +
-            "\n.forfeit/.ff - Forfeits the race for the player";
+            "\n.f - Forfeits the race for the player";
     } else {
         commands = "Prefixes: `.` or `!`" +
             "\n.join- Joins the current race" +
@@ -106,11 +105,8 @@ module.exports = (race, channel) => {
             "\n.ready - Sets player ready to start" +
             "\n.unready - Sets player not ready to start" +
             "\n.setseed {URL} - Sets the seed for the Race" +
-            //moved .streaming command higher in list to be above .setstream option - Web-Mage 02/01/2021
             "\n.streaming {on|off} - Sets if the player is streaming the race and should be included in the Multistream" +
-            //Clarifying text for .setstream description - Web-Mage 02/01/2021
-            //(original) "\n.setstream/twitch {Twitch username} - Changes the Twitch Username if it is different from the Discord Username" +
-            "\n.setstream/{insert Twitch username} - Change stream URL to your Twitch username if different from your Discord username";
+            "\n.twitch {insert Twitch username} - Change stream URL to your Twitch username if different from your Discord username";
     }
 
     embed.fields = [

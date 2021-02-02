@@ -21,7 +21,7 @@ var race = {
     category: config.defaultCategory,
     messageId: null,
     seed: null,
-    kadgar: null,
+    mutlistream: null,
     status: '',
     tournament: false
 };

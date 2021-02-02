@@ -14,9 +14,9 @@ module.exports = (race, channel, message, username) => {
             userTwitch = username;
         }
 
-        race.kadgar = race.kadgar.replace(new RegExp(userTwitch + '/', 'i'), "");
+        race.mutlistream = race.mutlistream.replace(new RegExp(userTwitch + '/', 'i'), "");
 
-        if (isStreaming) race.kadgar += userTwitch + '/';
+        if (isStreaming) race.mutlistream += userTwitch + '/';
 
         updateRaceMessage(race, channel);
     } else {

@@ -31,9 +31,9 @@ module.exports = (race, channel, username, message) => {
                     if (data.getPlayerStreaming(username)) {
                         let userTwitch = data.getPlayerTwitch(username);
                         if (userTwitch) {
-                            race.kadgar += userTwitch + '/';
+                            race.mutlistream += userTwitch + '/';
                         } else {
-                            race.kadgar += username.replace(/\W/gi, "") + '/';
+                            race.mutlistream += username.replace(/\W/gi, "") + '/';
                         }
                     }
 
@@ -50,11 +50,13 @@ module.exports = (race, channel, username, message) => {
             let role = message.guild.roles.find(r => r.name === "Racer");
             message.member.addRole(role).then().catch(console.error);
 
-            let userTwitch = data.getPlayerTwitch(username);
-            if (userTwitch) {
-                race.kadgar += userTwitch + '/';
-            } else {
-                race.kadgar += username.replace(/\W/gi, "") + '/';
+            if (data.getPlayerStreaming(username)) {
+                let userTwitch = data.getPlayerTwitch(username);
+                if (userTwitch) {
+                    race.mutlistream += userTwitch + '/';
+                } else {
+                    race.mutlistream += username.replace(/\W/gi, "") + '/';
+                }
             }
 
             updateRaceMessage(race, channel);

@@ -27,7 +27,7 @@ module.exports = (race, channel, message) => {
             race.remainingPlayers = 0;
             race.category = config.defaultCategory;
             race.players = [];
-            race.kadgar = 'https://multistre.am/';
+            race.mutlistream = 'https://multistre.am/';
             race.status = 'PRE-RACE: WAITING FOR PLAYERS';
     
             return new Promise((resolve, reject) => {

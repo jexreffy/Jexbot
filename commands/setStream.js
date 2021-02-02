@@ -12,11 +12,11 @@ module.exports = (race, channel, message, username) => {
             userTwitch = username;
         }
 
-        race.kadgar = race.kadgar.replace(new RegExp(userTwitch + '/', 'i'), "");
+        race.mutlistream = race.mutlistream.replace(new RegExp(userTwitch + '/', 'i'), "");
 
         data.setPlayerTwitch(username, stream);
 
-        if (data.getPlayerStreaming(username)) race.kadgar += stream + '/';
+        if (data.getPlayerStreaming(username)) race.mutlistream += stream + '/';
 
         updateRaceMessage(race, channel);
     } else {
