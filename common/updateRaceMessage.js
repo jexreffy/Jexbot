@@ -106,8 +106,11 @@ module.exports = (race, channel) => {
             "\n.ready - Sets player ready to start" +
             "\n.unready - Sets player not ready to start" +
             "\n.setseed {URL} - Sets the seed for the Race" +
-            "\n.setstream/twitch {Twitch username} - Changes the Twitch Username if it is different from the Discord Username" +
-            "\n.streaming {on|off} - Sets if the player is streaming the race and should be included in the Multistream";
+            //moved .streaming command higher in list to be above .setstream option - Web-Mage 02/01/2021
+            "\n.streaming {on|off} - Sets if the player is streaming the race and should be included in the Multistream" +
+            //Clarifying text for .setstream description - Web-Mage 02/01/2021
+            //(original) "\n.setstream/twitch {Twitch username} - Changes the Twitch Username if it is different from the Discord Username" +
+            "\n.setstream/{insert Twitch username} - Change stream URL to your Twitch username if different from your Discord username";
     }
 
     embed.fields = [
