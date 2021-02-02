@@ -6,7 +6,7 @@ module.exports = (race, channel) => {
     embed.color = 65280;
     embed.title = race.status;
 
-    let desc = "The Legend of Zelda: A Link to the Past Randomizer Friday Night Standard Race"
+    let desc = "The Legend of Zelda: A Link to the Past Randomizer Race"
 
     if (race.seed) {
         desc += "\n Seed: " + race.seed;

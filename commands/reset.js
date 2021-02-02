@@ -15,13 +15,6 @@ module.exports = (race, channel, message) => {
                 x.time = null;
             });
             race.status = 'RESTARTED PRE-RACE: WAITING FOR PLAYERS';
-            channel.fetchMessage(race.messageId).then(x => {
-                (async() => {
-                    await x.clearReactions().then().catch(console.error);
-                    await x.react('➕').then().catch(console.error);
-                    await x.react('✅').then().catch(console.error);
-                })();
-            }).catch(console.error);
             updateRaceMessage(race, channel);
         }
     }
