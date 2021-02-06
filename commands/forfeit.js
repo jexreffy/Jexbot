@@ -59,9 +59,4 @@ module.exports = (race, channel, username, message) => {
         let time = new Date();
         console.log(time.toLocaleString('en-GB') + ' forfeit: ' + username + ' is not in the race!');
     }
-
-    if (message) {
-        message.delete().then().catch(console.error);
-    }
-    return;
 };

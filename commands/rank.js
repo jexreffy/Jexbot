@@ -28,9 +28,4 @@ module.exports = (channel, message, username) => {
 
         channel.send(centerPad(output, 24)).then().catch(console.error);
     }
-
-    if (message) {
-        message.delete().then().catch(console.error);
-    }
-    return;
 };

@@ -31,9 +31,4 @@ module.exports = (channel, message) => {
         }
         channel.send(output).then().catch(console.error);
     }
-
-    if (message) {
-        message.delete().then().catch(console.error);
-    }
-    return;
 };

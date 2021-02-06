@@ -51,7 +51,7 @@ module.exports = (race, channel) => {
         return 0;
     });
 
-    let commands = "";
+    let racerCommands = "";
     let names = "";
     let status = "";
     let times = "";
@@ -95,11 +95,11 @@ module.exports = (race, channel) => {
     }
 
     if (race.started) {
-        commands = "Prefixes: `.` or `!`" +
-            "\n.done/.time - Finishes the race for the player" +
-            "\n.f - Forfeits the race for the player";
+        racerCommands = "Prefixes: `.` or `!`" +
+            "\n.done - Finishes the race for the player" +
+            "\n.ff - Forfeits the race for the player";
     } else {
-        commands = "Prefixes: `.` or `!`" +
+        racerCommands = "Prefixes: `.` or `!`" +
             "\n.join- Joins the current race" +
             "\n.leave - Leaves the current race" +
             "\n.ready - Sets player ready to start" +
@@ -109,15 +109,29 @@ module.exports = (race, channel) => {
             "\n.twitch {insert Twitch username} - Change stream URL to your Twitch username if different from your Discord username";
     }
 
+    let viewerCommands = "Prefixes: `.` or `!`" +
+        "\n.spaceballs - Resets the clock since the last Spaceballs reference";
+
+    const time = data.getSpaceballs();
+    let dt = new Date(time);
+    let spaceTime = `${(dt.getMonth()+1).toString().padStart(2, '0')}/${
+                        dt.getDate().toString().padStart(2, '0')}/${
+                        dt.getFullYear().toString().padStart(4, '0')} ${
+                        dt.getHours().toString().padStart(2, '0')}:${
+                        dt.getMinutes().toString().padStart(2, '0')}:${
+                        dt.getSeconds().toString().padStart(2, '0')}`;
+
     embed.fields = [
-        {'name': 'Commands', 'value': commands, 'inline': false},
+        {'name': 'Racer Commands', 'value': racerCommands, 'inline': false},
+        {'name': 'Viewer Commands', 'value': viewerCommands, 'inline': false},
+        {'name': 'Last Spaceballs Reference', 'value': spaceTime, 'inline': false},
         {'name': 'Player', 'value': names, 'inline': true},
         {'name': 'Status', 'value': status, 'inline': true},
         {'name': 'Time', 'value': times, 'inline': true},
     ];
 
     message = {
-        'content': "Let's get ready to Rando!!!",
+        'content': "<@ jexreffy> Let's get ready to Rando!!!",
         'embed': embed
     }
 

@@ -12,9 +12,4 @@ module.exports = (race, message, channel) => {
             channel.send('Can\'t close race this soon!').then().catch(console.error);
         }
     }
-
-    if (message) {
-        message.delete().then().catch(console.error);
-    }
-    return;
 };

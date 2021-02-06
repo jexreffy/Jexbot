@@ -13,7 +13,7 @@ module.exports = (race, channel, message) => {
     if (category) {
         for (let i = 0; i < categories.length; i++) {
             for (let j = 0; j < categories[i].aliases.length; j++) {
-                if (category.toLowerCase() == categories[i].aliases[j]) {
+                if (category.toLowerCase() === categories[i].aliases[j]) {
                     category = categories[i].name;
                     break;
                 }
@@ -55,7 +55,4 @@ module.exports = (race, channel, message) => {
     if (stats) {
         channel.send(output).then().catch(console.error);
     }
-
-    message.delete().then().catch(console.error);
-    return;
 };

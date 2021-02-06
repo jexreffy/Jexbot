@@ -7,8 +7,4 @@ module.exports = (race, channel, username, message) => {
         player.ready = false;
         updateRaceMessage(race, channel);
     }
-    if (message) {
-        message.delete().then().catch(console.error);
-    }
-    return;
 };

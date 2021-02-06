@@ -6,9 +6,10 @@ const config = require('../config.json');
 module.exports = (race, channel, message) => {
     if (message.member && message.member.hasPermission('KICK_MEMBERS', false, false) || config.referees.includes(message.author.username)) {
         let match = message.content.match(/^[.!](\bkick\b)([ ]{0,1})([a-zA-Z0-9%]{0,20})/i);
-        let player =  race.players.find(x => x.username === match[3]);
+        let player = race.players.find(x => x.username === match[3]);
 
         if (!race.finished && player) {
+            let username = player.username;
             race.players.splice(race.players.indexOf(player), 1);
             race.remainingPlayers -= 1;
 
@@ -17,6 +18,7 @@ module.exports = (race, channel, message) => {
                 userTwitch = username;
             }
 
+            //TAKE THE ROLE OFF OF THE RIGHT USER
             let role = message.guild.roles.cache.find(r => r.name === config.racerRole);
             message.member.roles.remove(role.id).then().catch(console.error);
 
@@ -73,9 +75,4 @@ module.exports = (race, channel, message) => {
             console.log(time.toLocaleString('en-GB') + ' leave: ' + player.username + ' is not in the race!');
         }
     }
-
-    if (message) {
-        message.delete().then().catch(console.error);
-    }
-    return;
 };

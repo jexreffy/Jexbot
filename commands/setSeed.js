@@ -10,8 +10,4 @@ module.exports = (race, channel, username, message) => {
         race.seed = '<' + seed + '>';
         updateRaceMessage(race, channel);
     }
-    if (message) {
-        message.delete().then().catch(console.error);
-    }
-    return;
 };

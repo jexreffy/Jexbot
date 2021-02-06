@@ -14,11 +14,6 @@ module.exports = (race, channel, username, message) => {
     if (race.finished || (!race.started && !player)) {
 
         if (race.finished || timedOut) {
-            if (race.messageId) {
-                channel.fetchMessage(race.messageId).then(x =>
-                    x.clearReactions().then().catch(console.error)).catch(console.error);
-            }
-
             if (message) {
                 startrace(race, channel, message)
                 .then(() => {
@@ -62,8 +57,4 @@ module.exports = (race, channel, username, message) => {
             updateRaceMessage(race, channel);
         }
     }
-    if (message) {
-        message.delete().then().catch(console.error);
-    }
-    return;
 };

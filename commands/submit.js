@@ -36,8 +36,4 @@ module.exports = (channel, message) => {
     } else {
         channel.send('Moderator level permissions are required to use this command!').then().catch(console.error);
     }
-    if (message) {
-        message.delete().then().catch(console.error);
-    }
-    return;
 };

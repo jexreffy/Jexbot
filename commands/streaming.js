@@ -22,9 +22,4 @@ module.exports = (race, channel, message, username) => {
     } else {
         data.setPlayerTwitch(username, isStreaming);
     }
-
-    if (message) {
-        message.delete().then().catch(console.error);
-    }
-    return;
 };

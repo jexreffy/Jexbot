@@ -1,4 +1,5 @@
 const playersDb = require('../data/players.json');
+const serverDb = require('../data/server.json');
 const eloConfig = require('../elo/eloConfig.json');
 const path = require('path');
 const fs = require('fs');
@@ -6,10 +7,11 @@ const fs = require('fs');
 const defaultELO = (eloConfig.defaultELO);
 const placementMatches = (eloConfig.placementMatches);
 
-let players = [];
+let players = playersDb;
+let server = serverDb;
 
 function savePlayer(player) {
-    let playerIndex = players.findIndex(x => x.username == player.username);
+    let playerIndex = players.findIndex(x => x.username === player.username);
     if (playerIndex > -1) {
         players[playerIndex] = player;
     } else {
@@ -17,6 +19,11 @@ function savePlayer(player) {
     }
     fs.writeFileSync(path.join(__dirname, '../data/players.json'), JSON.stringify(players, null, 2));
     players = playersDb;
+}
+
+function saveServerData() {
+    fs.writeFileSync(path.join(__dirname, '../data/server.json'), JSON.stringify(server, null, 2));
+    server = serverDb;
 }
 
 function getPlayerIndexByName(username) {
@@ -182,5 +189,12 @@ module.exports = {
             }
         });
         return stats;
+    },
+    getSpaceballs: function() {
+        return server.spaceballs;
+    },
+    setSpaceballs: function(time) {
+        server.spaceballs = time;
+        saveServerData();
     }
 };
