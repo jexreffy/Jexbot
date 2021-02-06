@@ -17,10 +17,10 @@ module.exports = (race, channel, message) => {
             if (!userTwitch) {
                 userTwitch = username;
             }
-
-            //TAKE THE ROLE OFF OF THE RIGHT USER
+            
             let role = message.guild.roles.cache.find(r => r.name === config.racerRole);
-            message.member.roles.remove(role.id).then().catch(console.error);
+            let member = message.guild.members.cache.find(m => m.username === username);
+            member.roles.remove(role.id).then().catch(console.error);
 
             race.mutlistream = race.mutlistream.replace(new RegExp(userTwitch + '/', 'i'), "");
     
