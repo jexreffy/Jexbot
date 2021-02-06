@@ -4,38 +4,23 @@ const updateRaceMessage = require('../common/updateRaceMessage');
 module.exports = (race, channel) => {
     const sleep = m => new Promise(r => setTimeout(r, m));
     (async() => {
-        race.status = 'You are looking live at a bunch of Nerds about to play Rando!!!';
+        let countdown = config.countdowns[race.countdownIndex];
+        race.status = countdown.firstLine;
         updateRaceMessage(race, channel);
-        await sleep(5000);
-        race.status = 'Yay! He said the thing!!!';
+        await sleep(countdown.firstDelay);
+        race.status = countdown.secondLine;
         updateRaceMessage(race, channel);
-        await sleep(2500);
-        race.status = 'Starting in: 5';
-        updateRaceMessage(race, channel);
-        let allReady = race.players.every(x => x.ready == true);
-        if (!allReady) {
-            race.status = 'INTERRUPTED: WAITING FOR PLAYERS';
+        await sleep(countdown.secondDelay);
+        for (let i = countdown.countdown; i > 0; i--) {
+            race.status = 'Starting in: ' + i;
             updateRaceMessage(race, channel);
-            return;
-        }
-        await sleep(1000);
-        race.status = 'Starting in: 4';
-        updateRaceMessage(race, channel);
-        await sleep(1000);
-        race.status = 'Starting in: 3';
-        updateRaceMessage(race, channel);
-        await sleep(1000);
-        race.status = 'Starting in: 2';
-        updateRaceMessage(race, channel);
-        await sleep(1000);
-        race.status = 'Starting in: 1';
-        updateRaceMessage(race, channel);
-        await sleep(1000);
-        allReady = race.players.every(x => x.ready == true);
-        if (!allReady) {
-            race.status = 'INTERRUPTED: WAITING FOR PLAYERS';
-            updateRaceMessage(race, channel);
-            return;
+            let allReady = race.players.every(x => x.ready === true);
+            if (!allReady) {
+                race.status = 'INTERRUPTED: WAITING FOR PLAYERS';
+                updateRaceMessage(race, channel);
+                return;
+            }
+            await sleep(1000);
         }
         race.status = 'GO!!!';
         race.started = true;
@@ -45,6 +30,4 @@ module.exports = (race, channel) => {
         race.status = 'RACE STARTED';
         updateRaceMessage(race, channel);
     })();
-
-    return;
 };

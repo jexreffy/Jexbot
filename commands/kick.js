@@ -17,7 +17,7 @@ module.exports = (race, channel, message) => {
             if (!userTwitch) {
                 userTwitch = username;
             }
-            
+
             let role = message.guild.roles.cache.find(r => r.name === config.racerRole);
             let member = message.guild.members.cache.find(m => m.username === username);
             member.roles.remove(role.id).then().catch(console.error);

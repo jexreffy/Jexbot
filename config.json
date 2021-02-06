@@ -1,5 +1,6 @@
 {
     "channel": "lttp-race-bot",
+    "pingRole": "LttPR",
     "racerRole": "Racer",
     "maxOffsetSeconds": "0",
     "timeoutMinutes": "45",
@@ -9,11 +10,104 @@
     "rematchTimeoutSeconds": "8000",
     "voiceChannelPrefix": "Race-Channel",
     "defaultCategory": "ALTTPR",
-    "referees": ["Jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken"],
+    "referees": ["Jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken", "KillerApp23"],
     "offsets": [],
     "categories": [{
             "name": "ALTTPR",
             "aliases": ["alttpr"]
+        }
+    ],
+    "pings": [
+        "Let's get ready to Rando!!!",
+        "Live from the internet, it's Friday Night!!!",
+        "I've come to fry some bacon and chew bubblegum, and I'm all out of bubblegum...",
+        "Time to play games, crack wise, and blame the seed roller for our troubles.",
+        "Blues rhythm in B, watch me for the changes, and try to keep up."
+    ],
+    "countdowns": [
+        {
+            "firstLine": "You are looking live at a bunch of Nerds about to play Rando!!!",
+            "firstDelay": 5000,
+            "secondLine": "Yay! He said the thing!!!",
+            "secondDelay": 2500,
+            "countdown": 10
+        },
+        {
+            "firstLine": "You are looking live at a bunch of Nerds about to play Rando!!!",
+            "firstDelay": 5000,
+            "secondLine": "Yay! He said the thing!!!",
+            "secondDelay": 2500,
+            "countdown": 10
+        },
+        {
+            "firstLine": "You are looking live at a bunch of Nerds about to play Rando!!!",
+            "firstDelay": 5000,
+            "secondLine": "Yay! He said the thing!!!",
+            "secondDelay": 2500,
+            "countdown": 10
+        },
+        {
+            "firstLine": "You are looking live at a bunch of Nerds about to play Rando!!!",
+            "firstDelay": 5000,
+            "secondLine": "Yay! He said the thing!!!",
+            "secondDelay": 2500,
+            "countdown": 10
+        },
+        {
+            "firstLine": "You are looking live at a bunch of Nerds about to play Rando!!!",
+            "firstDelay": 5000,
+            "secondLine": "Yay! He said the thing!!!",
+            "secondDelay": 2500,
+            "countdown": 10
+        },
+        {
+            "firstLine": "I knew it. I'm surrounded by assholes.",
+            "firstDelay": 5000,
+            "secondLine": "Reset the clock!",
+            "secondDelay": 2500,
+            "countdown": 10
+        },
+        {
+            "firstLine": "I knew it. I'm surrounded by assholes.",
+            "firstDelay": 5000,
+            "secondLine": "Reset the clock!",
+            "secondDelay": 2500,
+            "countdown": 10
+        },
+        {
+            "firstLine": "Lightspeed is too slow. We're gonna have to go to Ludicrous speed!",
+            "firstDelay": 5000,
+            "secondLine": "What's the matter Colonel Sanders? CHICKEN!!!",
+            "secondDelay": 2500,
+            "countdown": 10
+        },
+        {
+            "firstLine": "No, sir. We call it Mr. Coffee. Care for some?",
+            "firstDelay": 5000,
+            "secondLine": "Yes! I always have coffee when I watch radar!",
+            "secondDelay": 2500,
+            "countdown": 10
+        },
+        {
+            "firstLine": "We were told to comb the desert so we're combing it. Found anything yet?!",
+            "firstDelay": 5000,
+            "secondLine": "We ain't found shit yet!!!",
+            "secondDelay": 2500,
+            "countdown": 10
+        },
+        {
+            "firstLine": "That's... That's gotta be... That's gotta be Cane! That's! Gotta! Be! Cane!!!",
+            "firstDelay": 5000,
+            "secondLine": "1. That's copyright infringement. 2. That's not when you're suppose to say it.",
+            "secondDelay": 5000,
+            "countdown": 7
+        },
+        {
+            "firstLine": "TjMaelstrom, did you get non-alcoholic beer again?!",
+            "firstDelay": 5000,
+            "secondLine": "I swear on my mother, who God rest her soul is still alive...",
+            "secondDelay": 5000,
+            "countdown": 7
         }
     ]
 }

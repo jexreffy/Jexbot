@@ -10,7 +10,8 @@ const newrace = require('../commands/new');
 const rank = require('../commands/rank');
 const ready = require('../commands/ready');
 const reset = require('../commands/reset');
-const setSeed = require('../commands/setSeed');
+const setSeedCode = require('../commands/setSeedCode');
+const setSeedLink = require('../commands/setSeedLink');
 const spaceballs = require('../commands/spaceballs');
 const stats = require('../commands/stats');
 const streaming = require('../commands/streaming');
@@ -20,6 +21,8 @@ const unready = require('../commands/unready');
 
 module.exports = (client, race, message) => {
     const channel = config.channel;
+
+    console.log(message.content);
 
     if (message.channel.name === channel && message.content.match(/^[.!](\bclose\b)/i)) {
         close(race, message, message.channel);
@@ -43,8 +46,10 @@ module.exports = (client, race, message) => {
         ready(race, message.channel, message.author.username, message);
     } else if (message.channel.name === channel && message.content.match(/^[.!](\breset\b)/i)) {
         reset(race, message.channel, message);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\bsetseed\b) (https:\/\/[a-zA-Z0-9_%\/?,.]{4,70})/i)) {
-        setSeed(race, message.channel, message.author.username, message);
+    } else if (message.channel.name === channel && message.content.match(/^[.!](\bsetseedcode\b) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100})/i)) {
+        setSeedCode(race, message.channel, message.author.username, message);
+    }else if (message.channel.name === channel && message.content.match(/^[.!](\bsetseedlink\b) (https:\/\/[a-zA-Z0-9_%\/?,.]{4,70})/i)) {
+        setSeedLink(race, message.channel, message.author.username, message);
     } else if (message.channel.name === channel && message.content.match(/^[.!](\bspaceballs\b)/i)) {
         spaceballs(race, message.channel);
     } else if (message.channel.name === channel && message.content.match(/^[.!](\bstats\b)([ ]{0,1})([a-zA-Z 0-9%]{0,30})/i)) {

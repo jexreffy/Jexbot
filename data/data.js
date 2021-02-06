@@ -165,7 +165,7 @@ module.exports = {
         if (players.length < 1) {
             players = playersDb;
         }
-        let playerIndex = players.findIndex(x => x.username == player);
+        let playerIndex = players.findIndex(x => x.username === player);
         if (playerIndex < 0) {
             return stats;
         }

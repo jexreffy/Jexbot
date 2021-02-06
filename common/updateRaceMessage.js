@@ -1,4 +1,5 @@
-const data = require('../data/data.js')
+const config = require('../config.json');
+const data = require('../data/data.js');
 
 module.exports = (race, channel) => {
     let message = {};
@@ -8,12 +9,16 @@ module.exports = (race, channel) => {
 
     let desc = "The Legend of Zelda: A Link to the Past Randomizer Race"
 
-    if (race.seed) {
-        desc += "\n Seed: " + race.seed;
+    if (race.seedLink) {
+        desc += `\n Seed: <${race.seedLink}>`;
+    }
+
+    if (race.seedCode) {
+        desc += `\n Code: ${race.seedCode}`;
     }
 
     if (race.mutlistream) {
-        desc += "\n Multistream: <" + race.mutlistream + ">";
+        desc += `\n Multistream: <${race.mutlistream}>`;
     }
 
     embed.description = desc;
@@ -96,21 +101,22 @@ module.exports = (race, channel) => {
 
     if (race.started) {
         racerCommands = "Prefixes: `.` or `!`" +
-            "\n.done - Finishes the race for the player" +
-            "\n.ff - Forfeits the race for the player";
+            "\n`.done` - Finishes the race for the player" +
+            "\n`.ff` - Forfeits the race for the player";
     } else {
         racerCommands = "Prefixes: `.` or `!`" +
-            "\n.join- Joins the current race" +
-            "\n.leave - Leaves the current race" +
-            "\n.ready - Sets player ready to start" +
-            "\n.unready - Sets player not ready to start" +
-            "\n.setseed {URL} - Sets the seed for the Race" +
-            "\n.streaming {on|off} - Sets if the player is streaming the race and should be included in the Multistream" +
-            "\n.twitch {insert Twitch username} - Change stream URL to your Twitch username if different from your Discord username";
+            "\n`.join` - Joins the current race" +
+            "\n`.leave` - Leaves the current race" +
+            "\n`.ready` - Sets player ready to start" +
+            "\n`.unready` - Sets player not ready to start" +
+            "\n`.setseedlink {URL}` - Sets the seed url for the Race" +
+            "\n`.setseedcode {Emote 1} {Emote 2} {Emote 3} {Emote 4} {Emote 5}` - Sets the seed code via Emotes for the Race" +
+            "\n`.streaming {on|off}` - Sets if the player is streaming the race and should be included in the Multistream" +
+            "\n`.twitch {Twitch username}` - Change stream URL to your Twitch username if different from your Discord username";
     }
 
     let viewerCommands = "Prefixes: `.` or `!`" +
-        "\n.spaceballs - Resets the clock since the last Spaceballs reference";
+        "\n`.spaceballs` - Resets the clock since the last Spaceballs reference";
 
     const time = data.getSpaceballs();
     let dt = new Date(time);
@@ -131,7 +137,7 @@ module.exports = (race, channel) => {
     ];
 
     message = {
-        'content': "<@ jexreffy> Let's get ready to Rando!!!",
+        'content': "",
         'embed': embed
     }
 

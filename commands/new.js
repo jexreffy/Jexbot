@@ -16,13 +16,19 @@ module.exports = (race, channel, message) => {
     
             return new Promise((resolve, reject) => {
                 race.initiatedAt = new Date().getTime();
+                race.pingIndex = Math.floor(Math.random() * Math.floor(config.pings.length));
+                race.countdownIndex = Math.floor(Math.random() * Math.floor(config.countdowns.length));
                 let embed = {
-                    'content': "<@ jexreffy> Let's get ready to Rando!!!",
+                    'content': "",
                     'embed': {
                         'color': 65280,
                         'title': 'Crystal Company Race'
                     }
                 };
+
+                let role = message.guild.roles.cache.find(r => r.name === config.pingRole);
+
+                channel.send(`${role} ${config.pings[race.pingIndex]}`);
                 channel.send(embed).then(x => {
                     race.messageId = x.id;
                     updateRaceMessage(race, channel);
