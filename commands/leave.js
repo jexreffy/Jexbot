@@ -28,6 +28,6 @@ module.exports = (race, channel, username, message) => {
         }
     } else {
         let time = new Date();
-        console.log(time.toLocaleString('en-GB') + ' leave: ' + username + ' is not in the race!');
+        console.log(time.toLocaleString('en-US') + ' leave: ' + username + ' is not in the race!');
     }
 };

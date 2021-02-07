@@ -3,6 +3,6 @@ module.exports = () => {
     let time = new Date();
     (async() => {
         await sleep(2000);
-        console.log(time.toLocaleString('en-GB') + ' reconnecting');
+        console.log(time.toLocaleString('en-US') + ' reconnecting');
     })();
 };

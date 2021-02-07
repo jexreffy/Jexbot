@@ -39,7 +39,7 @@ fs.readdir('./events/', (err, files) => {
 
 client.login(process.env.BOT_TOKEN).then(x => {
     let time = new Date();
-    console.log(time.toLocaleString('en-GB') + ' restarted');
+    console.log(time.toLocaleString('en-US') + ' restarted');
 }).catch(console.error);
 
 rl.on('line', (input) => {

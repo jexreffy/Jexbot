@@ -13,6 +13,8 @@ module.exports = (race, channel, username, message) => {
         let role = message.guild.roles.cache.find(r => r.name === config.racerRole);
         message.member.roles.remove(role.id).then().catch(console.error);
 
+        channel.send(`**${username} has forfeited.**`);
+
         if (race.remainingPlayers < 1) {
             race.finished = true;
             race.status = 'RACE FINISHED';
@@ -52,11 +54,13 @@ module.exports = (race, channel, username, message) => {
             for (let i = 0; i < race.players.length; i++) {
                 race.players[i].adjustment = adjustments[i];
             }
+
+            channel.send(`**The race has finished.**`);
         }
 
         updateRaceMessage(race, channel);
     } else {
         let time = new Date();
-        console.log(time.toLocaleString('en-GB') + ' forfeit: ' + username + ' is not in the race!');
+        console.log(time.toLocaleString('en-US') + ' forfeit: ' + username + ' is not in the race!');
     }
 };

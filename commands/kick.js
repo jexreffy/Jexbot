@@ -72,7 +72,7 @@ module.exports = (race, channel, message) => {
             }
         } else {
             let time = new Date();
-            console.log(time.toLocaleString('en-GB') + ' leave: ' + player.username + ' is not in the race!');
+            console.log(time.toLocaleString('en-US') + ' leave: ' + player.username + ' is not in the race!');
         }
     }
 };

@@ -16,6 +16,12 @@ module.exports = (race, channel, username, message) => {
         player.time = time;
         race.remainingPlayers -= 1;
 
+        let seconds = Math.floor((time / 1000) % 60);
+        let minutes = Math.floor((time / (1000 * 60)) % 60);
+        let hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+        let msgTime = hours.toString().padStart(2, "0") + ':' + minutes.toString().padStart(2, "0") + ':' + seconds.toString().padStart(2, "0");
+        channel.send(`**${username} has finished with a time of ${msgTime}.**`);
+
         let role = message.guild.roles.cache.find(r => r.name === config.racerRole);
         message.member.roles.remove(role.id).then().catch(console.error);
 
@@ -58,10 +64,12 @@ module.exports = (race, channel, username, message) => {
             for (let i = 0; i < race.players.length; i++) {
                 race.players[i].adjustment = adjustments[i];
             }
+
+            channel.send(`**The race has finished.**`);
         }
         updateRaceMessage(race, channel);
     } else {
         let time = new Date();
-        console.log(time.toLocaleString('en-GB') + ' done: ' + username + ' is not in the race!');
+        console.log(time.toLocaleString('en-US') + ' done: ' + username + ' is not in the race!');
     }
 };
