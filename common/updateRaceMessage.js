@@ -116,7 +116,8 @@ module.exports = (race, channel) => {
     }
 
     let viewerCommands = "Prefixes: `.` or `!`" +
-        "\n`.spaceballs` - Resets the clock since the last Spaceballs reference";
+        "\n`.dick` - Increments the counter of times the seed roller was called a dick" +
+        "\n`.spaceballs` - Resets the clock since the last Spaceballs reference"
 
     const time = data.getSpaceballs();
     let dt = new Date(time);
@@ -131,6 +132,7 @@ module.exports = (race, channel) => {
         {'name': 'Racer Commands', 'value': racerCommands, 'inline': false},
         {'name': 'Viewer Commands', 'value': viewerCommands, 'inline': false},
         {'name': 'Last Spaceballs Reference', 'value': spaceTime, 'inline': false},
+        {'name': 'Dick Counter', 'value': `${race.dickCount}`, 'inline': false},
         {'name': 'Player', 'value': names, 'inline': true},
         {'name': 'Status', 'value': status, 'inline': true},
         {'name': 'Time', 'value': times, 'inline': true},

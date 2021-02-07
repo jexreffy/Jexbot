@@ -2,7 +2,7 @@ const config = require('../config.json');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (race, channel, message) => {
-    if ((race.tournament && message.member && message.member.hasPermission('KICK_MEMBERS', false, false))) {
+    if (message.member && message.member.hasPermission('KICK_MEMBERS', false, false)) {
         if (!race.finished) {
             race.started = false;
             race.startedAt = null;

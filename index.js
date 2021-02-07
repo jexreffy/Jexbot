@@ -26,7 +26,7 @@ var race = {
     seedLink: null,
     mutlistream: null,
     status: '',
-    tournament: false
+    dickCount: 0
 };
 
 fs.readdir('./events/', (err, files) => {

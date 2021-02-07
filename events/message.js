@@ -1,5 +1,6 @@
 const config = require('../config.json');
 const close = require('../commands/close');
+const dick = require('../commands/dick');
 const done = require('../commands/done');
 const forfeit = require('../commands/forfeit');
 const join = require('../commands/join');
@@ -22,10 +23,10 @@ const unready = require('../commands/unready');
 module.exports = (client, race, message) => {
     const channel = config.channel;
 
-    console.log(message.content);
-
     if (message.channel.name === channel && message.content.match(/^[.!](\bclose\b)/i)) {
         close(race, message, message.channel);
+    } else if (message.channel.name === channel && message.content.match(/^[.!](\bdick\b)/i)) {
+        dick(race, message.channel);
     } else if (message.channel.name === channel && message.content.match(/^[.!]((\bdone\b)|(\btime\b))/i)) {
         done(race, message.channel, message.author.username, message);
     } else if (message.channel.name === channel && message.content.match(/^[.!](\bforfeit\b)|(\bff\b)/i)) {
