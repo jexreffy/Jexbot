@@ -80,6 +80,13 @@
             "countdown": 10
         },
         {
+            "firstLine": "Hey! The Boots are in Hyrule!",
+            "firstDelay": 5000,
+            "secondLine": "Good luck! You'll need it!",
+            "secondDelay": 2500,
+            "countdown": 10
+        },
+        {
             "firstLine": "Lightspeed is too slow. We're gonna have to go to Ludicrous speed!",
             "firstDelay": 5000,
             "secondLine": "What's the matter Colonel Sanders? CHICKEN!!!",
