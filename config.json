@@ -1,6 +1,6 @@
 {
     "channel": "lttp-race-bot",
-    "pingRole": "LTTPRacer",
+    "pingRole": "LttPR",
     "racerRole": "Racer",
     "maxOffsetSeconds": "0",
     "timeoutMinutes": "45",
