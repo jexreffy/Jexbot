@@ -120,7 +120,7 @@ module.exports = (race, channel) => {
     }
 
     let viewerCommands = "Prefixes: `.` or `!`" +
-        "\n`.dick` - Increments the counter of times the seed roller was called a dick" +
+        "\n`.dick` - Increments the counter of times the seed roller is blamed for the seed" +
         "\n`.spaceballs` - Resets the clock since the last Spaceballs reference"
 
     const time = data.getSpaceballs();
