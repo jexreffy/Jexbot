@@ -19,7 +19,7 @@ var race = {
     countdownIndex: -1,
     remainingPlayers: 0,
     players: [],
-    offset: parseInt(config.defaultOffset),
+    gatekeeper: null,
     category: config.defaultCategory,
     messageId: null,
     seedCode: null,

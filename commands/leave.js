@@ -21,7 +21,7 @@ module.exports = (race, channel, username, message) => {
         race.mutlistream = race.mutlistream.replace(new RegExp(userTwitch + '/', 'i'), "");
 
         let allReady = race.players.every(x => x.ready === true);
-        if (allReady && race.players.length > 1) {
+        if (!race.gatekeeper && allReady && race.players.length > 1) {
             startRace(race, channel);
         } else {
             updateRaceMessage(race, channel);

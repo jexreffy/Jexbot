@@ -24,7 +24,7 @@ module.exports = (race, channel) => {
         }
         race.status = 'GO!!!';
         race.started = true;
-        race.startedAt = new Date().getTime() + race.offset;
+        race.startedAt = new Date().getTime();
         updateRaceMessage(race, channel);
         await sleep(2000);
         race.status = 'RACE STARTED';

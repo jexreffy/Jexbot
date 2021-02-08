@@ -1,17 +1,12 @@
 {
     "channel": "lttp-race-bot",
-    "pingRole": "LttPR",
+    "pingRole": "LTTPRacer",
     "racerRole": "Racer",
-    "maxOffsetSeconds": "0",
     "timeoutMinutes": "45",
     "minimumNewIntervalMinutes": "1",
     "defaultLeaderboardSize": "25",
-    "defaultOffset": "0",
-    "rematchTimeoutSeconds": "8000",
-    "voiceChannelPrefix": "Race-Channel",
     "defaultCategory": "ALTTPR",
     "referees": ["Jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken", "KillerApp23"],
-    "offsets": [],
     "categories": [{
             "name": "ALTTPR",
             "aliases": ["alttpr"]

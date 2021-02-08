@@ -3,6 +3,7 @@ const close = require('../commands/close');
 const dick = require('../commands/dick');
 const done = require('../commands/done');
 const forfeit = require('../commands/forfeit');
+const gatekeeper = require('../commands/gatekeeper');
 const join = require('../commands/join');
 const kick = require('../commands/kick');
 const leaderboard = require('../commands/leaderboard');
@@ -14,6 +15,7 @@ const reset = require('../commands/reset');
 const setSeedCode = require('../commands/setSeedCode');
 const setSeedLink = require('../commands/setSeedLink');
 const spaceballs = require('../commands/spaceballs');
+const start = require('../commands/start');
 const stats = require('../commands/stats');
 const streaming = require('../commands/streaming');
 const submit = require('../commands/submit');
@@ -31,6 +33,8 @@ module.exports = (client, race, message) => {
         done(race, message.channel, message.author.username, message);
     } else if (message.channel.name === channel && message.content.match(/^[.!](\bforfeit\b)|(\bff\b)/i)) {
         forfeit(race, message.channel, message.author.username, message);
+    } else if (message.channel.name === channel && message.content.match(/^[.!](\bgatekeeper\b)/i)) {
+        gatekeeper(race, message.channel, message, message.author.username);
     } else if (message.channel.name === channel && message.content.match(/^[.!]((\bjoin\b)|(\benter\b))/i)) {
         join(race, message.channel, message.author.username, message);
     } else if (message.channel.name === channel && message.content.match(/^[.!](\bkick\b)([ ]{0,1})([a-zA-Z0-9%]{0,20})/i)) {
@@ -53,6 +57,8 @@ module.exports = (client, race, message) => {
         setSeedLink(race, message.channel, message.author.username, message);
     } else if (message.channel.name === channel && message.content.match(/^[.!](\bspaceballs\b)/i)) {
         spaceballs(race, message.channel);
+    } else if (message.channel.name === channel && message.content.match(/^[.!](\bstart\b)/i)) {
+        start(race, message.channel, message, message.author.username);
     } else if (message.channel.name === channel && message.content.match(/^[.!](\bstats\b)([ ]{0,1})([a-zA-Z 0-9%]{0,30})/i)) {
         stats(race, message.channel, message);
     } else if (message.channel.name === channel && message.content.match(/^[.!](\bstreaming\b) ((\bon\b)|(\boff\b))/i)) {
