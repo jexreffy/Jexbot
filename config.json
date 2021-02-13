@@ -1,6 +1,6 @@
 {
     "channel": "lttp-race-bot",
-    "pingRole": "LTTPRacer",
+    "pingRole": "LttPR",
     "racerRole": "Racer",
     "timeoutMinutes": "45",
     "minimumNewIntervalMinutes": "1",
@@ -29,41 +29,6 @@
             "firstLine": "You are looking live at a bunch of Nerds about to play Rando!!!",
             "firstDelay": 5000,
             "secondLine": "Yay! He said the thing!!!",
-            "secondDelay": 2500,
-            "countdown": 10
-        },
-        {
-            "firstLine": "You are looking live at a bunch of Nerds about to play Rando!!!",
-            "firstDelay": 5000,
-            "secondLine": "Yay! He said the thing!!!",
-            "secondDelay": 2500,
-            "countdown": 10
-        },
-        {
-            "firstLine": "You are looking live at a bunch of Nerds about to play Rando!!!",
-            "firstDelay": 5000,
-            "secondLine": "Yay! He said the thing!!!",
-            "secondDelay": 2500,
-            "countdown": 10
-        },
-        {
-            "firstLine": "You are looking live at a bunch of Nerds about to play Rando!!!",
-            "firstDelay": 5000,
-            "secondLine": "Yay! He said the thing!!!",
-            "secondDelay": 2500,
-            "countdown": 10
-        },
-        {
-            "firstLine": "You are looking live at a bunch of Nerds about to play Rando!!!",
-            "firstDelay": 5000,
-            "secondLine": "Yay! He said the thing!!!",
-            "secondDelay": 2500,
-            "countdown": 10
-        },
-        {
-            "firstLine": "I knew it. I'm surrounded by assholes.",
-            "firstDelay": 5000,
-            "secondLine": "Reset the clock!",
             "secondDelay": 2500,
             "countdown": 10
         },
