@@ -25,49 +25,51 @@ const unready = require('../commands/unready');
 module.exports = (client, race, message) => {
     const channel = config.channel;
 
-    if (message.channel.name === channel && message.content.match(/^[.!](\bclose\b)/i)) {
+    if (message.channel.name !== channel) return;
+
+    if (message.content.match(/^[.!](\bclose\b)/i)) {
         close(race, message, message.channel);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\bdick\b)/i)) {
+    } else if (message.content.match(/^[.!](\bdick\b)/i)) {
         dick(race, message.channel);
-    } else if (message.channel.name === channel && message.content.match(/^[.!]((\bdone\b)|(\btime\b))/i)) {
+    } else if (message.content.match(/^[.!]((\bdone\b)|(\btime\b))/i)) {
         done(race, message.channel, message.author.username, message);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\bforfeit\b)|(\bff\b)/i)) {
+    } else if (message.content.match(/^[.!](\bforfeit\b)|(\bff\b)/i)) {
         forfeit(race, message.channel, message.author.username, message);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\bgatekeeper\b)/i)) {
+    } else if (message.content.match(/^[.!](\bgatekeeper\b)/i)) {
         gatekeeper(race, message.channel, message, message.author.username);
-    } else if (message.channel.name === channel && message.content.match(/^[.!]((\bjoin\b)|(\benter\b))/i)) {
+    } else if (message.content.match(/^[.!]((\bjoin\b)|(\benter\b))/i)) {
         join(race, message.channel, message.author.username, message);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\bkick\b)([ ]{0,1})([a-zA-Z0-9%]{0,20})/i)) {
+    } else if (message.content.match(/^[.!](\bkick\b)([ ]{0,1})([a-zA-Z0-9%]{0,20})/i)) {
         kick(race, message.channel, message);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\bleaderboard\b) ([ a-zA-Z0-9%]{3,20})/i)) {
+    } else if (message.content.match(/^[.!](\bleaderboard\b) ([ a-zA-Z0-9%]{3,20})/i)) {
         leaderboard(message.channel, message);
-    } else if (message.channel.name === channel && message.content.match(/^[.!]((\bleave\b)|(\bunjoin\b))/i)) {
+    } else if (message.content.match(/^[.!]((\bleave\b)|(\bunjoin\b))/i)) {
         leave(race, message.channel, message.author.username, message);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\bnew\b)/i)) {
+    } else if (message.content.match(/^[.!](\bnew\b)/i)) {
         newrace(race, message.channel, message);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\brank\b) ([ a-zA-Z0-9%]{3,20})/i)) {
+    } else if (message.content.match(/^[.!](\brank\b) ([ a-zA-Z0-9%]{3,20})/i)) {
         rank(message.channel, message, message.author.username);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\bready\b)/i)) {
+    } else if (message.content.match(/^[.!](\bready\b)/i)) {
         ready(race, message.channel, message.author.username, message);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\breset\b)/i)) {
+    } else if (message.content.match(/^[.!](\breset\b)/i)) {
         reset(race, message.channel, message);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\bsetseedcode\b) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100})/i)) {
+    } else if (message.content.match(/^[.!](\bsetseedcode\b) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100})/i)) {
         setSeedCode(race, message.channel, message.author.username, message);
-    }else if (message.channel.name === channel && message.content.match(/^[.!](\bsetseedlink\b) (https:\/\/[a-zA-Z0-9_%\/?,.]{4,70})/i)) {
+    }else if (message.content.match(/^[.!](\bsetseedlink\b) (https:\/\/[a-zA-Z0-9_%\/?,.]{4,70})/i)) {
         setSeedLink(race, message.channel, message.author.username, message);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\bspaceballs\b)/i)) {
+    } else if (message.content.match(/^[.!](\bspaceballs\b)/i)) {
         spaceballs(race, message.channel);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\bstart\b)/i)) {
+    } else if (message.content.match(/^[.!](\bstart\b)/i)) {
         start(race, message.channel, message, message.author.username);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\bstats\b)([ ]{0,1})([a-zA-Z 0-9%]{0,30})/i)) {
+    } else if (message.content.match(/^[.!](\bstats\b)([ ]{0,1})([a-zA-Z 0-9%]{0,30})/i)) {
         stats(race, message.channel, message);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\bstreaming\b) ((\bon\b)|(\boff\b))/i)) {
+    } else if (message.content.match(/^[.!](\bstreaming\b) ((\bon\b)|(\boff\b))/i)) {
         streaming(race, message.channel, message, message.author.username);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\bsubmit\b)(( "[a-zA-Z0-9%_ .]{3,30}"){3,18})( end)/i)) {
+    } else if (message.content.match(/^[.!](\bsubmit\b)(( "[a-zA-Z0-9%_ .]{3,30}"){3,18})( end)/i)) {
         submit(message.channel, message);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\btwitch\b) ([a-zA-Z0-9_]{4,20})/i)) {
+    } else if (message.content.match(/^[.!](\btwitch\b) ([a-zA-Z0-9_]{4,20})/i)) {
         twitch(race, message.channel, message, message.author.username);
-    } else if (message.channel.name === channel && message.content.match(/^[.!](\bunready\b)/i)) {
+    } else if (message.content.match(/^[.!](\bunready\b)/i)) {
         unready(race, message.channel, message.author.username, message);
     }
 
