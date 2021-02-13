@@ -5,6 +5,7 @@ module.exports = (race, channel) => {
     const sleep = m => new Promise(r => setTimeout(r, m));
     (async() => {
         let countdown = config.countdowns[race.countdownIndex];
+        channel.send(`**The race will start in ${countdown.firstDelay + countdown.secondDelay + countdown.countdown} seconds**`);
         race.status = countdown.firstLine;
         updateRaceMessage(race, channel);
         await sleep(countdown.firstDelay);
@@ -20,12 +21,15 @@ module.exports = (race, channel) => {
                 updateRaceMessage(race, channel);
                 return;
             }
+
+            if (i <= 5) channel.send(`**${i}**`);
             await sleep(1000);
         }
         race.status = 'GO!!!';
         race.started = true;
         race.startedAt = new Date().getTime();
         updateRaceMessage(race, channel);
+        channel.send(`**GO!!!**`);
         await sleep(2000);
         race.status = 'RACE STARTED';
         updateRaceMessage(race, channel);

@@ -9,7 +9,9 @@
     "twitch": "jexreffy"
   },
   {
-    "username": "ZephyrBlayze"
+    "username": "ZephyrBlayze",
+    "twitch": "zephyrblayze",
+    "streaming": true
   },
   {
     "username": "PhantomRyu",
@@ -80,5 +82,8 @@
   },
   {
     "username": "WallKicks"
+  },
+  {
+    "username": "who42baker"
   }
 ]

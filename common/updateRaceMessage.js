@@ -14,11 +14,15 @@ module.exports = (race, channel) => {
     }
 
     if (race.seedLink) {
-        desc += `\n Seed: <${race.seedLink}>`;
+        desc += `\n Race Seed: <${race.seedLink}>`;
     }
 
     if (race.seedCode) {
-        desc += `\n Code: ${race.seedCode}`;
+        desc += `\n Seed Code: ${race.seedCode}`;
+    }
+
+    if (race.seedRoller) {
+        desc += `\n Rolled By: ${race.seedRoller}`;
     }
 
     if (race.mutlistream) {

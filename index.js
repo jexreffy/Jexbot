@@ -24,6 +24,7 @@ var race = {
     messageId: null,
     seedCode: null,
     seedLink: null,
+    seedRoller: null,
     mutlistream: null,
     status: '',
     dickCount: 0
