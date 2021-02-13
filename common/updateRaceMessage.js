@@ -60,7 +60,6 @@ module.exports = (race, channel) => {
         return 0;
     });
 
-    let racerCommands = "";
     let names = "";
     let status = "";
     let times = "";
@@ -103,10 +102,16 @@ module.exports = (race, channel) => {
         times = "---";
     }
 
+    let racerCommands = "";
+    let viewerCommands = "";
     if (race.started) {
         racerCommands = "Prefixes: `.` or `!`" +
             "\n`.done` - Finishes the race for the player" +
             "\n`.ff` - Forfeits the race for the player";
+
+        viewerCommands = "Prefixes: `.` or `!`" +
+            "\n`.dick` - Increments the counter of times the seed roller is blamed for the seed" +
+            "\n`.spaceballs` - Resets the clock since the last Spaceballs reference";
     } else {
         racerCommands = "Prefixes: `.` or `!`" +
             "\n`.join` - Joins the current race" +
@@ -117,11 +122,10 @@ module.exports = (race, channel) => {
             "\n`.setseedcode {Emote 1} {Emote 2} {Emote 3} {Emote 4} {Emote 5}` - Sets the seed code via Emotes for the Race" +
             "\n`.streaming {on|off}` - Sets if the player is streaming the race and should be included in the Multistream" +
             "\n`.twitch {Twitch username}` - Change stream URL to your Twitch username if different from your Discord username";
-    }
 
-    let viewerCommands = "Prefixes: `.` or `!`" +
-        "\n`.dick` - Increments the counter of times the seed roller is blamed for the seed" +
-        "\n`.spaceballs` - Resets the clock since the last Spaceballs reference"
+        viewerCommands = "Prefixes: `.` or `!`" +
+            "\n`.spaceballs` - Resets the clock since the last Spaceballs reference";
+    }
 
     const time = data.getSpaceballs();
     let dt = new Date(time);
