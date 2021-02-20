@@ -2,8 +2,8 @@
   {
     "username": "jexreffy",
     "ALTTPR": {
-      "elo": 1220,
-      "matches": 14
+      "elo": 1160,
+      "matches": 15
     },
     "streaming": true,
     "twitch": "jexreffy"
@@ -11,23 +11,27 @@
   {
     "username": "ZephyrBlayze",
     "twitch": "zephyrblayze",
-    "streaming": true
+    "streaming": true,
+    "ALTTPR": {
+      "elo": 1225,
+      "matches": 1
+    }
   },
   {
     "username": "PhantomRyu",
     "streaming": true,
     "twitch": "phantomryu",
     "ALTTPR": {
-      "elo": 795,
-      "matches": 2
+      "elo": 815,
+      "matches": 3
     }
   },
   {
     "username": "TjMaelstrom",
     "streaming": true,
     "ALTTPR": {
-      "elo": 1255,
-      "matches": 2
+      "elo": 1445,
+      "matches": 3
     },
     "twitch": "TjMaelstrom"
   },
@@ -46,16 +50,16 @@
     "username": "Antissim",
     "streaming": false,
     "ALTTPR": {
-      "elo": 1270,
-      "matches": 2
+      "elo": 1255,
+      "matches": 3
     }
   },
   {
     "username": "KwehstopherWarken",
     "streaming": true,
     "ALTTPR": {
-      "elo": 805,
-      "matches": 2
+      "elo": 620,
+      "matches": 3
     }
   },
   {
@@ -68,22 +72,32 @@
     "twitch": "Digidude22",
     "streaming": true,
     "ALTTPR": {
-      "elo": 820,
-      "matches": 1
+      "elo": 530,
+      "matches": 2
     }
   },
   {
     "username": "KillerApp23",
-    "streaming": true,
+    "streaming": false,
     "ALTTPR": {
-      "elo": 1215,
-      "matches": 1
+      "elo": 1525,
+      "matches": 2
     }
   },
   {
     "username": "WallKicks"
   },
   {
-    "username": "who42baker"
+    "username": "who42baker",
+    "ALTTPR": {
+      "elo": 830,
+      "matches": 1
+    }
+  },
+  {
+    "username": "Brightbeginner"
+  },
+  {
+    "username": "Marcnificent"
   }
 ]

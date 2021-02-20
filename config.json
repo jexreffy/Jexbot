@@ -7,7 +7,7 @@
     "minimumNewIntervalMinutes": "1",
     "defaultLeaderboardSize": "25",
     "defaultCategory": "ALTTPR",
-    "referees": ["Jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken", "KillerApp23"],
+    "referees": ["Jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken", "KillerApp23", "Jixson", "RGBHive"],
     "categories": [{
             "name": "ALTTPR",
             "aliases": ["alttpr"]

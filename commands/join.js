@@ -15,8 +15,7 @@ module.exports = (race, channel, username, message) => {
 
         if (race.finished || timedOut) {
             if (message) {
-                startrace(race, channel, message)
-                .then(() => {
+                startrace(race, channel, message).then(() => {
                     race.players.push(newPlayer);
                     race.remainingPlayers += 1;
 
