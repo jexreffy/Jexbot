@@ -66,7 +66,6 @@ module.exports = (race, channel) => {
 
     let names = "";
     let status = "";
-    let times = "";
     if (race.players.length > 0) {
         for (let i = 0; i < race.players.length; i++) {
             let username = race.players[i].username;
@@ -87,23 +86,18 @@ module.exports = (race, channel) => {
                 let seconds = Math.floor((time / 1000) % 60);
                 let minutes = Math.floor((time / (1000 * 60)) % 60);
                 let hours = Math.floor((time / (1000 * 60 * 60)) % 24);
-                status += ((i !== 0) ? '\n' : '') + 'Finished';
-                times += ((i !== 0) ? '\n' : '') + (i + 1) + ". " + hours.toString().padStart(2, "0") + ':' + minutes.toString().padStart(2, "0") + ':' + seconds.toString().padStart(2, "0");
+                status += ((i !== 0) ? '\n' : '') + (i + 1) + ". " + hours.toString().padStart(2, "0") + ':' + minutes.toString().padStart(2, "0") + ':' + seconds.toString().padStart(2, "0");
             } else if (race.players[i].forfeited) {
-                status += ((i !== 0) ? '\n' : '') + 'Forfeit';
-                times += ((i !== 0) ? '\n' : '') + 'DNF';
+                status += ((i !== 0) ? '\n' : '') + 'DNF';
             } else if (race.players[i].ready) {
                 status += ((i !== 0) ? '\n' : '') + 'Ready';
-                times += ((i !== 0) ? '\n' : '') + '---';
             } else {
                 status += ((i !== 0) ? '\n' : '') + 'Not Ready';
-                times += ((i !== 0) ? '\n' : '') + '---';
             }
         }
     } else {
         names = "N/A";
         status = "---";
-        times = "---";
     }
 
     let racerCommands = "";
@@ -146,8 +140,7 @@ module.exports = (race, channel) => {
         {'name': 'Last Spaceballs Reference', 'value': spaceTime, 'inline': false},
         {'name': 'Dick Counter', 'value': `${race.dickCount}`, 'inline': false},
         {'name': 'Player', 'value': names, 'inline': true},
-        {'name': 'Status', 'value': status, 'inline': true},
-        {'name': 'Time', 'value': times, 'inline': true},
+        {'name': 'Status', 'value': status, 'inline': true}
     ];
 
     message = {
