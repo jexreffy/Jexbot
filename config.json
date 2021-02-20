@@ -2,7 +2,7 @@
     "channel": "lttp-race-bot",
     "pingRole": "LttPR",
     "racerRole": "Racer",
-    "jokeCountdown": 10000,
+    "jokeCountdownMax": 10000,
     "timeoutMinutes": "45",
     "minimumNewIntervalMinutes": "1",
     "defaultLeaderboardSize": "25",
