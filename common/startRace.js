@@ -5,7 +5,9 @@ module.exports = (race, channel) => {
     const sleep = m => new Promise(r => setTimeout(r, m));
     (async() => {
         let countdown = config.countdowns[race.countdownIndex];
-        channel.send(`**The race will start in ${countdown.firstDelay + countdown.secondDelay + countdown.countdown} seconds**`);
+        let jokeTime = Math.floor(Math.random() * config.jokeCountdown);
+        let jokeUnits = config.jokeUnits[Math.floor(Math.random() * config.jokeUnits.length)];
+        channel.send(`**The race will start in ${jokeTime} ${jokeUnits}**`);
         race.status = countdown.firstLine;
         updateRaceMessage(race, channel);
         await sleep(countdown.firstDelay);

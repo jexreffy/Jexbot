@@ -2,6 +2,7 @@
     "channel": "lttp-race-bot",
     "pingRole": "LttPR",
     "racerRole": "Racer",
+    "jokeCountdown": 10000,
     "timeoutMinutes": "45",
     "minimumNewIntervalMinutes": "1",
     "defaultLeaderboardSize": "25",
@@ -12,6 +13,7 @@
             "aliases": ["alttpr"]
         }
     ],
+    "jokeUnits": ["seconds", "schmeconds", "milliseconds", "minutes", "hours", "days", "months", "years", "dog years", "weeks", "Fortnights", "scores", "moments", "shakes"],
     "pings": [
         "Let's get ready to Rando!!!",
         "Live from the internet, it's Friday Night!!!",
