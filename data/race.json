@@ -1,0 +1,25 @@
+{
+  "started": false,
+  "finished": true,
+  "startedAt": null,
+  "initiatedAt": 1613881032335,
+  "pingIndex": 2,
+  "countdownIndex": 7,
+  "remainingPlayers": 1,
+  "players": [
+    {
+      "username": "jexreffy"
+    }
+  ],
+  "gatekeeper": null,
+  "category": "ALTTPR",
+  "messageId": "812900694020456458",
+  "seedCode": null,
+  "seedLink": "https://alttpr.com/h/30yAo3d6MV",
+  "seedRoller": null,
+  "mutlistream": "https://multistre.am/jexreffy/",
+  "status": "RACE CLOSED",
+  "dickCount": 0,
+  "seed": null,
+  "seedlink": null
+}

@@ -8,16 +8,24 @@ module.exports = (race, channel, message) => {
             race.started = false;
             race.finished = false;
             race.startedAt = null;
+            race.initiatedAt = null;
+            race.pingIndex = Math.floor(Math.random() * Math.floor(config.pings.length));
+            race.countdownIndex = Math.floor(Math.random() * Math.floor(config.countdowns.length));
             race.remainingPlayers = 0;
-            race.category = config.defaultCategory;
             race.players = [];
+            race.gatekeeper = null;
+            race.category = config.defaultCategory;
+            race.messageId = null;
+            race.seedCode = null;
+            race.seedlink = null;
+            race.seedRoller = null;
             race.mutlistream = 'https://multistre.am/';
             race.status = 'PRE-RACE: WAITING FOR PLAYERS';
+            race.dickCount = 0;
     
             return new Promise((resolve, reject) => {
                 race.initiatedAt = new Date().getTime();
-                race.pingIndex = Math.floor(Math.random() * Math.floor(config.pings.length));
-                race.countdownIndex = Math.floor(Math.random() * Math.floor(config.countdowns.length));
+
                 let embed = {
                     'content': "",
                     'embed': {

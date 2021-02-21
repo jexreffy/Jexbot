@@ -10,31 +10,12 @@ const rl = readline.createInterface({
     output: process.stdout
   });
 
-var race = {
-    started: false,
-    finished: true,
-    startedAt: null,
-    initiatedAt: null,
-    pingIndex: -1,
-    countdownIndex: -1,
-    remainingPlayers: 0,
-    players: [],
-    gatekeeper: null,
-    category: config.defaultCategory,
-    messageId: null,
-    seedCode: null,
-    seedLink: null,
-    seedRoller: null,
-    mutlistream: null,
-    status: '',
-    dickCount: 0
-};
-
 fs.readdir('./events/', (err, files) => {
     files.forEach(file => {
         const eventHandler = require(`./events/${file}`);
         const eventName = file.split('.')[0];
-        client.on(eventName, (...args) => eventHandler(client, race, ...args));
+
+        client.on(eventName, (...args) => eventHandler(client, ...args));
     });
 });
 

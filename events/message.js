@@ -1,5 +1,6 @@
 const config = require('../config.json');
 const close = require('../commands/close');
+const data = require('../data/data.js');
 const dick = require('../commands/dick');
 const done = require('../commands/done');
 const forfeit = require('../commands/forfeit');
@@ -22,10 +23,12 @@ const submit = require('../commands/submit');
 const twitch = require('../commands/twitch');
 const unready = require('../commands/unready');
 
-module.exports = (client, race, message) => {
-    const channel = config.channel;
+module.exports = (client, message) => {
+        const channel = config.channel;
 
     if (message.channel.name !== channel) return;
+
+    let race = data.getRace();
 
     if (message.content.match(/^[.!](\bclose\b)/i)) {
         close(race, message, message.channel);
@@ -72,6 +75,8 @@ module.exports = (client, race, message) => {
     } else if (message.content.match(/^[.!](\bunready\b)/i)) {
         unready(race, message.channel, message.author.username, message);
     }
+
+    data.setRace(race);
 
     if (message && !message.author.bot) {
         message.delete().then().catch(console.error);
