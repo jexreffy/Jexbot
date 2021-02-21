@@ -11,9 +11,7 @@ const tClient = new Twitch.Client({
         username: process.env.TWITCH_BOT_NAME,
         password: process.env.TWITCH_BOT_TOKEN
     },
-    channels: [
-        'jexreffy'
-    ]
+    channels: config.twitchChannels
 });
 
 const readline = require('readline');
