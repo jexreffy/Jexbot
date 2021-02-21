@@ -1,35 +1,51 @@
 require('dotenv').config();
 const config = require('./config.json');
 const fs = require('fs');
-const Discord = require('discord.js');
-const client = new Discord.Client();
-const readline = require('readline');
 
+const Discord = require('discord.js');
+const dClient = new Discord.Client();
+
+const Twitch = require('tmi.js');
+const tClient = new Twitch.Client({
+    identity: {
+        username: process.env.TWITCH_BOT_NAME,
+        password: process.env.TWITCH_BOT_TOKEN
+    },
+    channels: [
+        'jexreffy'
+    ]
+});
+
+const readline = require('readline');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
-  });
+});
 
 fs.readdir('./events/', (err, files) => {
     files.forEach(file => {
         const eventHandler = require(`./events/${file}`);
         const eventName = file.split('.')[0];
 
-        client.on(eventName, (...args) => eventHandler(client, ...args));
+        dClient.on(eventName, (message) => {
+            eventHandler(dClient, tClient, message);
+        });
+
+        if (eventName === 'message') {
+            tClient.on(eventName, (channel, tags, message, self) => {
+                eventHandler(dClient, tClient, channel, tags, message, self);
+            });
+        }
+
     });
 });
 
-client.login(process.env.BOT_TOKEN).then(x => {
+dClient.login(process.env.DISCORD_BOT_TOKEN).then(x => {
     let time = new Date();
-    console.log(time.toLocaleString('en-US') + ' restarted');
+    console.log(time.toLocaleString('en-US') + ' Discord connected');
 }).catch(console.error);
 
-rl.on('line', (input) => {
-    if (input === 'race') {
-        console.log(race);
-    } else if (input === 'channels') {
-        console.log(client.channels);
-    } else if (input === 'roles') {
-        console.log(client.guilds.first(1)[0].roles);
-    }
-});
+tClient.connect().then(x => {
+    let time = new Date();
+    console.log(time.toLocaleString('en-US') + ' Twitch connected');
+}).catch(console.error);

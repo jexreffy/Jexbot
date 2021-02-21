@@ -2,9 +2,9 @@
   "started": false,
   "finished": true,
   "startedAt": null,
-  "initiatedAt": 1613881032335,
-  "pingIndex": 2,
-  "countdownIndex": 7,
+  "initiatedAt": 1613893771770,
+  "pingIndex": 9,
+  "countdownIndex": 5,
   "remainingPlayers": 1,
   "players": [
     {
@@ -13,13 +13,12 @@
   ],
   "gatekeeper": null,
   "category": "ALTTPR",
-  "messageId": "812900694020456458",
+  "messageId": "812954124240551956",
   "seedCode": null,
-  "seedLink": "https://alttpr.com/h/30yAo3d6MV",
+  "seedLink": null,
   "seedRoller": null,
   "mutlistream": "https://multistre.am/jexreffy/",
-  "status": "RACE CLOSED",
+  "status": "PRE-RACE: WAITING FOR PLAYERS",
   "dickCount": 0,
-  "seed": null,
-  "seedlink": null
+  "seed": null
 }

@@ -148,5 +148,7 @@ module.exports = (race, channel) => {
         'embed': embed
     }
 
-    channel.messages.fetch(race.messageId).then(x => x.edit(message).then().catch(console.error)).catch(console.error);
+    channel.messages.fetch(race.messageId).then(x => {
+        x.edit(message).then().catch(console.error)
+    }).catch(console.error);
 };

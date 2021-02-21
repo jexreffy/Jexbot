@@ -23,8 +23,8 @@ const submit = require('../commands/submit');
 const twitch = require('../commands/twitch');
 const unready = require('../commands/unready');
 
-module.exports = (client, message) => {
-        const channel = config.channel;
+function processDiscordCommand(dClient, tClient, message) {
+    const channel = config.channel;
 
     if (message.channel.name !== channel) return;
 
@@ -33,7 +33,7 @@ module.exports = (client, message) => {
     if (message.content.match(/^[.!](\bclose\b)/i)) {
         close(race, message, message.channel);
     } else if (message.content.match(/^[.!](\bdick\b)/i)) {
-        dick(race, message.channel);
+        dick(race, message.channel, tClient);
     } else if (message.content.match(/^[.!]((\bdone\b)|(\btime\b))/i)) {
         done(race, message.channel, message.author.username, message);
     } else if (message.content.match(/^[.!](\bforfeit\b)|(\bff\b)/i)) {
@@ -61,7 +61,7 @@ module.exports = (client, message) => {
     }else if (message.content.match(/^[.!](\bsetseedlink\b) (https:\/\/[a-zA-Z0-9_%\/?,.]{4,70})/i)) {
         setSeedLink(race, message.channel, message.author.username, message);
     } else if (message.content.match(/^[.!](\bspaceballs\b)/i)) {
-        spaceballs(race, message.channel);
+        spaceballs(race, message.channel, tClient);
     } else if (message.content.match(/^[.!](\bstart\b)/i)) {
         start(race, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\bstats\b)([ ]{0,1})([a-zA-Z 0-9%]{0,30})/i)) {
@@ -80,5 +80,31 @@ module.exports = (client, message) => {
 
     if (message && !message.author.bot) {
         message.delete().then().catch(console.error);
+    }
+}
+
+function processTwitchCommand(dClient, tClient, tChannel, tags, message, self) {
+    if (self) return;
+
+    console.log(tChannel);
+
+    let race = data.getRace();
+
+    let dChannel = dClient.channels.cache.find(channel => channel.name === config.channel);
+
+    if (message.match(/^[!](\bdick\b)/i)) {
+        dick(race, dChannel, tClient);
+    } else if (message.match(/^[!](\bspaceballs\b)/i)) {
+        spaceballs(race, dChannel, tClient);
+    }
+
+    data.setRace(race);
+}
+
+module.exports = (...args) => {
+    if (args.length === 3) {
+        processDiscordCommand(args[0], args[1], args[2]);
+    } else if (args.length === 6) {
+        processTwitchCommand(args[0], args[1], args[2], args[3], args[4], args[5]);
     }
 };

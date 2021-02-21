@@ -13,6 +13,9 @@
             "aliases": ["alttpr"]
         }
     ],
+    "twitchChannels": [
+        "jexreffy"
+    ],
     "jokeUnits": ["seconds", "schmeconds", "milliseconds", "minutes", "hours", "days", "months", "years", "dog years", "weeks", "fortnights", "scores", "moments", "shakes"],
     "pings": [
         "Let's get ready to Rando!!!",
@@ -25,6 +28,39 @@
         "I would be careful, the seed roller is sus...",
         "Nobody blink! Triumph or Die!",
         "Deja vu - the sensation that you are doing something you have done before."
+    ],
+    "dickMessages": [
+        "has been blamed for our runners collective adversity RICHARD times.",
+        "has been blamed for our runners collective affliction RICHARD times.",
+        "has been blamed for our runners collective angst RICHARD times.",
+        "has been blamed for our runners collective despondency RICHARD times.",
+        "has been blamed for our runners collective discomfort RICHARD times.",
+        "has been blamed for our runners collective distress RICHARD times.",
+        "has been blamed for our runners collective dolor RICHARD times.",
+        "has been blamed for our runners collective gloom RICHARD times.",
+        "has been blamed for our runners collective grief RICHARD times.",
+        "has been blamed for our runners collective hardship RICHARD times.",
+        "has been blamed for our runners collective melancholy RICHARD times.",
+        "has been blamed for our runners collective misery RICHARD times.",
+        "has been blamed for our runners collective misfortune RICHARD times.",
+        "has been blamed for our runners collective pain RICHARD times.",
+        "has been blamed for our runners collective sorrow RICHARD times.",
+        "has been blamed for our runners collective suffering RICHARD times.",
+        "has been blamed for our runners collective trouble RICHARD times.",
+        "has been blamed for our runners collective tribulation RICHARD times.",
+        "has been blamed for our runners collective unhappiness RICHARD times.",
+        "has been blamed for our runners collective woe RICHARD times.",
+        "has been blamed for whatever this bullshit is RICHARD times.",
+        "has been blamed for whatever this calamity of a seed is RICHARD times.",
+        "has been blamed for whatever this catastrophe of a seed is RICHARD times.",
+        "has been blamed for whatever this nonsense is RICHARD times.",
+        "has been blamed for whatever this wretchedness is RICHARD times.",
+        "owes the rest of the group RICHARD beers after rolling this bullshit.",
+        "owes the rest of the group RICHARD beers after rolling this nonsense.",
+        "will have to wait RICHARD weeks before getting to roll another seed again.",
+        "should have offered RICHARD more prayers to RN Jesus.",
+        "should be charged with RICHARD counts of cruel and unusual punishment.",
+        "ehhh... I'm too lazy to come up with a pithy comment. The Dick Counter is at RICHARD"
     ],
     "countdowns": [
         {

@@ -5,26 +5,25 @@ const Discord = require('discord.js');
 module.exports = (race, channel, message) => {
     if (race.finished || (message.member && message.member.hasPermission('KICK_MEMBERS', false, false)) || config.referees.includes(message.author.username)) {
         if ((Math.floor(((new Date().getTime()) - race.initiatedAt)) / (1000 * 60)) > parseInt(config.minimumNewIntervalMinutes)) {
-            race.started = false;
-            race.finished = false;
-            race.startedAt = null;
-            race.initiatedAt = null;
-            race.pingIndex = Math.floor(Math.random() * Math.floor(config.pings.length));
-            race.countdownIndex = Math.floor(Math.random() * Math.floor(config.countdowns.length));
-            race.remainingPlayers = 0;
-            race.players = [];
-            race.gatekeeper = null;
-            race.category = config.defaultCategory;
-            race.messageId = null;
-            race.seedCode = null;
-            race.seedlink = null;
-            race.seedRoller = null;
-            race.mutlistream = 'https://multistre.am/';
-            race.status = 'PRE-RACE: WAITING FOR PLAYERS';
-            race.dickCount = 0;
-    
+
             return new Promise((resolve, reject) => {
+                race.started = false;
+                race.finished = false;
+                race.startedAt = null;
                 race.initiatedAt = new Date().getTime();
+                race.pingIndex = Math.floor(Math.random() * Math.floor(config.pings.length));
+                race.countdownIndex = Math.floor(Math.random() * Math.floor(config.countdowns.length));
+                race.remainingPlayers = 0;
+                race.players = [];
+                race.gatekeeper = null;
+                race.category = config.defaultCategory;
+                race.messageId = null;
+                race.seedCode = null;
+                race.seedLink = null;
+                race.seedRoller = null;
+                race.mutlistream = 'https://multistre.am/';
+                race.status = 'PRE-RACE: WAITING FOR PLAYERS';
+                race.dickCount = 0;
 
                 let embed = {
                     'content': "",
