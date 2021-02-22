@@ -2,7 +2,7 @@
     "channel": "lttp-race-bot",
     "pingRole": "LttPF",
     "racerRole": "Racer",
-    "jokeCountdownMax": 10000,
+    "jokeCountdownMax": 100,
     "minimumNewDickSeconds": 30,
     "minimumNewSpaceballsSeconds": 30,
     "minimumGuessStartSeconds": 3900000,
