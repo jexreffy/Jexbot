@@ -7,12 +7,8 @@ module.exports = (dClient, tClient) => {
     let dChannel = dClient.channels.cache.find(channel => channel.name === config.channel);
 
     if (race.started && !race.guessGameStarted && (Math.floor(Date().now() - race.startedAt) / 1000) > config.minimumGuessStartSeconds) {
-        for (let i = 0; i < config.twitchChannels.length; i++) {
-            tClient.say(`${config.twitchChannels[i]}`, config.gtGuessIntro);
-        }
-
-        dChannel.send(config.gtGuessIntro);
-
+        const broadcastMessage = require('../common/broadcastMessage');
+        broadcastMessage(config, dChannel, tClient, config.gtGuessIntro, false);
         race.guessGameStarted = true;
     } else if ((Math.floor(Date().now() - race.lastHello) / 1000) > config.helloInterval) {
         const hello = require('../commands/hello');

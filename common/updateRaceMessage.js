@@ -28,6 +28,10 @@ module.exports = (race, channel) => {
         desc += `\n Multistream: <${race.mutlistream}>`;
     }
 
+    if (race.escapeItem) {
+        desc += `\n Escape Item: ${race.escapeItem}`;
+    }
+
     if (race.remainingPlayers < race.players.length / 2) {
         if (race.blueballs >= 0) {
             desc += `\n Aga 1 Blue Balls: ${race.blueballs}`;
@@ -118,8 +122,13 @@ module.exports = (race, channel) => {
             "\n`.ff` - Forfeits the race for the player";
 
         viewerCommands = "Prefixes: `.` or `!`" +
+            "\n`.blueballs [0-15]` - Sets the number of blue balls Aga 1 threw" +
             "\n`.dick` - Increments the counter of times the seed roller is blamed for the seed" +
-            "\n`.spaceballs` - Resets the clock since the last Spaceballs reference";
+            "\n`.escape {Emote}` - Sets the item Uncle gave the runners in the Escape sequence";
+
+        if (race.guessGameStarted) viewerCommands += "\n`.gtguess [1-22]` - Sets your guess for the GTBK Guessing Game when the game starts";
+
+        viewerCommands += "\n`.spaceballs` - Resets the clock since the last Spaceballs reference";
     } else {
         racerCommands = "Prefixes: `.` or `!`" +
             "\n`.join` - Joins the current race" +

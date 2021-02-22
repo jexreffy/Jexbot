@@ -7,6 +7,7 @@ module.exports = (config, race, dChannel, message) => {
             race.finished = false;
             race.startedAt = null;
             race.initiatedAt = Date.now();
+            race.escapeItem = null;
             race.lastHello = race.initiatedAt;
             race.pingIndex = Math.floor(Math.random() * Math.floor(config.pings.length));
             race.countdownIndex = Math.floor(Math.random() * Math.floor(config.countdowns.length));

@@ -1,4 +1,4 @@
-const broadcastMessage = require('../common/broadcastTwitch');
+const broadcastTwitch = require('../common/broadcastTwitch');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (config, race, dChannel, tClient) => {
@@ -13,6 +13,6 @@ module.exports = (config, race, dChannel, tClient) => {
 
         let dickMessage = config.dickMessages[Math.floor(Math.random() * Math.floor(config.dickMessages.length))].replace('RICHARD', race.dickCount);
 
-        broadcastMessage(tClient, dickMessage);
+        broadcastTwitch(tClient, dickMessage);
     }
 };

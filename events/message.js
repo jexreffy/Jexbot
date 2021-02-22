@@ -5,6 +5,7 @@ const callback = require('../commands/callback');
 const close = require('../commands/close');
 const dick = require('../commands/dick');
 const done = require('../commands/done');
+const escape = require('../commands/escape');
 const forfeit = require('../commands/forfeit');
 const gatekeeper = require('../commands/gatekeeper');
 const gtbk = require('../commands/gtbk');
@@ -44,6 +45,8 @@ function processDiscordCommand(dClient, tClient, message) {
         dick(config, race, message.channel, tClient);
     } else if (message.content.match(/^[.!]((\bdone\b)|(\btime\b))/i)) {
         done(config, race, message.channel, tClient, message.author.username, message);
+    } else if (message.content.match(/^[.!](\bescape\b) ([a-zA-Z0-9<>:]{4,100})/i)) {
+        escape(config, race, message.channel, message.author.username, message);
     } else if (message.content.match(/^[.!](\bforfeit\b)|(\bff\b)/i)) {
         forfeit(config, race, message.channel, tClient, message.author.username, message);
     } else if (message.content.match(/^[.!](\bgatekeeper\b)/i)) {
@@ -70,7 +73,7 @@ function processDiscordCommand(dClient, tClient, message) {
         reset(race, message.channel, message);
     } else if (message.content.match(/^[.!](\bsetseedcode\b) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100})/i)) {
         setSeedCode(config, race, message.channel, message.author.username, message);
-    }else if (message.content.match(/^[.!](\bsetseedlink\b) (https:\/\/[a-zA-Z0-9_%\/?,.]{4,70})/i)) {
+    } else if (message.content.match(/^[.!](\bsetseedlink\b) (https:\/\/[a-zA-Z0-9_%\/?,.]{4,70})/i)) {
         setSeedLink(config, race, message.channel, message.author.username, message);
     } else if (message.content.match(/^[.!](\bspaceballs\b)/i)) {
         spaceballs(config, race, message.channel, tClient);
