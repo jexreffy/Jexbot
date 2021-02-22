@@ -6,7 +6,7 @@
     "timeoutMinutes": "45",
     "minimumNewDickSeconds": 30,
     "minimumNewSpaceballsSeconds": 30,
-    "minimumGuessStartSeconds": 3900
+    "minimumGuessStartSeconds": 3900,
     "defaultLeaderboardSize": "25",
     "defaultCategory": "ALTTPR",
     "referees": ["Jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken", "KillerApp23", "Jixson", "RGBHive"],
