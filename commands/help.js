@@ -1,3 +1,3 @@
 module.exports = (config, tClient, tChannel) => {
-    tClient.say(tChannel, config.help).then().catch(console.error);;
+    tClient.say(tChannel, config.help).then().catch(console.error);
 };

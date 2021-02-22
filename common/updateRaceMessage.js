@@ -28,6 +28,17 @@ module.exports = (race, channel) => {
         desc += `\n Multistream: <${race.mutlistream}>`;
     }
 
+    if (race.remainingPlayers < race.players.length / 2) {
+        if (race.blueballs >= 0) {
+            desc += `\n Aga 1 Blue Balls: ${race.blueballs}`;
+        }
+
+        if (race.gtbk >= 0) {
+            desc += `\n GTBK Guessing Game Location: ${race.gtRunner.replace('#', '')} Check ${race.gtbk}`;
+            desc += `\n GTBK Guessing Game Winner: ${race.gtbkWinner} guessed ${race.gtbkGuess}`;
+        }
+    }
+
     embed.description = desc;
 
     race.players.sort(function(a, b) {

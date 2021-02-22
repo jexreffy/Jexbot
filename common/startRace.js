@@ -34,7 +34,7 @@ module.exports = (config, race, dChannel, tClient) => {
 
         race.status = 'GO!!!';
         race.started = true;
-        race.startedAt = new Date().getTime();
+        race.startedAt = Date.now();
         updateRaceMessage(race, dChannel);
         dChannel.send(`**GO!!!**`).then().catch(console.error);
         await sleep(2000);

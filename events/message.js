@@ -1,6 +1,7 @@
 const config = require('../config.json');
 const data = require('../data/data.js');
 const blueballs = require('../commands/blueballs');
+const callback = require('../commands/callback');
 const close = require('../commands/close');
 const dick = require('../commands/dick');
 const done = require('../commands/done');
@@ -100,7 +101,9 @@ function processTwitchCommand(dClient, tClient, tChannel, tags, message, self) {
     let dChannel = dClient.channels.cache.find(channel => channel.name === config.channel);
 
     if (message.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i)) {
-        blueballs(race, message);
+        blueballs(race, tClient, tChannel, message);
+    } else if (message.match(/^[!](\bcallback\b)/i)) {
+        callback(config, race, dChannel, tClient, tChannel);
     } else if (message.match(/^[!](\bdick\b)/i)) {
         dick(config, race, dChannel, tClient);
     } else if (message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i)) {

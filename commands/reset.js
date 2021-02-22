@@ -5,7 +5,7 @@ module.exports = (race, dChannel, message) => {
         if (!race.finished) {
             race.started = false;
             race.startedAt = null;
-            race.initiatedAt = new Date().getTime();
+            race.initiatedAt = Date.now();
             race.remainingPlayers = race.players.length;
             race.players.forEach(x => {
                 x.finished = false;

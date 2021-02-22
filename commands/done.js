@@ -8,7 +8,7 @@ module.exports = (config, race, dChannel, tClient, username, message) => {
         player.finished = true;
         race.remainingPlayers -= 1;
 
-        let time = new Date().getTime() - race.startedAt;
+        let time = Date.now() - race.startedAt;
         if (time < 0) {
             time = 0;
         }

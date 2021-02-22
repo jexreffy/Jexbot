@@ -4,6 +4,7 @@
     "racerRole": "Racer",
     "helloInterval": 1800,
     "jokeCountdownMax": 100,
+    "minimumNewCallbackSeconds": 60,
     "minimumNewDickSeconds": 30,
     "minimumNewSpaceballsSeconds": 30,
     "minimumGuessStartSeconds": 3900,

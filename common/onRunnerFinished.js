@@ -58,7 +58,7 @@ module.exports = (config, race, dChannel, tClient, message) => {
         (async() => {
             updateRaceMessage(race, dChannel);
             await sleep(5000);
-            broadcastMessage(config, dChannel, tClient, `Spoilers are now allowed for the race`, true);
+            broadcastMessage(config, dChannel, tClient, `Spoilers are now allowed for the race.`, true);
             await sleep(5000);
             gtbkWinner(config, race, dChannel, tClient);
         })();
