@@ -2,27 +2,19 @@
   "started": false,
   "finished": false,
   "startedAt": null,
-  "initiatedAt": 1613969842955,
-  "pingIndex": 5,
-  "countdownIndex": 5,
-  "remainingPlayers": 2,
-  "players": [
-    {
-      "id": "263872489946349568",
-      "username": "jexreffy"
-    },
-    {
-      "username": "Digidude22"
-    }
-  ],
-  "guessGameStarted": true,
+  "initiatedAt": 1613980909439,
+  "pingIndex": 7,
+  "countdownIndex": 2,
+  "remainingPlayers": 0,
+  "players": [],
+  "guessGameStarted": false,
   "gatekeeper": null,
   "category": "ALTTPR",
-  "messageId": "813273193660940298",
+  "messageId": "813319623952826389",
   "seedCode": null,
   "seedLink": null,
   "seedRoller": null,
-  "mutlistream": "https://multistre.am/jexreffy/Digidude22/",
+  "mutlistream": "https://multistre.am/",
   "status": "PRE-RACE: WAITING FOR PLAYERS",
   "dickCount": 0,
   "seed": null,
@@ -31,7 +23,7 @@
     null,
     null,
     null,
-    "jexreffy",
+    null,
     null,
     null,
     null,
@@ -50,5 +42,7 @@
     null,
     null
   ],
-  "lastDickTime": null
+  "lastDickTime": null,
+  "gtRunner": null,
+  "gtbk": -1
 }

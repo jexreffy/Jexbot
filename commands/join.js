@@ -4,7 +4,6 @@ const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (config, race, dChannel, username, message) => {
     let player = race.players.find(x => x.username === username);
-    console.log(player);
 
     if (race.finished) {
         let newPlayer = {

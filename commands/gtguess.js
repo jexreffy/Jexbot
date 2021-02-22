@@ -1,39 +1,39 @@
 const broadcastMessage = require('../common/broadcastMessage');
 
 module.exports = (config, race, dChannel, tClient, tChannel, username, message) => {
-    if (race.guessGameStarted) {;
-        let match = message.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i);
-        let guess = parseInt(match[2]);
+    if (!race.guessGameStarted) return;
 
-        if (guess < 1 || guess > 22) return;
+    let match = message.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i);
+    let guess = parseInt(match[2]);
 
-        let response = null;
+    if (guess < 1 || guess > 22) return;
 
-        for (let i = 0; i < race.guesses.length; i++) {
-            if (race.guesses[i] === username) {
-                response = `${race.guesses[i]} has already guessed ${i + 1} for the GTBK Guessing Game.`;
-                if (tChannel) {
-                    tClient.say(tChannel, response).then().catch(console.error);
-                } else {
-                    dChannel.send(`**${response}**`).then().catch(console.error);
-                }
+    let response = null;
 
-                return;
-            }
-        }
-
-        if (race.guesses[guess - 1]) {
-            response = `${race.guesses[guess - 1]} has already guessed ${guess} for the GTBK Guessing Game.`;
-
+    for (let i = 0; i < race.guesses.length; i++) {
+        if (race.guesses[i] === username) {
+            response = `${race.guesses[i]} has already guessed ${i + 1} for the GTBK Guessing Game.`;
             if (tChannel) {
-                tClient.say(tChannel, response).then().catch(console.error);;
+                tClient.say(tChannel, response).then().catch(console.error);
             } else {
                 dChannel.send(`**${response}**`).then().catch(console.error);
             }
-        } else {
-            race.guesses[guess - 1] = username;
 
-            broadcastMessage(config, dChannel, tClient, `${username} has guessed ${guess} for the GTBK Guessing Game.`, true);
+            return;
         }
+    }
+
+    if (race.guesses[guess - 1]) {
+        response = `${race.guesses[guess - 1]} has already guessed ${guess} for the GTBK Guessing Game.`;
+
+        if (tChannel) {
+            tClient.say(tChannel, response).then().catch(console.error);;
+        } else {
+            dChannel.send(`**${response}**`).then().catch(console.error);
+        }
+    } else {
+        race.guesses[guess - 1] = username;
+
+        broadcastMessage(config, dChannel, tClient, `${username} has guessed ${guess} for the GTBK Guessing Game.`, true);
     }
 };

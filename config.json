@@ -1,6 +1,6 @@
 {
     "channel": "lttp-race-bot",
-    "pingRole": "LTTPRacer",
+    "pingRole": "LttPF",
     "racerRole": "Racer",
     "jokeCountdownMax": 10000,
     "minimumNewDickSeconds": 30,
@@ -20,6 +20,8 @@
     "hello": "Hello! I'm JexBot, your friendly neighborhood bot here to enhance your viewing experience. Use !help and I'll tell you how you can interact with me.",
     "help": "!dick - Use this when the seed roller is blamed for the seed. !spaceballs - Use this to reset the Spaceballs Clock. !gtguess - [1-22] use this to make your GTBK guess. !gtenter - use this when your runner has entered GT. !gtbk - use this when your runner has found the GTBK",
     "gtGuessIntro": "Now that our runners are over an hour in, it's possible one might be entering GT soon. You can now guess where the GTBK is based on the first streamed runner who enters GT. Use !gtguess [1-22] to get your guess in. The winner will be announced when we reach spoiler talk in the race.",
+    "gtGuessEnter": "Your runner has entered GT. Use !gtbk [1-22] when they find the key!",
+    "gtGuessFound": "Your runner found the GTBK at check LOCATION. When spoilers are open, I will reveal the winner.",
     "spaceballsClock": "Reset the Spaceballs clock!!",
     "jokeUnits": ["seconds", "schmeconds", "milliseconds", "minutes", "hours", "days", "months", "years", "dog years", "weeks", "fortnights", "scores", "moments", "shakes"],
     "pings": [

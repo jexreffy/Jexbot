@@ -13,6 +13,8 @@ module.exports = (config, race, dChannel, message) => {
             race.players = [];
             race.guessGameStarted = false;
             race.guesses = [];
+            race.gtRunner = null;
+            race.gtbk = -1;
             race.gatekeeper = null;
             race.category = config.defaultCategory;
             race.messageId = null;

@@ -12,6 +12,8 @@ module.exports = (race, dChannel, message, username) => {
             userTwitch = username;
         }
 
+        player.twitch = `#${username}`;
+
         race.mutlistream = race.mutlistream.replace(new RegExp(userTwitch + '/', 'i'), "");
 
         data.setPlayerTwitch(username, stream);

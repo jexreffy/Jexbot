@@ -5,6 +5,8 @@ const dick = require('../commands/dick');
 const done = require('../commands/done');
 const forfeit = require('../commands/forfeit');
 const gatekeeper = require('../commands/gatekeeper');
+const gtbk = require('../commands/gtbk');
+const gtEnter = require('../commands/gtEnter');
 const gtGuess = require('../commands/gtguess');
 const hello = require('../commands/hello');
 const help = require('../commands/help');
@@ -96,6 +98,10 @@ function processTwitchCommand(dClient, tClient, tChannel, tags, message, self) {
 
     if (message.match(/^[!](\bdick\b)/i)) {
         dick(config, race, dChannel, tClient);
+    } else if (message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i)) {
+        gtbk(config, race, tClient, tChannel, message);
+    } else if (message.match(/^[.!](\bgtenter\b)/i)) {
+        gtEnter(config, race, tClient, tChannel);
     } else if (message.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i)) {
         gtGuess(config, race, dChannel, tClient, tChannel, tags.username, message);
     } else if (message.match(/^[!](\bhelp\b)/i)) {

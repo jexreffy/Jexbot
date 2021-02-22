@@ -1,4 +1,5 @@
 const broadcastMessage = require('../common/broadcastMessage');
+const gtbkWinner = require('../common/gtbkWinner');
 const updateRaceMessage = require('../common/updateRaceMessage');
 const elo = require('../elo/elo.js');
 
@@ -46,10 +47,20 @@ module.exports = (config, race, dChannel, tClient, message) => {
             race.players[i].adjustment = adjustments[i];
         }
 
-        broadcastMessage(config, dChannel, tClient, `The race has finished.`, true);
+        const sleep = m => new Promise(r => setTimeout(r, m));
+        (async() => {
+            updateRaceMessage(race, dChannel);
+            await sleep(5000);
+            broadcastMessage(config, dChannel, tClient, `The race has finished.`, true);
+        })();
     } else if (race.remainingPlayers < race.players.length / 2) {
-
+        const sleep = m => new Promise(r => setTimeout(r, m));
+        (async() => {
+            updateRaceMessage(race, dChannel);
+            await sleep(5000);
+            broadcastMessage(config, dChannel, tClient, `Spoilers are now allowed for the race`, true);
+            await sleep(5000);
+            gtbkWinner(config, race, dChannel, tClient);
+        })();
     }
-
-    updateRaceMessage(race, dChannel);
 }

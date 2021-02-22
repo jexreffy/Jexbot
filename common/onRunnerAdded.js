@@ -12,8 +12,10 @@ module.exports = (config, race, player, message) => {
         let userTwitch = data.getPlayerTwitch(username);
         if (userTwitch) {
             race.mutlistream += userTwitch + '/';
+            player.twitch = `#${userTwitch}`;
         } else {
-            race.mutlistream += username.replace(/\W/gi, "") + '/';
+            race.mutlistream += username.replace(/\W/gi, "") + '/'
+            player.twitch = `#${username}`;
         }
     }
 }

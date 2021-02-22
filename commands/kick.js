@@ -1,6 +1,7 @@
-const startRace = require('../common/startRace');
 const onRunnerFinished = require('../common/onRunnerFinished');
 const onRunnerRemoved = require('../common/onRunnerRemoved');
+const startRace = require('../common/startRace');
+const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (config, race, dChannel, tClient, message) => {
     if (message.member && message.member.hasPermission('KICK_MEMBERS', false, false) || config.referees.includes(message.author.username)) {
@@ -16,6 +17,8 @@ module.exports = (config, race, dChannel, tClient, message) => {
             } else if (race.started) {
                 player.forfeited = true;
                 onRunnerFinished(config, race, dChannel, tClient, message);
+            } else if (!race.started) {
+                updateRaceMessage(race, dChannel);
             }
         } else {
             let time = new Date();
