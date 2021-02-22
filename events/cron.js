@@ -6,7 +6,7 @@ module.exports = (dClient, tClient) => {
 
     let dChannel = dClient.channels.cache.find(channel => channel.name === config.channel);
 
-    if (!race.started && !race.guessGameStarted && (Math.floor(((new Date().getTime()) - race.startedAt)) / 1000) > config.minimumGuessStartSeconds) {
+    if (race.started && !race.guessGameStarted && (Math.floor(((new Date().getTime()) - race.startedAt)) / 1000) > config.minimumGuessStartSeconds) {
         for (let i = 0; i < config.twitchChannels.length; i++) {
             tClient.say(`${config.twitchChannels[i]}`, config.gtGuessIntro);
         }
@@ -14,6 +14,9 @@ module.exports = (dClient, tClient) => {
         dChannel.send(config.gtGuessIntro);
 
         race.guessGameStarted = true;
+    } else if ((Math.floor(((new Date().getTime()) - race.lastHello)) / 1000) > config.helloInterval) {
+        const hello = require('../commands/hello');
+        hello(config, race, tClient, "CRON");
     }
 
     data.setRace(race);

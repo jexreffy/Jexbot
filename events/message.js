@@ -1,6 +1,7 @@
 const config = require('../config.json');
-const close = require('../commands/close');
 const data = require('../data/data.js');
+const blueballs = require('../commands/blueballs');
+const close = require('../commands/close');
 const dick = require('../commands/dick');
 const done = require('../commands/done');
 const forfeit = require('../commands/forfeit');
@@ -34,7 +35,9 @@ function processDiscordCommand(dClient, tClient, message) {
 
     let race = data.getRace();
 
-    if (message.content.match(/^[.!](\bclose\b)/i)) {
+    if (message.content.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i)) {
+        blueballs(race, message.content);
+    } else if (message.content.match(/^[.!](\bclose\b)/i)) {
         close(race, message, message.channel);
     } else if (message.content.match(/^[.!](\bdick\b)/i)) {
         dick(config, race, message.channel, tClient);
@@ -96,7 +99,9 @@ function processTwitchCommand(dClient, tClient, tChannel, tags, message, self) {
 
     let dChannel = dClient.channels.cache.find(channel => channel.name === config.channel);
 
-    if (message.match(/^[!](\bdick\b)/i)) {
+    if (message.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i)) {
+        blueballs(race, message);
+    } else if (message.match(/^[!](\bdick\b)/i)) {
         dick(config, race, dChannel, tClient);
     } else if (message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i)) {
         gtbk(config, race, tClient, tChannel, message);

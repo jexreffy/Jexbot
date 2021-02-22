@@ -7,10 +7,12 @@ module.exports = (config, race, dChannel, message) => {
             race.finished = false;
             race.startedAt = null;
             race.initiatedAt = new Date().getTime();
+            race.lastHello = new Date().getTime();
             race.pingIndex = Math.floor(Math.random() * Math.floor(config.pings.length));
             race.countdownIndex = Math.floor(Math.random() * Math.floor(config.countdowns.length));
             race.remainingPlayers = 0;
             race.players = [];
+            race.blueballs = -1;
             race.guessGameStarted = false;
             race.guesses = [];
             race.gtRunner = null;
