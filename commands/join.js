@@ -1,59 +1,28 @@
-const config = require('../config.json');
+const newRace = require('../commands/new');
+const onRunnerAdded = require('../common/onRunnerAdded');
 const updateRaceMessage = require('../common/updateRaceMessage');
-const startrace = require('../commands/new');
-const data = require('../data/data.js');
 
-module.exports = (race, channel, username, message) => {
+module.exports = (config, race, dChannel, username, message) => {
     let player = race.players.find(x => x.username === username);
-    let newPlayer = {
-        username: username
-    };
+    console.log(player);
 
-    let timedOut = ((Math.floor(((new Date().getTime()) - race.initiatedAt)) / (1000 * 60)) >= parseInt(config.timeoutMinutes));
+    if (race.finished) {
+        let newPlayer = {
+            id: message.author.id,
+            username: username
+        };
 
-    if (race.finished || (!race.started && !player)) {
+        newRace(config, race, dChannel, message).then(() => {
+            onRunnerAdded(config, race, newPlayer, message);
+            updateRaceMessage(race, dChannel);
+        }).catch(console.error);
+    } else if ((!race.started && !player)) {
+        let newPlayer = {
+            id: message.author.id,
+            username: username
+        };
 
-        if (race.finished || timedOut) {
-            if (message) {
-                startrace(race, channel, message).then(() => {
-                    race.players.push(newPlayer);
-                    race.remainingPlayers += 1;
-
-                    let role = message.guild.roles.cache.find(r => r.name === config.racerRole);
-                    message.member.roles.add(role.id).then().catch(console.error);
-
-                    if (data.getPlayerStreaming(username)) {
-                        let userTwitch = data.getPlayerTwitch(username);
-                        if (userTwitch) {
-                            race.mutlistream += userTwitch + '/';
-                        } else {
-                            race.mutlistream += username.replace(/\W/gi, "") + '/';
-                        }
-                    }
-
-                    updateRaceMessage(race, channel);}
-                ).catch(console.error);
-            } else if (timedOut) {
-                race.status = 'TIMED OUT';
-                updateRaceMessage(race, channel);
-            }
-        } else {
-            race.players.push(newPlayer);
-            race.remainingPlayers += 1;
-
-            let role = message.guild.roles.cache.find(r => r.name === config.racerRole);
-            message.member.roles.add(role.id).then().catch(console.error);
-
-            if (data.getPlayerStreaming(username)) {
-                let userTwitch = data.getPlayerTwitch(username);
-                if (userTwitch) {
-                    race.mutlistream += userTwitch + '/';
-                } else {
-                    race.mutlistream += username.replace(/\W/gi, "") + '/';
-                }
-            }
-
-            updateRaceMessage(race, channel);
-        }
+        onRunnerAdded(config, race, newPlayer, message);
+        updateRaceMessage(race, dChannel);
     }
 };

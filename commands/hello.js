@@ -1,9 +1,7 @@
-const config = require('../config.json');
+const broadcastTwitch = require('../common/broadcastTwitch');
 
-module.exports = (race, tClient, message) => {
+module.exports = (config, race, tClient, message) => {
     if ((message.member && message.member.hasPermission('KICK_MEMBERS', false, false)) || config.referees.includes(message.author.username)) {
-        for (let i = 0; i < config.twitchChannels.length; i++) {
-            tClient.say(`#${config.twitchChannels[i]}`, config.hello);
-        }
+        broadcastTwitch(config, tClient, config.hello);
     }
 };

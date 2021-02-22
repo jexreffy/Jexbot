@@ -1,7 +1,7 @@
 const data = require('../data/data.js');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
-module.exports = (race, channel, message, username) => {
+module.exports = (race, dChannel, message, username) => {
     let match = message.content.match(/^[.!](\btwitch\b) ([a-zA-Z0-9_]{4,20})/i);
     let stream = match[2];
 
@@ -18,7 +18,7 @@ module.exports = (race, channel, message, username) => {
 
         if (data.getPlayerStreaming(username)) race.mutlistream += stream + '/';
 
-        updateRaceMessage(race, channel);
+        updateRaceMessage(race, dChannel);
     } else {
         data.setPlayerTwitch(username, stream);
     }

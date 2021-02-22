@@ -1,4 +1,3 @@
-const config = require('../config.json');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (race, message, channel) => {

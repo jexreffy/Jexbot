@@ -1,7 +1,6 @@
 const updateRaceMessage = require('../common/updateRaceMessage');
-const config = require('../config.json');
 
-module.exports = (race, channel, username, message) => {
+module.exports = (config, race, dChannel, username, message) => {
     if (race.seedLink) return;
 
     let player = race.players.find(x => x.username === username);
@@ -11,6 +10,6 @@ module.exports = (race, channel, username, message) => {
     if (!race.started && (player || config.referees.includes(username))) {
         race.seedRoller = username;
         race.seedLink = seed;
-        updateRaceMessage(race, channel);
+        updateRaceMessage(race, dChannel);
     }
 };

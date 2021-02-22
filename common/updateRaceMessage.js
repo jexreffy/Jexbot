@@ -1,4 +1,3 @@
-const config = require('../config.json');
 const data = require('../data/data.js');
 
 module.exports = (race, channel) => {

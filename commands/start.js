@@ -1,15 +1,14 @@
 const updateRaceMessage = require('../common/updateRaceMessage');
 const startRace = require('../common/startRace');
-const config = require('../config.json');
 
-module.exports = (race, channel, message, username) => {
+module.exports = (config, race, dChannel, tClient, message, username) => {
     if (message.member && message.member.hasPermission('KICK_MEMBERS', false, false) || config.referees.includes(username)) {
         if (!race.started && race.gatekeeper === username) {
             let allReady = race.players.every(x => x.ready === true);
             if (allReady && race.players.length > 1) {
-                startRace(race, channel);
+                startRace(config, race, dChannel, tClient);
             } else {
-                updateRaceMessage(race, channel);
+                updateRaceMessage(race, dChannel);
             }
         }
     }

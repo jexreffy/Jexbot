@@ -1,8 +1,6 @@
-const config = require('../config.json');
 const updateRaceMessage = require('../common/updateRaceMessage');
-const Discord = require('discord.js');
 
-module.exports = (race, channel, message) => {
+module.exports = (config, race, dChannel, message) => {
     if (race.finished || (message.member && message.member.hasPermission('KICK_MEMBERS', false, false)) || config.referees.includes(message.author.username)) {
         return new Promise((resolve, reject) => {
             race.started = false;
@@ -13,6 +11,7 @@ module.exports = (race, channel, message) => {
             race.countdownIndex = Math.floor(Math.random() * Math.floor(config.countdowns.length));
             race.remainingPlayers = 0;
             race.players = [];
+            race.guessGameStarted = false;
             race.guesses = [];
             race.gatekeeper = null;
             race.category = config.defaultCategory;
@@ -39,10 +38,10 @@ module.exports = (race, channel, message) => {
 
             let role = message.guild.roles.cache.find(r => r.name === config.pingRole);
 
-            channel.send(`${role} ${config.pings[race.pingIndex]}`);
-            channel.send(embed).then(x => {
+            dChannel.send(`${role} ${config.pings[race.pingIndex]}`);
+            dChannel.send(embed).then(x => {
                 race.messageId = x.id;
-                updateRaceMessage(race, channel);
+                updateRaceMessage(race, dChannel);
                 resolve();
             }).catch((error) => {
                 console.log(error);

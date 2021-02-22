@@ -1,30 +1,18 @@
-const config = require('../config.json');
-const data = require('../data/data.js');
+const onRunnerRemoved = require('../common/onRunnerRemoved');
 const startRace = require('../common/startRace');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
-module.exports = (race, channel, username, message) => {
+module.exports = (config, race, dChannel, username, message) => {
     let player = race.players.find(x => x.username === username);
 
     if (!race.finished && player) {
-        race.players.splice(race.players.indexOf(player), 1);
-        race.remainingPlayers -= 1;
-
-        let userTwitch = data.getPlayerTwitch(username);
-        if (!userTwitch) {
-            userTwitch = username;
-        }
-
-        let role = message.guild.roles.cache.find(r => r.name === config.racerRole);
-        message.member.roles.remove(role.id).then().catch(console.error);
-
-        race.mutlistream = race.mutlistream.replace(new RegExp(userTwitch + '/', 'i'), "");
+        onRunnerRemoved(config, race, player, message);
 
         let allReady = race.players.every(x => x.ready === true);
         if (!race.gatekeeper && allReady && race.players.length > 1) {
-            startRace(race, channel);
+            startRace(config, race, dChannel);
         } else {
-            updateRaceMessage(race, channel);
+            updateRaceMessage(race, dChannel);
         }
     } else {
         let time = new Date();

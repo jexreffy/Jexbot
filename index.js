@@ -52,5 +52,5 @@ tClient.connect().then(x => {
 const cron = require('node-cron');
 cron.schedule('* * * * *', () => {
     const cron = require('./events/cron');
-    cron(dClient, tClient);
+    //cron(dClient, tClient);
 }, {});

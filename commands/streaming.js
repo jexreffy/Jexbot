@@ -1,7 +1,7 @@
 const data = require('../data/data.js');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
-module.exports = (race, channel, message, username) => {
+module.exports = (race, dChannel, message, username) => {
     let match = message.content.match(/^[.!](\bstreaming\b) ((\bon\b)|(\boff\b))/i);
     let isStreaming = match[3] === "on";
 
@@ -18,7 +18,7 @@ module.exports = (race, channel, message, username) => {
 
         if (isStreaming) race.mutlistream += userTwitch + '/';
 
-        updateRaceMessage(race, channel);
+        updateRaceMessage(race, dChannel);
     } else {
         data.setPlayerTwitch(username, isStreaming);
     }

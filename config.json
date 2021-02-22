@@ -1,12 +1,11 @@
 {
     "channel": "lttp-race-bot",
-    "pingRole": "LttPR",
+    "pingRole": "LTTPRacer",
     "racerRole": "Racer",
     "jokeCountdownMax": 10000,
-    "timeoutMinutes": "45",
     "minimumNewDickSeconds": 30,
     "minimumNewSpaceballsSeconds": 30,
-    "minimumGuessStartSeconds": 3900
+    "minimumGuessStartSeconds": 3900000,
     "defaultLeaderboardSize": "25",
     "defaultCategory": "ALTTPR",
     "referees": ["Jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken", "KillerApp23", "Jixson", "RGBHive"],
@@ -19,8 +18,9 @@
         "jexreffy"
     ],
     "hello": "Hello! I'm JexBot, your friendly neighborhood bot here to enhance your viewing experience. Use !help and I'll tell you how you can interact with me.",
-    "help": "!dick - Use this when the seed roller is blamed for the seed. !spaceballs - Use this to reset the Spaceballs Clock. !guess [1-22] use this to make your GTBK guess.",
-    "guessIntro": "Now that our runners are over an hour in, it's possible one might be entering GT soon. You can now guess where the GTBK is based on the first streamed runner who enters GT. Use !guess [1-22] to get your guess in",
+    "help": "!dick - Use this when the seed roller is blamed for the seed. !spaceballs - Use this to reset the Spaceballs Clock. !gtguess - [1-22] use this to make your GTBK guess. !gtenter - use this when your runner has entered GT. !gtbk - use this when your runner has found the GTBK",
+    "gtGuessIntro": "Now that our runners are over an hour in, it's possible one might be entering GT soon. You can now guess where the GTBK is based on the first streamed runner who enters GT. Use !gtguess [1-22] to get your guess in. The winner will be announced when we reach spoiler talk in the race.",
+    "spaceballsClock": "Reset the Spaceballs clock!!",
     "jokeUnits": ["seconds", "schmeconds", "milliseconds", "minutes", "hours", "days", "months", "years", "dog years", "weeks", "fortnights", "scores", "moments", "shakes"],
     "pings": [
         "Let's get ready to Rando!!!",

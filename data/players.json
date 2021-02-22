@@ -2,8 +2,8 @@
   {
     "username": "jexreffy",
     "ALTTPR": {
-      "elo": 1160,
-      "matches": 15
+      "elo": 1205,
+      "matches": 17
     },
     "streaming": true,
     "twitch": "jexreffy"
@@ -99,5 +99,12 @@
   },
   {
     "username": "Marcnificent"
+  },
+  {
+    "username": "Jixson",
+    "ALTTPR": {
+      "elo": 925,
+      "matches": 2
+    }
   }
 ]
