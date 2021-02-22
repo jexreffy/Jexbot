@@ -5,6 +5,9 @@ const dick = require('../commands/dick');
 const done = require('../commands/done');
 const forfeit = require('../commands/forfeit');
 const gatekeeper = require('../commands/gatekeeper');
+const guess = require('../commands/guess');
+const hello = require('../commands/hello');
+const help = require('../commands/help');
 const join = require('../commands/join');
 const kick = require('../commands/kick');
 const leaderboard = require('../commands/leaderboard');
@@ -40,6 +43,10 @@ function processDiscordCommand(dClient, tClient, message) {
         forfeit(race, message.channel, message.author.username, message);
     } else if (message.content.match(/^[.!](\bgatekeeper\b)/i)) {
         gatekeeper(race, message.channel, message, message.author.username);
+    } else if (message.content.match(/^[.!](\bguess\b) ([0-9]{1,2})/i)) {
+        guess(race, message.channel, tClient, null, message.author.username, message.content);
+    } else if (message.content.match(/^[.!](\bhello\b)/i)) {
+        hello(race, tClient, message);
     } else if (message.content.match(/^[.!]((\bjoin\b)|(\benter\b))/i)) {
         join(race, message.channel, message.author.username, message);
     } else if (message.content.match(/^[.!](\bkick\b)([ ]{0,1})([a-zA-Z0-9%]{0,20})/i)) {
@@ -94,6 +101,10 @@ function processTwitchCommand(dClient, tClient, tChannel, tags, message, self) {
 
     if (message.match(/^[!](\bdick\b)/i)) {
         dick(race, dChannel, tClient);
+    } else if (message.match(/^[.!](\bguess\b) ([0-9]{1,2})/i)) {
+        guess(race, dChannel, tClient, tChannel, tags.username, message);
+    } else if (message.match(/^[!](\bhelp\b)/i)) {
+        help(tClient, tChannel);
     } else if (message.match(/^[!](\bspaceballs\b)/i)) {
         spaceballs(race, dChannel, tClient);
     }

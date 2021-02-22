@@ -25,16 +25,17 @@ fs.readdir('./events/', (err, files) => {
         const eventHandler = require(`./events/${file}`);
         const eventName = file.split('.')[0];
 
-        dClient.on(eventName, (message) => {
-            eventHandler(dClient, tClient, message);
-        });
-
-        if (eventName === 'message') {
-            tClient.on(eventName, (channel, tags, message, self) => {
-                eventHandler(dClient, tClient, channel, tags, message, self);
+        if (eventName !== 'cron') {
+            dClient.on(eventName, (message) => {
+                eventHandler(dClient, tClient, message);
             });
-        }
 
+            if (eventName === 'message') {
+                tClient.on(eventName, (channel, tags, message, self) => {
+                    eventHandler(dClient, tClient, channel, tags, message, self);
+                });
+            }
+        }
     });
 });
 
@@ -47,3 +48,9 @@ tClient.connect().then(x => {
     let time = new Date();
     console.log(time.toLocaleString('en-US') + ' Twitch connected');
 }).catch(console.error);
+
+const cron = require('node-cron');
+cron.schedule('* * * * *', () => {
+    const cron = require('./events/cron');
+    cron(dClient, tClient);
+}, {});

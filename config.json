@@ -4,7 +4,9 @@
     "racerRole": "Racer",
     "jokeCountdownMax": 10000,
     "timeoutMinutes": "45",
-    "minimumNewIntervalMinutes": "1",
+    "minimumNewDickSeconds": 30,
+    "minimumNewSpaceballsSeconds": 30,
+    "minimumGuessStartSeconds": 3900
     "defaultLeaderboardSize": "25",
     "defaultCategory": "ALTTPR",
     "referees": ["Jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken", "KillerApp23", "Jixson", "RGBHive"],
@@ -16,6 +18,9 @@
     "twitchChannels": [
         "jexreffy"
     ],
+    "hello": "Hello! I'm JexBot, your friendly neighborhood bot here to enhance your viewing experience. Use !help and I'll tell you how you can interact with me.",
+    "help": "!dick - Use this when the seed roller is blamed for the seed. !spaceballs - Use this to reset the Spaceballs Clock. !guess [1-22] use this to make your GTBK guess.",
+    "guessIntro": "Now that our runners are over an hour in, it's possible one might be entering GT soon. You can now guess where the GTBK is based on the first streamed runner who enters GT. Use !guess [1-22] to get your guess in",
     "jokeUnits": ["seconds", "schmeconds", "milliseconds", "minutes", "hours", "days", "months", "years", "dog years", "weeks", "fortnights", "scores", "moments", "shakes"],
     "pings": [
         "Let's get ready to Rando!!!",
