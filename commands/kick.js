@@ -13,7 +13,7 @@ module.exports = (config, race, dChannel, tClient, message) => {
     
             let allReady = race.players.every(x => x.ready === true);
             if (!race.started && !race.gatekeeper && allReady && race.players.length > 1) {
-                startRace(config, race, dChannel, tClient);
+                startRace(config, race, dChannel);
             } else if (race.started) {
                 player.forfeited = true;
                 onRunnerFinished(config, race, dChannel, tClient, message);

@@ -86,11 +86,12 @@ module.exports = (race, channel) => {
 
             if (data.getPlayerStreaming(username)) {
                 let userTwitch = data.getPlayerTwitch(username);
+                let twitchBot = data.getPlayerTwitchBot(username) ? " Bot Enabled" : "";
                 if (!userTwitch) {
                     userTwitch = username;
                 }
 
-                names += ((i !== 0) ? '\n' : '') + "[" + userTwitch + "](https://twitch.tv/" + userTwitch + ")";
+                names += ((i !== 0) ? '\n' : '') + "[" + userTwitch + "](https://twitch.tv/" + userTwitch + ") " + twitchBot;
             } else {
                 names += ((i !== 0) ? '\n' : '') + username;
             }
@@ -138,7 +139,8 @@ module.exports = (race, channel) => {
             "\n`.setseedlink {URL}` - Sets the seed url for the Race" +
             "\n`.setseedcode {Emote 1} {Emote 2} {Emote 3} {Emote 4} {Emote 5}` - Sets the seed code via Emotes for the Race" +
             "\n`.streaming {on|off}` - Sets if the player is streaming the race and should be included in the Multistream" +
-            "\n`.twitch {Twitch username}` - Change stream URL to your Twitch username if different from your Discord username";
+            "\n`.twitch {Twitch username}` - Change stream URL to your Twitch username if different from your Discord username" +
+            "\n`.twitchBot {on|off}` - Sets if JexBot connects to the Player's Twitch stream" ;
 
         viewerCommands = "Prefixes: `.` or `!`" +
             "\n`.spaceballs` - Resets the clock since the last Spaceballs reference";

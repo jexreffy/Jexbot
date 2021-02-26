@@ -1,7 +1,6 @@
-const broadcastTwitch = require('../common/broadcastTwitch');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
-module.exports = (config, race, dChannel, tClient) => {
+module.exports = (config, race, dChannel) => {
     const sleep = m => new Promise(r => setTimeout(r, m));
     (async() => {
         let countdown = config.countdowns[race.countdownIndex];
@@ -9,12 +8,10 @@ module.exports = (config, race, dChannel, tClient) => {
         let jokeUnits = config.jokeUnits[Math.floor(Math.random() * config.jokeUnits.length)];
         dChannel.send(`**The race will start in ${jokeTime} ${jokeUnits}**`).then().catch(console.error);
         race.status = countdown.firstLine;
-        broadcastTwitch(config, tClient, race.status);
         updateRaceMessage(race, dChannel);
         await sleep(countdown.firstDelay);
 
         race.status = countdown.secondLine;
-        broadcastTwitch(config, tClient, race.status);
         updateRaceMessage(race, dChannel);
         await sleep(countdown.secondDelay);
 

@@ -2,19 +2,25 @@
   "started": false,
   "finished": true,
   "startedAt": null,
-  "initiatedAt": 1613980909439,
+  "initiatedAt": 1614326327533,
   "pingIndex": 7,
-  "countdownIndex": 2,
-  "remainingPlayers": 0,
-  "players": [],
+  "countdownIndex": 1,
+  "remainingPlayers": 1,
+  "players": [
+    {
+      "id": "263872489946349568",
+      "username": "jexreffy",
+      "twitch": "#jexreffy"
+    }
+  ],
   "guessGameStarted": false,
-  "gatekeeper": null,
+  "gatekeeper": "jexreffy",
   "category": "ALTTPR",
-  "messageId": "813319623952826389",
+  "messageId": "814768352554909717",
   "seedCode": null,
   "seedLink": null,
   "seedRoller": null,
-  "mutlistream": "https://multistre.am/",
+  "mutlistream": "https://multistre.am/jexreffy/",
   "status": "PRE-RACE: WAITING FOR PLAYERS",
   "dickCount": 0,
   "seed": null,
@@ -44,5 +50,11 @@
   ],
   "lastDickTime": null,
   "gtRunner": null,
-  "gtbk": -1
+  "gtbk": -1,
+  "escapeItem": null,
+  "lastHello": null,
+  "lastCallback": null,
+  "blueballs": -1,
+  "gtbkWinner": null,
+  "gtbkGuess": -1
 }

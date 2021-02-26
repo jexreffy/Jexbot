@@ -1,6 +1,6 @@
 {
     "channel": "lttp-race-bot",
-    "pingRole": "LttPF",
+    "pingRole": "LttPR",
     "racerRole": "Racer",
     "helloInterval": 1800,
     "jokeCountdownMax": 100,
@@ -16,10 +16,7 @@
             "aliases": ["alttpr"]
         }
     ],
-    "twitchChannels": [
-        "jexreffy"
-    ],
-    "hello": "Hello! I'm JexBot, your friendly neighborhood bot here to enhance your viewing experience. Use !help and I'll tell you how you can interact with me.",
+    "hello": "Hello! I'm JexBot. My job is to enhance your viewing experience for the Crystal Company Friday Night Race. Use !help and I'll tell you how you can interact with me.",
     "help": "Commands I listen to: !callback, !dick, !spaceballs, !blueballs [0-15], !gtguess [1-22], !gtenter, !gtbk",
     "gtGuessIntro": "Now that our runners are over an hour in, it's possible one might be entering GT soon. You can now guess where the GTBK is based on the first streamed runner who enters GT. Use !gtguess [1-22] to get your guess in. The winner will be announced when we reach spoiler talk in the race.",
     "gtGuessEnter": "Your runner has entered GT. Use !gtbk [1-22] when they find the key!",

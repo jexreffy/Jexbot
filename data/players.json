@@ -6,7 +6,8 @@
       "matches": 17
     },
     "streaming": true,
-    "twitch": "jexreffy"
+    "twitch": "jexreffy",
+    "twitchBot": true
   },
   {
     "username": "ZephyrBlayze",

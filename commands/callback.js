@@ -1,8 +1,7 @@
 const broadcastMessage = require('../common/broadcastMessage');
 
 module.exports = (config, race, dChannel, tClient, tChannel) => {
-    let lastTime = race.lastCallback;
-    if (race.started && (Math.floor((Date.now() - lastTime)) / 1000) > config.minimumNewCallbackSeconds) {
+    if (race.started && (!race.lastCallback || (Math.floor((Date.now() - race.lastCallback)) / 1000) > config.minimumNewCallbackSeconds)) {
         race.lastCallback = Date.now();
 
         let time = race.lastCallback - race.startedAt;

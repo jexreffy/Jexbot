@@ -28,6 +28,7 @@ const start = require('../commands/start');
 const stats = require('../commands/stats');
 const streaming = require('../commands/streaming');
 const twitch = require('../commands/twitch');
+const twitchBot = require('../commands/twitchbot');
 const unready = require('../commands/unready');
 
 function processDiscordCommand(dClient, tClient, message) {
@@ -68,7 +69,7 @@ function processDiscordCommand(dClient, tClient, message) {
     } else if (message.content.match(/^[.!](\brank\b) ([ a-zA-Z0-9%]{3,20})/i)) {
         rank(message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\bready\b)/i)) {
-        ready(config, race, message.channel, tClient, message.author.username);
+        ready(config, race, message.channel, message.author.username);
     } else if (message.content.match(/^[.!](\breset\b)/i)) {
         reset(race, message.channel, message);
     } else if (message.content.match(/^[.!](\bsetseedcode\b) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100})/i)) {
@@ -85,6 +86,8 @@ function processDiscordCommand(dClient, tClient, message) {
         streaming(race, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\btwitch\b) ([a-zA-Z0-9_]{4,20})/i)) {
         twitch(race, message.channel, message, message.author.username);
+    } else if (message.content.match(/^[.!](\btwitchbot\b) ((\bon\b)|(\boff\b))/i)) {
+        twitchBot(race, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\bunready\b)/i)) {
         unready(race, message.channel, message.author.username, message);
     }

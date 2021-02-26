@@ -2,8 +2,7 @@ const broadcastTwitch = require('../common/broadcastTwitch');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (config, race, dChannel, tClient) => {
-    let lastTime = race.lastDickTime;
-    if (race.started && (Math.floor((Date.now() - lastTime)) / 1000) > config.minimumNewDickSeconds) {
+    if (race.started && (!race.lastDickTime || (Math.floor((Date.now() - race.lastDickTime)) / 1000) > config.minimumNewDickSeconds)) {
         race.dickCount += 1;
         race.lastDickTime = Date.now();
 
@@ -13,6 +12,6 @@ module.exports = (config, race, dChannel, tClient) => {
 
         let dickMessage = config.dickMessages[Math.floor(Math.random() * Math.floor(config.dickMessages.length))].replace('RICHARD', race.dickCount);
 
-        broadcastTwitch(tClient, dickMessage);
+        broadcastTwitch(config, tClient, dickMessage);
     }
 };

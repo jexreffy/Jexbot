@@ -1,5 +1,5 @@
 module.exports = (config, tClient, message) => {
-    for (let i = 0; i < config.twitchChannels.length; i++) {
-        tClient.say(`${config.twitchChannels[i]}`, message).then().catch(console.error);;
+    for (let i = 0; i < tClient.channels.length; i++) {
+        tClient.say(`${tClient.channels[i]}`, message).then().catch(console.error);;
     }
 };

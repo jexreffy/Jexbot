@@ -1,7 +1,7 @@
 const startRace = require('../common/startRace');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
-module.exports = (config, race, dChannel, tClient, username) => {
+module.exports = (config, race, dChannel, username) => {
     let player = race.players.find(x => x.username === username);
 
     if (!race.started && player) {
@@ -9,7 +9,7 @@ module.exports = (config, race, dChannel, tClient, username) => {
 
         let allReady = race.players.every(x => x.ready === true);
         if (!race.gatekeeper && allReady && race.players.length > 1) {
-            startRace(config, race, dChannel, tClient);
+            startRace(config, race, dChannel);
         } else {
             updateRaceMessage(race, dChannel);
         }

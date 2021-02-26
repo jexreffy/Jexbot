@@ -20,6 +20,6 @@ module.exports = (race, dChannel, message, username) => {
 
         updateRaceMessage(race, dChannel);
     } else {
-        data.setPlayerTwitch(username, isStreaming);
+        data.setPlayerStreaming(username, isStreaming);
     }
 };

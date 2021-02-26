@@ -8,12 +8,12 @@ module.exports = (config, race, dChannel, message) => {
             race.startedAt = null;
             race.initiatedAt = Date.now();
             race.escapeItem = null;
-            race.lastHello = race.initiatedAt;
+            race.lastHello = null;
             race.pingIndex = Math.floor(Math.random() * Math.floor(config.pings.length));
             race.countdownIndex = Math.floor(Math.random() * Math.floor(config.countdowns.length));
             race.remainingPlayers = 0
             race.players = [];
-            race.lastCallback = race.initiatedAt;
+            race.lastCallback = null;
             race.blueballs = -1;
             race.guessGameStarted = false;
             race.guesses = [];

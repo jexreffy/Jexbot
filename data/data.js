@@ -70,6 +70,15 @@ module.exports = {
         players[playerIndex].twitch = twitch;
         savePlayer(players[playerIndex]);
     },
+    getPlayerTwitchBot: function(username) {
+        let playerIndex = getPlayerIndexByName(username);
+        return players[playerIndex].streaming && players[playerIndex].twitchBot;
+    },
+    setPlayerTwitchBot: function(username, twitchBot) {
+        let playerIndex = getPlayerIndexByName(username);
+        players[playerIndex].twitchBot = twitchBot;
+        savePlayer(players[playerIndex]);
+    },
     getPlayerStreaming: function(username) {
         let playerIndex = getPlayerIndexByName(username);
         return players[playerIndex].streaming;
