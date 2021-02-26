@@ -1,7 +1,7 @@
 module.exports = (config, race, tClient, tChannel) => {
     if (!race.guessGameStarted) return;
 
-    tClient.say(tChannel, config.gtGuessEnter).then().catch(console.error);
+    if (tClient) tClient.say(tChannel, config.gtGuessEnter).then().catch(console.error);
 
     if (race.gtRunner) return;
 

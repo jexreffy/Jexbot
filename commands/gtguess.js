@@ -13,7 +13,7 @@ module.exports = (config, race, dChannel, tClient, tChannel, username, message) 
     for (let i = 0; i < race.guesses.length; i++) {
         if (race.guesses[i] === username) {
             response = `${race.guesses[i]} has already guessed ${i + 1} for the GTBK Guessing Game.`;
-            if (tChannel) {
+            if (tClient && tChannel) {
                 tClient.say(tChannel, response).then().catch(console.error);
             } else {
                 dChannel.send(`**${response}**`).then().catch(console.error);
@@ -26,7 +26,7 @@ module.exports = (config, race, dChannel, tClient, tChannel, username, message) 
     if (race.guesses[guess - 1]) {
         response = `${race.guesses[guess - 1]} has already guessed ${guess} for the GTBK Guessing Game.`;
 
-        if (tChannel) {
+        if (tClient && tChannel) {
             tClient.say(tChannel, response).then().catch(console.error);;
         } else {
             dChannel.send(`**${response}**`).then().catch(console.error);

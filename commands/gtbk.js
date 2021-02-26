@@ -5,7 +5,7 @@ module.exports = (config, race, tClient, tChannel, message) => {
     let guess = parseInt(match[2]);
     let response = config.gtGuessFound.replace('LOCATION', guess);
 
-    tClient.say(tChannel, response).then().catch(console.error);
+    if (tClient) tClient.say(tChannel, response).then().catch(console.error);
 
     let player = race.players.find(x => x.twitch === tChannel);
 

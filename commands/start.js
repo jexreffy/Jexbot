@@ -6,7 +6,7 @@ module.exports = (config, race, dChannel, tClient, message, username) => {
         if (!race.started && race.gatekeeper === username) {
             let allReady = race.players.every(x => x.ready === true);
             if (allReady && race.players.length > 1) {
-                startRace(config, race, dChannel, tClient);
+                startRace(config, race, dChannel);
             } else {
                 updateRaceMessage(race, dChannel);
             }

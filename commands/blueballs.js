@@ -8,5 +8,5 @@ module.exports = (race, tClient, tChannel, message) => {
 
     race.blueballs = blueballs;
 
-    tClient.say(tChannel, `Aga 1 Blue Balls recorded as ${blueballs}`).then().catch(console.error);
+    if (tClient) tClient.say(tChannel, `Aga 1 Blue Balls recorded as ${blueballs}`).then().catch(console.error);
 }

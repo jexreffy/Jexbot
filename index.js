@@ -28,6 +28,8 @@ function connectToTwitch() {
         }
     }
 
+    if (channels.length <= 0) return;
+
     tClient = new Twitch.Client({
         identity: {
             username: process.env.TWITCH_BOT_NAME,
