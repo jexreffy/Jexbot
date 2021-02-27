@@ -47,7 +47,7 @@ function processDiscordCommand(dClient, tClient, message) {
     } else if (message.content.match(/^[.!]((\bdone\b)|(\btime\b))/i)) {
         done(config, race, message.channel, tClient, message.author.username, message);
     } else if (message.content.match(/^[.!](\bescape\b) ([a-zA-Z0-9<>:]{4,100})/i)) {
-        escape(config, race, message.channel, message.author.username, message);
+        escape(config, race, message.channel, message);
     } else if (message.content.match(/^[.!](\bforfeit\b)|(\bff\b)/i)) {
         forfeit(config, race, message.channel, tClient, message.author.username, message);
     } else if (message.content.match(/^[.!](\bgatekeeper\b)/i)) {

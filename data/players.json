@@ -25,7 +25,8 @@
     "ALTTPR": {
       "elo": 815,
       "matches": 3
-    }
+    },
+    "twitchBot": true
   },
   {
     "username": "TjMaelstrom",
@@ -34,7 +35,8 @@
       "elo": 1445,
       "matches": 3
     },
-    "twitch": "TjMaelstrom"
+    "twitch": "TjMaelstrom",
+    "twitchBot": true
   },
   {
     "username": "The Lost Carol"
@@ -53,7 +55,8 @@
     "ALTTPR": {
       "elo": 1255,
       "matches": 3
-    }
+    },
+    "twitchBot": false
   },
   {
     "username": "KwehstopherWarken",
@@ -75,7 +78,8 @@
     "ALTTPR": {
       "elo": 530,
       "matches": 2
-    }
+    },
+    "twitchBot": true
   },
   {
     "username": "KillerApp23",
@@ -96,7 +100,10 @@
     }
   },
   {
-    "username": "Brightbeginner"
+    "username": "Brightbeginner",
+    "streaming": true,
+    "twitch": "brightbeginner1",
+    "twitchBot": true
   },
   {
     "username": "Marcnificent"
@@ -107,5 +114,15 @@
       "elo": 925,
       "matches": 2
     }
+  },
+  {
+    "username": "Ahab",
+    "twitch": "ahabpequod"
+  },
+  {
+    "username": "DoctorBobtastic"
+  },
+  {
+    "username": "Milla_84"
   }
 ]
