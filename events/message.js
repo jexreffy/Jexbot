@@ -20,9 +20,8 @@ const leave = require('../commands/leave');
 const newRace = require('../commands/new');
 const rank = require('../commands/rank');
 const ready = require('../commands/ready');
-const reset = require('../commands/reset');
-const setSeedCode = require('../commands/setSeedCode');
-const setSeedLink = require('../commands/setSeedLink');
+const reset = require('../commands/reset')
+const roll = require('../commands/roll');
 const spaceballs = require('../commands/spaceballs');
 const start = require('../commands/start');
 const stats = require('../commands/stats');
@@ -72,10 +71,8 @@ function processDiscordCommand(dClient, tClient, message) {
         ready(config, race, message.channel, message.author.username);
     } else if (message.content.match(/^[.!](\breset\b)/i)) {
         reset(race, message.channel, message);
-    } else if (message.content.match(/^[.!](\bsetseedcode\b) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100})/i)) {
-        setSeedCode(config, race, message.channel, message.author.username, message);
-    } else if (message.content.match(/^[.!](\bsetseedlink\b) (https:\/\/[a-zA-Z0-9_%\/?,.]{4,70})/i)) {
-        setSeedLink(config, race, message.channel, message.author.username, message);
+    } else if (message.content.match(/^[.!](\broll\b)/i)) {
+        roll(config, race, message.channel, message.author.username);
     } else if (message.content.match(/^[.!](\bspaceballs\b)/i)) {
         spaceballs(config, race, message.channel, tClient);
     } else if (message.content.match(/^[.!](\bstart\b)/i)) {

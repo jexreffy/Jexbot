@@ -13,8 +13,72 @@
     "referees": ["Jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken", "KillerApp23", "Jixson", "RGBHive"],
     "categories": [{
             "name": "ALTTPR",
-            "aliases": ["alttpr"]
+            "aliases": ["alttpr"],
+            "settings": {
+                "allow_quickswap": true,
+                "glitches": "none",
+                "item_placement": "advanced",
+                "dungeon_items": "standard",
+                "accessibility": "items",
+                "goal": "ganon",
+                "crystals": {
+                    "ganon": "7",
+                    "tower": "7"
+                },
+                "mode": "standard",
+                "entrances": "none",
+                "hints": "off",
+                "weapons": "randomized",
+                "item": {
+                    "pool": "normal",
+                    "functionality": "normal"
+                },
+                "tournament": true,
+                "spoilers": "off",
+                "lang":"en",
+                "enemizer": {
+                    "boss_shuffle":"none",
+                    "enemy_shuffle":"none",
+                    "enemy_damage":"default",
+                    "enemy_health":"default"
+                }
+            }
         }
+    ],
+    "codeStartAt": 1573397,
+    "codeMap": [
+        ":Bow:812714327928078367",
+        ":Boomerang:812714328222335067",
+        ":Hookshot:812714328268341259",
+        ":Bomb:812714328259690516",
+        ":Mushroom:812714328317755462",
+        ":Powder:812714328310284319",
+        ":IceRod:812714330331807745",
+        ":GreenPendant:812714328363892767",
+        ":Bombos:812714328079073341",
+        ":Ether:812714328234524696",
+        ":Quake:812714328553816074",
+        ":Lamp:812714328272535593",
+        ":MCHammer:812714328292720662",
+        ":Shovel:812714328317755402",
+        ":Flute:812714328360878100",
+        ":Net:812714328049451029",
+        ":Mudora:812714328230854696",
+        ":Bottle:812714328280006676",
+        ":GreenPotion:812714328238456833",
+        ":PhantoCane:590599035220656138",
+        ":Cape:812714328041979915",
+        ":mirror:812714328347246622",
+        ":Boots:812714328360747089",
+        ":PowerGlove:812714328532844604",
+        ":Flippers:812714328251695105",
+        ":MoonPearl:812714328250777622",
+        ":MirrorShield:812714328402690058",
+        ":GreenMail:812714328398626856",
+        ":ALotOfLove:",
+        ":DungeonMap:",
+        ":DungeonCompass:812714328456167424",
+        ":BigKey:812714328335319100"
     ],
     "hello": "Hello! I'm JexBot. My job is to enhance your viewing experience for the Crystal Company Friday Night Race. Use !help and I'll tell you how you can interact with me.",
     "help": "Commands I listen to: !callback, !dick, !spaceballs, !blueballs [0-15], !gtguess [1-22], !gtenter, !gtbk",

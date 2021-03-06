@@ -13,7 +13,7 @@ module.exports = (race, channel) => {
     }
 
     if (race.seedLink) {
-        desc += `\n Race Seed: <${race.seedLink}>`;
+        desc += `\n Race Seed: ${race.seedLink}`;
     }
 
     if (race.seedCode) {
@@ -127,7 +127,7 @@ module.exports = (race, channel) => {
             "\n`.dick` - Increments the counter of times the seed roller is blamed for the seed" +
             "\n`.escape {Emote}` - Sets the item Uncle gave the runners in the Escape sequence";
 
-        if (race.guessGameStarted) viewerCommands += "\n`.gtguess [1-22]` - Sets your guess for the GTBK Guessing Game when the game starts";
+        if (race.guessGameStarted) viewerCommands += "\n`.gtguess [1-22]` - Sets your guess for the GTBK Guessing Game";
 
         viewerCommands += "\n`.spaceballs` - Resets the clock since the last Spaceballs reference";
     } else {
@@ -136,8 +136,7 @@ module.exports = (race, channel) => {
             "\n`.leave` - Leaves the current race" +
             "\n`.ready` - Sets player ready to start" +
             "\n`.unready` - Sets player not ready to start" +
-            "\n`.setseedlink {URL}` - Sets the seed url for the Race" +
-            "\n`.setseedcode {Emote 1} {Emote 2} {Emote 3} {Emote 4} {Emote 5}` - Sets the seed code via Emotes for the Race" +
+            "\n`.roll` - Only type this is your self esteem can handle it, or understand how Random Number Generators work..." +
             "\n`.streaming {on|off}` - Sets if the player is streaming the race and should be included in the Multistream" +
             "\n`.twitch {Twitch username}` - Change stream URL to your Twitch username if different from your Discord username" +
             "\n`.twitchBot {on|off}` - Sets if JexBot connects to the Player's Twitch stream" ;
