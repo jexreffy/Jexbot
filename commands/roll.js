@@ -5,7 +5,7 @@ const updateRaceMessage = require('../common/updateRaceMessage');
 module.exports = (config, race, dChannel, username) => {
     if (race.seedLink) return;
 
-    dChannel.send(`**${username} has sealed their fate. I'd pray to RNJesus while the seed is rolling if I were you...**`).then().catch(console.error);
+    dChannel.send(`**${username} has sealed their fate. I'd pray to RN Jesus while the seed is rolling if I were you...**`).then().catch(console.error);
 
     const settings = config.categories[0].settings;
     axios.post('https://alttpr.com/api/randomizer', settings).then(result => {
