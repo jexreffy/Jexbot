@@ -10,7 +10,7 @@ module.exports = (config, race, dChannel, tClient) => {
             updateRaceMessage(race, dChannel);
         }
 
-        let dickMessage = config.dickMessages[Math.floor(Math.random() * Math.floor(config.dickMessages.length))].replace('RICHARD', race.dickCount);
+        let dickMessage = `${race.seedRoller} ${config.dickMessages[Math.floor(Math.random() * Math.floor(config.dickMessages.length))].replace('RICHARD', race.dickCount)}`;
 
         broadcastTwitch(config, tClient, dickMessage);
     }

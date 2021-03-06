@@ -20,6 +20,7 @@ module.exports = (config, race, dChannel, message) => {
             race.gtRunner = null;
             race.gtbk = -1;
             race.gtbkWinner = null;
+            race.gtbkWinnerAnnounced = false;
             race.gtbkGuess = -1;
             race.gatekeeper = null;
             race.category = config.defaultCategory;

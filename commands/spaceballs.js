@@ -4,8 +4,9 @@ const data = require('../data/data.js');
 
 module.exports = (config, race, dChannel, tClient) => {
     let lastTime = data.getSpaceballs();
-    if ((Math.floor(Date.now() - lastTime) / 1000) > config.minimumNewSpaceballsSeconds) {
-        data.setSpaceballs(Date.now() + 3600000);
+    let now = Date.now();
+    if ((Math.floor(now - lastTime) / 1000) > config.minimumNewSpaceballsSeconds) {
+        data.setSpaceballs(now);
         if (race.initiatedAt) {
             updateRaceMessage(race, dChannel);
         }
