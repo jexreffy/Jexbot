@@ -5,20 +5,11 @@ module.exports = (race, channel, message) => {
     const centerPad = (str, length, char = ' ') => str.padStart((str.length + length) / 2, char).padEnd(length, char);
     let match = message.content.match(/^[.!](\bstats\b)([ ]{0,1})([a-zA-Z 0-9%]{0,30})/i);
     let category = match[3];
-    let categories = config.categories;
     let stats = null;
     let player = false;
 
 
     if (category) {
-        for (let i = 0; i < categories.length; i++) {
-            for (let j = 0; j < categories[i].aliases.length; j++) {
-                if (category.toLowerCase() === categories[i].aliases[j]) {
-                    category = categories[i].name;
-                    break;
-                }
-            }
-        }
         stats = data.getCategoryStats(category);
         if (!stats) {
             stats = data.getPlayerStats(category);

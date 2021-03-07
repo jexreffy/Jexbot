@@ -7,7 +7,7 @@ module.exports = (config, race, dChannel, username) => {
 
     dChannel.send(`**${username} has sealed their fate. I'd pray to RN Jesus while the seed is rolling if I were you...**`).then().catch(console.error);
 
-    const settings = config.categories[0].settings;
+    const settings = config.categories[race.category].settings;
     axios.post('https://alttpr.com/api/randomizer', settings).then(result => {
         race.seedRoller = username;
         race.seedLink = `<https://alttpr.com/h/${result.data.hash}>`;

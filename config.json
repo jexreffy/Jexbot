@@ -90,11 +90,11 @@
     "minimumNewSpaceballsSeconds": 30,
     "minimumGuessStartSeconds": 3900,
     "defaultLeaderboardSize": "25",
-    "defaultCategory": "ALTTPR",
+    "defaultCategory": "standard",
     "referees": ["Jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken", "KillerApp23", "Jixson", "RGBHive"],
-    "categories": [{
-            "name": "ALTTPR",
-            "aliases": ["alttpr"],
+    "categories": {
+        "standard": {
+            "name": "Standard",
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -124,8 +124,296 @@
                     "enemy_health":"default"
                 }
             }
+        },
+        "open": {
+            "name": "Open",
+            "settings": {
+                "allow_quickswap": true,
+                "glitches": "none",
+                "item_placement": "advanced",
+                "dungeon_items": "standard",
+                "accessibility": "items",
+                "goal": "ganon",
+                "crystals": {
+                    "ganon": "7",
+                    "tower": "7"
+                },
+                "mode": "open",
+                "entrances": "none",
+                "hints": "off",
+                "weapons": "randomized",
+                "item": {
+                    "pool": "normal",
+                    "functionality": "normal"
+                },
+                "tournament": true,
+                "spoilers": "off",
+                "lang":"en",
+                "enemizer": {
+                    "boss_shuffle":"none",
+                    "enemy_shuffle":"none",
+                    "enemy_damage":"default",
+                    "enemy_health":"default"
+                }
+            }
+        },
+        "adkeysanity": {
+            "name": "AD Keysanity",
+            "settings": {
+                "allow_quickswap": true,
+                "glitches": "none",
+                "item_placement": "advanced",
+                "dungeon_items": "standard",
+                "accessibility": "items",
+                "goal": "dungeons",
+                "crystals": {
+                    "ganon": "7",
+                    "tower": "7"
+                },
+                "mode": "open",
+                "entrances": "none",
+                "hints": "off",
+                "weapons": "randomized",
+                "item": {
+                    "pool": "normal",
+                    "functionality": "normal"
+                },
+                "tournament": true,
+                "spoilers": "off",
+                "lang":"en",
+                "enemizer": {
+                    "boss_shuffle":"none",
+                    "enemy_shuffle":"none",
+                    "enemy_damage":"default",
+                    "enemy_health":"default"
+                }
+            }
+        },
+        "crosskeys": {
+            "name": "Crosskeys",
+            "settings": {
+                "allow_quickswap": true,
+                "glitches": "none",
+                "item_placement": "advanced",
+                "dungeon_items": "standard",
+                "accessibility": "items",
+                "goal": "fast_ganon",
+                "crystals": {
+                    "ganon": "7",
+                    "tower": "7"
+                },
+                "mode": "open",
+                "entrances": "crossed",
+                "hints": "off",
+                "weapons": "randomized",
+                "item": {
+                    "pool": "normal",
+                    "functionality": "normal"
+                },
+                "tournament": true,
+                "spoilers": "off",
+                "lang":"en",
+                "enemizer": {
+                    "boss_shuffle":"none",
+                    "enemy_shuffle":"none",
+                    "enemy_damage":"default",
+                    "enemy_health":"default"
+                }
+            }
+        },
+        "inverted": {
+            "name": "Inverted",
+            "settings": {
+                "allow_quickswap": true,
+                "glitches": "none",
+                "item_placement": "advanced",
+                "dungeon_items": "standard",
+                "accessibility": "items",
+                "goal": "ganon",
+                "crystals": {
+                    "ganon": "7",
+                    "tower": "7"
+                },
+                "mode": "inverted",
+                "entrances": "none",
+                "hints": "off",
+                "weapons": "randomized",
+                "item": {
+                    "pool": "normal",
+                    "functionality": "normal"
+                },
+                "tournament": true,
+                "spoilers": "off",
+                "lang":"en",
+                "enemizer": {
+                    "boss_shuffle":"none",
+                    "enemy_shuffle":"none",
+                    "enemy_damage":"default",
+                    "enemy_health":"default"
+                }
+            }
+        },
+        "keysanity": {
+            "name": "Keysanity",
+            "settings": {
+                "allow_quickswap": true,
+                "glitches": "none",
+                "item_placement": "advanced",
+                "dungeon_items": "standard",
+                "accessibility": "items",
+                "goal": "ganon",
+                "crystals": {
+                    "ganon": "7",
+                    "tower": "7"
+                },
+                "mode": "open",
+                "entrances": "none",
+                "hints": "off",
+                "weapons": "randomized",
+                "item": {
+                    "pool": "normal",
+                    "functionality": "normal"
+                },
+                "tournament": true,
+                "spoilers": "off",
+                "lang":"en",
+                "enemizer": {
+                    "boss_shuffle":"none",
+                    "enemy_shuffle":"none",
+                    "enemy_damage":"default",
+                    "enemy_health":"default"
+                }
+            }
+        },
+        "mcshuffle": {
+            "name": "MC Shuffle",
+            "settings": {
+                "allow_quickswap": true,
+                "glitches": "none",
+                "item_placement": "advanced",
+                "dungeon_items": "standard",
+                "accessibility": "items",
+                "goal": "ganon",
+                "crystals": {
+                    "ganon": "7",
+                    "tower": "7"
+                },
+                "mode": "open",
+                "entrances": "none",
+                "hints": "off",
+                "weapons": "randomized",
+                "item": {
+                    "pool": "normal",
+                    "functionality": "normal"
+                },
+                "tournament": true,
+                "spoilers": "off",
+                "lang":"en",
+                "enemizer": {
+                    "boss_shuffle":"none",
+                    "enemy_shuffle":"none",
+                    "enemy_damage":"default",
+                    "enemy_health":"default"
+                }
+            }
+        },
+        "reduced": {
+            "name": "Reduced Crystals",
+            "settings": {
+                "allow_quickswap": true,
+                "glitches": "none",
+                "item_placement": "advanced",
+                "dungeon_items": "standard",
+                "accessibility": "items",
+                "goal": "ganon",
+                "crystals": {
+                    "ganon": "6",
+                    "tower": "6"
+                },
+                "mode": "open",
+                "entrances": "none",
+                "hints": "off",
+                "weapons": "randomized",
+                "item": {
+                    "pool": "normal",
+                    "functionality": "normal"
+                },
+                "tournament": true,
+                "spoilers": "off",
+                "lang":"en",
+                "enemizer": {
+                    "boss_shuffle":"none",
+                    "enemy_shuffle":"none",
+                    "enemy_damage":"default",
+                    "enemy_health":"default"
+                }
+            }
+        },
+        "retro": {
+            "name": "Retro",
+            "settings": {
+                "allow_quickswap": true,
+                "glitches": "none",
+                "item_placement": "advanced",
+                "dungeon_items": "standard",
+                "accessibility": "items",
+                "goal": "ganon",
+                "crystals": {
+                    "ganon": "7",
+                    "tower": "7"
+                },
+                "mode": "retro",
+                "entrances": "none",
+                "hints": "off",
+                "weapons": "randomized",
+                "item": {
+                    "pool": "normal",
+                    "functionality": "normal"
+                },
+                "tournament": true,
+                "spoilers": "off",
+                "lang":"en",
+                "enemizer": {
+                    "boss_shuffle":"none",
+                    "enemy_shuffle":"none",
+                    "enemy_damage":"default",
+                    "enemy_health":"default"
+                }
+            }
+        },
+        "spoiler": {
+            "name": "Spoiler Open",
+            "settings": {
+                "allow_quickswap": true,
+                "glitches": "none",
+                "item_placement": "advanced",
+                "dungeon_items": "standard",
+                "accessibility": "items",
+                "goal": "ganon",
+                "crystals": {
+                    "ganon": "7",
+                    "tower": "7"
+                },
+                "mode": "open",
+                "entrances": "none",
+                "hints": "off",
+                "weapons": "randomized",
+                "item": {
+                    "pool": "normal",
+                    "functionality": "normal"
+                },
+                "tournament": true,
+                "spoilers": "on",
+                "lang":"en",
+                "enemizer": {
+                    "boss_shuffle":"none",
+                    "enemy_shuffle":"none",
+                    "enemy_damage":"default",
+                    "enemy_health":"default"
+                }
+            }
         }
-    ],
+    },
     "codeStartAt": 1573397,
     "hello": "Hello! I'm JexBot. My job is to enhance your viewing experience for the Crystal Company Friday Night Race. Use !help and I'll tell you how you can interact with me.",
     "help": "Commands I listen to: !callback, !dick, !spaceballs, !blueballs [0-15], !gtguess [1-22], !gtenter, !gtbk",

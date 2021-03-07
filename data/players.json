@@ -1,7 +1,7 @@
 [
   {
     "username": "jexreffy",
-    "ALTTPR": {
+    "standard": {
       "elo": 1105,
       "matches": 18
     },
@@ -13,7 +13,7 @@
     "username": "ZephyrBlayze",
     "twitch": "ZephyrBlayze",
     "streaming": true,
-    "ALTTPR": {
+    "standard": {
       "elo": 1225,
       "matches": 1
     }
@@ -22,7 +22,7 @@
     "username": "PhantomRyu",
     "streaming": true,
     "twitch": "PhantomRyu",
-    "ALTTPR": {
+    "standard": {
       "elo": 920,
       "matches": 4
     },
@@ -31,7 +31,7 @@
   {
     "username": "TjMaelstrom",
     "streaming": true,
-    "ALTTPR": {
+    "standard": {
       "elo": 1370,
       "matches": 4
     },
@@ -44,7 +44,7 @@
   {
     "username": "Katiebug",
     "twitch": "Katiebug_931",
-    "ALTTPR": {
+    "standard": {
       "elo": 690,
       "matches": 12
     }
@@ -52,7 +52,7 @@
   {
     "username": "Antissim",
     "streaming": false,
-    "ALTTPR": {
+    "standard": {
       "elo": 1455,
       "matches": 4
     },
@@ -61,7 +61,7 @@
   {
     "username": "KwehstopherWarken",
     "streaming": true,
-    "ALTTPR": {
+    "standard": {
       "elo": 500,
       "matches": 4
     },
@@ -76,7 +76,7 @@
     "username": "Digidude22",
     "twitch": "Digidude22",
     "streaming": true,
-    "ALTTPR": {
+    "standard": {
       "elo": 450,
       "matches": 3
     },
@@ -85,7 +85,7 @@
   {
     "username": "KillerApp23",
     "streaming": false,
-    "ALTTPR": {
+    "standard": {
       "elo": 1710,
       "matches": 3
     }
@@ -95,7 +95,7 @@
   },
   {
     "username": "who42baker",
-    "ALTTPR": {
+    "standard": {
       "elo": 830,
       "matches": 1
     }
@@ -108,7 +108,7 @@
   },
   {
     "username": "Marcnificent",
-    "ALTTPR": {
+    "standard": {
       "elo": 1225,
       "matches": 1
     },
@@ -116,7 +116,7 @@
   },
   {
     "username": "Jixson",
-    "ALTTPR": {
+    "standard": {
       "elo": 925,
       "matches": 2
     }
@@ -124,7 +124,7 @@
   {
     "username": "Ahab",
     "twitch": "ahabpequod",
-    "ALTTPR": {
+    "standard": {
       "elo": 725,
       "matches": 1
     }
