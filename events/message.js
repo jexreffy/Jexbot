@@ -9,8 +9,10 @@ const escape = require('../commands/escape');
 const forfeit = require('../commands/forfeit');
 const gatekeeper = require('../commands/gatekeeper');
 const gtbk = require('../commands/gtbk');
-const gtEnter = require('../commands/gtEnter');
+const gtEnter = require('../commands/gtenter');
 const gtGuess = require('../commands/gtguess');
+const gtStart = require('../commands/gtstart');
+const gtStop = require('../commands/gtstop');
 const help = require('../commands/help');
 const join = require('../commands/join');
 const kick = require('../commands/kick');
@@ -87,7 +89,7 @@ function processDiscordInactiveCommands(dClient, tClient, config, race, message)
 
 function processDiscordLadderCommands(dClient, tClient, config, race, message) {
     if (message.content.match(/^[.!](\bclose\b)/i)) {
-        close(race, message, message.channel);
+        close(config, race, message, message.channel);
     }
 }
 
@@ -95,7 +97,7 @@ function processDiscordRaceActiveCommands(dClient, tClient, config, race, messag
     if (message.content.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i)) {
         blueballs(race, message.content);
     } else if (message.content.match(/^[.!](\bclose\b)/i)) {
-        close(race, message, message.channel);
+        close(config, race, message, message.channel);
     } else if (message.content.match(/^[.!](\bdick\b)/i)) {
         dick(config, race, message.channel, tClient);
     } else if (message.content.match(/^[.!](\bdone\b)/i)) {
@@ -115,7 +117,7 @@ function processDiscordRaceActiveCommands(dClient, tClient, config, race, messag
 
 function processDiscordRaceLobbyCommands(dClient, tClient, config, race, message) {
     if (message.content.match(/^[.!](\bclose\b)/i)) {
-        close(race, message, message.channel);
+        close(config, race, message, message.channel);
     } else if (message.content.match(/^[.!](\bgatekeeper\b)/i)) {
         gatekeeper(race, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\bjoin\b)/i)) {
@@ -173,14 +175,16 @@ function processTwitchLadderCommands(dChannel, tClient, tChannel, config, race, 
         blueballs(race, tClient, tChannel, message);
     } else if (message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i)) {
         gtbk(config, race, tClient, tChannel, message);
-    } else if (message.match(/^[.!](\bgtenter\b)/i)) {
-        gtEnter(config, race, tClient, tChannel);
     } else if (message.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i)) {
         gtGuess(config, race, dChannel, tClient, tChannel, tags.username, message);
+    } else if (message.match(/^[.!](\bgtstart\b)/i)) {
+        gtStart(config, race, tClient, tChannel);
+    } else if (message.match(/^[.!](\bgtstop\b)/i)) {
+        gtStop(config, race, tClient, tChannel);
     } else if (message.match(/^[!](\bhelp\b)/i)) {
         help(config, race, tClient, tChannel);
     } else if (message.match(/^[!](\bmode\b)/i)) {
-        mode(config, tClient, tChannel);
+        mode(config, race, tClient, tChannel);
     } else if (message.match(/^[!](\bspaceballs\b)/i)) {
         spaceballs(config, race, dChannel, tClient);
     }
@@ -202,7 +206,7 @@ function processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, ra
     } else if (message.match(/^[!](\bhelp\b)/i)) {
         help(config, race, tClient, tChannel);
     } else if (message.match(/^[!](\bmode\b)/i)) {
-        mode(config, tClient, tChannel);
+        mode(config, race, tClient, tChannel);
     } else if (message.match(/^[!](\bspaceballs\b)/i)) {
         spaceballs(config, race, dChannel, tClient);
     }

@@ -7,7 +7,7 @@ module.exports = (config, race, dChannel, message) => {
 
         let category = config.defaultCategory;
 
-        if (match.length > 2) {
+        if (match && match.length > 2) {
             let categories = Object.keys(config.categories);
 
             for (let i = 0; i < categories.length; i++) {
@@ -33,6 +33,7 @@ module.exports = (config, race, dChannel, message) => {
             race.lastCallback = null;
             race.blueballs = -1;
             race.guessGameStarted = false;
+            race.guessGameFinished = false;
             race.guesses = [];
             race.gtRunner = null;
             race.gtbk = -1;

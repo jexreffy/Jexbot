@@ -31,6 +31,7 @@ module.exports = (config, race, dChannel, message) => {
         race.lastCallback = null;
         race.blueballs = -1;
         race.guessGameStarted = false;
+        race.guessGameFinished = false;
         race.guesses = [];
         race.gtRunner = null;
         race.gtbk = -1;

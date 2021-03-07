@@ -1,7 +1,7 @@
 const broadcastMessage = require('../common/broadcastMessage');
 
 module.exports = (config, race, dChannel, tClient, tChannel, username, message) => {
-    if (!race.guessGameStarted) return;
+    if (!config.categories[race.category].gtbk || !race.guessGameStarted) return;
 
     let match = message.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i);
     let guess = parseInt(match[2]);
@@ -27,13 +27,18 @@ module.exports = (config, race, dChannel, tClient, tChannel, username, message) 
         response = `${race.guesses[guess - 1]} has already guessed ${guess} for the GTBK Guessing Game.`;
 
         if (tClient && tChannel) {
-            tClient.say(tChannel, response).then().catch(console.error);;
+            tClient.say(tChannel, response).then().catch(console.error);
         } else {
             dChannel.send(`**${response}**`).then().catch(console.error);
         }
     } else {
         race.guesses[guess - 1] = username;
+        response = `${username} has guessed ${guess} for the GTBK Guessing Game.`;
 
-        broadcastMessage(config, dChannel, tClient, `${username} has guessed ${guess} for the GTBK Guessing Game.`, true);
+        if (race.ladder) {
+            tClient.say(tChannel, response).then().catch(console.error);
+        } else {
+            broadcastMessage(config, dChannel, tClient, response, true);
+        }
     }
 };

@@ -1,5 +1,6 @@
 require('dotenv').config();
 const config = require('./config.json');
+const data = require('./data/data.js');
 const fs = require('fs');
 
 const Discord = require('discord.js');
@@ -14,17 +15,7 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-function connectToTwitch() {
-    const data = require('./data/data.js');
-
-    const guildId = data.getActiveRace();
-
-    if (!guildId) return;
-
-    let race = data.getRaceData(guildId);
-
-    if (!race.started || race.finished) return;
-
+function connectToTwitch(race) {
     let channels = [];
 
     if (race.ladder) {
@@ -66,6 +57,14 @@ function connectToTwitch() {
     }).catch(console.error);
 }
 
+function disconnectFromTwitch() {
+    tClient.disconnect().then(x => {
+        let time = new Date();
+        console.log(time.toLocaleString('en-US') + ' Twitch disconnected');
+        tClient = null;
+    }).catch(console.error);
+}
+
 fs.readdir('./events/', (err, files) => {
     files.forEach(file => {
         const eventHandler = require(`./events/${file}`);
@@ -86,8 +85,17 @@ dClient.login(process.env.DISCORD_BOT_TOKEN).then(x => {
 
 const cron = require('node-cron');
 cron.schedule('*/5 * * * * *', () => {
+    const guildId = data.getActiveRace();
+    if (!guildId) {
+        if (tClient) disconnectFromTwitch();
+        return;
+    }
+
+    let race = data.getRaceData(guildId);
+    if (!race.started) return;
+
     if (!tClient) {
-        connectToTwitch();
+        connectToTwitch(race);
     } else {
         const cron = require('./events/cron');
         cron(dClient, tClient);

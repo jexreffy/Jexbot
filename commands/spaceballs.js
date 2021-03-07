@@ -7,7 +7,7 @@ module.exports = (config, race, dChannel, tClient) => {
     let now = Date.now();
     if ((Math.floor(now - lastTime) / 1000) > config.minimumNewSpaceballsSeconds) {
         data.setSpaceballs(now);
-        if (race.initiatedAt) {
+        if (!race.ladder && race.initiatedAt) {
             updateRaceMessage(race, dChannel);
         }
 

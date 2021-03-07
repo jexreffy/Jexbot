@@ -1,5 +1,5 @@
 module.exports = (config, race, tClient, tChannel) => {
-    if (!race.guessGameStarted) return;
+    if (race.ladder || !config.categories[race.category].gtbk || !race.guessGameStarted) return;
 
     if (tClient) tClient.say(tChannel, config.gtGuessEnter).then().catch(console.error);
 
