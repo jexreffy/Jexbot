@@ -17,6 +17,7 @@ const join = require('../commands/join');
 const kick = require('../commands/kick');
 const leaderboard = require('../commands/leaderboard');
 const leave = require('../commands/leave');
+const mode = require('../commands/mode');
 const newRace = require('../commands/new');
 const rank = require('../commands/rank');
 const ready = require('../commands/ready');
@@ -128,6 +129,8 @@ function processTwitchCommand(dClient, tClient, tChannel, tags, message, self) {
         gtGuess(config, race, dChannel, tClient, tChannel, tags.username, message);
     } else if (message.match(/^[!](\bhelp\b)/i)) {
         help(config, tClient, tChannel);
+    } else if (message.match(/^[!](\bmode\b)/i)) {
+        mode(config, tClient, tChannel);
     } else if (message.match(/^[!](\bspaceballs\b)/i)) {
         spaceballs(config, race, dChannel, tClient);
     }

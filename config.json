@@ -95,6 +95,7 @@
     "categories": {
         "standard": {
             "name": "Standard",
+            "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals",
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -127,6 +128,7 @@
         },
         "open": {
             "name": "Open",
+            "description": "Open Start, Defeat Ganon, 7/7 Crystals",
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -159,6 +161,7 @@
         },
         "adkeysanity": {
             "name": "AD Keysanity",
+            "description": "Open Start, All Dungeons, 7/7 Crystals, Dungeon Items shuffled in the full item pool",
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -191,6 +194,7 @@
         },
         "crosskeys": {
             "name": "Crosskeys",
+            "description": "Open Start, Fast Ganon, 7/7 Crystals, Crossworld Entrance Shuffle Dungeon Items shuffled in the full item pool",
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -223,6 +227,7 @@
         },
         "inverted": {
             "name": "Inverted",
+            "description": "Start in Dark World, CT and GT swapped, Defeat Ganon, 7/7 Crystals",
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -255,6 +260,7 @@
         },
         "keysanity": {
             "name": "Keysanity",
+            "description": "Open Start, Defeat Ganon, 7/7 Crystals, Dungeon Items shuffled in the full item pool",
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -287,6 +293,7 @@
         },
         "mcshuffle": {
             "name": "MC Shuffle",
+            "description": "Open Start, Defeat Ganon, 7/7 Crystals, Maps & Compasses shuffled in the full item pool",
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -319,6 +326,7 @@
         },
         "reduced": {
             "name": "Reduced Crystals",
+            "description": "Open Start, Defeat Ganon, 6/6 Crystals",
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -351,6 +359,7 @@
         },
         "retro": {
             "name": "Retro",
+            "description": "Open Start, Defeat Ganon, 7/7 Crystals, Universal Keys, Bows cost money to use",
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -383,6 +392,7 @@
         },
         "spoiler": {
             "name": "Spoiler Open",
+            "description": "Open Start, Defeat Ganon, 7/7 Crystals, Spoiler Log given at start of race with 15 minutes to route",
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -415,8 +425,8 @@
         }
     },
     "codeStartAt": 1573397,
-    "hello": "Hello! I'm JexBot. My job is to enhance your viewing experience for the Crystal Company Friday Night Race. Use !help and I'll tell you how you can interact with me.",
-    "help": "Commands I listen to: !callback, !dick, !spaceballs, !blueballs [0-15], !gtguess [1-22], !gtenter, !gtbk",
+    "hello": "Hello! I'm JexBot. My job is to enhance your viewing experience. Use !help and I'll tell you how you can interact with me.",
+    "help": "Commands I listen to: !callback, !dick, !spaceballs, !mode, !blueballs [0-15], !gtguess [1-22], !gtenter, !gtbk",
     "gtGuessIntro": "Now that our runners are over an hour in, it's possible one might be entering GT soon. You can now guess where the GTBK is based on the first streamed runner who enters GT. Use !gtguess [1-22] to get your guess in. The winner will be announced when we reach spoiler talk in the race.",
     "gtGuessEnter": "Your runner has entered GT. Use !gtbk [1-22] when they find the key!",
     "gtGuessFound": "Your runner found the GTBK at check LOCATION. When spoilers are open, I will reveal the winner.",
