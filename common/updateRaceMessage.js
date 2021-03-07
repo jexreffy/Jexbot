@@ -9,7 +9,7 @@ module.exports = (race, channel) => {
     let desc = "The Legend of Zelda: A Link to the Past Randomizer Race"
 
     if (race.category) {
-        desc += `\n Category: ${race.category}`;
+        desc += `\n Mode: ${race.category}`;
     }
 
     if (race.gatekeeper) {
