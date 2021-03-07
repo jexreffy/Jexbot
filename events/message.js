@@ -178,7 +178,7 @@ function processTwitchLadderCommands(dChannel, tClient, tChannel, config, race, 
     } else if (message.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i)) {
         gtGuess(config, race, dChannel, tClient, tChannel, tags.username, message);
     } else if (message.match(/^[!](\bhelp\b)/i)) {
-        help(config, tClient, tChannel);
+        help(config, race, tClient, tChannel);
     } else if (message.match(/^[!](\bmode\b)/i)) {
         mode(config, tClient, tChannel);
     } else if (message.match(/^[!](\bspaceballs\b)/i)) {
@@ -200,7 +200,7 @@ function processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, ra
     } else if (message.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i)) {
         gtGuess(config, race, dChannel, tClient, tChannel, tags.username, message);
     } else if (message.match(/^[!](\bhelp\b)/i)) {
-        help(config, tClient, tChannel);
+        help(config, race, tClient, tChannel);
     } else if (message.match(/^[!](\bmode\b)/i)) {
         mode(config, tClient, tChannel);
     } else if (message.match(/^[!](\bspaceballs\b)/i)) {

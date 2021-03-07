@@ -1,3 +1,3 @@
-module.exports = (config, tClient, tChannel) => {
-    if (tClient) tClient.say(tChannel, config.help).then().catch(console.error);
+module.exports = (config, race, tClient, tChannel) => {
+    if (tClient) tClient.say(tChannel, race.ladder ? config.helpLadder : config.helpRace).then().catch(console.error);
 };

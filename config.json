@@ -472,8 +472,10 @@
         }
     },
     "codeStartAt": 1573397,
-    "hello": "Hello! I'm JexBot. My job is to enhance your viewing experience. Use !help and I'll tell you how you can interact with me.",
-    "help": "Commands I listen to: !callback, !dick, !spaceballs, !mode, !blueballs [0-15], !gtguess [1-22], !gtenter, !gtbk",
+    "helloLadder": "Hello! I'm JexBot. My job is to enhance your viewing experience. Use !help and I'll tell you how you can interact with me. This is a Ladder Race. You can interact with Jexreffy, but you cannot help him with the race in any capacity",
+    "helloRace": "Hello! I'm JexBot. My job is to enhance your viewing experience. Use !help and I'll tell you how you can interact with me.",
+    "helpLadder": "Commands I listen to: !spaceballs, !mode, !blueballs [0-15], !gtstart, !gtguess [1-22], !gtstop, !gtbk",
+    "helpRace": "Commands I listen to: !callback, !dick, !spaceballs, !mode, !blueballs [0-15], !gtguess [1-22], !gtenter, !gtbk",
     "gtGuessIntro": "Now that our runners are over an hour in, it's possible one might be entering GT soon. You can now guess where the GTBK is based on the first streamed runner who enters GT. Use !gtguess [1-22] to get your guess in. The winner will be announced when we reach spoiler talk in the race.",
     "gtGuessEnter": "Your runner has entered GT. Use !gtbk [1-22] when they find the key!",
     "gtGuessFound": "Your runner found the GTBK at check LOCATION. When spoilers are open, I will reveal the winner.",
