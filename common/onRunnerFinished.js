@@ -55,8 +55,8 @@ module.exports = (config, race, dChannel, tClient, message) => {
             await sleep(5000);
             broadcastMessage(config, dChannel, tClient, `The race has finished.`, true);
         })();
-    } else if (race.remainingPlayers <= race.players.length / 2 && !race.gtbkWinnerAnnounced) {
-        race.gtbkWinnerAnnounced = true;
+    } else if (race.remainingPlayers <= race.players.length / 2 && !race.spoilersAllowed) {
+        race.spoilersAllowed = true;
 
         const sleep = m => new Promise(r => setTimeout(r, m));
         (async() => {

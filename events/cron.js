@@ -1,5 +1,7 @@
 const config = require('../config.json');
 const data = require('../data/data.js');
+const broadcastMessage = require('../common/broadcastMessage');
+const broadcastTwitch = require('../common/broadcastTwitch');
 
 module.exports = (dClient, tClient) => {
     const guildId = data.getActiveRace();
@@ -9,13 +11,12 @@ module.exports = (dClient, tClient) => {
 
     let dChannel = dClient.channels.cache.find(channel => channel.name === config.guilds[guildId].channel);
 
-    if (!race.guessGameStarted && (Math.floor(Date.now() - race.startedAt) / 1000) > config.minimumGuessStartSeconds) {
-        const broadcastMessage = require('../common/broadcastMessage');
-        broadcastMessage(config, dChannel, tClient, config.gtGuessIntro, false);
+    if (!race.ladder && config.categories[race.category].gtbk && !race.guessGameStarted && (Math.floor(Date.now() - race.startedAt) / 1000) > config.minimumGuessStartSeconds) {
         race.guessGameStarted = true;
+        broadcastMessage(config, dChannel, tClient, config.gtGuessIntro, false);
     } else if (!race.lastHello || (Math.floor(Date.now() - race.lastHello) / 1000) > config.helloInterval) {
-        const hello = require('../commands/hello');
-        hello(config, race, tClient, "CRON");
+        race.lastHello = Date.now();
+        broadcastTwitch(config, tClient, config.hello);
     }
 
     data.setRaceData(guildId, race);

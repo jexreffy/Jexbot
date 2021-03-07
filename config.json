@@ -1,4 +1,7 @@
 {
+    "botOwnerName": "jexreffy",
+    "botOwnerGuild": "574586257079009280",
+    "botOwnerTwitch": "#jexreffy",
     "guilds": {
         "574586257079009280": {
             "id": "574586257079009280",
@@ -96,6 +99,7 @@
         "standard": {
             "name": "Standard",
             "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals",
+            "gtbk": true,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -129,6 +133,7 @@
         "open": {
             "name": "Open",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals",
+            "gtbk": true,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -162,6 +167,7 @@
         "adkeysanity": {
             "name": "AD Keysanity",
             "description": "Open Start, All Dungeons, 7/7 Crystals, Dungeon Items shuffled in the full item pool",
+            "gtbk": false,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -195,6 +201,7 @@
         "crosskeys": {
             "name": "Crosskeys",
             "description": "Open Start, Fast Ganon, 7/7 Crystals, Crossworld Entrance Shuffle Dungeon Items shuffled in the full item pool",
+            "gtbk": false,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -225,9 +232,44 @@
                 }
             }
         },
+        "standardhard": {
+            "name": "Standard Hard Item Pool",
+            "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Hard Item Pool (Tempered Sword Max, No Silvers, No Mail)",
+            "gtbk": true,
+            "settings": {
+                "allow_quickswap": true,
+                "glitches": "none",
+                "item_placement": "advanced",
+                "dungeon_items": "standard",
+                "accessibility": "items",
+                "goal": "ganon",
+                "crystals": {
+                    "ganon": "7",
+                    "tower": "7"
+                },
+                "mode": "standard",
+                "entrances": "none",
+                "hints": "off",
+                "weapons": "randomized",
+                "item": {
+                    "pool": "hard",
+                    "functionality": "normal"
+                },
+                "tournament": true,
+                "spoilers": "off",
+                "lang":"en",
+                "enemizer": {
+                    "boss_shuffle":"none",
+                    "enemy_shuffle":"none",
+                    "enemy_damage":"default",
+                    "enemy_health":"default"
+                }
+            }
+        },
         "inverted": {
             "name": "Inverted",
             "description": "Start in Dark World, CT and GT swapped, Defeat Ganon, 7/7 Crystals",
+            "gtbk": true,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -261,6 +303,7 @@
         "keysanity": {
             "name": "Keysanity",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Dungeon Items shuffled in the full item pool",
+            "gtbk": false,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -294,6 +337,7 @@
         "mcshuffle": {
             "name": "MC Shuffle",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Maps & Compasses shuffled in the full item pool",
+            "gtbk": true,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -327,6 +371,7 @@
         "reduced": {
             "name": "Reduced Crystals",
             "description": "Open Start, Defeat Ganon, 6/6 Crystals",
+            "gtbk": true,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -360,6 +405,7 @@
         "retro": {
             "name": "Retro",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Universal Keys, Bows cost money to use",
+            "gtbk": true,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -393,6 +439,7 @@
         "spoiler": {
             "name": "Spoiler Open",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Spoiler Log given at start of race with 15 minutes to route",
+            "gtbk": false,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",

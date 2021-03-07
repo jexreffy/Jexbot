@@ -19,6 +19,7 @@ module.exports = (config, race, dChannel, message) => {
         }
 
         return new Promise((resolve, reject) => {
+            race.ladder = false;
             race.started = false;
             race.finished = false;
             race.startedAt = null;
@@ -36,7 +37,7 @@ module.exports = (config, race, dChannel, message) => {
             race.gtRunner = null;
             race.gtbk = -1;
             race.gtbkWinner = null;
-            race.gtbkWinnerAnnounced = false;
+            race.spoilersAllowed = false;
             race.gtbkGuess = -1;
             race.gatekeeper = null;
             race.category = category;
