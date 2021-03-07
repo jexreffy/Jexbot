@@ -3,6 +3,21 @@ const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (config, race, dChannel, message) => {
     if (race.finished || (message.member && message.member.hasPermission('KICK_MEMBERS', false, false)) || config.referees.includes(message.author.username)) {
+        let match = message.content.match(/^[.!](\bnew\b) ([a-zA-Z0-9<>:]{4,20})/i);
+
+        let category = config.defaultCategory;
+
+        if (match.length > 2) {
+            let categories = Object.keys(config.categories);
+
+            for (let i = 0; i < categories.length; i++) {
+                if (match[2] === categories[i]) {
+                    category = categories[i];
+                    break;
+                }
+            }
+        }
+
         return new Promise((resolve, reject) => {
             race.started = false;
             race.finished = false;
@@ -24,7 +39,7 @@ module.exports = (config, race, dChannel, message) => {
             race.gtbkWinnerAnnounced = false;
             race.gtbkGuess = -1;
             race.gatekeeper = null;
-            race.category = config.defaultCategory;
+            race.category = category;
             race.messageId = null;
             race.seedCode = null;
             race.seedLink = null;

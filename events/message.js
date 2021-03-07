@@ -50,7 +50,7 @@ function processDiscordCommand(dClient, tClient, message) {
             close(race, message, message.channel);
         } else if (message.content.match(/^[.!](\bdick\b)/i)) {
             dick(config, race, message.channel, tClient);
-        } else if (message.content.match(/^[.!]((\bdone\b)|(\btime\b))/i)) {
+        } else if (message.content.match(/^[.!](\bdone\b)/i)) {
             done(config, race, message.channel, tClient, message.author.username, message);
         } else if (message.content.match(/^[.!](\bescape\b) ([a-zA-Z0-9<>:]{4,100})/i)) {
             escape(config, race, message.channel, message);
@@ -62,13 +62,13 @@ function processDiscordCommand(dClient, tClient, message) {
             gtGuess(config, race, message.channel, tClient, null, message.author.username, message.content);
         } else if (message.content.match(/^[.!](\bhello\b)/i)) {
             hello(config, race, tClient, message);
-        } else if (message.content.match(/^[.!]((\bjoin\b)|(\benter\b))/i)) {
+        } else if (message.content.match(/^[.!](\bjoin\b)/i)) {
             join(config, race, message.channel, message.author.username, message);
         } else if (message.content.match(/^[.!](\bkick\b)([ ]{0,1})([a-zA-Z0-9%]{0,20})/i)) {
             kick(config, race, message.channel, tClient, message);
         } else if (message.content.match(/^[.!](\bleaderboard\b) ([ a-zA-Z0-9%]{3,20})/i)) {
             leaderboard(message.channel, message);
-        } else if (message.content.match(/^[.!]((\bleave\b)|(\bunjoin\b))/i)) {
+        } else if (message.content.match(/^[.!](\bleave\b)/i)) {
             leave(config, race, message.channel, message.author.username, message);
         } else if (message.content.match(/^[.!](\bnew\b)/i)) {
             newRace(config, race, message.channel, message);
