@@ -4,7 +4,7 @@
             "id": "574586257079009280",
             "name": "Jexreffy Studios",
             "channel": "alttp-race-bot",
-            "pingRole": "ALTTPRR",
+            "pingRole": "ALTTPR",
             "racerRole": "Racer",
             "codeMap": [
                 ":Bow:817965008637919293",
@@ -45,7 +45,7 @@
             "id": "515731524616847367",
             "name": "Crystal Company",
             "channel": "lttp-race-bot",
-            "pingRole": "LttPRR",
+            "pingRole": "LttPR",
             "racerRole": "Racer",
             "codeMap": [
                 ":Bow:812714327928078367",
