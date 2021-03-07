@@ -16,7 +16,12 @@ const rl = readline.createInterface({
 
 function connectToTwitch() {
     const data = require('./data/data.js');
-    let race = data.getRace();
+
+    const guildId = data.getActiveRace();
+
+    if (!guildId) return;
+
+    let race = data.getRaceData(guildId);
 
     if (!race.started || race.finished) return;
 

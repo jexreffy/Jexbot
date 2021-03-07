@@ -1,3 +1,4 @@
+const data = require('../data/data.js');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (race, message, channel) => {
@@ -5,6 +6,7 @@ module.exports = (race, message, channel) => {
         race.finished = true;
         race.seed = null;
         race.status = 'RACE CLOSED';
+        data.setActiveRace(null);
         updateRaceMessage(race, channel);
     }
 };

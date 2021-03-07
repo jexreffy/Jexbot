@@ -31,14 +31,14 @@ module.exports = (config, race, dChannel, username) => {
 
             race.seedCode = "";
             for (let c = 0; c < 5; c++) {
-                race.seedCode += `<${config.codeMap[data[c + offset]]}>${c < 4 ? ' ' : ''}`
+                race.seedCode += `<${config.guilds[dChannel.guild.id].codeMap[data[c + offset]]}>${c < 4 ? ' ' : ''}`
             }
 
             break;
         }
 
         updateRaceMessage(race, dChannel);
-        data.setRace(race);
+        data.setRaceData(dChannel.guild.id, race);
         dChannel.send(`${race.seedLink} ${race.seedCode}`).then().catch(console.error);
     }).catch(console.error);
 }

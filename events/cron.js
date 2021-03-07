@@ -2,11 +2,12 @@ const config = require('../config.json');
 const data = require('../data/data.js');
 
 module.exports = (dClient, tClient) => {
-    let race = data.getRace();
+    const guildId = data.getActiveRace();
+    let race = data.getRaceData(guildId);
 
     if (!race.started || race.finished) return;
 
-    let dChannel = dClient.channels.cache.find(channel => channel.name === config.channel);
+    let dChannel = dClient.channels.cache.find(channel => channel.name === config.guilds[guildId].channel);
 
     if (!race.guessGameStarted && (Math.floor(Date.now() - race.startedAt) / 1000) > config.minimumGuessStartSeconds) {
         const broadcastMessage = require('../common/broadcastMessage');
@@ -17,5 +18,5 @@ module.exports = (dClient, tClient) => {
         hello(config, race, tClient, "CRON");
     }
 
-    data.setRace(race);
+    data.setRaceData(guildId, race);
 };

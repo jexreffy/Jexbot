@@ -1,15 +1,17 @@
+const data = require('../data/data.js');
 const broadcastMessage = require('../common/broadcastMessage');
 const gtbkWinner = require('../common/gtbkWinner');
 const updateRaceMessage = require('../common/updateRaceMessage');
 const elo = require('../elo/elo.js');
 
 module.exports = (config, race, dChannel, tClient, message) => {
-    let role = message.guild.roles.cache.find(r => r.name === config.racerRole);
+    let role = message.guild.roles.cache.find(r => r.name === config.guilds[message.guild.id].racerRole);
     message.member.roles.remove(role.id).then().catch(console.error);
 
     if (race.remainingPlayers < 1) {
         race.finished = true;
         race.status = 'RACE FINISHED';
+        data.setActiveRace(null);
         race.players.sort(function(a, b) {
             if (a.time == null) {
                 if (b.time) {

@@ -1,3 +1,4 @@
+const data = require('../data/data.js');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (config, race, dChannel, message) => {
@@ -45,7 +46,9 @@ module.exports = (config, race, dChannel, message) => {
                 }
             };
 
-            let role = message.guild.roles.cache.find(r => r.name === config.pingRole);
+            const guildId = dChannel.guild.id;
+            data.setActiveRace(guildId);
+            let role = message.guild.roles.cache.find(r => r.name === config.guilds[guildId].pingRole);
 
             dChannel.send(`${role} ${config.pings[race.pingIndex]}`);
             dChannel.send(embed).then(x => {

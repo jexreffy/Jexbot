@@ -11,7 +11,7 @@ const placementMatches = (eloConfig.placementMatches);
 
 let players = playersDb;
 let server = serverDb;
-let race = raceDb;
+let races = raceDb;
 
 function savePlayer(player) {
     let playerIndex = players.findIndex(x => x.username === player.username);
@@ -30,8 +30,8 @@ function saveServerData() {
 }
 
 function saveRaceData() {
-    fs.writeFileSync(path.join(__dirname, '../data/race.json'), JSON.stringify(race, null, 2));
-    race = raceDb;
+    fs.writeFileSync(path.join(__dirname, '../data/race.json'), JSON.stringify(races, null, 2));
+    races = raceDb;
 }
 
 function getPlayerIndexByName(username) {
@@ -214,11 +214,18 @@ module.exports = {
         server.spaceballs = time;
         saveServerData();
     },
-    getRace: function() {
-        return race;
+    getActiveRace: function() {
+        return server.activeRace;
     },
-    setRace: function(updatedRace) {
-        race = updatedRace;
+    setActiveRace: function(guildId) {
+        server.activeRace = guildId;
+        saveServerData();
+    },
+    getRaceData: function(guildId) {
+        return races[guildId];
+    },
+    setRaceData: function(guildId, updatedRace) {
+        races[guildId] = updatedRace;
         saveRaceData();
     }
 };

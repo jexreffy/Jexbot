@@ -5,7 +5,7 @@ module.exports = (config, race, player, message) => {
     race.players.push(player);
     race.remainingPlayers += 1;
 
-    let role = message.guild.roles.cache.find(r => r.name === config.racerRole);
+    let role = message.guild.roles.cache.find(r => r.name === config.guilds[message.guild.id].racerRole);
     message.member.roles.add(role.id).then().catch(console.error);
 
     if (data.getPlayerStreaming(username)) {

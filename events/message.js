@@ -31,67 +31,77 @@ const twitchBot = require('../commands/twitchbot');
 const unready = require('../commands/unready');
 
 function processDiscordCommand(dClient, tClient, message) {
-    const channel = config.channel;
+    if (message.author.bot) return;
+
+    const guildId = message.guild.id;
+
+    const channel = config.guilds[guildId].channel;
 
     if (message.channel.name !== channel) return;
 
-    let race = data.getRace();
+    const activeRace = data.getActiveRace();
 
-    if (message.content.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i)) {
-        blueballs(race, message.content);
-    } else if (message.content.match(/^[.!](\bclose\b)/i)) {
-        close(race, message, message.channel);
-    } else if (message.content.match(/^[.!](\bdick\b)/i)) {
-        dick(config, race, message.channel, tClient);
-    } else if (message.content.match(/^[.!]((\bdone\b)|(\btime\b))/i)) {
-        done(config, race, message.channel, tClient, message.author.username, message);
-    } else if (message.content.match(/^[.!](\bescape\b) ([a-zA-Z0-9<>:]{4,100})/i)) {
-        escape(config, race, message.channel, message);
-    } else if (message.content.match(/^[.!](\bforfeit\b)|(\bff\b)/i)) {
-        forfeit(config, race, message.channel, tClient, message.author.username, message);
-    } else if (message.content.match(/^[.!](\bgatekeeper\b)/i)) {
-        gatekeeper(race, message.channel, message, message.author.username);
-    } else if (message.content.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i)) {
-        gtGuess(config, race, message.channel, tClient, null, message.author.username, message.content);
-    } else if (message.content.match(/^[.!](\bhello\b)/i)) {
-        hello(config, race, tClient, message);
-    } else if (message.content.match(/^[.!]((\bjoin\b)|(\benter\b))/i)) {
-        join(config, race, message.channel, message.author.username, message);
-    } else if (message.content.match(/^[.!](\bkick\b)([ ]{0,1})([a-zA-Z0-9%]{0,20})/i)) {
-        kick(config, race, message.channel, tClient, message);
-    } else if (message.content.match(/^[.!](\bleaderboard\b) ([ a-zA-Z0-9%]{3,20})/i)) {
-        leaderboard(message.channel, message);
-    } else if (message.content.match(/^[.!]((\bleave\b)|(\bunjoin\b))/i)) {
-        leave(config, race, message.channel, message.author.username, message);
-    } else if (message.content.match(/^[.!](\bnew\b)/i)) {
-        newRace(config, race, message.channel, message);
-    } else if (message.content.match(/^[.!](\brank\b) ([ a-zA-Z0-9%]{3,20})/i)) {
-        rank(message.channel, message, message.author.username);
-    } else if (message.content.match(/^[.!](\bready\b)/i)) {
-        ready(config, race, message.channel, message.author.username);
-    } else if (message.content.match(/^[.!](\breset\b)/i)) {
-        reset(race, message.channel, message);
-    } else if (message.content.match(/^[.!](\broll\b)/i)) {
-        roll(config, race, message.channel, message.author.username);
-    } else if (message.content.match(/^[.!](\bspaceballs\b)/i)) {
-        spaceballs(config, race, message.channel, tClient);
-    } else if (message.content.match(/^[.!](\bstart\b)/i)) {
-        start(config, race, message.channel, tClient, message, message.author.username);
-    } else if (message.content.match(/^[.!](\bstats\b)([ ]{0,1})([a-zA-Z 0-9%]{0,30})/i)) {
-        stats(race, message.channel, message);
-    } else if (message.content.match(/^[.!](\bstreaming\b) ((\bon\b)|(\boff\b))/i)) {
-        streaming(race, message.channel, message, message.author.username);
-    } else if (message.content.match(/^[.!](\btwitch\b) ([a-zA-Z0-9_]{4,20})/i)) {
-        twitch(race, message.channel, message, message.author.username);
-    } else if (message.content.match(/^[.!](\btwitchbot\b) ((\bon\b)|(\boff\b))/i)) {
-        twitchBot(race, message.channel, message, message.author.username);
-    } else if (message.content.match(/^[.!](\bunready\b)/i)) {
-        unready(race, message.channel, message.author.username, message);
+    if (!activeRace || guildId === activeRace) {
+        let race = data.getRaceData(guildId);
+
+        if (message.content.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i)) {
+            blueballs(race, message.content);
+        } else if (message.content.match(/^[.!](\bclose\b)/i)) {
+            close(race, message, message.channel);
+        } else if (message.content.match(/^[.!](\bdick\b)/i)) {
+            dick(config, race, message.channel, tClient);
+        } else if (message.content.match(/^[.!]((\bdone\b)|(\btime\b))/i)) {
+            done(config, race, message.channel, tClient, message.author.username, message);
+        } else if (message.content.match(/^[.!](\bescape\b) ([a-zA-Z0-9<>:]{4,100})/i)) {
+            escape(config, race, message.channel, message);
+        } else if (message.content.match(/^[.!](\bforfeit\b)|(\bff\b)/i)) {
+            forfeit(config, race, message.channel, tClient, message.author.username, message);
+        } else if (message.content.match(/^[.!](\bgatekeeper\b)/i)) {
+            gatekeeper(race, message.channel, message, message.author.username);
+        } else if (message.content.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i)) {
+            gtGuess(config, race, message.channel, tClient, null, message.author.username, message.content);
+        } else if (message.content.match(/^[.!](\bhello\b)/i)) {
+            hello(config, race, tClient, message);
+        } else if (message.content.match(/^[.!]((\bjoin\b)|(\benter\b))/i)) {
+            join(config, race, message.channel, message.author.username, message);
+        } else if (message.content.match(/^[.!](\bkick\b)([ ]{0,1})([a-zA-Z0-9%]{0,20})/i)) {
+            kick(config, race, message.channel, tClient, message);
+        } else if (message.content.match(/^[.!](\bleaderboard\b) ([ a-zA-Z0-9%]{3,20})/i)) {
+            leaderboard(message.channel, message);
+        } else if (message.content.match(/^[.!]((\bleave\b)|(\bunjoin\b))/i)) {
+            leave(config, race, message.channel, message.author.username, message);
+        } else if (message.content.match(/^[.!](\bnew\b)/i)) {
+            newRace(config, race, message.channel, message);
+        } else if (message.content.match(/^[.!](\brank\b) ([ a-zA-Z0-9%]{3,20})/i)) {
+            rank(message.channel, message, message.author.username);
+        } else if (message.content.match(/^[.!](\bready\b)/i)) {
+            ready(config, race, message.channel, message.author.username);
+        } else if (message.content.match(/^[.!](\breset\b)/i)) {
+            reset(race, message.channel, message);
+        } else if (message.content.match(/^[.!](\broll\b)/i)) {
+            roll(config, race, message.channel, message.author.username);
+        } else if (message.content.match(/^[.!](\bspaceballs\b)/i)) {
+            spaceballs(config, race, message.channel, tClient);
+        } else if (message.content.match(/^[.!](\bstart\b)/i)) {
+            start(config, race, message.channel, tClient, message, message.author.username);
+        } else if (message.content.match(/^[.!](\bstats\b)([ ]{0,1})([a-zA-Z 0-9%]{0,30})/i)) {
+            stats(race, message.channel, message);
+        } else if (message.content.match(/^[.!](\bstreaming\b) ((\bon\b)|(\boff\b))/i)) {
+            streaming(race, message.channel, message, message.author.username);
+        } else if (message.content.match(/^[.!](\btwitch\b) ([a-zA-Z0-9_]{4,20})/i)) {
+            twitch(race, message.channel, message, message.author.username);
+        } else if (message.content.match(/^[.!](\btwitchbot\b) ((\bon\b)|(\boff\b))/i)) {
+            twitchBot(race, message.channel, message, message.author.username);
+        } else if (message.content.match(/^[.!](\bunready\b)/i)) {
+            unready(race, message.channel, message.author.username, message);
+        }
+
+        data.setRaceData(guildId, race);
+    } else {
+        message.channel.send("**There is a race currently being run on another server.**");
     }
 
-    data.setRace(race);
-
-    if (message && !message.author.bot) {
+    if (message) {
         message.delete().then().catch(console.error);
     }
 }
@@ -99,9 +109,10 @@ function processDiscordCommand(dClient, tClient, message) {
 function processTwitchCommand(dClient, tClient, tChannel, tags, message, self) {
     if (self) return;
 
-    let race = data.getRace();
+    const guildId = data.getActiveRace();
+    let race = data.getRaceData(guildId);
 
-    let dChannel = dClient.channels.cache.find(channel => channel.name === config.channel);
+    let dChannel = dClient.channels.cache.find(channel => channel.name === config.guilds[guildId].channel);
 
     if (message.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i)) {
         blueballs(race, tClient, tChannel, message);
@@ -121,7 +132,7 @@ function processTwitchCommand(dClient, tClient, tChannel, tags, message, self) {
         spaceballs(config, race, dChannel, tClient);
     }
 
-    data.setRace(race);
+    data.setRaceData(guildId, race);
 }
 
 module.exports = (...args) => {
