@@ -42,6 +42,7 @@ module.exports = (config, race, dChannel, message) => {
             race.gtbkGuess = -1;
             race.gatekeeper = null;
             race.category = category;
+            race.categoryName = config.categories[category].name;
             race.messageId = null;
             race.seedCode = null;
             race.seedLink = null;

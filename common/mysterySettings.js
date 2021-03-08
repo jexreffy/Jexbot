@@ -7,7 +7,7 @@ module.exports = (weights) => {
     settings.goal = determineSetting(weights["goal"]);
     settings.crystals.tower = determineSetting(weights["tower_open"]);
     settings.crystals.ganon = determineSetting(weights["ganon_open"]);
-    settings.mode = determineSetting(weights["world_state"]);
+    settings.mode = determineSetting(weights["mode"]);
     settings.hints = determineSetting(weights["hints"]);
     settings.weapons = determineSetting(weights["weapons"]);
     settings.item.pool = determineSetting(weights["item_pool"]);
@@ -23,16 +23,26 @@ module.exports = (weights) => {
     }
 
     let startBoots = determineSetting(weights["starting_boots"]) === "true";
+    let startFlute = determineSetting(weights["starting_boots"]) === "true";
 
-    if (startBoots) {
+    if (startBoots || startFlute) {
         settings.entrances = "none";
-        settings.eq.splice(0, 0, 'PegasusBoots');
+
+        if (startFlute) {
+            settings.eq.splice(0, 0, settings.mode === "standard" ? 'OcarinaInactive' : 'OcarinaActive');
+            settings.custom.item.count.OcarinaInactive = 0;
+        }
+
+        if (startBoots) {
+            settings.eq.splice(0, 0, 'PegasusBoots');
+            settings.custom.item.count.PegasusBoots = 0;
+        }
     } else {
         settings.entrances = determineSetting(weights["entrance_shuffle"]);
     }
 
     if (settings.entrances === "crossed") {
-        settings.dungeon_items = determineSetting(weights["dungeon_items_entrance"]);
+        settings.dungeon_items = determineSetting(weights["dungeon_items"]);
     } else {
         settings.dungeon_items = "standard";
         settings.custom["region.wildBigKeys"] = determineSetting(weights["wild_big_keys"]) === "true";
@@ -40,16 +50,20 @@ module.exports = (weights) => {
         settings.custom["region.wildKeys"] = determineSetting(weights["wild_keys"]) === "true";
         settings.custom["region.wildMaps"] = determineSetting(weights["wild_maps"]) === "true";
 
-        if (settings.custom["region.wildBigKeys"] || settings.custom["region.wildCompasses"] || settings.custom["region.wildKeys"] || settings.custom["region.wildMaps"]) {
+        if (settings.custom["region.wildBigKeys"] || settings.custom["region.wildKeys"]) {
             settings.custom["rom.freeItemMenu"] = true;
             settings.custom["rom.freeItemText"] = true;
         }
 
         if (settings.custom["region.wildMaps"]) {
+            settings.custom["rom.freeItemMenu"] = true;
+            settings.custom["rom.freeItemText"] = true;
             settings.custom["rom.mapOnPickup"] = true;
         }
 
         if (settings.custom["region.wildCompasses"]) {
+            settings.custom["rom.freeItemMenu"] = true;
+            settings.custom["rom.freeItemText"] = true;
             settings.custom["rom.dungeonCount"] = "pickup";
         }
     }

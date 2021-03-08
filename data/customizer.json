@@ -16,7 +16,7 @@
     "functionality": "normal"
   },
   "tournament": true,
-  "spoilers": "mystery",
+  "spoilers": "off",
   "lang": "en",
   "allow_quickswap": true,
   "enemizer": {

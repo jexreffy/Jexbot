@@ -80,6 +80,8 @@ function processDiscordInactiveCommands(dClient, tClient, config, race, message)
         newRace(config, race, message.channel, message);
     } else if (message.content.match(/^[.!](\brank\b) ([ a-zA-Z0-9%]{3,20})/i)) {
         rank(message.channel, message, message.author.username);
+    } else if (message.content.match(/^[.!](\broll\b)/i)) {
+        roll(config, null, message.channel, message);
     } else if (message.content.match(/^[.!](\bspaceballs\b)/i)) {
         spaceballs(config, race, message.channel, tClient);
     } else if (message.content.match(/^[.!](\bstats\b)([ ]{0,1})([a-zA-Z 0-9%]{0,30})/i)) {
