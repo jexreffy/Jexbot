@@ -21,11 +21,12 @@ module.exports = (config, race, dChannel, message) => {
             for (let i = 0; i < categories.length; i++) {
                 if (match[2] === categories[i]) {
                     categoryName = categories[i];
-                    dChannel.send(`**Generating ${categories[i].name} seed...**`).then().catch(console.error);
                     break;
                 }
             }
         }
+
+        dChannel.send(`**Generating ${config.categories[categoryName].name} seed...**`).then().catch(console.error);
     }
 
     const category = config.categories[categoryName];
