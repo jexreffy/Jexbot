@@ -1,5 +1,5 @@
 module.exports = (weights) => {
-    let settings = defaultSettings();
+    let settings = require('../data/customizer.json');
 
     settings.glitches = determineSetting(weights["glitches_required"]);
     settings.item_placement = determineSetting(weights["item_placement"]);
@@ -8,7 +8,6 @@ module.exports = (weights) => {
     settings.crystals.tower = determineSetting(weights["tower_open"]);
     settings.crystals.ganon = determineSetting(weights["ganon_open"]);
     settings.mode = determineSetting(weights["world_state"]);
-    settings.entrances = determineSetting(weights["entrance_shuffle"]);
     settings.hints = determineSetting(weights["hints"]);
     settings.weapons = determineSetting(weights["weapons"]);
     settings.item.pool = determineSetting(weights["item_pool"]);
@@ -18,10 +17,41 @@ module.exports = (weights) => {
     settings.enemizer.enemy_damage = determineSetting(weights["enemy_damage"]);
     settings.enemizer.enemy_health = determineSetting(weights["enemy_health"]);
 
+    if (settings.goal === "triforce-hunt") {
+        settings.custom["item.Goal.Required"] = "20";
+        settings.custom.item.count.TriforcePiece = 30;
+    }
+
+    let startBoots = determineSetting(weights["starting_boots"]) === "true";
+
+    if (startBoots) {
+        settings.entrances = "none";
+        settings.eq.splice(0, 0, 'PegasusBoots');
+    } else {
+        settings.entrances = determineSetting(weights["entrance_shuffle"]);
+    }
+
     if (settings.entrances === "crossed") {
         settings.dungeon_items = determineSetting(weights["dungeon_items_entrance"]);
     } else {
-        settings.dungeon_items = determineSetting(weights["dungeon_items"]);
+        settings.dungeon_items = "standard";
+        settings.custom["region.wildBigKeys"] = determineSetting(weights["wild_big_keys"]) === "true";
+        settings.custom["region.wildCompasses"] = determineSetting(weights["wild_compasses"]) === "true";
+        settings.custom["region.wildKeys"] = determineSetting(weights["wild_keys"]) === "true";
+        settings.custom["region.wildMaps"] = determineSetting(weights["wild_maps"]) === "true";
+
+        if (settings.custom["region.wildBigKeys"] || settings.custom["region.wildCompasses"] || settings.custom["region.wildKeys"] || settings.custom["region.wildMaps"]) {
+            settings.custom["rom.freeItemMenu"] = true;
+            settings.custom["rom.freeItemText"] = true;
+        }
+
+        if (settings.custom["region.wildMaps"]) {
+            settings.custom["rom.mapOnPickup"] = true;
+        }
+
+        if (settings.custom["region.wildCompasses"]) {
+            settings.custom["rom.dungeonCount"] = "pickup";
+        }
     }
 
     if (settings.enemizer.enemy_shuffle === "shuffled" && settings.mode === "standard") {
@@ -29,38 +59,6 @@ module.exports = (weights) => {
     }
 
     return settings;
-}
-
-function defaultSettings() {
-    return {
-        "allow_quickswap": true,
-        "glitches": "none",
-        "item_placement": "advanced",
-        "dungeon_items": "standard",
-        "accessibility": "items",
-        "goal": "ganon",
-        "crystals": {
-            "ganon": "7",
-            "tower": "7"
-        },
-        "mode": "standard",
-        "entrances": "none",
-        "hints": "off",
-        "weapons": "randomized",
-        "item": {
-            "pool": "normal",
-            "functionality": "normal"
-        },
-        "tournament": true,
-        "spoilers": "mystery",
-        "lang":"en",
-        "enemizer": {
-            "boss_shuffle":"none",
-            "enemy_shuffle":"none",
-            "enemy_damage":"default",
-            "enemy_health":"default"
-        }
-    }
 }
 
 function determineSetting(setting) {

@@ -100,6 +100,7 @@
             "name": "Standard",
             "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals",
             "gtbk": true,
+            "customizer": false,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -134,6 +135,7 @@
             "name": "Open",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals",
             "gtbk": true,
+            "customizer": false,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -168,6 +170,7 @@
             "name": "AD Keysanity",
             "description": "Open Start, All Dungeons, 7/7 Crystals, Dungeon Items shuffled in the full item pool",
             "gtbk": false,
+            "customizer": false,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -202,6 +205,7 @@
             "name": "Crosskeys",
             "description": "Open Start, Fast Ganon, 7/7 Crystals, Crossworld Entrance Shuffle Dungeon Items shuffled in the full item pool",
             "gtbk": false,
+            "customizer": false,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -236,6 +240,7 @@
             "name": "Standard Hard Item Pool",
             "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Hard Item Pool (Tempered Sword Max, No Silvers, No Mail)",
             "gtbk": true,
+            "customizer": false,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -270,6 +275,7 @@
             "name": "Inverted",
             "description": "Start in Dark World, CT and GT swapped, Defeat Ganon, 7/7 Crystals",
             "gtbk": true,
+            "customizer": false,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -304,6 +310,7 @@
             "name": "Keysanity",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Dungeon Items shuffled in the full item pool",
             "gtbk": false,
+            "customizer": false,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -338,6 +345,7 @@
             "name": "MC Shuffle",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Maps & Compasses shuffled in the full item pool",
             "gtbk": true,
+            "customizer": false,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -372,6 +380,7 @@
             "name": "Mystery",
             "description": "All settings are randomly chosen. You must play the seed to figure out what it is.",
             "gtbk": false,
+            "customizer": true,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -406,6 +415,7 @@
             "name": "Reduced Crystals",
             "description": "Open Start, Defeat Ganon, 6/6 Crystals",
             "gtbk": true,
+            "customizer": false,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -440,6 +450,7 @@
             "name": "Retro",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Universal Keys, Bows cost money to use",
             "gtbk": true,
+            "customizer": false,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -474,6 +485,7 @@
             "name": "Spoiler Open",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Spoiler Log given at start of race with 15 minutes to route",
             "gtbk": false,
+            "customizer": false,
             "settings": {
                 "allow_quickswap": true,
                 "glitches": "none",
@@ -535,10 +547,26 @@
             "none": 10
         },
         "dungeon_items": {
-            "standard": 60,
-            "mc": 10,
-            "mcs": 10,
-            "full": 20
+            "standard": 100,
+            "mc": 0,
+            "mcs": 0,
+            "full": 0
+        },
+        "wild_maps": {
+            "true": 60,
+            "false": 40
+        },
+        "wild_compasses": {
+            "true": 60,
+            "false": 40
+        },
+        "wild_keys": {
+            "true": 60,
+            "false": 40
+        },
+        "wild_big_keys": {
+            "true": 60,
+            "false": 40
         },
         "dungeon_items_entrance": {
             "standard": 50,
@@ -618,6 +646,10 @@
             "easy": 0,
             "hard": 0,
             "expert": 0
+        },
+        "starting_boots": {
+            "false": 50,
+            "true": 50
         }
     },
     "codeStartAt": 1573397,

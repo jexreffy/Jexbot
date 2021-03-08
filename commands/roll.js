@@ -8,8 +8,11 @@ module.exports = (config, race, dChannel, username) => {
 
     dChannel.send(`**${username} has sealed their fate. I'd pray to RN Jesus while the seed is rolling if I were you...**`).then().catch(console.error);
 
-    const settings = race.category === "mystery" ? mysterySettings(config.mysteryWeights) : config.categories[race.category].settings;
-    axios.post('https://alttpr.com/api/randomizer', settings).then(result => {
+    const category = config.categories[race.category];
+    const settings = race.category === "mystery" ? mysterySettings(config.mysteryWeights) : category.settings;
+
+    const url = category.customizer ? 'https://alttpr.com/api/customizer' : 'https://alttpr.com/api/randomizer';
+    axios.post(url, settings).then(result => {
         race.seedRoller = username;
         race.seedLink = `<https://alttpr.com/h/${result.data.hash}>`;
 
