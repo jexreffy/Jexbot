@@ -368,6 +368,40 @@
                 }
             }
         },
+        "mystery": {
+            "name": "Mystery",
+            "description": "All settings are randomly chosen. You must play the seed to figure out what it is.",
+            "gtbk": false,
+            "settings": {
+                "allow_quickswap": true,
+                "glitches": "none",
+                "item_placement": "advanced",
+                "dungeon_items": "standard",
+                "accessibility": "items",
+                "goal": "ganon",
+                "crystals": {
+                    "ganon": "7",
+                    "tower": "7"
+                },
+                "mode": "standard",
+                "entrances": "none",
+                "hints": "off",
+                "weapons": "randomized",
+                "item": {
+                    "pool": "normal",
+                    "functionality": "normal"
+                },
+                "tournament": true,
+                "spoilers": "mystery",
+                "lang":"en",
+                "enemizer": {
+                    "boss_shuffle":"none",
+                    "enemy_shuffle":"none",
+                    "enemy_damage":"default",
+                    "enemy_health":"default"
+                }
+            }
+        },
         "reduced": {
             "name": "Reduced Crystals",
             "description": "Open Start, Defeat Ganon, 6/6 Crystals",
@@ -469,6 +503,121 @@
                     "enemy_health":"default"
                 }
             }
+        }
+    },
+    "mysteryWeights": {
+        "glitches_required": {
+            "none": 100,
+            "overworld_glitches": 0,
+            "major_glitches": 0,
+            "no_logic": 0
+        },
+        "item_placement": {
+            "basic": 0,
+            "advanced": 100
+        },
+        "world_state": {
+            "standard": 40,
+            "open": 40,
+            "inverted": 10,
+            "retro": 10
+        },
+        "goal": {
+            "ganon": 35,
+            "fast_ganon": 35,
+            "dungeons": 15,
+            "pedestal": 20,
+            "triforce-hunt": 5
+        },
+        "accessibility": {
+            "items": 90,
+            "location": 0,
+            "none": 10
+        },
+        "dungeon_items": {
+            "standard": 60,
+            "mc": 10,
+            "mcs": 10,
+            "full": 20
+        },
+        "dungeon_items_entrance": {
+            "standard": 50,
+            "mc": 0,
+            "mcs": 0,
+            "full": 50
+        },
+        "tower_open": {
+            "0": 5,
+            "1": 5,
+            "2": 10,
+            "3": 10,
+            "4": 10,
+            "5": 20,
+            "6": 20,
+            "7": 20,
+            "random": 0
+        },
+        "ganon_open": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3": 10,
+            "4": 10,
+            "5": 25,
+            "6": 25,
+            "7": 30,
+            "random": 0
+        },
+        "entrance_shuffle": {
+            "none": 70,
+            "simple": 0,
+            "restricted": 0,
+            "full": 0,
+            "crossed": 30,
+            "insanity": 0
+        },
+        "boss_shuffle": {
+            "none": 70,
+            "simple": 0,
+            "full": 30,
+            "random": 0
+        },
+        "enemy_shuffle": {
+            "none": 70,
+            "shuffled": 30,
+            "random": 0
+        },
+        "hints": {
+            "on": 10,
+            "off": 90
+        },
+        "weapons": {
+            "randomized": 50,
+            "assured": 20,
+            "vanilla": 20,
+            "swordless": 10
+        },
+        "item_pool": {
+            "normal": 60,
+            "hard": 30,
+            "expert": 10,
+            "crowd_control": 0
+        },
+        "item_functionality": {
+            "normal": 60,
+            "hard": 30,
+            "expert": 10
+        },
+        "enemy_damage": {
+            "default": 100,
+            "shuffled": 0,
+            "random": 0
+        },
+        "enemy_health": {
+            "default": 100,
+            "easy": 0,
+            "hard": 0,
+            "expert": 0
         }
     },
     "codeStartAt": 1573397,
