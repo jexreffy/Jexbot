@@ -66,6 +66,7 @@
     "rom.timerStart": "",
     "rom.rupeeBow": false,
     "rom.genericKeys": false,
+    "rom.logicMode": "NoGlitches",
     "spoil.BootsLocation": false,
     "canBombJump": false,
     "canBootsClip": false,

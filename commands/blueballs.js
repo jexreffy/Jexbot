@@ -4,7 +4,7 @@ module.exports = (race, tClient, tChannel, message) => {
     let match = message.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i);
     let blueballs = parseInt(match[2]);
 
-    if (blueballs <= 0 || blueballs > 15) return;
+    if (blueballs < 0 || blueballs > 15) return;
 
     race.blueballs = blueballs;
 

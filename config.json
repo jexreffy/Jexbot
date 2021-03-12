@@ -110,9 +110,10 @@
         "ambrosia": {
             "name": "Ambrosia",
             "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Assured Sword, Uncle Spoils Boots Location, Bosses cannot hold Dungeon Items",
-            "gtbk": false,
+            "gtbk": true,
             "customizer": true,
             "settings": {
+                "mode": "standard",
                 "weapons": "assured",
                 "custom": {
                     "spoil.BootsLocation": true,
@@ -120,21 +121,34 @@
                 }
             }
         },
+        "beginner": {
+            "name": "Beginner",
+            "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Assured Sword, Beginner Item Placement",
+            "gtbk": true,
+            "customizer": false,
+            "settings": {
+                "mode": "standard",
+                "weapons": "assured",
+                "item_placement": "beginner"
+            }
+        },
         "casual": {
             "name": "Casual",
             "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Assured Sword",
-            "gtbk": false,
+            "gtbk": true,
             "customizer": false,
             "settings": {
+                "mode": "standard",
                 "weapons": "assured"
             }
         },
         "casualboots": {
             "name": "Casual Boots",
             "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Assured Sword, Starting Boots",
-            "gtbk": false,
+            "gtbk": true,
             "customizer": true,
             "settings": {
+                "mode": "standard",
                 "weapons": "assured",
                 "eq": ["PegasusBoots","BossHeartContainer", "BossHeartContainer", "BossHeartContainer"]
             }
@@ -170,6 +184,7 @@
             "gtbk": true,
             "customizer": false,
             "settings": {
+                "mode": "standard",
                 "item": {
                     "pool": "hard"
                 }
@@ -232,11 +247,11 @@
         },
         "mysterykeys": {
             "name": "Mystery Keys",
-            "description": "Open Start, Defeat Ganon, 5/5 Crystals, Big Keys expect GTBK are randomized, but you don't know which Key is which until you enter a dungeon",
+            "description": "Escape Sequence Start, Defeat Ganon, 5/5 Crystals, Big Keys expect GTBK are randomized, but you don't know which Key is which until you enter a dungeon",
             "gtbk": true,
             "customizer": true,
             "settings": {
-                "mode": "open",
+                "mode": "standard",
                 "crystals": {
                     "ganon": "5",
                     "tower": "5"
@@ -268,6 +283,19 @@
                 "goal": "pedestal"
             }
         },
+        "randomcrystals": {
+            "name": "Random Crystals",
+            "description": "Open Start, Defeat Ganon, Random/Random Crystals",
+            "gtbk": true,
+            "customizer": false,
+            "settings": {
+                "crystals": {
+                    "ganon": "random",
+                    "tower": "random"
+                },
+                "mode": "open"
+            }
+        },
         "reduced": {
             "name": "Reduced Crystals",
             "description": "Open Start, Defeat Ganon, 6/6 Crystals",
@@ -293,7 +321,7 @@
         "spoiler": {
             "name": "Spoiler Open",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Spoiler Log given at start of race with 15 minutes to route",
-            "gtbk": false,
+            "gtbk": true,
             "customizer": false,
             "settings": {
                 "mode": "open",
@@ -305,7 +333,9 @@
             "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals",
             "gtbk": true,
             "customizer": false,
-            "settings": {}
+            "settings": {
+                "mode": "open"
+            }
         },
         "triforce": {
             "name": "Triforce Hunt",
