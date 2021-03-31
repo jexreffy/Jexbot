@@ -66,5 +66,7 @@ module.exports = (config, race, dChannel, tClient, message) => {
             await sleep(5000);
             gtbkWinner(config, race, dChannel, tClient);
         })();
+    } else {
+        updateRaceMessage(race, dChannel);
     }
 }

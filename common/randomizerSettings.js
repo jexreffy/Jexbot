@@ -1,5 +1,8 @@
+const getCustomizerSettings = require('../common/getCustomizerSettings');
+const getRandomizerSettings = require('../common/getRandomizerSettings');
+
 module.exports = (config, category) => {
-    let settings = require(category.customizer ? '../data/customizer.json' : '../data/randomizer.json');
+    let settings = category.customizer ? getCustomizerSettings() : getRandomizerSettings();
 
     let keys = Object.keys(category.settings);
 

@@ -140,7 +140,7 @@ module.exports = (race, channel) => {
             "\n`.leave` - Leaves the current race" +
             "\n`.ready` - Sets player ready to start" +
             "\n`.unready` - Sets player not ready to start" +
-            "\n`.roll` - Only type this is your self esteem can handle it, or understand how Random Number Generators work..." +
+            "\n`.roll` - Only type this if your self esteem can handle it, or understand how Random Number Generators work..." +
             "\n`.streaming {on|off}` - Sets if the player is streaming the race and should be included in the Multistream" +
             "\n`.twitch {Twitch username}` - Change stream URL to your Twitch username if different from your Discord username" +
             "\n`.twitchBot {on|off}` - Sets if JexBot connects to the Player's Twitch stream" ;

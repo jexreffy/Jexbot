@@ -9,6 +9,7 @@
             "channel": "alttp-race-bot",
             "pingRole": "ALTTPR",
             "racerRole": "Racer",
+            "sotwEnabled": false,
             "codeMap": [
                 ":Bow:817965008637919293",
                 ":Boomerang:817965008721018911",
@@ -50,6 +51,26 @@
             "channel": "lttp-race-bot",
             "pingRole": "LttPR",
             "racerRole": "Racer",
+            "sotwEnabled": true,
+            "sotwChannel": "lttp-seed-of-the-week",
+            "sotwEasy": [
+                "open",
+                "standard",
+                "casualboots",
+                "ambrosia"
+            ],
+            "sotwMedium": [
+                "harditemstandard",
+                "harditemstandard",
+                "harditemstandard",
+                "harditemstandard"
+            ],
+            "sotwHard": [
+                "adkeysanity",
+                "crosskeys",
+                "mystery",
+                "swordless"
+            ],
             "codeMap": [
                 ":Bow:812714327928078367",
                 ":Boomerang:812714328222335067",
@@ -175,6 +196,32 @@
                 "enemizer": {
                     "boss_shuffle": "full",
                     "enemy_shuffle": "shuffled"
+                }
+            }
+        },
+        "expert": {
+            "name": "Expert",
+            "description": "Open Start, Defeat Ganon, 7/7 Crystals, Expert Item Pool, Expert Item Functionality",
+            "gtbk": true,
+            "customizer": false,
+            "settings": {
+                "mode": "open",
+                "item": {
+                    "pool": "expert",
+                    "functionality": "expert"
+                }
+            }
+        },
+        "hard": {
+            "name": "Hard",
+            "description": "Open Start, Defeat Ganon, 7/7 Crystals, Hart Item Pool, Hard Item Functionality",
+            "gtbk": true,
+            "customizer": false,
+            "settings": {
+                "mode": "open",
+                "item": {
+                    "pool": "hard",
+                    "functionality": "hard"
                 }
             }
         },
@@ -334,7 +381,17 @@
             "gtbk": true,
             "customizer": false,
             "settings": {
-                "mode": "open"
+                "mode": "standard"
+            }
+        },
+        "swordless": {
+            "name": "Swordless",
+            "description": "Open Start, Defeat Ganon, 7/7 Crystals, No Swords",
+            "gtbk": true,
+            "customizer": false,
+            "settings": {
+                "mode": "open",
+                "weapons": "swordless"
             }
         },
         "triforce": {

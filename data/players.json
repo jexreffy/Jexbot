@@ -2,8 +2,8 @@
   {
     "username": "jexreffy",
     "standard": {
-      "elo": 1105,
-      "matches": 18
+      "elo": 1125,
+      "matches": 21
     },
     "streaming": true,
     "twitch": "jexreffy",
@@ -14,8 +14,8 @@
     "twitch": "ZephyrBlayze",
     "streaming": true,
     "standard": {
-      "elo": 1225,
-      "matches": 1
+      "elo": 1455,
+      "matches": 3
     }
   },
   {
@@ -23,8 +23,8 @@
     "streaming": true,
     "twitch": "PhantomRyu",
     "standard": {
-      "elo": 920,
-      "matches": 4
+      "elo": 525,
+      "matches": 7
     },
     "twitchBot": true
   },
@@ -32,8 +32,8 @@
     "username": "TjMaelstrom",
     "streaming": true,
     "standard": {
-      "elo": 1370,
-      "matches": 4
+      "elo": 1670,
+      "matches": 7
     },
     "twitch": "TjMaelstrom",
     "twitchBot": true
@@ -53,8 +53,8 @@
     "username": "Antissim",
     "streaming": false,
     "standard": {
-      "elo": 1455,
-      "matches": 4
+      "elo": 1035,
+      "matches": 6
     },
     "twitchBot": false
   },
@@ -62,33 +62,39 @@
     "username": "KwehstopherWarken",
     "streaming": true,
     "standard": {
-      "elo": 500,
-      "matches": 4
+      "elo": 765,
+      "matches": 6
     },
     "twitchBot": true
   },
   {
     "username": "Web_Mage",
     "twitch": "Web_Mage",
-    "streaming": false
+    "streaming": false,
+    "twitchBot": true,
+    "standard": {
+      "elo": 420,
+      "matches": 2
+    }
   },
   {
     "username": "Digidude22",
     "twitch": "Digidude22",
     "streaming": true,
     "standard": {
-      "elo": 450,
-      "matches": 3
+      "elo": 325,
+      "matches": 5
     },
     "twitchBot": true
   },
   {
     "username": "KillerApp23",
-    "streaming": false,
+    "streaming": true,
     "standard": {
-      "elo": 1710,
-      "matches": 3
-    }
+      "elo": 1915,
+      "matches": 5
+    },
+    "twitchBot": true
   },
   {
     "username": "WallKicks"
@@ -109,10 +115,12 @@
   {
     "username": "Marcnificent",
     "standard": {
-      "elo": 1225,
-      "matches": 1
+      "elo": 1200,
+      "matches": 3
     },
-    "twitchBot": true
+    "twitchBot": true,
+    "twitch": "wetalkinaboutpracticeman",
+    "streaming": true
   },
   {
     "username": "Jixson",
@@ -130,9 +138,31 @@
     }
   },
   {
-    "username": "DoctorBobtastic"
+    "username": "DoctorBobtastic",
+    "standard": {
+      "elo": 1120,
+      "matches": 2
+    },
+    "streaming": true,
+    "twitchBot": true
   },
   {
     "username": "Milla_84"
+  },
+  {
+    "username": "WaltherIV",
+    "twitch": "bsforbonesaw",
+    "streaming": true,
+    "standard": {
+      "elo": 1485,
+      "matches": 1
+    }
+  },
+  {
+    "username": "Ruzzelljr",
+    "standard": {
+      "elo": 800,
+      "matches": 1
+    }
   }
 ]

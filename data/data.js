@@ -227,5 +227,24 @@ module.exports = {
     setRaceData: function(guildId, updatedRace) {
         races[guildId] = updatedRace;
         saveRaceData();
+    },
+    getEasySotw: function(guildId) {
+        return server.sotw[guildId][0];
+    },
+    getMediumSotw: function(guildId) {
+        return server.sotw[guildId][1];
+    },
+    getHardSotw: function(guildId) {
+        return server.sotw[guildId][2];
+    },
+    getLastSotw: function() {
+        return server.sotwLast;
+    },
+    setSotw: function(guildId, easy, medium, hard, last) {
+        server.sotw[guildId][0] = easy;
+        server.sotw[guildId][1] = medium;
+        server.sotw[guildId][2] = hard;
+        server.sotwLast = last;
+        saveServerData();
     }
 };

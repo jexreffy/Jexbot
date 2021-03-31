@@ -2,7 +2,8 @@ const config = require('../config.json');
 const data = require('../data/data.js');
 const blueballs = require('../commands/blueballs');
 const callback = require('../commands/callback');
-const close = require('../commands/close');
+const close = require('../commands/close')
+const comment = require('../commands/comment');
 const dick = require('../commands/dick');
 const done = require('../commands/done');
 const escape = require('../commands/escape');
@@ -72,7 +73,9 @@ function processDiscordCommand(dClient, tClient, message) {
 }
 
 function processDiscordInactiveCommands(dClient, tClient, config, race, message) {
-    if (message.content.match(/^[.!](\bladder\b) ([a-zA-Z0-9%]{4,20})/i)) {
+    if (message.content.match(/^[.!](\bcomment\b) ([ a-zA-Z0-9,./<>?;':"{}|`~!@#$%^&*()=_+]{0,1000})/i)) {
+        comment(config, race, message.channel, message.author.username, message);
+    } else if (message.content.match(/^[.!](\bladder\b) ([a-zA-Z0-9%]{4,20})/i)) {
         ladder(config, race, message.channel, message);
     } else if (message.content.match(/^[.!](\bleaderboard\b) ([ a-zA-Z0-9%]{3,20})/i)) {
         leaderboard(message.channel, message);
@@ -84,7 +87,7 @@ function processDiscordInactiveCommands(dClient, tClient, config, race, message)
         roll(config, null, message.channel, message);
     } else if (message.content.match(/^[.!](\bspaceballs\b)/i)) {
         spaceballs(config, race, message.channel, tClient);
-    } else if (message.content.match(/^[.!](\bstats\b)([ ]{0,1})([a-zA-Z 0-9%]{0,30})/i)) {
+    } else if (message.content.match(/^[.!](\bstats\b) ([a-zA-Z 0-9%]{0,30})/i)) {
         stats(race, message.channel, message);
     }
 }
@@ -100,6 +103,8 @@ function processDiscordRaceActiveCommands(dClient, tClient, config, race, messag
         blueballs(race, message.content);
     } else if (message.content.match(/^[.!](\bclose\b)/i)) {
         close(config, race, message, message.channel);
+    } else if (message.content.match(/^[.!](\bcomment\b) ([ a-zA-Z0-9,./<>?;':"{}|`~!@#$%^&*()=_+]{0,1000})/i)) {
+        comment(config, race, message.channel, message.author.username, message);
     } else if (message.content.match(/^[.!](\bdick\b)/i)) {
         dick(config, race, message.channel, tClient);
     } else if (message.content.match(/^[.!](\bdone\b)/i)) {
@@ -110,7 +115,7 @@ function processDiscordRaceActiveCommands(dClient, tClient, config, race, messag
         forfeit(config, race, message.channel, tClient, message.author.username, message);
     } else if (message.content.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i)) {
         gtGuess(config, race, message.channel, tClient, null, message.author.username, message.content);
-    } else if (message.content.match(/^[.!](\bkick\b)([ ]{0,1})([a-zA-Z0-9%]{0,20})/i)) {
+    } else if (message.content.match(/^[.!](\bkick\b) ([a-zA-Z0-9%]{0,20})/i)) {
         kick(config, race, message.channel, tClient, message);
     } else if (message.content.match(/^[.!](\bspaceballs\b)/i)) {
         spaceballs(config, race, message.channel, tClient);
@@ -124,7 +129,7 @@ function processDiscordRaceLobbyCommands(dClient, tClient, config, race, message
         gatekeeper(race, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\bjoin\b)/i)) {
         join(config, race, message.channel, message.author.username, message);
-    } else if (message.content.match(/^[.!](\bkick\b)([ ]{0,1})([a-zA-Z0-9%]{0,20})/i)) {
+    } else if (message.content.match(/^[.!](\bkick\b) ([a-zA-Z0-9%]{0,20})/i)) {
         kick(config, race, message.channel, tClient, message);
     } else if (message.content.match(/^[.!](\bleaderboard\b) ([ a-zA-Z0-9%]{3,20})/i)) {
         leaderboard(message.channel, message);
@@ -137,12 +142,12 @@ function processDiscordRaceLobbyCommands(dClient, tClient, config, race, message
     } else if (message.content.match(/^[.!](\breset\b)/i)) {
         reset(race, message.channel, message);
     } else if (message.content.match(/^[.!](\broll\b)/i)) {
-        roll(config, race, message.channel, message.author.username);
+        roll(config, race, message.channel, message);
     } else if (message.content.match(/^[.!](\bspaceballs\b)/i)) {
         spaceballs(config, race, message.channel, tClient);
     } else if (message.content.match(/^[.!](\bstart\b)/i)) {
         start(config, race, message.channel, tClient, message, message.author.username);
-    } else if (message.content.match(/^[.!](\bstats\b)([ ]{0,1})([a-zA-Z 0-9%]{0,30})/i)) {
+    } else if (message.content.match(/^[.!](\bstats\b) ([a-zA-Z 0-9%]{0,30})/i)) {
         stats(race, message.channel, message);
     } else if (message.content.match(/^[.!](\bstreaming\b) ((\bon\b)|(\boff\b))/i)) {
         streaming(race, message.channel, message, message.author.username);

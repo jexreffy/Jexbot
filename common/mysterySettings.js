@@ -1,6 +1,9 @@
-module.exports = (weights) => {
-    let settings = require('../data/customizer.json');
+const getCustomizerSettings = require('../common/getCustomizerSettings');
 
+module.exports = (weights) => {
+    let settings = getCustomizerSettings();
+
+    settings.spoilers = "mystery";
     settings.glitches = determineSetting(weights["glitches_required"]);
     settings.item_placement = determineSetting(weights["item_placement"]);
     settings.accessibility = determineSetting(weights["accessibility"]);
@@ -74,6 +77,8 @@ module.exports = (weights) => {
 
     return settings;
 }
+
+
 
 function determineSetting(setting) {
     let keys = Object.keys(setting);

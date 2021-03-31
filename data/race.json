@@ -2,100 +2,24 @@
   "574586257079009280": {
     "started": true,
     "finished": true,
-    "startedAt": 1615002413612,
-    "initiatedAt": 1614998739643,
-    "pingIndex": 6,
-    "countdownIndex": 0,
+    "startedAt": 1616356716321,
+    "initiatedAt": 1616356716321,
+    "pingIndex": -1,
+    "countdownIndex": -1,
     "remainingPlayers": 0,
-    "players": [
-      {
-        "id": "112891568200908800",
-        "username": "KillerApp23",
-        "ready": true,
-        "finished": true,
-        "time": 6593574,
-        "adjustment": 185
-      },
-      {
-        "id": "225803089502797824",
-        "username": "Antissim",
-        "ready": true,
-        "finished": true,
-        "time": 6869315,
-        "adjustment": 200
-      },
-      {
-        "id": "451116427152457730",
-        "username": "Marcnificent",
-        "ready": true,
-        "finished": true,
-        "time": 7382110,
-        "adjustment": 225
-      },
-      {
-        "id": "234063405667844099",
-        "username": "TjMaelstrom",
-        "twitch": "#TjMaelstrom",
-        "ready": true,
-        "finished": true,
-        "time": 7519397,
-        "adjustment": -75
-      },
-      {
-        "id": "300096480742735873",
-        "username": "PhantomRyu",
-        "twitch": "#phantomryu",
-        "ready": true,
-        "finished": true,
-        "time": 7527233,
-        "adjustment": 105
-      },
-      {
-        "id": "263872489946349568",
-        "username": "jexreffy",
-        "twitch": "#jexreffy",
-        "ready": true,
-        "finished": true,
-        "time": 7563622,
-        "adjustment": -100
-      },
-      {
-        "id": "102147944555241472",
-        "username": "KwehstopherWarken",
-        "twitch": "#KwehstopherWarken",
-        "ready": true,
-        "forfeited": true,
-        "adjustment": -120
-      },
-      {
-        "id": "205479053489209345",
-        "username": "Ahab",
-        "ready": true,
-        "forfeited": true,
-        "adjustment": -275
-      },
-      {
-        "id": "152648829961895936",
-        "username": "Digidude22",
-        "twitch": "#Digidude22",
-        "ready": true,
-        "forfeited": true,
-        "adjustment": -80
-      }
-    ],
-    "guessGameStarted": true,
-    "gatekeeper": "jexreffy",
-    "category": "standard",
-    "messageId": "817588699109523476",
-    "seedCode": "<:DungeonCompass:585610051209789452> <:Mudora:585609020723691548> <:TheD:544671048193409025> <:Flippers:812714328251695105> <:DungeonCompass:812714328456167424>",
-    "seedLink": "https://alttpr.com/h/29MQ8Ob9GD",
-    "seedRoller": "KillerApp23",
-    "mutlistream": "https://multistre.am/jexreffy/TjMaelstrom/KwehstopherWarken/Digidude22/phantomryu/",
-    "status": "RACE FINISHED",
-    "dickCount": 9,
+    "players": [],
+    "guessGameStarted": false,
+    "gatekeeper": null,
+    "category": "crosskeys",
+    "messageId": null,
+    "seedCode": null,
+    "seedLink": null,
+    "seedRoller": null,
+    "mutlistream": "",
+    "status": "RACE CLOSED",
+    "dickCount": 0,
     "seed": null,
     "guesses": [
-      "lemming622",
       null,
       null,
       null,
@@ -107,77 +31,66 @@
       null,
       null,
       null,
-      "theshadesat",
-      null,
-      null,
-      null,
-      "dinosadies567",
       null,
       null,
       null,
       null,
-      "web_mage"
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
     ],
-    "lastDickTime": 1615009759519,
-    "gtRunner": "#jexreffy",
-    "gtbk": 19,
-    "escapeItem": "<:Bomb:812714328259690516>",
-    "lastHello": 1615009640001,
-    "lastCallback": 1615009547136,
+    "lastDickTime": null,
+    "gtRunner": null,
+    "gtbk": -1,
+    "escapeItem": null,
+    "lastHello": 1616365745002,
+    "lastCallback": null,
     "blueballs": -1,
-    "gtbkWinner": "dinosadies567",
-    "gtbkGuess": 17
+    "gtbkWinner": null,
+    "gtbkGuess": -1,
+    "ladder": true,
+    "guessGameFinished": false,
+    "spoilersAllowed": false
   },
   "515731524616847367": {
     "started": true,
     "finished": true,
-    "startedAt": 1615002413612,
-    "initiatedAt": 1614998739643,
-    "pingIndex": 6,
-    "countdownIndex": 0,
+    "startedAt": 1616803749746,
+    "initiatedAt": 1616801026825,
+    "pingIndex": 2,
+    "countdownIndex": 6,
     "remainingPlayers": 0,
     "players": [
-      {
-        "id": "112891568200908800",
-        "username": "KillerApp23",
-        "ready": true,
-        "finished": true,
-        "time": 6593574,
-        "adjustment": 185
-      },
-      {
-        "id": "225803089502797824",
-        "username": "Antissim",
-        "ready": true,
-        "finished": true,
-        "time": 6869315,
-        "adjustment": 200
-      },
-      {
-        "id": "451116427152457730",
-        "username": "Marcnificent",
-        "ready": true,
-        "finished": true,
-        "time": 7382110,
-        "adjustment": 225
-      },
       {
         "id": "234063405667844099",
         "username": "TjMaelstrom",
         "twitch": "#TjMaelstrom",
         "ready": true,
         "finished": true,
-        "time": 7519397,
-        "adjustment": -75
+        "time": 5712550,
+        "adjustment": 125
       },
       {
-        "id": "300096480742735873",
-        "username": "PhantomRyu",
-        "twitch": "#phantomryu",
+        "id": "112891568200908800",
+        "username": "KillerApp23",
+        "twitch": "#KillerApp23",
         "ready": true,
         "finished": true,
-        "time": 7527233,
-        "adjustment": 105
+        "time": 5944623,
+        "adjustment": -5
+      },
+      {
+        "id": "172148578397978624",
+        "username": "ZephyrBlayze",
+        "twitch": "#ZephyrBlayze",
+        "ready": true,
+        "finished": true,
+        "time": 6359837,
+        "adjustment": 65
       },
       {
         "id": "263872489946349568",
@@ -185,23 +98,33 @@
         "twitch": "#jexreffy",
         "ready": true,
         "finished": true,
-        "time": 7563622,
-        "adjustment": -100
+        "time": 6497912,
+        "adjustment": 40
       },
       {
-        "id": "102147944555241472",
-        "username": "KwehstopherWarken",
-        "twitch": "#KwehstopherWarken",
+        "id": "221003827879346176",
+        "username": "DoctorBobtastic",
         "ready": true,
-        "forfeited": true,
-        "adjustment": -120
+        "finished": true,
+        "time": 6918493,
+        "adjustment": -70
       },
       {
-        "id": "205479053489209345",
-        "username": "Ahab",
+        "id": "300096480742735873",
+        "username": "PhantomRyu",
+        "twitch": "#PhantomRyu",
         "ready": true,
-        "forfeited": true,
-        "adjustment": -275
+        "finished": true,
+        "time": 6969090,
+        "adjustment": 45
+      },
+      {
+        "id": "187709194059776003",
+        "username": "Ruzzelljr",
+        "ready": true,
+        "finished": true,
+        "time": 7785116,
+        "adjustment": -200
       },
       {
         "id": "152648829961895936",
@@ -209,25 +132,25 @@
         "twitch": "#Digidude22",
         "ready": true,
         "forfeited": true,
-        "adjustment": -80
+        "adjustment": -120
       }
     ],
     "guessGameStarted": true,
     "gatekeeper": "jexreffy",
     "category": "standard",
-    "messageId": "817588699109523476",
-    "seedCode": "<:DungeonCompass:585610051209789452> <:Mudora:585609020723691548> <:TheD:544671048193409025> <:Flippers:812714328251695105> <:DungeonCompass:812714328456167424>",
-    "seedLink": "https://alttpr.com/h/29MQ8Ob9GD",
-    "seedRoller": "KillerApp23",
-    "mutlistream": "https://multistre.am/jexreffy/TjMaelstrom/KwehstopherWarken/Digidude22/phantomryu/",
+    "messageId": "825148001000488980",
+    "seedCode": "<:BigKey:812714328335319100> <:PowerGlove:812714328532844604> <:PowerGlove:812714328532844604> <:Cape:812714328041979915> <:DungeonCompass:812714328456167424>",
+    "seedLink": "<https://alttpr.com/h/7mykPR3mGQ>",
+    "seedRoller": "DoctorBobtastic",
+    "mutlistream": "https://multistre.am/jexreffy/TjMaelstrom/DoctorBobtastic/KillerApp23/PhantomRyu/Digidude22/ZephyrBlayze/",
     "status": "RACE FINISHED",
-    "dickCount": 9,
+    "dickCount": 3,
     "seed": null,
     "guesses": [
-      "lemming622",
       null,
       null,
       null,
+      "antissim",
       null,
       null,
       null,
@@ -245,16 +168,20 @@
       null,
       null,
       null,
-      "web_mage"
+      null
     ],
-    "lastDickTime": 1615009759519,
-    "gtRunner": "#jexreffy",
-    "gtbk": 19,
-    "escapeItem": "<:Bomb:812714328259690516>",
-    "lastHello": 1615009640001,
-    "lastCallback": 1615009547136,
+    "lastDickTime": 1616808986116,
+    "gtRunner": null,
+    "gtbk": -1,
+    "escapeItem": null,
+    "lastHello": 1616810970002,
+    "lastCallback": 1616808867760,
     "blueballs": -1,
-    "gtbkWinner": "dinosadies567",
-    "gtbkGuess": 17
+    "gtbkWinner": null,
+    "gtbkGuess": -1,
+    "ladder": false,
+    "guessGameFinished": false,
+    "spoilersAllowed": true,
+    "categoryName": "Standard"
   }
 }

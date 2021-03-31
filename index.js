@@ -84,20 +84,16 @@ dClient.login(process.env.DISCORD_BOT_TOKEN).then(x => {
 }).catch(console.error);
 
 const cron = require('node-cron');
+const cronEvent = require('./events/cron');
 cron.schedule('*/5 * * * * *', () => {
     const guildId = data.getActiveRace();
-    if (!guildId) {
-        if (tClient) disconnectFromTwitch();
-        return;
-    }
+    if (guildId) {
+        let race = data.getRaceData(guildId);
 
-    let race = data.getRaceData(guildId);
-    if (!race.started) return;
-
-    if (!tClient) {
-        connectToTwitch(race);
+        if (race.started && !tClient) connectToTwitch(race);
     } else {
-        const cron = require('./events/cron');
-        cron(dClient, tClient);
+        if (tClient) disconnectFromTwitch();
     }
+
+    cronEvent(dClient, tClient);
 }, {});

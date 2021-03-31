@@ -2,37 +2,58 @@ const axios = require('axios');
 const data = require('../data/data.js');
 const mysterySettings = require('../common/mysterySettings');
 const randomizerSettings = require('../common/randomizerSettings');
+const plandoSettings = require('../common/plandoSettings');
 const updateRaceMessage = require('../common/updateRaceMessage');
+
+const RANDO_URL = 'https://alttpr.com/api/randomizer';
+const PLANDO_URL = 'https://alttpr.com/api/customizer';
 
 module.exports = (config, race, dChannel, message) => {
     if (race && race.seedLink) return;
 
     let categoryName = config.defaultCategory;
+    let username = message.author.username;
 
-    if (race) {
-        dChannel.send(`**${message} has sealed their fate. I'd pray to RN Jesus while the seed is rolling if I were you...**`).then().catch(console.error);
-        categoryName = race.category;
+    if (message.attachments && message.attachments.size > 0) {
+        /*let attachment = message.attachments.first();
+        axios.get(attachment.url).then(result => {
+            if (race) {
+                dChannel.send(`**I could tell you the nonsense that ${username} has in this Plando, but where's the fun in that...**`).then().catch(console.error);
+            }
+
+            rollSeed(config, race, dChannel, PLANDO_URL, plandoSettings(result), username);
+        }).catch(console.error);*/
     } else {
-        let match = message.content.match(/^[.!](\broll\b) ([a-zA-Z0-9<>:]{4,20})/i);
+        if (race) {
+            dChannel.send(`**${username} has sealed their fate. I'd pray to RN Jesus while the seed is rolling if I were you...**`).then().catch(console.error);
+            categoryName = race.category;
+        } else {
+            let match = message.content.match(/^[.!](\broll\b) ([a-zA-Z0-9<>:]{4,20})/i);
 
-        if (match && match.length > 2) {
-            let categories = Object.keys(config.categories);
+            if (match && match.length > 2) {
+                let categories = Object.keys(config.categories);
 
-            for (let i = 0; i < categories.length; i++) {
-                if (match[2] === categories[i]) {
-                    categoryName = categories[i];
-                    break;
+                for (let i = 0; i < categories.length; i++) {
+                    if (match[2] === categories[i]) {
+                        categoryName = categories[i];
+                        break;
+                    }
                 }
             }
+
+            dChannel.send(`**Generating ${config.categories[categoryName].name} seed...**`).then().catch(console.error);
         }
 
-        dChannel.send(`**Generating ${config.categories[categoryName].name} seed...**`).then().catch(console.error);
+        const category = config.categories[categoryName];
+        const settings = categoryName === "mystery" ? mysterySettings(config.mysteryWeights) : randomizerSettings(config, category);
+
+        const url = category.customizer ? PLANDO_URL : RANDO_URL;
+
+        rollSeed(config, race, dChannel, url, settings, username);
     }
+}
 
-    const category = config.categories[categoryName];
-    const settings = categoryName === "mystery" ? mysterySettings(config.mysteryWeights) : randomizerSettings(config, category);
-
-    const url = category.customizer ? 'https://alttpr.com/api/customizer' : 'https://alttpr.com/api/randomizer';
+function rollSeed(config, race, dChannel, url, settings, username) {
     axios.post(url, settings).then(result => {
         let link = `<https://alttpr.com/h/${result.data.hash}>`;
         let code = ``;
@@ -62,7 +83,7 @@ module.exports = (config, race, dChannel, message) => {
         }
 
         if (race) {
-            race.seedRoller = message;
+            race.seedRoller = username;
             race.seedLink = link;
             race.seedCode = code;
 
