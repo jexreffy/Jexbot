@@ -48,7 +48,7 @@ module.exports = (dClient, tClient) => {
                     let hardMode = config.guilds[guildId].sotwHard[hardIndex];
                     hardIndex = hardIndex >= config.guilds[guildId].sotwHard.length - 1 ? 0 : hardIndex + 1;
 
-                    data.setSotw(guildId, easyIndex, mediumIndex, hardIndex, new Date(2021, 2, 29, 12, 0, 0, 0).valueOf());
+                    data.setSotw(guildId, easyIndex, mediumIndex, hardIndex, now);
                     rollSeeds(guildId, dClient, easyMode, mediumMode, hardMode);
                 }
             }
