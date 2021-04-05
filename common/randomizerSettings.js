@@ -1,5 +1,6 @@
 const getCustomizerSettings = require('../common/getCustomizerSettings');
 const getRandomizerSettings = require('../common/getRandomizerSettings');
+const processStartingEquipment = require('../common/processStartingEquipment');
 
 module.exports = (config, category) => {
     let settings = category.customizer ? getCustomizerSettings() : getRandomizerSettings();
@@ -9,7 +10,9 @@ module.exports = (config, category) => {
     for (let i = 0; i < keys.length; i++) {
         let key = keys[i];
 
-        if (typeof category.settings[key] === 'object' && category.settings[key] !== null) {
+        if (key === "eq" && category.name !== "Casual Boots") {
+            processStartingEquipment(settings, category.settings['eq']);
+        } else if (typeof category.settings[key] === 'object' && category.settings[key] !== null) {
             let subkeys = Object.keys(category.settings[key]);
 
             for (let i = 0; i < subkeys.length; i++) {

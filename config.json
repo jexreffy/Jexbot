@@ -171,7 +171,7 @@
             "settings": {
                 "mode": "standard",
                 "weapons": "assured",
-                "eq": ["PegasusBoots","BossHeartContainer", "BossHeartContainer", "BossHeartContainer"]
+                "eq": ["PegasusBoots", "BossHeartContainer", "BossHeartContainer", "BossHeartContainer"]
             }
         },
         "crosskeys": {
@@ -273,6 +273,26 @@
                 "mode": "open"
             }
         },
+        "ladders7pot": {
+            "name": "Ladder S7 Potpourri",
+            "description": "Open Start, All Dungeons, 7/7 Crystals, Small and Big Keys Randomized, Boss Shuffle, Start w/ Flute, Hookshot, and Ice Rod",
+            "gtbk": false,
+            "customizer": true,
+            "settings": {
+                "mode": "open",
+                "goal": "dungeons",
+                "enemizer": {
+                    "boss_shuffle": "full"
+                },
+                "eq": ["OcarinaActive", "Hookshot", "IceRod"],
+                "custom": {
+                    "region.wildKeys": true,
+                    "region.wildBigKeys": true,
+                    "rom.freeItemMenu": true,
+                    "rom.freeItemText": true
+                }
+            }
+        },
         "mcshuffle": {
             "name": "MC Shuffle",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Maps & Compasses shuffled in the full item pool",
@@ -363,6 +383,32 @@
             "customizer": false,
             "settings": {
                 "mode": "retro"
+            }
+        },
+        "retrance": {
+            "name": "Retrance",
+            "description": "Open Start, Fast Ganon, 7/7 Crystals, Crossworld Entrance Shuffle, Assured Sword, Universal Keys, Other Dungeon Items Shuffled, Bows cost money to use",
+            "gtbk": false,
+            "customizer": false,
+            "settings": {
+                "dungeon_items": "full",
+                "goal": "fast_ganon",
+                "mode": "retro",
+                "entrances": "crossed",
+                "weapons": "assured"
+            }
+        },
+        "retrance_full": {
+            "name": "Retrance Full",
+            "description": "Open Start, Fast Ganon, 7/7 Crystals, Full Entrance Shuffle, Assured Sword, Universal Keys, Other Dungeon Items Shuffled, Bows cost money to use",
+            "gtbk": false,
+            "customizer": false,
+            "settings": {
+                "dungeon_items": "full",
+                "goal": "fast_ganon",
+                "mode": "retro",
+                "entrances": "full",
+                "weapons": "assured"
             }
         },
         "spoiler": {
@@ -481,9 +527,9 @@
         "entrance_shuffle": {
             "none": 70,
             "simple": 0,
-            "restricted": 0,
+            "restricted": 10,
             "full": 0,
-            "crossed": 30,
+            "crossed": 20,
             "insanity": 0
         },
         "boss_shuffle": {
@@ -514,9 +560,9 @@
             "crowd_control": 0
         },
         "item_functionality": {
-            "normal": 60,
-            "hard": 30,
-            "expert": 10
+            "normal": 100,
+            "hard": 0,
+            "expert": 0
         },
         "enemy_damage": {
             "default": 100,
@@ -524,19 +570,48 @@
             "random": 0
         },
         "enemy_health": {
-            "default": 100,
-            "easy": 0,
-            "hard": 0,
+            "default": 70,
+            "easy": 15,
+            "hard": 15,
             "expert": 0
         },
-        "starting_boots": {
-            "false": 50,
-            "true": 50
-        },
-        "starting_flute": {
-            "false": 70,
-            "true": 30
-        }
+        "starting_items": [
+            {
+                "item": "PegasusBoots",
+                "false": 50,
+                "true": 50
+            },
+            {
+                "item": "OcarinaActive",
+                "false": 80,
+                "true": 20
+            },
+            {
+                "item": "Hookshot",
+                "false": 90,
+                "true": 10
+            },
+            {
+                "item": "FireRod",
+                "false": 90,
+                "true": 10
+            },
+            {
+                "item": "IceRod",
+                "false": 90,
+                "true": 10
+            },
+            {
+                "item": "Flippers",
+                "false": 90,
+                "true": 10
+            },
+            {
+                "item": "MagicMirror",
+                "false": 90,
+                "true": 10
+            }
+        ]
     },
     "gtbkLocations": [
         "R2Fub24ncyBUb3dlciAtIEJvYidzIFRvcmNoOjE=",

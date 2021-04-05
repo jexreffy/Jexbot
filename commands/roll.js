@@ -12,6 +12,20 @@ const PLANDO_URL = 'https://alttpr.com/api/customizer';
 module.exports = (config, race, dChannel, message) => {
     if (race && race.seedLink) return;
 
+    let helpMatch = message.content.match(/^[.!](\broll help\b)/i);
+
+    if (helpMatch && helpMatch.length > 0) {
+        let keys = Object.keys(config.categories);
+        let message = `**.roll {mode}**\nModes:\n`;
+
+        for (let i = 0; i < keys.length; i++) {
+            message += `\n\`${keys[i]}\` - ${config.categories[keys[i]].name}`;
+        }
+
+        dChannel.send(message).then().catch(console.error);
+        return;
+    }
+
     let categoryName = config.defaultCategory;
     let username = message.author.username;
 

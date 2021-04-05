@@ -1,4 +1,5 @@
 const getCustomizerSettings = require('../common/getCustomizerSettings');
+const processStartingEquipment = require('../common/processStartingEquipment');
 
 module.exports = (weights) => {
     let settings = getCustomizerSettings();
@@ -25,21 +26,16 @@ module.exports = (weights) => {
         settings.custom.item.count.TriforcePiece = 30;
     }
 
-    let startBoots = determineSetting(weights["starting_boots"]) === "true";
-    let startFlute = determineSetting(weights["starting_boots"]) === "true";
+    let items = [];
+    for (let i = 0; i < weights["starting_items"].length; i++) {
+        if (determineSetting(weights["starting_items"][i]) === "true") {
+            items.push(weights["starting_items"][i].item);
+        }
+    }
 
-    if (startBoots || startFlute) {
+    if (items.length > 0) {
         settings.entrances = "none";
-
-        if (startFlute) {
-            settings.eq.splice(0, 0, settings.mode === "standard" ? 'OcarinaInactive' : 'OcarinaActive');
-            settings.custom.item.count.OcarinaInactive = 0;
-        }
-
-        if (startBoots) {
-            settings.eq.splice(0, 0, 'PegasusBoots');
-            settings.custom.item.count.PegasusBoots = 0;
-        }
+        processStartingEquipment(settings, items);
     } else {
         settings.entrances = determineSetting(weights["entrance_shuffle"]);
     }
@@ -78,14 +74,14 @@ module.exports = (weights) => {
     return settings;
 }
 
-
-
 function determineSetting(setting) {
     let keys = Object.keys(setting);
     let weight = randomWeight();
     let current = 0;
 
     for (let i = 0; i < keys.length; i++) {
+        if (keys[i] === "item") continue;
+
         current += setting[keys[i]];
         if (weight < current) {
             return keys[i];
