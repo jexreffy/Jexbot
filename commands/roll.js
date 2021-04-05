@@ -3,6 +3,7 @@ const data = require('../data/data.js');
 const mysterySettings = require('../common/mysterySettings');
 const randomizerSettings = require('../common/randomizerSettings');
 const plandoSettings = require('../common/plandoSettings');
+const processSeed = require('../common/processSeed');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 const RANDO_URL = 'https://alttpr.com/api/randomizer';
@@ -49,48 +50,24 @@ module.exports = (config, race, dChannel, message) => {
 
         const url = category.customizer ? PLANDO_URL : RANDO_URL;
 
-        rollSeed(config, race, dChannel, url, settings, username);
+        rollSeed(config, race, dChannel, url, settings, username, categoryName);
     }
 }
 
-function rollSeed(config, race, dChannel, url, settings, username) {
+function rollSeed(config, race, dChannel, url, settings, username, categoryName) {
     axios.post(url, settings).then(result => {
-        let link = `<https://alttpr.com/h/${result.data.hash}>`;
-        let code = ``;
-
-        for (let p = 0; p < result.data.patch.length; p++) {
-            let startAt = parseInt(config.codeStartAt)
-
-            let key = parseInt(Object.keys(result.data.patch[p])[0]);
-
-            if (startAt > key) continue;
-
-            let data = null;
-            if (startAt < key) {
-                key = parseInt(Object.keys(result.data.patch[p - 1])[0]);
-                data = result.data.patch[p - 1][`${key}`];
-            } else {
-                data = result.data.patch[p][`${key}`];
-            }
-
-            let offset = startAt - key;
-
-            for (let c = 0; c < 5; c++) {
-                code += `<${config.guilds[dChannel.guild.id].codeMap[data[c + offset]]}>${c < 4 ? ' ' : ''}`
-            }
-
-            break;
-        }
+        let guildId = dChannel.guild.id;
+        let seed = processSeed(config, guildId, categoryName, result);
 
         if (race) {
             race.seedRoller = username;
-            race.seedLink = link;
-            race.seedCode = code;
+            race.seedLink = seed.link;
+            race.seedCode = seed.code;
 
             updateRaceMessage(race, dChannel);
             data.setRaceData(dChannel.guild.id, race);
         }
 
-        dChannel.send(`${link} ${code}`).then().catch(console.error);
+        dChannel.send(`${seed.link} ${seed.code}`).then().catch(console.error);
     }).catch(console.error);
 }

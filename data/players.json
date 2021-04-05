@@ -2,8 +2,8 @@
   {
     "username": "jexreffy",
     "standard": {
-      "elo": 1125,
-      "matches": 21
+      "elo": 1130,
+      "matches": 22
     },
     "streaming": true,
     "twitch": "jexreffy",
@@ -32,8 +32,8 @@
     "username": "TjMaelstrom",
     "streaming": true,
     "standard": {
-      "elo": 1670,
-      "matches": 7
+      "elo": 1690,
+      "matches": 8
     },
     "twitch": "TjMaelstrom",
     "twitchBot": true
@@ -62,8 +62,8 @@
     "username": "KwehstopherWarken",
     "streaming": true,
     "standard": {
-      "elo": 765,
-      "matches": 6
+      "elo": 740,
+      "matches": 7
     },
     "twitchBot": true
   },

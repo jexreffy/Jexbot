@@ -5,6 +5,7 @@ const broadcastMessage = require('../common/broadcastMessage');
 const broadcastTwitch = require('../common/broadcastTwitch');
 const mysterySettings = require('../common/mysterySettings');
 const randomizerSettings = require('../common/randomizerSettings');
+const processSeed = require('../common/processSeed');
 
 const RANDO_URL = 'https://alttpr.com/api/randomizer';
 const PLANDO_URL = 'https://alttpr.com/api/customizer';
@@ -15,7 +16,7 @@ module.exports = (dClient, tClient) => {
     if (guildId) {
         let race = data.getRaceData(guildId);
 
-        if (race.started && !race.finished) return;
+        if (!race.started || race.finished) return;
 
         let dChannel = dClient.channels.cache.find(channel => channel.name === config.guilds[guildId].channel);
 
@@ -93,38 +94,4 @@ function rollSeeds(guildId, dClient, easyMode, mediumMode, hardMode) {
             }).catch(console.error);
         }).catch(console.error);
     }).catch(console.error);
-}
-
-function processSeed(guildId, categoryName, result) {
-    let retVal = {};
-
-    retVal.name = categoryName;
-    retVal.link = `<https://alttpr.com/h/${result.data.hash}>`;
-    retVal.code = ``;
-
-    for (let p = 0; p < result.data.patch.length; p++) {
-        let startAt = parseInt(config.codeStartAt)
-
-        let key = parseInt(Object.keys(result.data.patch[p])[0]);
-
-        if (startAt > key) continue;
-
-        let data = null;
-        if (startAt < key) {
-            key = parseInt(Object.keys(result.data.patch[p - 1])[0]);
-            data = result.data.patch[p - 1][`${key}`];
-        } else {
-            data = result.data.patch[p][`${key}`];
-        }
-
-        let offset = startAt - key;
-
-        for (let c = 0; c < 5; c++) {
-            retVal.code += `<${config.guilds[guildId].codeMap[data[c + offset]]}>${c < 4 ? ' ' : ''}`
-        }
-
-        break;
-    }
-
-    return retVal;
 }
