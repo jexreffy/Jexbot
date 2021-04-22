@@ -73,18 +73,18 @@ function rollSeeds(guildId, dClient, easyMode, mediumMode, hardMode) {
     let seeds = [];
 
     axios.post(easyUrl, easySettings).then(easyResult => {
-        seeds.push(processSeed(guildId, easyCategory.name, easyResult));
+        seeds.push(processSeed(config, guildId, easyCategory.name, easyResult));
 
         axios.post(mediumUrl, mediumSettings).then(mediumResult => {
-            seeds.push(processSeed(guildId, mediumCategory.name, mediumResult));
+            seeds.push(processSeed(config, guildId, mediumCategory.name, mediumResult));
 
             axios.post(hardUrl, hardSettings).then(hardResult => {
-                seeds.push(processSeed(guildId, hardCategory.name, hardResult));
+                seeds.push(processSeed(config, guildId, hardCategory.name, hardResult));
 
                 let dChannel = dClient.channels.cache.find(channel => channel.name === config.guilds[guildId].sotwChannel);
                 let role = dChannel.guild.roles.cache.find(r => r.name === config.guilds[guildId].pingRole);
 
-                let message = `${role} Seeds of the week, courtesy of JexBot`;
+                let message = `${role} ${config.sotwMessage} ${config.sotwSponsor[Math.floor(Math.random() * config.sotwSponsor.length)]}`;
 
                 for (let i = 0; i < seeds.length; i++) {
                     message += `\n${seeds[i].name} ${seeds[i].link} ${seeds[i].code}`;

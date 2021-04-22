@@ -752,5 +752,17 @@
             "secondDelay": 5000,
             "countdown": 7
         }
+    ],
+    "sotwMessage": "Seeds of the week, brought to you by",
+    "sotwSponsor": [
+        "Jexbot.",
+        "Red Things. Sometimes they give you health, sometimes they give you money, sometimes they cause people to say catchphrases.",
+        "Red Things, because Red is the color of winners, and blue is the color of losers.",
+        "Blue Things, because Red is the color of winners, and blue is the color of losers.",
+        "AwesomeStunPrizes.com. Awesome! Stun Prizes! Dot! Com!",
+        "BoringStunPrizes.com. woo...",
+        "The Corporation for Public Broadcasting, and viewers like you.",
+        "Geico. Fifteen minutes could save you 15% or more of car insurance.",
+        "Robo-Caller. We have been trying to reach you regarding your car's extended warranty."
     ]
 }
