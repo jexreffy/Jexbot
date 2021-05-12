@@ -1,4 +1,36 @@
+const DROP_LIST = [
+    "Heart",
+    "RupeeGreen",
+    "RupeeBlue",
+    "RupeeRed",
+    "BombRefill1",
+    "BombRefill4",
+    "BombRefill8",
+    "MagicRefillSmall",
+    "MagicRefillFull",
+    "ArrowRefill5",
+    "ArrowRefill10",
+    "Fairy"
+];
+
+const POOL_LIST = [
+    ["Heart", "Heart", "Heart", "Heart", "RupeeGreen", "Heart", "Heart", "RupeeGreen"],
+    ["RupeeBlue", "RupeeGreen", "RupeeBlue", "RupeeRed", "RupeeBlue", "RupeeGreen", "RupeeBlue", "RupeeBlue"],
+    ["MagicRefillFull", "MagicRefillSmall", "MagicRefillSmall", "RupeeBlue", "MagicRefillFull", "MagicRefillSmall", "Heart", "MagicRefillSmall"],
+    ["BombRefill1", "BombRefill1", "BombRefill1", "BombRefill4", "BombRefill1", "BombRefill1", "BombRefill8", "BombRefill1"],
+    ["ArrowRefill5", "Heart", "ArrowRefill5", "ArrowRefill10", "ArrowRefill5", "Heart", "ArrowRefill5", "ArrowRefill10"],
+    ["MagicRefillSmall", "RupeeGreen", "Heart", "ArrowRefill5", "MagicRefillSmall", "BombRefill1", "RupeeGreen", "Heart"],
+    ["Heart", "Fairy", "MagicRefillFull", "RupeeRed", "BombRefill8", "Heart", "RupeeRed", "ArrowRefill10"]
+];
+
 module.exports = () => {
+    let randomPools = [];
+
+    do {
+        let i = Math.floor(Math.random() * 7);
+        if (randomPools.indexOf(i) < 0) randomPools.push(i);
+    } while (randomPools.length < 7);
+
     return {
         "glitches": "none",
         "item_placement": "advanced",
@@ -32,17 +64,17 @@ module.exports = () => {
         "l": {},
         "eq": ["BossHeartContainer", "BossHeartContainer", "BossHeartContainer"],
         "drops": {
-            "0": ["auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill"],
-            "1": ["auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill"],
-            "2": ["auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill"],
-            "3": ["auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill"],
-            "4": ["auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill"],
-            "5": ["auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill"],
-            "6": ["auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill"],
-            "pull": ["auto_fill", "auto_fill", "auto_fill"],
-            "crab": ["auto_fill", "auto_fill"],
-            "stun": ["auto_fill"],
-            "fish": ["auto_fill"]
+            "0": POOL_LIST[randomPools[0]],
+            "1": POOL_LIST[randomPools[1]],
+            "2": POOL_LIST[randomPools[2]],
+            "3": POOL_LIST[randomPools[3]],
+            "4": POOL_LIST[randomPools[4]],
+            "5": POOL_LIST[randomPools[5]],
+            "6": POOL_LIST[randomPools[6]],
+            "pull": [getRandomDrop(), getRandomDrop(), getRandomDrop()],
+            "crab": [getRandomDrop(), getRandomDrop()],
+            "stun": [getRandomDrop()],
+            "fish": [getRandomDrop()]
         },
         "custom": {
             "item.Goal.Required": "",
@@ -230,20 +262,24 @@ module.exports = () => {
                 "count": {
                     "Bee": 0,
                     "BeeGood": 0,
-                    "Heart": 13,
-                    "RupeeGreen": 9,
-                    "RupeeBlue": 7,
-                    "RupeeRed": 6,
-                    "BombRefill1": 7,
-                    "BombRefill4": 1,
-                    "BombRefill8": 2,
-                    "MagicRefillSmall": 6,
-                    "MagicRefillFull": 3,
-                    "ArrowRefill5": 5,
-                    "ArrowRefill10": 3,
-                    "Fairy": 1
+                    "Heart": 0,
+                    "RupeeGreen": 0,
+                    "RupeeBlue": 0,
+                    "RupeeRed": 0,
+                    "BombRefill1": 0,
+                    "BombRefill4": 0,
+                    "BombRefill8": 0,
+                    "MagicRefillSmall": 0,
+                    "MagicRefillFull": 0,
+                    "ArrowRefill5": 0,
+                    "ArrowRefill10": 0,
+                    "Fairy": 0
                 }
             }
         }
     };
+}
+
+function getRandomDrop() {
+    return DROP_LIST[Math.floor(Math.random() * Math.floor(DROP_LIST.length))];
 }
