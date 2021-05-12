@@ -176,15 +176,15 @@ function processTwitchCommand(dClient, tClient, tChannel, tags, message, self) {
     let dChannel = dClient.channels.cache.find(channel => channel.name === config.guilds[guildId].channel);
 
     if (race.ladder) {
-        processTwitchLadderCommands(dChannel, tClient, tChannel, config, race, tags, message, self);
+        processTwitchLadderCommands(dChannel, tClient, tChannel, config, race, tags, message);
     } else {
-        processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, race, tags, message, self);
+        processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, race, tags, message);
     }
 
     data.setRaceData(guildId, race);
 }
 
-function processTwitchLadderCommands(dChannel, tClient, tChannel, config, race, tags, message, self) {
+function processTwitchLadderCommands(dChannel, tClient, tChannel, config, race, tags, message) {
     if (message.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i)) {
         blueballs(race, tClient, tChannel, message);
     } else if (message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i)) {
@@ -204,7 +204,7 @@ function processTwitchLadderCommands(dChannel, tClient, tChannel, config, race, 
     }
 }
 
-function processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, race, tags, message, self) {
+function processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, race, tags, message) {
     if (message.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i)) {
         blueballs(race, tClient, tChannel, message);
     } else if (message.match(/^[!](\bcallback\b)/i)) {
@@ -219,6 +219,10 @@ function processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, ra
         gtEnter(config, race, tClient, tChannel);
     } else if (message.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i)) {
         gtGuess(config, race, dChannel, tClient, tChannel, tags.username, message);
+    } else if (message.match(/^[.!](\bgtstart\b)/i)) {
+        gtStart(config, race, tClient, tChannel);
+    } else if (message.match(/^[.!](\bgtstop\b)/i)) {
+        gtStop(config, race, tClient, tChannel);
     } else if (message.match(/^[!](\bhelp\b)/i)) {
         help(config, race, tClient, tChannel);
     } else if (message.match(/^[!](\bmode\b)/i)) {
