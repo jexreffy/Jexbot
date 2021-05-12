@@ -380,7 +380,7 @@
         },
         "retro": {
             "name": "Retro",
-            "description": "Open Start, Defeat Ganon, 7/7 Crystals, Universal Keys, Bows cost money to use",
+            "description": "Open Start, Defeat Ganon, 7/7 Crystals, Universal Keys, Bow cost money to use",
             "gtbk": true,
             "customizer": false,
             "settings": {
@@ -389,7 +389,7 @@
         },
         "retrance": {
             "name": "Retrance",
-            "description": "Open Start, Fast Ganon, 7/7 Crystals, Crossworld Entrance Shuffle, Assured Sword, Universal Keys, Other Dungeon Items Shuffled, Bows cost money to use",
+            "description": "Open Start, Fast Ganon, 7/7 Crystals, Crossworld Entrance Shuffle, Assured Sword, Universal Keys, Other Dungeon Items Shuffled, Bow cost money to use",
             "gtbk": false,
             "customizer": false,
             "settings": {
@@ -402,7 +402,7 @@
         },
         "retrance_full": {
             "name": "Retrance Full",
-            "description": "Open Start, Fast Ganon, 7/7 Crystals, Full Entrance Shuffle, Assured Sword, Universal Keys, Other Dungeon Items Shuffled, Bows cost money to use",
+            "description": "Open Start, Fast Ganon, 7/7 Crystals, Full Entrance Shuffle, Assured Sword, Universal Keys, Other Dungeon Items Shuffled, Bow cost money to use",
             "gtbk": false,
             "customizer": false,
             "settings": {
