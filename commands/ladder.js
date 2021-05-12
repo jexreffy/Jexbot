@@ -26,8 +26,9 @@ module.exports = (config, race, dChannel, message) => {
         race.lastHello = null;
         race.pingIndex = -1;
         race.countdownIndex = -1;
-        race.remainingPlayers = 0
+        race.remainingPlayers = 0;
         race.players = [];
+        race.crew = [];
         race.lastCallback = null;
         race.blueballs = -1;
         race.guessGameStarted = false;
@@ -45,6 +46,7 @@ module.exports = (config, race, dChannel, message) => {
         race.seedLink = null;
         race.seedRoller = null;
         race.mutlistream = '';
+        race.restream = null;
         race.status = '';
         race.lastDickTime = null;
         race.dickCount = 0;

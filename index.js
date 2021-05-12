@@ -21,9 +21,13 @@ function connectToTwitch(race) {
     if (race.ladder) {
         channels.push(config.botOwnerTwitch);
     } else {
-        for (let i = 0; i < race.players.length; i++) {
-            if (data.getPlayerTwitchBot(race.players[i].username)) {
-                channels.push(race.players[i].twitch);
+        if (race.restream) {
+            channels.push(race.restream);
+        } else {
+            for (let i = 0; i < race.players.length; i++) {
+                if (data.getPlayerTwitchBot(race.players[i].username)) {
+                    channels.push(race.players[i].twitch);
+                }
             }
         }
     }

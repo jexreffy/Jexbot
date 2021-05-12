@@ -28,8 +28,9 @@ module.exports = (config, race, dChannel, message) => {
             race.lastHello = null;
             race.pingIndex = Math.floor(Math.random() * Math.floor(config.pings.length));
             race.countdownIndex = Math.floor(Math.random() * Math.floor(config.countdowns.length));
-            race.remainingPlayers = 0
+            race.remainingPlayers = 0;
             race.players = [];
+            race.crew = [];
             race.lastCallback = null;
             race.blueballs = -1;
             race.guessGameStarted = false;
@@ -48,6 +49,7 @@ module.exports = (config, race, dChannel, message) => {
             race.seedLink = null;
             race.seedRoller = null;
             race.mutlistream = 'https://multistre.am/';
+            race.restream = null;
             race.status = 'PRE-RACE: WAITING FOR PLAYERS';
             race.lastDickTime = null;
             race.dickCount = 0;

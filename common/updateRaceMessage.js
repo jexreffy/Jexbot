@@ -28,12 +28,22 @@ module.exports = (race, channel) => {
         desc += `\n Rolled By: ${race.seedRoller}`;
     }
 
-    if (race.mutlistream) {
+    if (race.restream) {
+        desc += `\n Restream: <https://twitch.tv/${race.restream.substr(1)}>`;
+    } else if (race.mutlistream) {
         desc += `\n Multistream: <${race.mutlistream}>`;
     }
 
     if (race.escapeItem) {
         desc += `\n Escape Item: ${race.escapeItem}`;
+    }
+
+    if (race.crew.length > 0) {
+        let crew = "";
+        for (let i = 0; i < race.crew.length; i++) {
+            crew += ((i !== 0) ? ' ' : '') + race.crew[i].username;
+        }
+        desc += `\n Crew: ${crew}`;
     }
 
     if (race.remainingPlayers < race.players.length / 2) {
@@ -90,7 +100,7 @@ module.exports = (race, channel) => {
 
             if (data.getPlayerStreaming(username)) {
                 let userTwitch = data.getPlayerTwitch(username);
-                let twitchBot = data.getPlayerTwitchBot(username) ? " Bot Enabled" : "";
+                let twitchBot = !race.restream && data.getPlayerTwitchBot(username) ? " Bot Enabled" : "";
                 if (!userTwitch) {
                     userTwitch = username;
                 }

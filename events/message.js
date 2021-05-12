@@ -4,6 +4,7 @@ const blueballs = require('../commands/blueballs');
 const callback = require('../commands/callback');
 const close = require('../commands/close')
 const comment = require('../commands/comment');
+const crew = require('../commands/crew');
 const dick = require('../commands/dick');
 const done = require('../commands/done');
 const escape = require('../commands/escape');
@@ -24,8 +25,10 @@ const mode = require('../commands/mode');
 const newRace = require('../commands/new');
 const rank = require('../commands/rank');
 const ready = require('../commands/ready');
-const reset = require('../commands/reset')
+const reset = require('../commands/reset');
+const restream = require('../commands/restream');
 const roll = require('../commands/roll');
+const runners = require('../commands/runners');
 const spaceballs = require('../commands/spaceballs');
 const start = require('../commands/start');
 const stats = require('../commands/stats');
@@ -125,6 +128,8 @@ function processDiscordRaceActiveCommands(dClient, tClient, config, race, messag
 function processDiscordRaceLobbyCommands(dClient, tClient, config, race, message) {
     if (message.content.match(/^[.!](\bclose\b)/i)) {
         close(config, race, message, message.channel);
+    } else if (message.content.match(/^[.!](\bcrew\b)/i)) {
+        crew(config, race, message.channel, message.author.username, null, null);
     } else if (message.content.match(/^[.!](\bgatekeeper\b)/i)) {
         gatekeeper(race, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\bjoin\b)/i)) {
@@ -141,6 +146,8 @@ function processDiscordRaceLobbyCommands(dClient, tClient, config, race, message
         ready(config, race, message.channel, message.author.username);
     } else if (message.content.match(/^[.!](\breset\b)/i)) {
         reset(race, message.channel, message);
+    } else if (message.content.match(/^[.!](\brestream\b) ((\bon\b)|(\boff\b))/i)) {
+        restream(config, race, message.channel, message);
     } else if (message.content.match(/^[.!](\broll\b)/i)) {
         roll(config, race, message.channel, message);
     } else if (message.content.match(/^[.!](\bspaceballs\b)/i)) {
@@ -202,6 +209,8 @@ function processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, ra
         blueballs(race, tClient, tChannel, message);
     } else if (message.match(/^[!](\bcallback\b)/i)) {
         callback(config, race, dChannel, tClient, tChannel);
+    } else if (message.content.match(/^[.!](\bcrew\b)/i)) {
+        crew(config, race, null, null, tClient, tChannel);
     } else if (message.match(/^[!](\bdick\b)/i)) {
         dick(config, race, dChannel, tClient);
     } else if (message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i)) {
@@ -214,6 +223,8 @@ function processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, ra
         help(config, race, tClient, tChannel);
     } else if (message.match(/^[!](\bmode\b)/i)) {
         mode(config, race, tClient, tChannel);
+    } else if (message.content.match(/^[.!](\brunners\b)/i)) {
+        runners(config, race, tClient, tChannel);
     } else if (message.match(/^[!](\bspaceballs\b)/i)) {
         spaceballs(config, race, dChannel, tClient);
     }
