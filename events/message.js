@@ -209,7 +209,7 @@ function processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, ra
         blueballs(race, tClient, tChannel, message);
     } else if (message.match(/^[!](\bcallback\b)/i)) {
         callback(config, race, dChannel, tClient, tChannel);
-    } else if (message.content.match(/^[.!](\bcrew\b)/i)) {
+    } else if (message.match(/^[.!](\bcrew\b)/i)) {
         crew(config, race, null, null, tClient, tChannel);
     } else if (message.match(/^[!](\bdick\b)/i)) {
         dick(config, race, dChannel, tClient);
@@ -227,7 +227,7 @@ function processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, ra
         help(config, race, tClient, tChannel);
     } else if (message.match(/^[!](\bmode\b)/i)) {
         mode(config, race, tClient, tChannel);
-    } else if (message.content.match(/^[.!](\brunners\b)/i)) {
+    } else if (message.match(/^[.!](\brunners\b)/i)) {
         runners(config, race, tClient, tChannel);
     } else if (message.match(/^[!](\bspaceballs\b)/i)) {
         spaceballs(config, race, dChannel, tClient);
