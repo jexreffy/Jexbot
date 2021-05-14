@@ -656,6 +656,17 @@
     "gtGuessFound": "Your runner found the GTBK at check LOCATION. When spoilers are open, I will reveal the winner.",
     "spaceballsClock": "Reset the Spaceballs clock!!",
     "jokeUnits": ["seconds", "schmeconds", "milliseconds", "minutes", "hours", "days", "months", "years", "dog years", "weeks", "fortnights", "scores", "moments", "shakes"],
+    "friday": [
+        "I think so, NAME, but we know how TJ feels about non-alcoholic beer.",
+        "Time to play games, crack wise, and blame the seed roller for our troubles.",
+        "No, actually, I don't know what that means.",
+        "Time for ZephyrBlayze to get upset when I mention that blue is the color of losers when that's Jexreffy's favorite color, so I think he's missing the irony of the statement.",
+        "I think so, NAME, but pineapple on pizza is disgusting.",
+        "I think so, NAME, but that would require me to come up with an acceptably snarky response to whatever you think it means.",
+        "Well, NAME, it means that Ryu is going to have his last, last, last, last scotch around 1:45:36 in the race.",
+        "The same thing we do every night, NAME, try to take over the world!",
+        "yeah, yeah, yeah."
+    ],
     "pings": [
         "Let's get ready to Rando!!!",
         "Live from the internet, it's Friday Night!!!",

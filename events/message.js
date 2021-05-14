@@ -9,6 +9,7 @@ const dick = require('../commands/dick');
 const done = require('../commands/done');
 const escape = require('../commands/escape');
 const forfeit = require('../commands/forfeit');
+const friday = require('../commands/friday');
 const gatekeeper = require('../commands/gatekeeper');
 const gtbk = require('../commands/gtbk');
 const gtEnter = require('../commands/gtenter');
@@ -44,7 +45,13 @@ function processDiscordCommand(dClient, tClient, message) {
 
     const channel = config.guilds[guildId].channel;
 
-    if (message.channel.name !== channel) return;
+    if (message.channel.name !== channel) {
+        if (message.content.match(/(\byou know what that means\b)/i)) {
+            friday(config, message.channel, message.author.username);
+        }
+
+        return;
+    }
 
     const activeRace = data.getActiveRace();
 
