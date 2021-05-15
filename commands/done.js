@@ -1,7 +1,7 @@
 ﻿const broadcastMessage = require('../common/broadcastMessage');
 const onRunnerFinished = require('../common/onRunnerFinished');
 
-module.exports = (config, race, dChannel, tClient, username, message) => {
+module.exports = (config, db, race, dChannel, tClient, username, message) => {
     let player = race.players.find(x => x.username === username);
 
     if (race.started && player && !player.finished && !player.forfeited) {
@@ -21,7 +21,7 @@ module.exports = (config, race, dChannel, tClient, username, message) => {
 
         broadcastMessage(config, dChannel, tClient, `${username} has finished with a time of ${msgTime}.`, true);
 
-        onRunnerFinished(config, race, dChannel, tClient, message);
+        onRunnerFinished(config, db, race, dChannel, tClient, message);
     } else {
         let time = new Date();
         console.log(time.toLocaleString('en-US') + ' done: ' + username + ' is not in the race!');

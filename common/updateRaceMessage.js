@@ -1,6 +1,4 @@
-const data = require('../data/data.js');
-
-module.exports = (race, channel) => {
+module.exports = (db, race, channel) => {
     let message = {};
     let embed = {};
     embed.color = 65280;
@@ -8,8 +6,8 @@ module.exports = (race, channel) => {
 
     let desc = "The Legend of Zelda: A Link to the Past Randomizer Race"
 
-    if (race.category) {
-        desc += `\n Mode: ${race.category}`;
+    if (race.categoryName) {
+        desc += `\n Mode: ${race.categoryName}`;
     }
 
     if (race.gatekeeper) {
@@ -98,9 +96,9 @@ module.exports = (race, channel) => {
         for (let i = 0; i < race.players.length; i++) {
             let username = race.players[i].username;
 
-            if (data.getPlayerStreaming(username)) {
-                let userTwitch = data.getPlayerTwitch(username);
-                let twitchBot = !race.restream && data.getPlayerTwitchBot(username) ? " Bot Enabled" : "";
+            if (db.getPlayerStreaming(username)) {
+                let userTwitch = db.getPlayerTwitch(username);
+                let twitchBot = !race.restream && db.getPlayerTwitchBot(username) ? " Bot Enabled" : "";
                 if (!userTwitch) {
                     userTwitch = username;
                 }
@@ -159,7 +157,7 @@ module.exports = (race, channel) => {
             "\n`.spaceballs` - Resets the clock since the last Spaceballs reference";
     }
 
-    const time = data.getSpaceballs();
+    const time = db.getSpaceballs();
     let dt = new Date(time);
     let spaceTime = `${dt.toLocaleString('en-US', { timeZone: 'America/New_York' })}`;
 

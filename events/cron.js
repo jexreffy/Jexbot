@@ -1,6 +1,5 @@
 const axios = require('axios');
 const config = require('../config.json');
-const data = require('../data/data.js');
 const broadcastMessage = require('../common/broadcastMessage');
 const broadcastTwitch = require('../common/broadcastTwitch');
 const mysterySettings = require('../common/mysterySettings');
@@ -10,11 +9,11 @@ const processSeed = require('../common/processSeed');
 const RANDO_URL = 'https://alttpr.com/api/randomizer';
 const PLANDO_URL = 'https://alttpr.com/api/customizer';
 
-module.exports = (dClient, tClient) => {
-    const guildId = data.getActiveRace();
+module.exports = (db, dClient, tClient) => {
+    const guildId = db.getActiveRace();
 
     if (guildId) {
-        let race = data.getRaceData(guildId);
+        let race = db.getRaceData(guildId);
 
         if (!race.started || race.finished) return;
 
@@ -28,28 +27,28 @@ module.exports = (dClient, tClient) => {
             broadcastTwitch(config, tClient, race.ladder ? config.helloLadder : config.helloRace);
         }
 
-        data.setRaceData(guildId, race);
+        db.setRaceData(guildId, race);
     } else {
-        let lastTime = data.getLastSotw();
+        let lastTime = db.getLastSotw();
         let now = Date.now();
         if ((Math.floor(now - lastTime) / 604800000) > 1) {
             let keys = Object.keys(config.guilds);
             for (let i = 0; i < keys.length; i++) {
                 let guildId = keys[i];
                 if (config.guilds[guildId].sotwEnabled) {
-                    let easyIndex = data.getEasySotw(guildId);
+                    let easyIndex = db.getEasySotw(guildId);
                     let easyMode = config.guilds[guildId].sotwEasy[easyIndex];
                     easyIndex = easyIndex >= config.guilds[guildId].sotwEasy.length - 1 ? 0 : easyIndex + 1;
 
-                    let mediumIndex = data.getMediumSotw(guildId);
+                    let mediumIndex = db.getMediumSotw(guildId);
                     let mediumMode = config.guilds[guildId].sotwMedium[mediumIndex];
                     mediumIndex = mediumIndex >= config.guilds[guildId].sotwMedium.length - 1 ? 0 : mediumIndex + 1;
 
-                    let hardIndex = data.getHardSotw(guildId);
+                    let hardIndex = db.getHardSotw(guildId);
                     let hardMode = config.guilds[guildId].sotwHard[hardIndex];
                     hardIndex = hardIndex >= config.guilds[guildId].sotwHard.length - 1 ? 0 : hardIndex + 1;
 
-                    data.setSotw(guildId, easyIndex, mediumIndex, hardIndex, now);
+                    db.setSotw(guildId, easyIndex, mediumIndex, hardIndex, now);
                     rollSeeds(guildId, dClient, easyMode, mediumMode, hardMode);
                 }
             }

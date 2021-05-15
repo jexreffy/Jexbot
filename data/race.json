@@ -58,22 +58,22 @@
   },
   "515731524616847367": {
     "started": false,
-    "finished": true,
+    "finished": false,
     "startedAt": null,
-    "initiatedAt": 1620852882999,
-    "pingIndex": 9,
+    "initiatedAt": 1621038200393,
+    "pingIndex": 7,
     "countdownIndex": 3,
     "remainingPlayers": 0,
     "players": [],
     "guessGameStarted": false,
     "gatekeeper": null,
     "category": "standard",
-    "messageId": "842142707753025566",
+    "messageId": "842919947512315955",
     "seedCode": null,
     "seedLink": null,
     "seedRoller": null,
     "mutlistream": "https://multistre.am/",
-    "status": "RACE CLOSED",
+    "status": "PRE-RACE: WAITING FOR PLAYERS",
     "dickCount": 0,
     "seed": null,
     "guesses": [
@@ -114,6 +114,6 @@
     "spoilersAllowed": false,
     "categoryName": "Standard",
     "crew": [],
-    "restream": "#TheCrystalCompany"
+    "restream": null
   }
 }

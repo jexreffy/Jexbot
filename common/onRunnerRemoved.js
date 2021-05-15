@@ -1,6 +1,4 @@
-const data = require('../data/data.js');
-
-module.exports = (config, race, player, message) => {
+module.exports = (config, db, race, player, message) => {
     let username = player.username;
     race.players.splice(race.players.indexOf(player), 1);
     race.remainingPlayers -= 1;
@@ -9,7 +7,7 @@ module.exports = (config, race, player, message) => {
     let member = message.channel.members.find(x => x.user.username === username);
     member.roles.remove(role.id).then().catch(console.error);
 
-    let userTwitch = data.getPlayerTwitch(username);
+    let userTwitch = db.getPlayerTwitch(username);
     if (!userTwitch) {
         userTwitch = username;
     }

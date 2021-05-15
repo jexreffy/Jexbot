@@ -1,7 +1,6 @@
-const data = require('../data/data.js');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
-module.exports = (config, race, dChannel, message) => {
+module.exports = (config, db, race, dChannel, message) => {
     if (race.finished || (message.member && message.member.hasPermission('KICK_MEMBERS', false, false)) || config.referees.includes(message.author.username)) {
         let match = message.content.match(/^[.!](\bnew\b) ([a-zA-Z0-9<>:]{4,20})/i);
 
@@ -67,13 +66,13 @@ module.exports = (config, race, dChannel, message) => {
             };
 
             const guildId = dChannel.guild.id;
-            data.setActiveRace(guildId);
+            db.setActiveRace(guildId);
             let role = message.guild.roles.cache.find(r => r.name === config.guilds[guildId].pingRole);
 
             dChannel.send(`${role} ${config.pings[race.pingIndex]}`);
             dChannel.send(embed).then(x => {
                 race.messageId = x.id;
-                updateRaceMessage(race, dChannel);
+                updateRaceMessage(db, race, dChannel);
                 resolve();
             }).catch((error) => {
                 console.log(error);

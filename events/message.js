@@ -1,5 +1,4 @@
 const config = require('../config.json');
-const data = require('../data/data.js');
 const blueballs = require('../commands/blueballs');
 const callback = require('../commands/callback');
 const close = require('../commands/close')
@@ -38,7 +37,7 @@ const twitch = require('../commands/twitch');
 const twitchBot = require('../commands/twitchbot');
 const unready = require('../commands/unready');
 
-function processDiscordCommand(dClient, tClient, message) {
+function processDiscordCommand(db, dClient, tClient, message) {
     if (message.author.bot) return;
 
     const guildId = message.guild.id;
@@ -53,26 +52,26 @@ function processDiscordCommand(dClient, tClient, message) {
         return;
     }
 
-    const activeRace = data.getActiveRace();
+    const activeRace = db.getActiveRace();
 
     if (!activeRace) {
-        let race = data.getRaceData(guildId);
+        let race = db.getRaceData(guildId);
 
-        processDiscordInactiveCommands(dClient, tClient, config, race, message);
+        processDiscordInactiveCommands(dClient, tClient, config, db, race, message);
 
-        data.setRaceData(guildId, race);
+        db.setRaceData(guildId, race);
     } else if (guildId === activeRace) {
-        let race = data.getRaceData(guildId);
+        let race = db.getRaceData(guildId);
 
         if (race.ladder) {
-            processDiscordLadderCommands(dClient, tClient, config, race, message);
+            processDiscordLadderCommands(dClient, tClient, config, db, race, message);
         } else if (race.started) {
-            processDiscordRaceActiveCommands(dClient, tClient, config, race, message);
+            processDiscordRaceActiveCommands(dClient, tClient, config, db, race, message);
         } else {
-            processDiscordRaceLobbyCommands(dClient, tClient, config, race, message);
+            processDiscordRaceLobbyCommands(dClient, tClient, config, db, race, message);
         }
 
-        data.setRaceData(guildId, race);
+        db.setRaceData(guildId, race);
     } else {
         message.channel.send("**There is a race currently being run on another server.**");
     }
@@ -82,116 +81,116 @@ function processDiscordCommand(dClient, tClient, message) {
     }
 }
 
-function processDiscordInactiveCommands(dClient, tClient, config, race, message) {
+function processDiscordInactiveCommands(dClient, tClient, config, db, race, message) {
     if (message.content.match(/^[.!](\bcomment\b) ([ a-zA-Z0-9,./<>?;':"{}|`~!@#$%^&*()=_+]{0,1000})/i)) {
         comment(config, race, message.channel, message.author.username, message);
     } else if (message.content.match(/^[.!](\bladder\b) ([a-zA-Z0-9%]{4,20})/i)) {
-        ladder(config, race, message.channel, message);
-    } else if (message.content.match(/^[.!](\bleaderboard\b) ([ a-zA-Z0-9%]{3,20})/i)) {
-        leaderboard(message.channel, message);
+        ladder(config, db, race, message.channel, message);
+    } else if (message.content.match(/^[.!](\bleaderboard\b)/i)) {
+        leaderboard(config, db, message.channel, message);
     } else if (message.content.match(/^[.!](\bnew\b)/i)) {
-        newRace(config, race, message.channel, message);
-    } else if (message.content.match(/^[.!](\brank\b) ([ a-zA-Z0-9%]{3,20})/i)) {
-        rank(message.channel, message, message.author.username);
+        newRace(config, db, race, message.channel, message);
+    } else if (message.content.match(/^[.!](\brank\b)/i)) {
+        rank(config, db, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\broll\b)/i)) {
-        roll(config, null, message.channel, message);
+        roll(config, db, null, message.channel, message);
     } else if (message.content.match(/^[.!](\bspaceballs\b)/i)) {
-        spaceballs(config, race, message.channel, tClient);
-    } else if (message.content.match(/^[.!](\bstats\b) ([a-zA-Z 0-9%]{0,30})/i)) {
-        stats(race, message.channel, message);
+        spaceballs(config, db, race, message.channel, tClient);
+    } else if (message.content.match(/^[.!](\bstats\b)/i)) {
+        stats(config, db, race, message.channel, message);
     }
 }
 
-function processDiscordLadderCommands(dClient, tClient, config, race, message) {
+function processDiscordLadderCommands(dClient, tClient, config, db, race, message) {
     if (message.content.match(/^[.!](\bclose\b)/i)) {
-        close(config, race, message, message.channel);
+        close(config, db, race, message, message.channel);
     }
 }
 
-function processDiscordRaceActiveCommands(dClient, tClient, config, race, message) {
+function processDiscordRaceActiveCommands(dClient, tClient, config, db, race, message) {
     if (message.content.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i)) {
         blueballs(race, message.content);
     } else if (message.content.match(/^[.!](\bclose\b)/i)) {
-        close(config, race, message, message.channel);
+        close(config, db, race, message, message.channel);
     } else if (message.content.match(/^[.!](\bcomment\b) ([ a-zA-Z0-9,./<>?;':"{}|`~!@#$%^&*()=_+]{0,1000})/i)) {
         comment(config, race, message.channel, message.author.username, message);
     } else if (message.content.match(/^[.!](\bdick\b)/i)) {
-        dick(config, race, message.channel, tClient);
+        dick(config, db, race, message.channel, tClient);
     } else if (message.content.match(/^[.!](\bdone\b)/i)) {
-        done(config, race, message.channel, tClient, message.author.username, message);
+        done(config, db, race, message.channel, tClient, message.author.username, message);
     } else if (message.content.match(/^[.!](\bescape\b) ([a-zA-Z0-9<>:]{4,100})/i)) {
-        escape(config, race, message.channel, message);
+        escape(config, db, race, message.channel, message);
     } else if (message.content.match(/^[.!](\bforfeit\b)|(\bff\b)/i)) {
-        forfeit(config, race, message.channel, tClient, message.author.username, message);
+        forfeit(config, db, race, message.channel, tClient, message.author.username, message);
     } else if (message.content.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i)) {
         gtGuess(config, race, message.channel, tClient, null, message.author.username, message.content);
     } else if (message.content.match(/^[.!](\bkick\b) ([a-zA-Z0-9%]{0,20})/i)) {
-        kick(config, race, message.channel, tClient, message);
+        kick(config, db, race, message.channel, tClient, message);
     } else if (message.content.match(/^[.!](\bspaceballs\b)/i)) {
-        spaceballs(config, race, message.channel, tClient);
+        spaceballs(config, db, race, message.channel, tClient);
     }
 }
 
-function processDiscordRaceLobbyCommands(dClient, tClient, config, race, message) {
+function processDiscordRaceLobbyCommands(dClient, tClient, config, db, race, message) {
     if (message.content.match(/^[.!](\bclose\b)/i)) {
-        close(config, race, message, message.channel);
+        close(config, db, race, message, message.channel);
     } else if (message.content.match(/^[.!](\bcrew\b)/i)) {
-        crew(config, race, message.channel, message.author.username, null, null);
+        crew(config, db, race, message.channel, message.author.username, null, null);
     } else if (message.content.match(/^[.!](\bgatekeeper\b)/i)) {
-        gatekeeper(race, message.channel, message, message.author.username);
+        gatekeeper(db, race, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\bjoin\b)/i)) {
-        join(config, race, message.channel, message.author.username, message);
+        join(config, db, race, message.channel, message.author.username, message);
     } else if (message.content.match(/^[.!](\bkick\b) ([a-zA-Z0-9%]{0,20})/i)) {
-        kick(config, race, message.channel, tClient, message);
-    } else if (message.content.match(/^[.!](\bleaderboard\b) ([ a-zA-Z0-9%]{3,20})/i)) {
-        leaderboard(message.channel, message);
+        kick(config, db, race, message.channel, tClient, message);
+    } else if (message.content.match(/^[.!](\bleaderboard\b)/i)) {
+        leaderboard(config, db, message.channel, message);
     } else if (message.content.match(/^[.!](\bleave\b)/i)) {
-        leave(config, race, message.channel, message.author.username, message);
-    } else if (message.content.match(/^[.!](\brank\b) ([ a-zA-Z0-9%]{3,20})/i)) {
-        rank(message.channel, message, message.author.username);
+        leave(config, db, race, message.channel, message.author.username, message);
+    } else if (message.content.match(/^[.!](\brank\b)/i)) {
+        rank(config, db, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\bready\b)/i)) {
-        ready(config, race, message.channel, message.author.username);
+        ready(config, db, race, message.channel, message.author.username);
     } else if (message.content.match(/^[.!](\breset\b)/i)) {
-        reset(race, message.channel, message);
+        reset(db, race, message.channel, message);
     } else if (message.content.match(/^[.!](\brestream\b) ((\bon\b)|(\boff\b))/i)) {
-        restream(config, race, message.channel, message);
+        restream(config, db, race, message.channel, message);
     } else if (message.content.match(/^[.!](\broll\b)/i)) {
-        roll(config, race, message.channel, message);
+        roll(config, db, race, message.channel, message);
     } else if (message.content.match(/^[.!](\bspaceballs\b)/i)) {
-        spaceballs(config, race, message.channel, tClient);
+        spaceballs(config, db, race, message.channel, tClient);
     } else if (message.content.match(/^[.!](\bstart\b)/i)) {
-        start(config, race, message.channel, tClient, message, message.author.username);
-    } else if (message.content.match(/^[.!](\bstats\b) ([a-zA-Z 0-9%]{0,30})/i)) {
-        stats(race, message.channel, message);
+        start(config, db, race, message.channel, tClient, message, message.author.username);
+    } else if (message.content.match(/^[.!](\bstats\b)/i)) {
+        stats(config, db, race, message.channel, message);
     } else if (message.content.match(/^[.!](\bstreaming\b) ((\bon\b)|(\boff\b))/i)) {
-        streaming(race, message.channel, message, message.author.username);
+        streaming(db, race, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\btwitch\b) ([a-zA-Z0-9_]{4,20})/i)) {
-        twitch(race, message.channel, message, message.author.username);
+        twitch(db, race, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\btwitchbot\b) ((\bon\b)|(\boff\b))/i)) {
-        twitchBot(race, message.channel, message, message.author.username);
+        twitchBot(db, race, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\bunready\b)/i)) {
-        unready(race, message.channel, message.author.username, message);
+        unready(db, race, message.channel, message.author.username, message);
     }
 }
 
-function processTwitchCommand(dClient, tClient, tChannel, tags, message, self) {
+function processTwitchCommand(db, dClient, tClient, tChannel, tags, message, self) {
     if (self) return;
 
-    const guildId = data.getActiveRace();
-    let race = data.getRaceData(guildId);
+    const guildId = db.getActiveRace();
+    let race = db.getRaceData(guildId);
 
     let dChannel = dClient.channels.cache.find(channel => channel.name === config.guilds[guildId].channel);
 
     if (race.ladder) {
-        processTwitchLadderCommands(dChannel, tClient, tChannel, config, race, tags, message);
+        processTwitchLadderCommands(dChannel, tClient, tChannel, config, db, race, tags, message);
     } else {
-        processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, race, tags, message);
+        processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, db, race, tags, message);
     }
 
-    data.setRaceData(guildId, race);
+    db.setRaceData(guildId, race);
 }
 
-function processTwitchLadderCommands(dChannel, tClient, tChannel, config, race, tags, message) {
+function processTwitchLadderCommands(dChannel, tClient, tChannel, config, db, race, tags, message) {
     if (message.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i)) {
         blueballs(race, tClient, tChannel, message);
     } else if (message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i)) {
@@ -207,19 +206,19 @@ function processTwitchLadderCommands(dChannel, tClient, tChannel, config, race, 
     } else if (message.match(/^[!](\bmode\b)/i)) {
         mode(config, race, tClient, tChannel);
     } else if (message.match(/^[!](\bspaceballs\b)/i)) {
-        spaceballs(config, race, dChannel, tClient);
+        spaceballs(config, db, race, dChannel, tClient);
     }
 }
 
-function processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, race, tags, message) {
+function processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, db, race, tags, message) {
     if (message.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i)) {
         blueballs(race, tClient, tChannel, message);
     } else if (message.match(/^[!](\bcallback\b)/i)) {
         callback(config, race, dChannel, tClient, tChannel);
     } else if (message.match(/^[.!](\bcrew\b)/i)) {
-        crew(config, race, null, null, tClient, tChannel);
+        crew(config, db, race, null, null, tClient, tChannel);
     } else if (message.match(/^[!](\bdick\b)/i)) {
-        dick(config, race, dChannel, tClient);
+        dick(config, db, race, dChannel, tClient);
     } else if (message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i)) {
         gtbk(config, race, tClient, tChannel, message);
     } else if (message.match(/^[.!](\bgtenter\b)/i)) {
@@ -237,14 +236,14 @@ function processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, ra
     } else if (message.match(/^[.!](\brunners\b)/i)) {
         runners(config, race, tClient, tChannel);
     } else if (message.match(/^[!](\bspaceballs\b)/i)) {
-        spaceballs(config, race, dChannel, tClient);
+        spaceballs(config, db, race, dChannel, tClient);
     }
 }
 
 module.exports = (...args) => {
-    if (args.length === 3) {
-        processDiscordCommand(args[0], args[1], args[2]);
+    if (args.length === 4) {
+        processDiscordCommand(args[0], args[1], args[2], args[3]);
     } else if (args.length === 6) {
-        processTwitchCommand(args[0], args[1], args[2], args[3], args[4], args[5]);
+        processTwitchCommand(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
     }
 };

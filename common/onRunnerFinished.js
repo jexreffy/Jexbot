@@ -1,17 +1,16 @@
-const data = require('../data/data.js');
 const broadcastMessage = require('../common/broadcastMessage');
 const gtbkWinner = require('../common/gtbkWinner');
 const updateRaceMessage = require('../common/updateRaceMessage');
 const elo = require('../elo/elo.js');
 
-module.exports = (config, race, dChannel, tClient, message) => {
+module.exports = (config, db, race, dChannel, tClient, message) => {
     let role = message.guild.roles.cache.find(r => r.name === config.guilds[message.guild.id].racerRole);
     message.member.roles.remove(role.id).then().catch(console.error);
 
     if (race.remainingPlayers < 1) {
         race.finished = true;
         race.status = 'RACE FINISHED';
-        data.setActiveRace(null);
+        db.setActiveRace(null);
         race.players.sort(function(a, b) {
             if (a.time == null) {
                 if (b.time) {
@@ -44,14 +43,14 @@ module.exports = (config, race, dChannel, tClient, message) => {
             }
             return 0;
         });
-        let adjustments = elo.resolveMatch(race.players, race.category);
+        let adjustments = elo.resolveMatch(db, race.players, race.category);
         for (let i = 0; i < race.players.length; i++) {
             race.players[i].adjustment = adjustments[i];
         }
 
         const sleep = m => new Promise(r => setTimeout(r, m));
         (async() => {
-            updateRaceMessage(race, dChannel);
+            updateRaceMessage(db, race, dChannel);
             await sleep(5000);
             broadcastMessage(config, dChannel, tClient, `The race has finished.`, true);
         })();
@@ -60,13 +59,13 @@ module.exports = (config, race, dChannel, tClient, message) => {
 
         const sleep = m => new Promise(r => setTimeout(r, m));
         (async() => {
-            updateRaceMessage(race, dChannel);
+            updateRaceMessage(db, race, dChannel);
             await sleep(5000);
             broadcastMessage(config, dChannel, tClient, `Spoilers are now allowed for the race.`, true);
             await sleep(5000);
             gtbkWinner(config, race, dChannel, tClient);
         })();
     } else {
-        updateRaceMessage(race, dChannel);
+        updateRaceMessage(db, race, dChannel);
     }
 }

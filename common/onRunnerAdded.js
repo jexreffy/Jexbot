@@ -1,6 +1,4 @@
-const data = require('../data/data.js');
-
-module.exports = (config, race, player, message) => {
+module.exports = (config, db, race, player, message) => {
     let username = player.username;
     race.players.push(player);
     race.remainingPlayers += 1;
@@ -8,8 +6,8 @@ module.exports = (config, race, player, message) => {
     let role = message.guild.roles.cache.find(r => r.name === config.guilds[message.guild.id].racerRole);
     message.member.roles.add(role.id).then().catch(console.error);
 
-    if (data.getPlayerStreaming(username)) {
-        let userTwitch = data.getPlayerTwitch(username);
+    if (db.getPlayerStreaming(username)) {
+        let userTwitch = db.getPlayerTwitch(username);
         if (userTwitch) {
             race.mutlistream += userTwitch + '/';
             player.twitch = `#${userTwitch}`;

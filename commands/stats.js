@@ -1,40 +1,54 @@
-const config = require('../config.json');
-const data = require('../data/data.js');
-
-module.exports = (race, channel, message) => {
+module.exports = (config, db, race, channel, message) => {
     const centerPad = (str, length, char = ' ') => str.padStart((str.length + length) / 2, char).padEnd(length, char);
-    let match = message.content.match(/^[.!](\bstats\b)([ ]{0,1})([a-zA-Z 0-9%]{0,30})/i);
-    let category = match[3];
+    let match = message.content.match(/^[.!](\bstats\b) ([a-zA-Z 0-9%]{0,30})/i);
+    let categoryName = match && match.length > 2 ? match[2] : null;
+    let categoryTitle = categoryName;
     let stats = null;
     let player = false;
 
+    let categories = Object.keys(config.categories);
 
-    if (category) {
-        stats = data.getCategoryStats(category);
+    if (categoryName) {
+        for (let i = 0; i < categories.length; i++) {
+            if (match[2] === categories[i]) {
+                categoryName = categories[i];
+                categoryTitle = config.categories[categoryName].name;
+                break;
+            }
+        }
+
+        stats = db.getCategoryStats(categoryName);
         if (!stats) {
-            stats = data.getPlayerStats(category);
+            stats = db.getPlayerStats(message.author.username);
             player = true;
         }
     } else {
-        console.log("player?");
-        category = message.author.username;
-        stats = data.getPlayerStats(category);
+        stats = db.getPlayerStats(message.author.username);
         player = true;
     }
 
     let output = '';
     if (stats && player) {
-        output += category + ' stats';
+        output += message.author.username + ' stats';
         output += '\n Stream: <' + stats.twitch + '>';
         stats.categories.forEach(element => {
-            output += '\n' + ('`Category: ' + element.name).padEnd(35, " ") + '`';
+            let title = element.name;
+
+            for (let i = 0; i < categories.length; i++) {
+                if (title === categories[i]) {
+                    title = config.categories[title].name;
+                    break;
+                }
+            }
+
+            output += '\n' + ('`Category: ' + title).padEnd(35, " ") + '`';
             output += '\n' + ('`  Rank: ' + element.rank).padEnd(35, " ") + '`';
             output += '\n' + ('`  Elo: ' + element.elo).padEnd(35, " ") + '`';
             output += '\n' + ('`  Matches: ' + element.matches).padEnd(35, " ") + '`';
         });
     } else if (stats) {
         output += 'Stats:';
-        output += '\n`' + centerPad((category), 24) + '`';
+        output += '\n`' + centerPad((categoryTitle), 24) + '`';
         output += '\n`' + (' Players: ' + stats.categoryPlayers).padEnd(24, " ") + '`';
         output += '\n`' + (' Matches: ' + stats.totalRuns).padEnd(24, " ") + '`';
         output += '\n`' + centerPad(('Top 3'), 24) + '`';

@@ -1,8 +1,7 @@
-const newRace = require('../commands/new');
 const onRunnerAdded = require('../common/onRunnerAdded');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
-module.exports = (config, race, dChannel, username, message) => {
+module.exports = (config, db, race, dChannel, username, message) => {
     let player = race.players.find(x => x.username === username);
 
     if (!(race.started || race.finished || player)) {
@@ -11,7 +10,7 @@ module.exports = (config, race, dChannel, username, message) => {
             username: username
         };
 
-        onRunnerAdded(config, race, newPlayer, message);
-        updateRaceMessage(race, dChannel);
+        onRunnerAdded(config, db, race, newPlayer, message);
+        updateRaceMessage(db, race, dChannel);
     }
 };

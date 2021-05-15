@@ -1,7 +1,6 @@
-const data = require('../data/data.js');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
-module.exports = (config, race, dChannel, username, tClient, tChannel) => {
+module.exports = (config, db, race, dChannel, username, tClient, tChannel) => {
     if (tClient) {
         let message = config.crewMessage + " ";
 
@@ -23,14 +22,14 @@ module.exports = (config, race, dChannel, username, tClient, tChannel) => {
             //let role = message.guild.roles.cache.find(r => r.name === config.guilds[message.guild.id].racerRole);
             //message.member.roles.add(role.id).then().catch(console.error);
 
-            let userTwitch = data.getPlayerTwitch(username);
+            let userTwitch = db.getPlayerTwitch(username);
             if (userTwitch) {
                 newCrew.twitch = userTwitch;
             } else {
                 newCrew.twitch = username;
             }
 
-            updateRaceMessage(race, dChannel);
+            updateRaceMessage(db, race, dChannel);
         }
     }
 };

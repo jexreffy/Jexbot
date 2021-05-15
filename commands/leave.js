@@ -2,17 +2,17 @@ const onRunnerRemoved = require('../common/onRunnerRemoved');
 const startRace = require('../common/startRace');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
-module.exports = (config, race, dChannel, username, message) => {
+module.exports = (config, db, race, dChannel, username, message) => {
     let player = race.players.find(x => x.username === username);
 
     if (!race.finished && player) {
-        onRunnerRemoved(config, race, player, message);
+        onRunnerRemoved(config, db, race, player, message);
 
         let allReady = race.players.every(x => x.ready === true);
         if (!race.gatekeeper && allReady && race.players.length > 1) {
-            startRace(config, race, dChannel);
+            startRace(config, db, race, dChannel);
         } else {
-            updateRaceMessage(race, dChannel);
+            updateRaceMessage(db, race, dChannel);
         }
     } else {
         let time = new Date();

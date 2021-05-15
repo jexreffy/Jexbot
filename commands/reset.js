@@ -1,6 +1,6 @@
 const updateRaceMessage = require('../common/updateRaceMessage');
 
-module.exports = (race, dChannel, message) => {
+module.exports = (db, race, dChannel, message) => {
     if (message.member && message.member.hasPermission('KICK_MEMBERS', false, false)) {
         if (!race.finished) {
             race.started = false;
@@ -14,7 +14,7 @@ module.exports = (race, dChannel, message) => {
                 x.time = null;
             });
             race.status = 'RESTARTED PRE-RACE: WAITING FOR PLAYERS';
-            updateRaceMessage(race, dChannel);
+            updateRaceMessage(db, race, dChannel);
         }
     }
 };

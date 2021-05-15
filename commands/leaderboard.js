@@ -1,18 +1,26 @@
-const config = require('../config.json');
-const data = require('../data/data.js');
-
-const updateRaceMessage = require('../common/updateRaceMessage');
-
-module.exports = (channel, message) => {
+module.exports = (config, db, channel, message) => {
     const centerPad = (str, length, char = ' ') => str.padStart((str.length + length) / 2, char).padEnd(length, char);
-    let match = message.content.match(/^[.!](\bleaderboard\b) ([ a-zA-Z0-9%]{0,20})/i);
-    let category = match[2];
+    let match = message.content.match(/^[.!](\bleaderboard\b) ([a-zA-Z0-9%]{0,20})/i);
+    let categoryName = config.defaultCategory;
+    let categoryTitle = categoryName;
 
-    let board = data.getCategoryLeaderboard(category);
+    if (match && match.length > 2) {
+        let categories = Object.keys(config.categories);
+
+        for (let i = 0; i < categories.length; i++) {
+            if (match[2] === categories[i]) {
+                categoryName = categories[i];
+                categoryTitle = config.categories[categoryName].name;
+                break;
+            }
+        }
+    }
+
+    let board = db.getCategoryLeaderboard(categoryName);
 
     if (board) {
-        let output = 'Leaderboard';
-        output += '\n   `' + centerPad(('Category: ' + category), 34) + '`';
+        let output = `Leaderboard as of ${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })}`;
+        output +='\n   `' + centerPad(('Category: ' + categoryTitle), 34) + '`';
 
         let outputSize = (board.length > parseInt(config.defaultLeaderboardSize)) ? parseInt(config.defaultLeaderboardSize) : board.length;
 

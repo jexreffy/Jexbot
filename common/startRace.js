@@ -1,6 +1,6 @@
 const updateRaceMessage = require('../common/updateRaceMessage');
 
-module.exports = (config, race, dChannel) => {
+module.exports = (config, db, race, dChannel) => {
     const sleep = m => new Promise(r => setTimeout(r, m));
     (async() => {
         let countdown = config.countdowns[race.countdownIndex];
@@ -8,20 +8,20 @@ module.exports = (config, race, dChannel) => {
         let jokeUnits = config.jokeUnits[Math.floor(Math.random() * config.jokeUnits.length)];
         dChannel.send(`**The race will start in ${jokeTime} ${jokeUnits}**`).then().catch(console.error);
         race.status = countdown.firstLine;
-        updateRaceMessage(race, dChannel);
+        updateRaceMessage(db, race, dChannel);
         await sleep(countdown.firstDelay);
 
         race.status = countdown.secondLine;
-        updateRaceMessage(race, dChannel);
+        updateRaceMessage(db, race, dChannel);
         await sleep(countdown.secondDelay);
 
         for (let i = countdown.countdown; i > 0; i--) {
             race.status = 'Starting in: ' + i;
-            updateRaceMessage(race, dChannel);
+            updateRaceMessage(db, race, dChannel);
             let allReady = race.players.every(x => x.ready === true);
             if (!allReady) {
                 race.status = 'INTERRUPTED: WAITING FOR PLAYERS';
-                updateRaceMessage(race, dChannel);
+                updateRaceMessage(db, race, dChannel);
                 return;
             }
 
@@ -32,11 +32,11 @@ module.exports = (config, race, dChannel) => {
         race.status = 'GO!!!';
         race.started = true;
         race.startedAt = Date.now();
-        updateRaceMessage(race, dChannel);
+        updateRaceMessage(db, race, dChannel);
         dChannel.send(`**GO!!!**`).then().catch(console.error);
         await sleep(2000);
 
         race.status = 'RACE STARTED';
-        updateRaceMessage(race, dChannel);
+        updateRaceMessage(db, race, dChannel);
     })();
 };

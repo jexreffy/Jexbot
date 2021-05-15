@@ -4,7 +4,6 @@ K determines how strongly matches impact player ELO scores.
 KPlacement is a higher K value that is used during the initial few matches.
 N shows the difference in score that describes a 2x skill difference. Results in broader scores.
  */
-const data = require('../data/data.js');
 const eloConfig = require('../elo/eloConfig.json');
 const K = parseInt(eloConfig.K);
 const KPlacement = parseInt(eloConfig.KPlacement);
@@ -32,28 +31,28 @@ function calculatePoints(eloA, eloB, Kvalue, result) {
 }
 
 module.exports = {
-    resolveMatch: function(matchPlayers, category, local) {
+    resolveMatch: function(db, matchPlayers, category) {
         let adjustments = [];
         for (let i = 0; i < matchPlayers.length; i++) {
             let adjustment = 0;
-            let playerElo = data.getPlayerElo(matchPlayers[i].username, category);
-            let playerK = data.checkPlayerRanked(matchPlayers[i].username, category) ? K : KPlacement;
+            let playerElo = db.getPlayerElo(matchPlayers[i].username, category);
+            let playerK = db.checkPlayerRanked(matchPlayers[i].username, category) ? K : KPlacement;
 
             for (let j = 0; j < i; j++) {
                 if (matchPlayers[i].forfeited && matchPlayers[j].forfeited) {
-                    let opponentElo = data.getPlayerElo(matchPlayers[j].username, category);
+                    let opponentElo = db.getPlayerElo(matchPlayers[j].username, category);
                     adjustment += calculatePoints(playerElo, opponentElo, playerK, 0.5);
                 } else {
-                    let opponentElo = data.getPlayerElo(matchPlayers[j].username, category);
+                    let opponentElo = db.getPlayerElo(matchPlayers[j].username, category);
                     adjustment += calculatePoints(playerElo, opponentElo, playerK, 0);
                 }
             }
             for (let j = i + 1; j < matchPlayers.length; j++) {
                 if (matchPlayers[i].forfeited && matchPlayers[j].forfeited) {
-                    let opponentElo = data.getPlayerElo(matchPlayers[j].username, category);
+                    let opponentElo = db.getPlayerElo(matchPlayers[j].username, category);
                     adjustment += calculatePoints(playerElo, opponentElo, playerK, 0.5);
                 } else {
-                    let opponentElo = data.getPlayerElo(matchPlayers[j].username, category);
+                    let opponentElo = db.getPlayerElo(matchPlayers[j].username, category);
                     adjustment += calculatePoints(playerElo, opponentElo, playerK, 1);
                 }
             }
@@ -61,10 +60,7 @@ module.exports = {
         }
 
         for (let i = 0; i < matchPlayers.length; i++) {
-            data.adjustElo(matchPlayers[i].username, category, adjustments[i]);
-            if (local) {
-                console.log(matchPlayers[i].username + ' ' + adjustments[i]);
-            }
+            db.adjustElo(matchPlayers[i].username, category, adjustments[i]);
         }
         return adjustments;
     }

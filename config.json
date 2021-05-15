@@ -51,7 +51,7 @@
             "name": "Crystal Company",
             "channel": "lttp-race-bot",
             "restreamChannel": "#TheCrystalCompany",
-            "pingRole": "LTTPRacer",
+            "pingRole": "LttPR",
             "racerRole": "Racer",
             "sotwEnabled": true,
             "sotwChannel": "lttp-seed-of-the-week",

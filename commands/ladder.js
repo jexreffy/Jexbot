@@ -1,6 +1,4 @@
-const data = require('../data/data.js');
-
-module.exports = (config, race, dChannel, message) => {
+module.exports = (config, db, race, dChannel, message) => {
     if (race.finished && config.botOwnerName === message.author.username && config.botOwnerGuild === message.guild.id) {
         let match = message.content.match(/^[.!](\bladder\b) ([a-zA-Z0-9<>:]{4,20})/i);
 
@@ -56,6 +54,6 @@ module.exports = (config, race, dChannel, message) => {
         }
 
         const guildId = dChannel.guild.id;
-        data.setActiveRace(guildId);
+        db.setActiveRace(guildId);
     }
 };

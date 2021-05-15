@@ -1,5 +1,4 @@
 const axios = require('axios');
-const data = require('../data/data.js');
 const mysterySettings = require('../common/mysterySettings');
 const randomizerSettings = require('../common/randomizerSettings');
 const plandoSettings = require('../common/plandoSettings');
@@ -9,7 +8,7 @@ const updateRaceMessage = require('../common/updateRaceMessage');
 const RANDO_URL = 'https://alttpr.com/api/randomizer';
 const PLANDO_URL = 'https://alttpr.com/api/customizer';
 
-module.exports = (config, race, dChannel, message) => {
+module.exports = (config, db, race, dChannel, message) => {
     if (race && race.seedLink) return;
 
     let helpMatch = message.content.match(/^[.!](\broll help\b)/i);
@@ -64,11 +63,11 @@ module.exports = (config, race, dChannel, message) => {
 
         const url = category.customizer ? PLANDO_URL : RANDO_URL;
 
-        rollSeed(config, race, dChannel, url, settings, username, categoryName);
+        rollSeed(config, db, race, dChannel, url, settings, username, categoryName);
     }
 }
 
-function rollSeed(config, race, dChannel, url, settings, username, categoryName) {
+function rollSeed(config, db, race, dChannel, url, settings, username, categoryName) {
     axios.post(url, settings).then(result => {
         let guildId = dChannel.guild.id;
         let seed = processSeed(config, guildId, categoryName, result);
@@ -78,8 +77,8 @@ function rollSeed(config, race, dChannel, url, settings, username, categoryName)
             race.seedLink = seed.link;
             race.seedCode = seed.code;
 
-            updateRaceMessage(race, dChannel);
-            data.setRaceData(dChannel.guild.id, race);
+            updateRaceMessage(db, race, dChannel);
+            db.setRaceData(dChannel.guild.id, race);
         }
 
         dChannel.send(`${seed.link} ${seed.code}`).then().catch(console.error);
