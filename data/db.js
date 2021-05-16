@@ -9,20 +9,7 @@ const placementMatches = (eloConfig.placementMatches);
 
 let races = raceDb;
 
-var con = Mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME
-});
-
-con.connect(function(err) {
-    if (err) throw err;
-    let time = new Date();
-    console.log(time.toLocaleString('en-US') + ' MySQL connected');
-});
-
-server = {
+let server = {
     "spaceballs": 0,
     "activeRace": null,
     "sotwLast": 0,
@@ -33,60 +20,80 @@ server = {
             0
         ],
         "515731524616847367": [
-            3,
-            3,
-            3
+            0,
+            0,
+            0
         ]
     }
 };
 
-players = [];
+let players = [];
 
-con.query(`SELECT
-            players.id as id,
-            players.username as username,
-            players.twitch as twitch,
-            players.streaming as streaming,
-            players.twitchBot as twitchBot,
-            elo.mode as mode,
-            elo.elo as elo,
-            elo.matches as matches
-          FROM players, elo
-          WHERE players.id = elo.player_id`, (playerErr, playerRows) => {
-    if (playerErr) throw playerErr;
+let pool = Mysql.createPool({
+    connectionLimit: 2,
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
+});
 
-    playerRows.forEach((playerRow) => {
-        let player = players.find(x => x.username === playerRow.username);
-
-        if (!player) {
-            player = {};
-            players.push(player);
+pool.getConnection(function(err, connection) {
+    connection.query(`SELECT
+                    players.id as id,
+                    players.username as username,
+                    players.twitch as twitch,
+                    players.streaming as streaming,
+                    players.twitchBot as twitchBot,
+                    elo.mode as mode,
+                    elo.elo as elo,
+                    elo.matches as matches
+                  FROM players, elo
+                  WHERE players.id = elo.player_id`, (playerErr, playerRows) => {
+        if (playerErr) {
+            connection.release();
+            console.log()
+            throw playerErr;
         }
 
-        player.id = playerRow.id;
-        player.username = playerRow.username;
-        player.twitch = playerRow.twitch;
-        player.streaming = playerRow.streaming === 1;
-        player.twitchBot = playerRow.twitchBot === 1;
-        player[playerRow.mode] = {};
-        player[playerRow.mode].elo = playerRow.elo;
-        player[playerRow.mode].matches = playerRow.matches;
-    });
+        playerRows.forEach((playerRow) => {
+            let player = players.find(x => x.username === playerRow.username);
 
-    con.query(`SELECT * FROM server WHERE id = 1`, (serverErr, serverRow) => {
-        if (serverErr) throw serverErr;
+            if (!player) {
+                player = {};
+                players.push(player);
+            }
 
-        server.spaceballs = serverRow[0].spaceballs;
-        server.activeRace = serverRow[0].active;
-        server.sotwLast = serverRow[0].sotw;
+            player.id = playerRow.id;
+            player.username = playerRow.username;
+            player.twitch = playerRow.twitch;
+            player.streaming = playerRow.streaming === 1;
+            player.twitchBot = playerRow.twitchBot === 1;
+            player[playerRow.mode] = {};
+            player[playerRow.mode].elo = playerRow.elo;
+            player[playerRow.mode].matches = playerRow.matches;
+        });
 
-        con.query(`SELECT * FROM sotw`, (sotwErr, sotwRows) => {
-            if (sotwErr) throw sotwErr;
+        connection.query(`SELECT * FROM server WHERE id = 1`, (serverErr, serverRow) => {
+            if (serverErr) {
+                connection.release();
+                throw serverErr;
+            }
 
-            sotwRows.forEach( (sotwRow) => {
-                server.sotw[sotwRow.server][0] = sotwRow.easy;
-                server.sotw[sotwRow.server][1] = sotwRow.medium;
-                server.sotw[sotwRow.server][2] = sotwRow.hard;
+            server.spaceballs = serverRow[0].spaceballs;
+            server.activeRace = serverRow[0].active;
+            server.sotwLast = serverRow[0].sotw;
+
+            connection.query(`SELECT * FROM sotw`, (sotwErr, sotwRows) => {
+                if (sotwErr) {
+                    connection.release();
+                    throw sotwErr;
+                }
+
+                sotwRows.forEach((sotwRow) => {
+                    server.sotw[sotwRow.server][0] = sotwRow.easy;
+                    server.sotw[sotwRow.server][1] = sotwRow.medium;
+                    server.sotw[sotwRow.server][2] = sotwRow.hard;
+                });
             });
         });
     });
@@ -113,54 +120,57 @@ function getPlayerIndexByName(username) {
 }
 
 function createPlayer(player) {
-    let sql = `INSERT INTO players(username, twitch, streaming, twitchBot) VALUES(?)`;
-    let data = [player.username, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0];
+    pool.getConnection(function(err, connection) {
+        let sql = `INSERT INTO players(username, twitch, streaming, twitchBot) VALUES(?)`;
+        let data = [player.username, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0];
 
-    con.query(sql, data, (err, results, fields) => {
-        if (err) {
-            return console.error(err.message);
-        }
-        player.id = results.insertId;
-        players.push(player);
+        connection.query(sql, data, (error, results, fields) => {
+            connection.release();
+            if (error) throw error;
+
+            player.id = results.insertId;
+            players.push(player);
+        });
     });
 }
 
 function savePlayer(player) {
-    let sql = `UPDATE players
+    pool.getConnection(function(err, connection) {
+        let sql = `UPDATE players
                 SET username = ?, twitch = ?, streaming = ?, twitchBot = ?
                 WHERE id = ?`;
-    let data = [player.username, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0, player.id];
+        let data = [player.username, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0, player.id];
 
-    con.query(sql, data, (err, results, fields) => {
-        if (err) {
-            return console.error(err.message);
-        }
+        connection.query(sql, data, (error, results, fields) => {
+            connection.release();
+            if (error) throw error;
+        });
     });
 }
 
 function createElo(player, category) {
-    let sql = `INSERT INTO elo(player_id, mode) VALUES(?)`;
-    let data = [player.id, category];
+    pool.getConnection(function(err, connection) {
+        let sql = `INSERT INTO elo(player_id, mode) VALUES(?)`;
+        let data = [player.id, category];
 
-    con.query(sql, data, (err, results, fields) => {
-        if (err) {
-            return console.error(err.message);
-        }
-        player.id = results.insertId;
-        players.push(player);
+        connection.query(sql, data, (error, results, fields) => {
+            connection.release();
+            if (error) throw error;
+        });
     });
 }
 
 function saveElo(player, category) {
-    let sql = `UPDATE elo
+    pool.getConnection(function(err, connection) {
+        let sql = `UPDATE elo
                 SET elo = ?, matches = ?
                 WHERE player_id = ? AND mode = ?`;
-    let data = [player[category].elo, player[category].matches, player.id, category];
+        let data = [player[category].elo, player[category].matches, player.id, category];
 
-    con.query(sql, data, (error, results, fields) => {
-        if (error){
-            return console.error(error.message);
-        }
+        connection.query(sql, data, (error, results, fields) => {
+            connection.release();
+            if (error) throw error;
+        });
     });
 }
 
@@ -170,31 +180,42 @@ function saveRaceData() {
 }
 
 function saveServerData() {
-    let sql = `UPDATE server
+    pool.getConnection(function(err, connection) {
+        let sql = `UPDATE server
                 SET spaceballs = ?, active = ?, sotw = ?
                 WHERE id = ?`;
 
-    let data = [server.spaceballs, server.activeRace, server.sotwLast, 1];
+        let data = [server.spaceballs, server.activeRace, server.sotwLast, 1];
 
-    con.query(sql, data, (error, results, fields) => {
-        if (error){
-            return console.error(error.message);
-        }
+        connection.query(sql, data, (error, results, fields) => {
+            connection.release();
+            if (error) throw error;
+        });
     });
 }
 
 function saveSotwData(guildId) {
-    let sql = `UPDATE sotw
+    pool.getConnection(function(err, connection) {
+        let sql = `UPDATE sotw
                 SET easy = ?, medium = ?, hard = ?
                 WHERE server = ?`;
 
-    let data = [server.sotw[guildId][0], server.sotw[guildId][1], server.sotw[guildId][2], guildId];
+        let data = [server.sotw[guildId][0], server.sotw[guildId][1], server.sotw[guildId][2], guildId];
 
-    con.query(sql, data, (error, results, fields) => {
-        if (error){
-            return console.error(error.message);
-        }
-        saveServerData();
+        connection.query(sql, data, (sotwError, results, fields) => {
+            if (sotwError) {
+                connection.release();
+                throw sotwError;
+            }
+
+            sql = `UPDATE server sotw = ? WHERE id = ?`;
+            data = [server.sotwLast, 1];
+
+            connection.query(sql, data, (error, results, fields) => {
+                connection.release();
+                if (error) throw error;
+            });
+        });
     });
 }
 
