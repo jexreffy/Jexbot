@@ -1,7 +1,7 @@
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (config, db, race, dChannel, username, coop) => {
-    if (!race.started && !race.teams && config.referees.includes(username)) {
+    if (!race.started && config.referees.includes(username)) {
         if (coop && race.players.length % 2 !== 0) {
             dChannel.send(`**${config.teamPlayerError.replace('Teams', 'Co-op')}**`).then().catch(console.error);
             return;
