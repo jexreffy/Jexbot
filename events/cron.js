@@ -30,8 +30,8 @@ module.exports = (db, dClient, tClient) => {
         db.setRaceData(guildId, race);
     } else {
         let lastTime = db.getLastSotw();
-        let now = Date.now();
-        if ((Math.floor(now - lastTime) / 604800000) > 1) {
+        let now = new Date();
+        if ((Math.floor(now.getTime() - lastTime) / 604800000) > 1) {
             let keys = Object.keys(config.guilds);
             for (let i = 0; i < keys.length; i++) {
                 let guildId = keys[i];
@@ -48,7 +48,7 @@ module.exports = (db, dClient, tClient) => {
                     let hardMode = config.guilds[guildId].sotwHard[hardIndex];
                     hardIndex = hardIndex >= config.guilds[guildId].sotwHard.length - 1 ? 0 : hardIndex + 1;
 
-                    db.setSotwNext(guildId, easyIndex, mediumIndex, hardIndex, new Date(2021, 4, 17, 11, 0, 0, 0).valueOf());
+                    db.setSotwNext(guildId, easyIndex, mediumIndex, hardIndex, new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), 0, 0, 0).valueOf());
                     rollSeeds(guildId, db, dClient, easyMode, mediumMode, hardMode);
                 }
             }
