@@ -166,6 +166,7 @@ module.exports = () => {
                     "OneRupee": 2,
                     "FiveRupees": 4,
                     "TwentyRupees": 28,
+                    "TwentyRupees2": 0,
                     "BowAndArrows": 0,
                     "BowAndSilverArrows": 0,
                     "BottleWithBee": 0,

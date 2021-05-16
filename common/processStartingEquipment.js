@@ -3,11 +3,11 @@ module.exports = (settings, items) => {
         if (items[i] === "OcarinaActive") {
             settings.eq.splice(0, 0, settings.mode === "standard" ? 'OcarinaInactive' : 'OcarinaActive');
             settings.custom.item.count["OcarinaInactive"] = 0;
-            settings.custom.item.count.TwentyRupees++;
+            settings.custom.item.count.TwentyRupees2++;
         } else {
             settings.eq.splice(0, 0, items[i]);
             settings.custom.item.count[items[i]] = 0;
-            settings.custom.item.count.TwentyRupees++;
+            settings.custom.item.count.TwentyRupees2++;
         }
     }
 }
