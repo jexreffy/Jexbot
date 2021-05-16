@@ -21,9 +21,11 @@ function connectToTwitch(race) {
     if (race.ladder) {
         channels.push(config.botOwnerTwitch);
     } else {
-        if (race.restream) {
+        if (race.invitational) {
             channels.push(race.restream);
         } else {
+            if (race.restream) channels.push(race.restream);
+
             for (let i = 0; i < race.players.length; i++) {
                 if (db.getPlayerTwitchBot(race.players[i].username)) {
                     channels.push(race.players[i].twitch);

@@ -16,6 +16,7 @@ const gtGuess = require('../commands/gtguess');
 const gtStart = require('../commands/gtstart');
 const gtStop = require('../commands/gtstop');
 const help = require('../commands/help');
+const invitational = require('../commands/invitational');
 const join = require('../commands/join');
 const kick = require('../commands/kick');
 const ladder = require('../commands/ladder');
@@ -84,6 +85,8 @@ function processDiscordCommand(db, dClient, tClient, message) {
 function processDiscordInactiveCommands(dClient, tClient, config, db, race, message) {
     if (message.content.match(/^[.!](\bcomment\b) ([ a-zA-Z0-9,./<>?;':"{}|`~!@#$%^&*()=_+]{0,1000})/i)) {
         comment(config, race, message.channel, message.author.username, message);
+    } else if (message.content.match(/^[.!](\binvitational\b) ([a-zA-Z0-9<>:]{4,20}) ([a-zA-Z0-9<>:]{4,30}) ([a-zA-Z0-9<>:]{4,30})/i)) {
+        invitational(config, db, race, message.channel, message);
     } else if (message.content.match(/^[.!](\bladder\b) ([a-zA-Z0-9%]{4,20})/i)) {
         ladder(config, db, race, message.channel, message);
     } else if (message.content.match(/^[.!](\bleaderboard\b)/i)) {

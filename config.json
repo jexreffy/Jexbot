@@ -654,6 +654,7 @@
     "gtGuessIntro": "It's possible one of our runners might be entering GT soon. You can now guess where the GTBK is based on the first streamed runner who enters GT. Use !gtguess [1-22] to get your guess in, !gtenter when your runner has entered GT, and !gtbk [1-22] when they find the GTBK. The winner will be announced when we reach spoiler talk in the race.",
     "gtGuessEnter": "Your runner has entered GT. Use !gtbk [1-22] when they find the key!",
     "gtGuessFound": "Your runner found the GTBK at check LOCATION. When spoilers are open, I will reveal the winner.",
+    "invitationalPing": "your race has been created.",
     "spaceballsClock": "Reset the Spaceballs clock!!",
     "jokeUnits": ["seconds", "schmeconds", "milliseconds", "minutes", "hours", "days", "months", "years", "dog years", "weeks", "fortnights", "scores", "moments", "shakes"],
     "friday": [

@@ -19,7 +19,7 @@ module.exports = (db, dClient, tClient) => {
 
         let dChannel = dClient.channels.cache.find(channel => channel.name === config.guilds[guildId].channel);
 
-        if (!race.ladder && !race.restream && config.categories[race.category].gtbk && !race.guessGameStarted && (Math.floor(Date.now() - race.startedAt) / 1000) > config.minimumGuessStartSeconds) {
+        if (!race.ladder && !race.invitational && config.categories[race.category].gtbk && !race.guessGameStarted && (Math.floor(Date.now() - race.startedAt) / 1000) > config.minimumGuessStartSeconds) {
             race.guessGameStarted = true;
             broadcastMessage(config, dChannel, tClient, config.gtGuessIntro, false);
         } else if (!race.lastHello || (Math.floor(Date.now() - race.lastHello) / 1000) > config.helloInterval) {
