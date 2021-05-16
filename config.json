@@ -49,12 +49,12 @@
         "515731524616847367": {
             "id": "515731524616847367",
             "name": "Crystal Company",
-            "channel": "lttp-race-bot",
+            "channel": "lttp-jexbot",
             "restreamChannel": "#TheCrystalCompany",
             "pingRole": "LttPR",
             "racerRole": "Racer",
             "sotwEnabled": true,
-            "sotwChannel": "lttp-seed-of-the-week",
+            "sotwChannel": "lttp-jexbot",
             "sotwEasy": [
                 "open",
                 "standard",
@@ -640,6 +640,9 @@
         "R2Fub24ncyBUb3dlciAtIEJpZyBLZXkgUm9vbSAtIFJpZ2h0OjE="
     ],
     "codeStartAt": 1573397,
+    "teamPlayers": [-1, -1, -1, -1, 2, -1, 3, -1, 4, 3, 5, -1, 4, -1, 7, 5, 4, -1, 6, -1, 5, 7, 11, -1, 6, 5, -1],
+    "teamPlayerError": "Teams cannot be generated with the current number of players.",
+    "teamGenerated": "Teams have been generated for this race. Please check the Embedded Message to see the teams.",
     "helloLadder": "Hello! I'm JexBot. My job is to enhance your viewing experience. Use !help and I'll tell you how you can interact with me. This is a Ladder Race. You can interact with Jexreffy, but you cannot help him with the race in any capacity",
     "helloRace": "Hello! I'm JexBot. My job is to enhance your viewing experience. Use !help and I'll tell you how you can interact with me.",
     "helpLadder": "Commands I listen to: !spaceballs, !mode, !blueballs [0-15], !gtstart, !gtguess [1-22], !gtstop, !gtbk",

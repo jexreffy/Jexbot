@@ -14,7 +14,7 @@ module.exports = (config, db, race, dChannel, message) => {
         race.mutlistream = 'https://multistre.am/';
         race.status = 'PRE-RACE: WAITING FOR PLAYERS';
 
-        setRaceCategory(config, db, race, guildId, match[2]);
+        setRaceCategory(config, db, race, guildId, match && match.length > 2 ? match[2] : "");
 
         let embed = {
             'content': "",

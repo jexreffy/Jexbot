@@ -34,6 +34,7 @@ const spaceballs = require('../commands/spaceballs');
 const start = require('../commands/start');
 const stats = require('../commands/stats');
 const streaming = require('../commands/streaming');
+const teams = require('../commands/teams');
 const twitch = require('../commands/twitch');
 const twitchBot = require('../commands/twitchbot');
 const unready = require('../commands/unready');
@@ -167,6 +168,10 @@ function processDiscordRaceLobbyCommands(dClient, tClient, config, db, race, mes
         stats(config, db, race, message.channel, message);
     } else if (message.content.match(/^[.!](\bstreaming\b) ((\bon\b)|(\boff\b))/i)) {
         streaming(db, race, message.channel, message, message.author.username);
+    } else if (message.content.match(/^[.!](\bcoop\b)/i)) {
+        teams(config, db, race, message.channel, message, message.author.username, true);
+    } else if (message.content.match(/^[.!](\bteams\b)/i)) {
+        teams(config, db, race, message.channel, message, message.author.username, false);
     } else if (message.content.match(/^[.!](\btwitch\b) ([a-zA-Z0-9_]{4,20})/i)) {
         twitch(db, race, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\btwitchbot\b) ((\bon\b)|(\boff\b))/i)) {

@@ -1,3 +1,5 @@
+const sortPlayers = require('../common/sortPlayers');
+
 module.exports = (db, race, channel) => {
     let message = {};
     let embed = {};
@@ -57,48 +59,25 @@ module.exports = (db, race, channel) => {
 
     embed.description = desc;
 
-    race.players.sort(function(a, b) {
-        if (a.time == null) {
-            if (b.time) {
-                return 1;
-            }
-        }
-        if (b.time == null) {
-            if (a.time) {
-                return -1;
-            }
-        }
-        if (b.forfeited) {
-            if (!a.forfeited) {
-                return 1;
-            }
-        }
-        if (a.forfeited) {
-            if (!b.forfeited) {
-                return -1;
-            }
-        }
-        if (a.time > b.time) {
-            return 1;
-        }
-        if (a.time === b.time) {
-            return 0;
-        }
-        if (a.time < b.time) {
-            return -1;
-        }
-        return 0;
-    });
+    sortPlayers(race.players, race.teams);
 
     let names = "";
     let status = "";
     if (race.players.length > 0) {
         for (let i = 0; i < race.players.length; i++) {
+            if (race.teams && i === 0) {
+                names += `---Team ${race.players[i].team + 1}---\n`;
+                status += `----------\n`;
+            }if (race.teams && i > 0 && race.players[i - 1].team < race.players[i].team) {
+                names += `\n---Team ${race.players[i].team + 1}---`;
+                status += `\n----------`;
+            }
+
             let username = race.players[i].username;
 
             if (db.getPlayerStreaming(username)) {
                 let userTwitch = db.getPlayerTwitch(username);
-                let twitchBot = !race.restream && db.getPlayerTwitchBot(username) ? " Bot Enabled" : "";
+                let twitchBot = !race.restream && db.getPlayerTwitchBot(username) ? " :robot:" : "";
                 if (!userTwitch) {
                     userTwitch = username;
                 }
