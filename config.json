@@ -249,7 +249,7 @@
         "casualbootsfast": {
             "name": "Casual Boots Fast Ganon",
             "description": "Escape Sequence Start, Fast Ganon, 7/7 Crystals, Assured Sword, Starting Boots",
-            "gtbk": true,
+            "gtbk": false,
             "customizer": true,
             "settings": {
                 "mode": "standard",
@@ -496,7 +496,7 @@
         "openfast": {
             "name": "Open Fast Ganon",
             "description": "Open Start, Fast Ganon, 7/7 Crystals",
-            "gtbk": true,
+            "gtbk": false,
             "customizer": false,
             "settings": {
                 "mode": "open",
@@ -606,7 +606,7 @@
         "standardfast": {
             "name": "Standard Fast Ganon",
             "description": "Escape Sequence Start, Fast Ganon, 7/7 Crystals",
-            "gtbk": true,
+            "gtbk": false,
             "customizer": false,
             "settings": {
                 "mode": "standard",
@@ -658,7 +658,7 @@
         "wtfrosia": {
             "name": "WTFrosia",
             "description": "Start in Dark World, CT and GT swapped, All Dungeons, Dungeon Items shuffled in the full item pool, Assured Sword, Enemies and Bosses shuffled",
-            "gtbk": true,
+            "gtbk": false,
             "customizer": true,
             "settings": {
                 "mode": "inverted",
