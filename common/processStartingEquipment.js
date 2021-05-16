@@ -6,7 +6,7 @@ module.exports = (settings, items) => {
             settings.custom.item.count.TwentyRupees2++;
         } else {
             settings.eq.splice(0, 0, items[i]);
-            settings.custom.item.count[items[i]] = 0;
+            settings.custom.item.count[items[i]]--;
             settings.custom.item.count.TwentyRupees2++;
         }
     }
