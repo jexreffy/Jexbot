@@ -3,7 +3,7 @@ const startRace = require('../common/startRace');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (config, db, race, dChannel, username, message) => {
-    if (!(race.invitational || race.teams)) {
+    if (!race.invitational) {
         let player = race.players.find(x => x.username === username);
 
         if (!race.finished && player) {
@@ -11,10 +11,18 @@ module.exports = (config, db, race, dChannel, username, message) => {
 
             let allReady = race.players.every(x => x.ready === true);
             if (!race.gatekeeper && allReady && race.players.length > 1) {
-                startRace(config, db, race, dChannel);
+                if (race.teams) {
+                    race.teams = false;
+                    race.players[0].ready = false;
+                    updateRaceMessage(db, race, dChannel);
+                } else {
+                    startRace(config, db, race, dChannel);
+                }
             } else {
+                race.teams = false;
                 updateRaceMessage(db, race, dChannel);
             }
+
         } else {
             let time = new Date();
             console.log(time.toLocaleString('en-US') + ' leave: ' + username + ' is not in the race!');
