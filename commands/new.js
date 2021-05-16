@@ -3,7 +3,7 @@ const updateRaceMessage = require('../common/updateRaceMessage');
 const resetRace = require('../common/resetRace');
 
 module.exports = (config, db, race, dChannel, message) => {
-    if (race.finished || (message.member && message.member.hasPermission('KICK_MEMBERS', false, false)) || config.referees.includes(message.author.username)) {
+    if (race.finished && config.referees.includes(message.author.username)) {
         let match = message.content.match(/^[.!](\bnew\b) ([a-zA-Z0-9<>:]{4,20})/i);
 
         const guildId = dChannel.guild.id;

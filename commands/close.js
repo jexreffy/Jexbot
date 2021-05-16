@@ -1,14 +1,14 @@
 const updateRaceMessage = require('../common/updateRaceMessage');
 
-module.exports = (config, db, race, message, channel) => {
-    if (!race.finished && message.member && message.member.hasPermission('KICK_MEMBERS', false, false) || config.referees.includes(message.author.username)) {
+module.exports = (config, db, race, dChannel, username) => {
+    if (!race.finished && config.referees.includes(username)) {
         race.finished = true;
         race.seed = null;
         race.status = 'RACE CLOSED';
         db.setActiveRace(null);
 
         if (!race.ladder) {
-            updateRaceMessage(db, race, channel);
+            updateRaceMessage(db, race, dChannel);
         }
     }
 };

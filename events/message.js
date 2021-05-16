@@ -115,7 +115,7 @@ function processDiscordRaceActiveCommands(dClient, tClient, config, db, race, me
     if (message.content.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i)) {
         blueballs(race, message.content);
     } else if (message.content.match(/^[.!](\bclose\b)/i)) {
-        close(config, db, race, message, message.channel);
+        close(config, db, race, message.channel, message.author.username);
     } else if (message.content.match(/^[.!](\bcomment\b) ([ a-zA-Z0-9,./<>?;':"{}|`~!@#$%^&*()=_+]{0,1000})/i)) {
         comment(config, race, message.channel, message.author.username, message);
     } else if (message.content.match(/^[.!](\bdick\b)/i)) {
@@ -141,7 +141,7 @@ function processDiscordRaceLobbyCommands(dClient, tClient, config, db, race, mes
     } else if (message.content.match(/^[.!](\bcrew\b)/i)) {
         crew(config, db, race, message.channel, message.author.username, null, null);
     } else if (message.content.match(/^[.!](\bgatekeeper\b)/i)) {
-        gatekeeper(db, race, message.channel, message, message.author.username);
+        gatekeeper(config, db, race, message.channel, message.author.username);
     } else if (message.content.match(/^[.!](\bjoin\b)/i)) {
         join(config, db, race, message.channel, message.author.username, message);
     } else if (message.content.match(/^[.!](\bkick\b) ([a-zA-Z0-9%]{0,20})/i)) {
@@ -155,7 +155,7 @@ function processDiscordRaceLobbyCommands(dClient, tClient, config, db, race, mes
     } else if (message.content.match(/^[.!](\bready\b)/i)) {
         ready(config, db, race, message.channel, message.author.username);
     } else if (message.content.match(/^[.!](\breset\b)/i)) {
-        reset(db, race, message.channel, message);
+        reset(config, db, race, message.channel, message);
     } else if (message.content.match(/^[.!](\brestream\b) ((\bon\b)|(\boff\b))/i)) {
         restream(config, db, race, message.channel, message);
     } else if (message.content.match(/^[.!](\broll\b)/i)) {
@@ -163,15 +163,15 @@ function processDiscordRaceLobbyCommands(dClient, tClient, config, db, race, mes
     } else if (message.content.match(/^[.!](\bspaceballs\b)/i)) {
         spaceballs(config, db, race, message.channel, tClient);
     } else if (message.content.match(/^[.!](\bstart\b)/i)) {
-        start(config, db, race, message.channel, tClient, message, message.author.username);
+        start(config, db, race, message.channel, message.author.username);
     } else if (message.content.match(/^[.!](\bstats\b)/i)) {
         stats(config, db, race, message.channel, message);
     } else if (message.content.match(/^[.!](\bstreaming\b) ((\bon\b)|(\boff\b))/i)) {
         streaming(db, race, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\bcoop\b)/i)) {
-        teams(config, db, race, message.channel, message, message.author.username, true);
+        teams(config, db, race, message.channel, message.author.username, true);
     } else if (message.content.match(/^[.!](\bteams\b)/i)) {
-        teams(config, db, race, message.channel, message, message.author.username, false);
+        teams(config, db, race, message.channel, message.author.username, false);
     } else if (message.content.match(/^[.!](\btwitch\b) ([a-zA-Z0-9_]{4,20})/i)) {
         twitch(db, race, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\btwitchbot\b) ((\bon\b)|(\boff\b))/i)) {

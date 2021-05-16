@@ -4,7 +4,7 @@ const startRace = require('../common/startRace');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (config, db, race, dChannel, tClient, message) => {
-    if (message.member && message.member.hasPermission('KICK_MEMBERS', false, false) || config.referees.includes(message.author.username)) {
+    if (config.referees.includes(message.author.username)) {
         let match = message.content.match(/^[.!](\bkick\b)([ ]{0,1})([a-zA-Z0-9%]{0,20})/i);
         let player = race.players.find(x => x.username === match[3]);
 

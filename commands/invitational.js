@@ -3,7 +3,7 @@ const resetRace = require('../common/resetRace');
 const join = require('./join');
 
 module.exports = (config, db, race, dChannel, message) => {
-    if (race.finished || (message.member && message.member.hasPermission('KICK_MEMBERS', false, false)) || config.referees.includes(message.author.username)) {
+    if (race.finished && config.referees.includes(message.author.username)) {
         let match = message.content.match(/^[.!](\binvitational\b) ([a-zA-Z0-9<>:]{4,20}) ([a-zA-Z0-9<>:]{4,30}) ([a-zA-Z0-9<>:]{4,30})/i);
 
         resetRace(race);

@@ -1,7 +1,7 @@
 const updateRaceMessage = require('../common/updateRaceMessage');
 
-module.exports = (db, race, dChannel, message) => {
-    if (message.member && message.member.hasPermission('KICK_MEMBERS', false, false)) {
+module.exports = (config, db, race, dChannel, username) => {
+    if (config.referees.includes(username)) {
         if (!race.finished) {
             race.started = false;
             race.startedAt = null;
