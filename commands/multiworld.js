@@ -8,6 +8,7 @@ module.exports = (config, db, race, dChannel, username, message) => {
     let seed = match[2];
 
     if (!race.started && (player || config.referees.includes(username))) {
+        race.multiworld = true;
         race.seedRoller = "Multiworld";
         race.seedLink = seed;
         race.seedCode = "N/A";

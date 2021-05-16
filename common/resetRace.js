@@ -2,6 +2,7 @@ module.exports = (race) => {
     race.ladder = false;
     race.invitational = false;
     race.teams = false;
+    race.multiworld = false;
     race.started = false;
     race.finished = false;
     race.startedAt = null;

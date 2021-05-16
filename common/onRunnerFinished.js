@@ -13,7 +13,7 @@ module.exports = (config, db, race, dChannel, tClient, message) => {
         race.status = 'RACE FINISHED';
         db.setActiveRace(null);
 
-        if (!race.teams) {
+        if (!(race.teams || race.multiworld)) {
             sortPlayers(race.players, false);
 
             let adjustments = elo.resolveMatch(db, race.players, race.category);
