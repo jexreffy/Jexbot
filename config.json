@@ -189,7 +189,7 @@
         },
         "beginner": {
             "name": "Beginner",
-            "description": "Escape Sequence Start, Defeat Ganon, Assured Sword, Beginner Item Placement",
+            "description": "Escape Sequence Start, Defeat Ganon, Assured Sword, Basic Item Placement",
             "gtbk": true,
             "customizer": false,
             "settings": {
@@ -205,6 +205,11 @@
             "customizer": true,
             "settings": {
                 "mode": "open",
+                "goal": "fast_ganon",
+                "crystals": {
+                    "ganon": "4",
+                    "tower": "4"
+                },
                 "eq": ["ProgressiveSword", "ProgressiveSword", "MoonPearl", "Lamp", "PegasusBoots", "ProgressiveGlove", "ProgressiveGlove", "OcarinaActive"]
             }
         },
@@ -242,7 +247,7 @@
             }
         },
         "casualbootsfast": {
-            "name": "AD Casual Boots",
+            "name": "Casual Boots Fast Ganon",
             "description": "Escape Sequence Start, Fast Ganon, 7/7 Crystals, Assured Sword, Starting Boots",
             "gtbk": true,
             "customizer": true,
@@ -290,8 +295,8 @@
                 }
             }
         },
-        "expert": {
-            "name": "Expert",
+        "expertitempool": {
+            "name": "Expert Item Pool",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Expert Item Pool",
             "gtbk": true,
             "customizer": false,
@@ -302,8 +307,8 @@
                 }
             }
         },
-        "hard": {
-            "name": "Hard",
+        "harditempool": {
+            "name": "Hard Item Pool",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Hart Item Pool",
             "gtbk": true,
             "customizer": false,
@@ -364,7 +369,7 @@
         },
         "invrosiaboots": {
             "name": "Invrosia Boots",
-            "description": "Start in Dark World, CT and GT swapped, Defeat Ganon, Assured Sword, Bosses cannot hold Dungeon Items, Big Keys expect GTBK are randomized",
+            "description": "Start in Dark World, CT and GT swapped, Defeat Ganon, Assured Sword, Starting Boots, Bosses cannot hold Dungeon Items, Big Keys expect GTBK are randomized",
             "gtbk": true,
             "customizer": true,
             "settings": {
