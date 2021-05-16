@@ -363,7 +363,7 @@
             }
         },
         "invrosiaboots": {
-            "name": "Invrosia",
+            "name": "Invrosia Boots",
             "description": "Start in Dark World, CT and GT swapped, Defeat Ganon, Assured Sword, Bosses cannot hold Dungeon Items, Big Keys expect GTBK are randomized",
             "gtbk": true,
             "customizer": true,
