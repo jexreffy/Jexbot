@@ -1,7 +1,7 @@
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (db, race, dChannel, message, username) => {
-    let match = message.content.match(/^[.!](\btwitch\b) ([a-zA-Z0-9_]{4,20})/i);
+    let match = message.content.match(/^[.!](\btwitch\b) ([a-zA-Z0-9_]{4,30})/i);
     let stream = match[2];
 
     let player = race.players.find(x => x.username === username);

@@ -175,7 +175,7 @@ function processDiscordRaceLobbyCommands(dClient, tClient, config, db, race, mes
         teams(config, db, race, message.channel, message.author.username, true);
     } else if (message.content.match(/^[.!](\bteams\b)/i)) {
         teams(config, db, race, message.channel, message.author.username, false);
-    } else if (message.content.match(/^[.!](\btwitch\b) ([a-zA-Z0-9_]{4,20})/i)) {
+    } else if (message.content.match(/^[.!](\btwitch\b) ([a-zA-Z0-9_]{4,30})/i)) {
         twitch(db, race, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\btwitchbot\b) ((\bon\b)|(\boff\b))/i)) {
         twitchBot(db, race, message.channel, message, message.author.username);
