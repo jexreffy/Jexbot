@@ -63,7 +63,6 @@ pool.getConnection(function(err, connection) {
                   WHERE players.id = elo.player_id`, (playerErr, playerRows) => {
         if (playerErr) {
             connection.release();
-            console.log()
             throw playerErr;
         }
 
