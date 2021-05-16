@@ -48,15 +48,15 @@ module.exports = (db, dClient, tClient) => {
                     let hardMode = config.guilds[guildId].sotwHard[hardIndex];
                     hardIndex = hardIndex >= config.guilds[guildId].sotwHard.length - 1 ? 0 : hardIndex + 1;
 
-                    db.setSotw(guildId, easyIndex, mediumIndex, hardIndex, now);
-                    rollSeeds(guildId, dClient, easyMode, mediumMode, hardMode);
+                    db.setSotwNext(guildId, easyIndex, mediumIndex, hardIndex, new Date(2021, 4, 17, 11, 0, 0, 0).valueOf());
+                    rollSeeds(guildId, db, dClient, easyMode, mediumMode, hardMode);
                 }
             }
         }
     }
 };
 
-function rollSeeds(guildId, dClient, easyMode, mediumMode, hardMode) {
+function rollSeeds(guildId, db, dClient, easyMode, mediumMode, hardMode) {
     const easyCategory = config.categories[easyMode];
     const easySettings = easyMode === "mystery" ? mysterySettings(config.mysteryWeights) : randomizerSettings(config, easyCategory);
     const easyUrl      = easyCategory.customizer ? PLANDO_URL : RANDO_URL;
@@ -72,13 +72,13 @@ function rollSeeds(guildId, dClient, easyMode, mediumMode, hardMode) {
     let seeds = [];
 
     axios.post(easyUrl, easySettings).then(easyResult => {
-        seeds.push(processSeed(config, guildId, easyCategory.name, easyResult));
+        seeds.push(processSeed(config, guildId, easyMode, easyCategory.name, easyResult));
 
         axios.post(mediumUrl, mediumSettings).then(mediumResult => {
-            seeds.push(processSeed(config, guildId, mediumCategory.name, mediumResult));
+            seeds.push(processSeed(config, guildId, mediumMode, mediumCategory.name, mediumResult));
 
             axios.post(hardUrl, hardSettings).then(hardResult => {
-                seeds.push(processSeed(config, guildId, hardCategory.name, hardResult));
+                seeds.push(processSeed(config, guildId, hardMode, hardCategory.name, hardResult));
 
                 let dChannel = dClient.channels.cache.find(channel => channel.name === config.guilds[guildId].sotwChannel);
                 let role = dChannel.guild.roles.cache.find(r => r.name === config.guilds[guildId].pingRole);
@@ -90,6 +90,8 @@ function rollSeeds(guildId, dClient, easyMode, mediumMode, hardMode) {
                 }
 
                 dChannel.send(message).then().catch(console.error);
+
+                db.setSotwSeeds(guildId, seeds[0], seeds[1], seeds[2]);
             }).catch(console.error);
         }).catch(console.error);
     }).catch(console.error);

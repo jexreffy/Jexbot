@@ -1,6 +1,7 @@
-module.exports = (config, guildId, categoryName, result) => {
+module.exports = (config, guildId, category, categoryName, result) => {
     let retVal = {};
 
+    retVal.category = category;
     retVal.name = categoryName;
     retVal.link = `<https://alttpr.com/h/${result.data.hash}>`;
     retVal.code = ``;

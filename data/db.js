@@ -24,6 +24,18 @@ let server = {
             0,
             0
         ]
+    },
+    "sotwSeeds": {
+        "574586257079009280": [
+            0,
+            0,
+            0
+        ],
+        "515731524616847367": [
+            0,
+            0,
+            0
+        ]
     }
 };
 
@@ -93,6 +105,12 @@ pool.getConnection(function(err, connection) {
                     server.sotw[sotwRow.server][0] = sotwRow.easy;
                     server.sotw[sotwRow.server][1] = sotwRow.medium;
                     server.sotw[sotwRow.server][2] = sotwRow.hard;
+
+                    if (sotwRow.easy_seed) {
+                        server.sotwSeeds[sotwRow.server][0] = JSON.parse(sotwRow.easy_seed);
+                        server.sotwSeeds[sotwRow.server][1] = JSON.parse(sotwRow.medium_seed);
+                        server.sotwSeeds[sotwRow.server][2] = JSON.parse(sotwRow.hard_seed);
+                    }
                 });
             });
         });
@@ -194,7 +212,7 @@ function saveServerData() {
     });
 }
 
-function saveSotwData(guildId) {
+function saveSotwNextData(guildId) {
     pool.getConnection(function(err, connection) {
         let sql = `UPDATE sotw
                 SET easy = ?, medium = ?, hard = ?
@@ -208,13 +226,28 @@ function saveSotwData(guildId) {
                 throw sotwError;
             }
 
-            sql = `UPDATE server sotw = ? WHERE id = ?`;
+            sql = `UPDATE server SET sotw = ? WHERE id = ?`;
             data = [server.sotwLast, 1];
 
             connection.query(sql, data, (error, results, fields) => {
                 connection.release();
                 if (error) throw error;
             });
+        });
+    });
+}
+
+function saveSotwSeedData(guildId) {
+    pool.getConnection(function(err, connection) {
+        let sql = `UPDATE sotw
+                SET easy_seed = ?, medium_seed = ?, hard_seed = ?
+                WHERE server = ?`;
+
+        let data = [JSON.stringify(server.sotwSeeds[guildId][0]), JSON.stringify(server.sotwSeeds[guildId][1]), JSON.stringify(server.sotwSeeds[guildId][2]), guildId];
+
+        connection.query(sql, data, (sotwError, results, fields) => {
+            connection.release();
+            if (sotwError) throw sotwError;
         });
     });
 }
@@ -392,11 +425,30 @@ module.exports = {
     getLastSotw: function() {
         return server.sotwLast;
     },
-    setSotw: function(guildId, easy, medium, hard, last) {
+    getSotwSeed(guildId, level) {
+        let index = 0;
+        switch (level) {
+            case "medium":
+                index = 1;
+                break;
+            case "hard":
+                index = 2;
+                break;
+        }
+
+        return server.sotwSeeds[guildId][index];
+    },
+    setSotwNext: function(guildId, easy, medium, hard, last) {
         server.sotw[guildId][0] = easy;
         server.sotw[guildId][1] = medium;
         server.sotw[guildId][2] = hard;
         server.sotwLast = last;
-        saveSotwData(guildId);
+        saveSotwNextData(guildId);
+    },
+    setSotwSeeds: function(guildId, easy, medium, hard) {
+        server.sotwSeeds[guildId][0] = easy;
+        server.sotwSeeds[guildId][1] = medium;
+        server.sotwSeeds[guildId][2] = hard;
+        saveSotwSeedData(guildId);
     }
 }
