@@ -70,7 +70,7 @@ module.exports = (config, db, race, dChannel, message) => {
 function rollSeed(config, db, race, dChannel, url, settings, username, categoryName) {
     axios.post(url, settings).then(result => {
         let guildId = dChannel.guild.id;
-        let seed = processSeed(config, guildId, categoryName, result);
+        let seed = processSeed(config, guildId, null, categoryName, result);
 
         if (race) {
             race.seedRoller = username;
