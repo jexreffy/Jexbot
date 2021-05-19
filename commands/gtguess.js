@@ -15,7 +15,7 @@ module.exports = (config, race, dChannel, tClient, tChannel, username, message) 
             response = `${race.guesses[i]} has already guessed ${i + 1} for the GTBK Guessing Game.`;
             if (tClient && tChannel) {
                 tClient.say(tChannel, response).then().catch(console.error);
-            } else {
+            } else if (!race.invitational) {
                 dChannel.send(`**${response}**`).then().catch(console.error);
             }
 
@@ -28,14 +28,14 @@ module.exports = (config, race, dChannel, tClient, tChannel, username, message) 
 
         if (tClient && tChannel) {
             tClient.say(tChannel, response).then().catch(console.error);
-        } else {
+        } else if (!race.invitational) {
             dChannel.send(`**${response}**`).then().catch(console.error);
         }
     } else {
         race.guesses[guess - 1] = username;
         response = `${username} has guessed ${guess} for the GTBK Guessing Game.`;
 
-        if (race.ladder) {
+        if (race.ladder || race.invitational) {
             tClient.say(tChannel, response).then().catch(console.error);
         } else {
             broadcastMessage(config, dChannel, tClient, response, true);

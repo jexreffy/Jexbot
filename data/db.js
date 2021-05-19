@@ -130,15 +130,20 @@ function getPlayerIndexByName(username) {
             twitch: null,
             streaming: false,
             twitchBot: false,
+            standard: {
+                elo: 1000,
+                matches: 0
+            }
         };
+        players.push(player);
         createPlayer(player);
+        return players.findIndex(x => x.username === username);
     }
-    return player;
 }
 
 function createPlayer(player) {
     pool.getConnection(function(err, connection) {
-        let sql = `INSERT INTO players(username, twitch, streaming, twitchBot) VALUES(?)`;
+        let sql = `INSERT INTO players(username, twitch, streaming, twitchBot) VALUES(?, ?, ?, ?)`;
         let data = [player.username, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0];
 
         connection.query(sql, data, (error, results, fields) => {
@@ -146,7 +151,7 @@ function createPlayer(player) {
             if (error) throw error;
 
             player.id = results.insertId;
-            players.push(player);
+            createElo(player, "standard");
         });
     });
 }
@@ -167,7 +172,7 @@ function savePlayer(player) {
 
 function createElo(player, category) {
     pool.getConnection(function(err, connection) {
-        let sql = `INSERT INTO elo(player_id, mode) VALUES(?)`;
+        let sql = `INSERT INTO elo(player_id, mode) VALUES(?, ?)`;
         let data = [player.id, category];
 
         connection.query(sql, data, (error, results, fields) => {

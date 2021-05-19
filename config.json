@@ -117,7 +117,7 @@
     "minimumGuessStartSeconds": 3900,
     "defaultLeaderboardSize": "25",
     "defaultCategory": "standard",
-    "referees": ["Jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken", "KillerApp23", "Jixson", "RGBHive"],
+    "referees": ["jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken", "KillerApp23", "Jixson", "RGBHive", "Ruzzelljr"],
     "categories": {
         "ad": {
             "name": "All Dungeons",
@@ -865,8 +865,10 @@
     "teamGenerated": "Teams have been generated for this race. Please check the Embedded Message to see the teams.",
     "helloLadder": "Hello! I'm JexBot. My job is to enhance your viewing experience. Use !help and I'll tell you how you can interact with me. This is a Ladder Race. You can interact with Jexreffy, but you cannot help him with the race in any capacity",
     "helloRace": "Hello! I'm JexBot. My job is to enhance your viewing experience. Use !help and I'll tell you how you can interact with me.",
+    "helloInvitational": "Hello! I'm JexBot. My job is to enhance your viewing experience. Use !help and I'll tell you how you can interact with me.",
     "helpLadder": "Commands I listen to: !spaceballs, !mode, !blueballs [0-15], !gtstart, !gtguess [1-22], !gtstop, !gtbk",
     "helpRace": "Commands I listen to: !callback, !crew, !dick, !spaceballs, !mode, !blueballs [0-15], !gtguess [1-22], !gtenter, !gtbk, !runners",
+    "helpInvitational": "Commands I listen to: !callback, !crew, !dick, !spaceballs, !mode, !blueballs [0-15], !gtstart, !gtguess [1-22], !gtstop, !gtbk, !runners",
     "runnerMessage": "Follow the runners!",
     "crewMessage": "Follow the crew!",
     "gtLadderPrefix": "Jexreffy",

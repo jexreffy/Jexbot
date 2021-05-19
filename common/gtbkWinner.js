@@ -1,7 +1,7 @@
 const broadcastMessage = require('../common/broadcastMessage');
 
 module.exports = (config, race, dChannel, tClient) => {
-    let response = null
+    let response = null;
 
     if (race.guesses[race.gtbk - 1]) {
         race.gtbkWinner = race.guesses[race.gtbk - 1];

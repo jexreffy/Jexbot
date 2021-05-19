@@ -46,7 +46,7 @@ module.exports = (db, race, channel) => {
         desc += `\n Crew: ${crew}`;
     }
 
-    if (race.remainingPlayers < race.players.length / 2) {
+    if (race.invitational && race.finished || !race.invitational && race.remainingPlayers <= race.players.length / 2) {
         if (race.blueballs >= 0) {
             desc += `\n Aga 1 Blue Balls: ${race.blueballs}`;
         }

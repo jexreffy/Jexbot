@@ -24,7 +24,7 @@ module.exports = (db, dClient, tClient) => {
             broadcastMessage(config, dChannel, tClient, config.gtGuessIntro, false);
         } else if (!race.lastHello || (Math.floor(Date.now() - race.lastHello) / 1000) > config.helloInterval) {
             race.lastHello = Date.now();
-            broadcastTwitch(config, tClient, race.ladder ? config.helloLadder : config.helloRace);
+            broadcastTwitch(config, tClient, race.ladder ? config.helloLadder : race.invitational ? config.helloInvitational : config.helloRace);
         }
 
         db.setRaceData(guildId, race);

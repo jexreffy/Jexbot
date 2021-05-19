@@ -7,7 +7,7 @@ module.exports = (config, db, race, dChannel, tClient) => {
     if ((Math.floor(now - lastTime) / 1000) > config.minimumNewSpaceballsSeconds) {
         db.setSpaceballs(now);
         if (!race.ladder && race.initiatedAt) {
-            updateRaceMessage(race, dChannel);
+            updateRaceMessage(db, race, dChannel);
         }
 
         broadcastTwitch(config, tClient, config.spaceballsClock);

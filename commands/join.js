@@ -1,8 +1,8 @@
 const onRunnerAdded = require('../common/onRunnerAdded');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
-module.exports = (config, db, race, dChannel, username, message) => {
-    if (!race.invitational) {
+module.exports = (config, db, race, dChannel, username, message, invite) => {
+    if (!race.invitational || invite) {
         let player = race.players.find(x => x.username === username);
 
         if (!(race.started || race.finished || player)) {

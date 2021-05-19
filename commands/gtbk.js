@@ -4,8 +4,9 @@ module.exports = (config, race, tClient, tChannel, message) => {
     let match = message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i);
     let guess = parseInt(match[2]);
 
-    if (race.ladder) {
+    if (race.ladder || race.invitational) {
         race.gtbk = guess;
+        race.gtRunner = "TheCrystalCompany";
         const gtbkWinner = require('../common/gtbkWinner');
         gtbkWinner(config, race, null, tClient);
     } else {
