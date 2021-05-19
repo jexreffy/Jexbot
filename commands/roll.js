@@ -59,7 +59,7 @@ module.exports = (config, db, race, dChannel, message) => {
         }
 
         const category = config.categories[categoryName];
-        const settings = categoryName === "mystery" ? mysterySettings(config.mysteryWeights) : randomizerSettings(config, category);
+        const settings = category.mystery ? mysterySettings(category.weights) : randomizerSettings(config, category);
 
         const url = category.customizer ? PLANDO_URL : RANDO_URL;
 

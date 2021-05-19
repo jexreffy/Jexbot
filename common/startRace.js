@@ -7,11 +7,15 @@ module.exports = (config, db, race, dChannel) => {
         let jokeTime = Math.floor(Math.random() * config.jokeCountdownMax);
         let jokeUnits = config.jokeUnits[Math.floor(Math.random() * config.jokeUnits.length)];
         dChannel.send(`**The race will start in ${jokeTime} ${jokeUnits}**`).then().catch(console.error);
+        await sleep(100);
+
         race.status = countdown.firstLine;
+        dChannel.send(`**${race.status}**`).then().catch(console.error);
         updateRaceMessage(db, race, dChannel);
         await sleep(countdown.firstDelay);
 
         race.status = countdown.secondLine;
+        dChannel.send(`**${race.status}**`).then().catch(console.error);
         updateRaceMessage(db, race, dChannel);
         await sleep(countdown.secondDelay);
 

@@ -124,50 +124,59 @@
             "description": "Open Start, All Dungeons",
             "gtbk": true,
             "customizer": true,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "goal": "dungeons"
-            }
+            },
+            "weights": { }
         },
         "adboots": {
             "name": "All Dungeons Boots",
             "description": "Open Start, All Dungeons, Starting Boots",
             "gtbk": true,
             "customizer": true,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "goal": "dungeons",
                 "eq": ["PegasusBoots"]
-            }
+            },
+            "weights": { }
         },
         "adkeysanity": {
             "name": "AD Keysanity",
             "description": "Open Start, All Dungeons, Dungeon Items shuffled in the full item pool",
             "gtbk": false,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "dungeon_items": "full",
                 "goal": "dungeons",
                 "mode": "open"
-            }
+            },
+            "weights": { }
         },
         "adkeysanityboots": {
             "name": "AD Keysanity Boots",
             "description": "Open Start, All Dungeons, Dungeon Items shuffled in the full item pool, Starting Boots",
             "gtbk": false,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "dungeon_items": "full",
                 "goal": "dungeons",
                 "mode": "open",
                 "eq": ["PegasusBoots"]
-            }
+            },
+            "weights": { }
         },
         "ambrosia": {
             "name": "Ambrosia",
             "description": "Escape Sequence Start, Defeat Ganon, Assured Sword, Uncle Spoils Boots Location, Bosses cannot hold Dungeon Items",
             "gtbk": true,
             "customizer": true,
+            "mystery": false,
             "settings": {
                 "mode": "standard",
                 "weapons": "assured",
@@ -175,34 +184,40 @@
                     "spoil.BootsLocation": true,
                     "region.bossNormalLocation": false
                 }
-            }
+            },
+            "weights": { }
         },
         "beatable": {
             "name": "Beatable",
             "description": "Open Start, the Randomizer only ensures the game can be beaten, some items and dungeons may be inaccessible",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "accessibility": "none"
-            }
+            },
+            "weights": { }
         },
         "beginner": {
             "name": "Beginner",
             "description": "Escape Sequence Start, Defeat Ganon, Assured Sword, Basic Item Placement",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "standard",
                 "weapons": "assured",
                 "item_placement": "basic"
-            }
+            },
+            "weights": { }
         },
         "blitzmode": {
             "name": "Blitz Mode",
             "description": "Open Start, Fast Ganon, 4/4 Crystals, Start w/ Boots, Flute, Pearl, Mitts, Master Sword, and Lamp",
             "gtbk": false,
             "customizer": true,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "goal": "fast_ganon",
@@ -211,150 +226,176 @@
                     "tower": "4"
                 },
                 "eq": ["ProgressiveSword", "ProgressiveSword", "MoonPearl", "Lamp", "PegasusBoots", "ProgressiveGlove", "ProgressiveGlove", "OcarinaActive"]
-            }
+            },
+            "weights": { }
         },
         "casual": {
             "name": "Casual",
             "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Assured Sword",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "standard",
                 "weapons": "assured"
-            }
+            },
+            "weights": { }
         },
         "casualboots": {
             "name": "Casual Boots",
             "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Assured Sword, Starting Boots",
             "gtbk": true,
             "customizer": true,
+            "mystery": false,
             "settings": {
                 "mode": "standard",
                 "weapons": "assured",
                 "eq": ["PegasusBoots"]
-            }
+            },
+            "weights": { }
         },
         "casualbootsdungeons": {
             "name": "AD Casual Boots",
             "description": "Escape Sequence Start, All Dungeons, 7/7 Crystals, Assured Sword, Starting Boots",
             "gtbk": true,
             "customizer": true,
+            "mystery": false,
             "settings": {
                 "mode": "standard",
                 "goal": "dungeons",
                 "weapons": "assured",
                 "eq": ["PegasusBoots"]
-            }
+            },
+            "weights": { }
         },
         "casualbootsfast": {
             "name": "Casual Boots Fast Ganon",
             "description": "Escape Sequence Start, Fast Ganon, 7/7 Crystals, Assured Sword, Starting Boots",
             "gtbk": false,
             "customizer": true,
+            "mystery": false,
             "settings": {
                 "mode": "standard",
                 "goal": "fast_ganon",
                 "weapons": "assured",
                 "eq": ["PegasusBoots"]
-            }
+            },
+            "weights": { }
         },
         "crosskeys": {
             "name": "Crosskeys",
             "description": "Open Start, Fast Ganon, Crossworld Entrance Shuffle, Dungeon Items shuffled in the full item pool",
             "gtbk": false,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "dungeon_items": "full",
                 "goal": "fast_ganon",
                 "mode": "open",
                 "entrances": "crossed"
-            }
+            },
+            "weights": { }
         },
         "enemizer": {
             "name": "Enemizer",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Enemies and Bosses shuffled",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "enemizer": {
                     "boss_shuffle": "full",
                     "enemy_shuffle": "shuffled"
                 }
-            }
+            },
+            "weights": { }
         },
         "enemizerbosses": {
             "name": "Enemizer Boss Shuffle Only",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Bosses shuffled",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "enemizer": {
                     "boss_shuffle": "random"
                 }
-            }
+            },
+            "weights": { }
         },
         "expertitempool": {
             "name": "Expert Item Pool",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Expert Item Pool",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "item": {
                     "pool": "expert"
                 }
-            }
+            },
+            "weights": { }
         },
         "harditempool": {
             "name": "Hard Item Pool",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Hart Item Pool",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "item": {
                     "pool": "hard"
                 }
-            }
+            },
+            "weights": { }
         },
         "inverted": {
             "name": "Inverted",
             "description": "Start in Dark World, CT and GT swapped, Defeat Ganon",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "inverted"
-            }
+            },
+            "weights": { }
         },
         "invertedcrosskeys": {
             "name": "Inverted Crosskeys",
             "description": "Start in Dark World, CT and GT swapped, Fast Ganon, Crossworld Entrance Shuffle, Dungeon Items shuffled in the full item pool",
             "gtbk": false,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "dungeon_items": "full",
                 "goal": "fast_ganon",
                 "mode": "inverted",
                 "entrances": "crossed"
-            }
+            },
+            "weights": { }
         },
         "invertedkeys": {
             "name": "Inverted Keysanity",
             "description": "Start in Dark World, CT and GT swapped, Fast Ganon, Dungeon Items shuffled in the full item pool",
             "gtbk": false,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "dungeon_items": "full",
                 "mode": "inverted"
-            }
+            },
+            "weights": { }
         },
         "invrosia": {
             "name": "Invrosia",
             "description": "Start in Dark World, CT and GT swapped, Defeat Ganon, Assured Sword, Bosses cannot hold Dungeon Items, Big Keys expect GTBK are randomized",
             "gtbk": true,
             "customizer": true,
+            "mystery": false,
             "settings": {
                 "mode": "inverted",
                 "weapons": "assured",
@@ -365,13 +406,15 @@
                     "rom.freeItemText": true,
                     "jex.GTBKinGT": true
                 }
-            }
+            },
+            "weights": { }
         },
         "invrosiaboots": {
             "name": "Invrosia Boots",
             "description": "Start in Dark World, CT and GT swapped, Defeat Ganon, Assured Sword, Starting Boots, Bosses cannot hold Dungeon Items, Big Keys expect GTBK are randomized",
             "gtbk": true,
             "customizer": true,
+            "mystery": false,
             "settings": {
                 "mode": "inverted",
                 "weapons": "assured",
@@ -383,23 +426,27 @@
                     "rom.freeItemText": true,
                     "jex.GTBKinGT": true
                 }
-            }
+            },
+            "weights": { }
         },
         "keysanity": {
             "name": "Keysanity",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Dungeon Items shuffled in the full item pool",
             "gtbk": false,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "dungeon_items": "full",
                 "mode": "open"
-            }
+            },
+            "weights": { }
         },
         "ladders7pot": {
             "name": "Ladder S7 Potpourri",
             "description": "Open Start, All Dungeons, Small and Big Keys Randomized, Boss Shuffle, Start w/ Flute, Hookshot, and Ice Rod",
             "gtbk": false,
             "customizer": true,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "goal": "dungeons",
@@ -413,35 +460,203 @@
                     "rom.freeItemMenu": true,
                     "rom.freeItemText": true
                 }
-            }
+            },
+            "weights": { }
         },
         "mcshuffle": {
             "name": "MC Shuffle",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Maps & Compasses shuffled in the full item pool",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "dungeon_items": "mc",
                 "mode": "open"
-            }
+            },
+            "weights": { }
         },
         "mcsshuffle": {
             "name": "MCS Shuffle",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Maps, Compasses, and Small Keys shuffled in the full item pool",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "dungeon_items": "mcs",
                 "mode": "open"
-            }
+            },
+            "weights": { }
         },
         "mystery": {
             "name": "Mystery",
             "description": "All settings are randomly chosen. You must play the seed to figure out what it is.",
             "gtbk": false,
             "customizer": true,
+            "mystery": true,
             "settings": {
                 "spoilers": "mystery"
+            },
+            "weights": {
+                "glitches_required": {
+                    "none": 100,
+                    "overworld_glitches": 0,
+                    "major_glitches": 0,
+                    "no_logic": 0
+                },
+                "item_placement": {
+                    "basic": 0,
+                    "advanced": 100
+                },
+                "mode": {
+                    "standard": 40,
+                    "open": 40,
+                    "inverted": 10,
+                    "retro": 10
+                },
+                "goal": {
+                    "ganon": 35,
+                    "fast_ganon": 35,
+                    "dungeons": 15,
+                    "pedestal": 20,
+                    "triforce-hunt": 5
+                },
+                "accessibility": {
+                    "items": 90,
+                    "location": 0,
+                    "none": 10
+                },
+                "dungeon_items": {
+                    "standard": 50,
+                    "mc": 0,
+                    "mcs": 0,
+                    "full": 50
+                },
+                "wild_maps": {
+                    "true": 60,
+                    "false": 40
+                },
+                "wild_compasses": {
+                    "true": 60,
+                    "false": 40
+                },
+                "wild_keys": {
+                    "true": 60,
+                    "false": 40
+                },
+                "wild_big_keys": {
+                    "true": 60,
+                    "false": 40
+                },
+                "tower_open": {
+                    "0": 5,
+                    "1": 5,
+                    "2": 10,
+                    "3": 10,
+                    "4": 10,
+                    "5": 20,
+                    "6": 20,
+                    "7": 20,
+                    "random": 0
+                },
+                "ganon_open": {
+                    "0": 0,
+                    "1": 0,
+                    "2": 0,
+                    "3": 10,
+                    "4": 10,
+                    "5": 25,
+                    "6": 25,
+                    "7": 30,
+                    "random": 0
+                },
+                "entrance_shuffle": {
+                    "none": 70,
+                    "simple": 0,
+                    "restricted": 10,
+                    "full": 0,
+                    "crossed": 20,
+                    "insanity": 0
+                },
+                "boss_shuffle": {
+                    "none": 70,
+                    "simple": 0,
+                    "full": 30,
+                    "random": 0
+                },
+                "enemy_shuffle": {
+                    "none": 70,
+                    "shuffled": 30,
+                    "random": 0
+                },
+                "hints": {
+                    "on": 10,
+                    "off": 90
+                },
+                "weapons": {
+                    "randomized": 50,
+                    "assured": 20,
+                    "vanilla": 20,
+                    "swordless": 10
+                },
+                "item_pool": {
+                    "normal": 60,
+                    "hard": 30,
+                    "expert": 10,
+                    "crowd_control": 0
+                },
+                "item_functionality": {
+                    "normal": 100,
+                    "hard": 0,
+                    "expert": 0
+                },
+                "enemy_damage": {
+                    "default": 100,
+                    "shuffled": 0,
+                    "random": 0
+                },
+                "enemy_health": {
+                    "default": 70,
+                    "easy": 15,
+                    "hard": 15,
+                    "expert": 0
+                },
+                "starting_items": [
+                    {
+                        "item": "PegasusBoots",
+                        "false": 50,
+                        "true": 50
+                    },
+                    {
+                        "item": "OcarinaActive",
+                        "false": 80,
+                        "true": 20
+                    },
+                    {
+                        "item": "Hookshot",
+                        "false": 90,
+                        "true": 10
+                    },
+                    {
+                        "item": "FireRod",
+                        "false": 90,
+                        "true": 10
+                    },
+                    {
+                        "item": "IceRod",
+                        "false": 90,
+                        "true": 10
+                    },
+                    {
+                        "item": "Flippers",
+                        "false": 90,
+                        "true": 10
+                    },
+                    {
+                        "item": "MagicMirror",
+                        "false": 90,
+                        "true": 10
+                    }
+                ]
             }
         },
         "mysterykeys": {
@@ -449,6 +664,7 @@
             "description": "Escape Sequence Start, Defeat Ganon, 5/5 Crystals, Starting Boots and Flute, Big Keys expect GTBK are randomized, but you don't know which Key is which until you enter a dungeon",
             "gtbk": true,
             "customizer": true,
+            "mystery": false,
             "settings": {
                 "mode": "standard",
                 "crystals": {
@@ -462,204 +678,242 @@
                     "rom.freeItemText": false,
                     "jex.GTBKinGT": true
                 }
-            }
+            },
+            "weights": { }
         },
         "open": {
             "name": "Open",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "open"
-            }
+            },
+            "weights": { }
         },
         "openassured": {
             "name": "Open Assured Sword",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Assured Sword",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "weapons": "assured"
-            }
+            },
+            "weights": { }
         },
         "openboots": {
             "name": "Open Boots",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Starting Boots",
             "gtbk": true,
             "customizer": true,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "eq": ["PegasusBoots"]
-            }
+            },
+            "weights": { }
         },
         "openfast": {
             "name": "Open Fast Ganon",
             "description": "Open Start, Fast Ganon, 7/7 Crystals",
             "gtbk": false,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "goal": "fast_ganon"
-            }
+            },
+            "weights": { }
         },
         "openflute": {
             "name": "Open Flute",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Starting Flute",
             "gtbk": true,
             "customizer": true,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "eq": ["OcarinaActive"]
-            }
+            },
+            "weights": { }
         },
         "pedestal": {
             "name": "Pedestal",
             "description": "Open Start, Pedestal Goal, 7/7 Crystals",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "goal": "pedestal"
-            }
+            },
+            "weights": { }
         },
         "randomcrystals": {
             "name": "Random Crystals",
             "description": "Open Start, Defeat Ganon, Random/Random Crystals",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "crystals": {
                     "ganon": "random",
                     "tower": "random"
                 },
                 "mode": "open"
-            }
+            },
+            "weights": { }
         },
         "reduced": {
             "name": "Reduced Crystals",
             "description": "Open Start, Defeat Ganon, 6/6 Crystals",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "crystals": {
                     "ganon": "6",
                     "tower": "6"
                 },
                 "mode": "open"
-            }
+            },
+            "weights": { }
         },
         "retro": {
             "name": "Retro",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, Universal Keys, Bow cost money to use",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "retro"
-            }
+            },
+            "weights": { }
         },
         "retrance": {
             "name": "Retrance",
             "description": "Open Start, Fast Ganon, Crossworld Entrance Shuffle, Assured Sword, Universal Keys, Other Dungeon Items Shuffled, Bow cost money to use",
             "gtbk": false,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "dungeon_items": "full",
                 "goal": "fast_ganon",
                 "mode": "retro",
                 "entrances": "crossed",
                 "weapons": "assured"
-            }
+            },
+            "weights": { }
         },
         "retrancefull": {
             "name": "Retrance Full",
             "description": "Open Start, Fast Ganon, Full Entrance Shuffle, Assured Sword, Universal Keys, Other Dungeon Items Shuffled, Bow cost money to use",
             "gtbk": false,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "dungeon_items": "full",
                 "goal": "fast_ganon",
                 "mode": "retro",
                 "entrances": "full",
                 "weapons": "assured"
-            }
+            },
+            "weights": { }
         },
         "standard": {
             "name": "Standard",
             "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "standard"
-            }
+            },
+            "weights": { }
         },
         "standardboots": {
             "name": "Standard Boots",
             "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Starting Boots",
             "gtbk": true,
             "customizer": true,
+            "mystery": false,
             "settings": {
                 "mode": "standard",
                 "eq": ["PegasusBoots"]
-            }
+            },
+            "weights": { }
         },
         "standardfast": {
             "name": "Standard Fast Ganon",
             "description": "Escape Sequence Start, Fast Ganon, 7/7 Crystals",
             "gtbk": false,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "standard",
                 "goal": "fast_ganon"
-            }
+            },
+            "weights": { }
         },
         "standardvanilla": {
             "name": "Standard Vanilla Sword",
             "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Vanilla Sword",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "weapons": "vanilla"
-            }
+            },
+            "weights": { }
         },
         "swordless": {
             "name": "Swordless",
             "description": "Open Start, Defeat Ganon, 7/7 Crystals, No Swords",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "weapons": "swordless"
-            }
+            },
+            "weights": { }
         },
         "tourney2021": {
             "name": "Standard Hard Item Pool",
             "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Hard Item Pool",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "standard",
                 "item": {
                     "pool": "hard"
                 }
-            }
+            },
+            "weights": { }
         },
         "triforce": {
             "name": "Triforce Hunt",
             "description": "Open Start, Triforce Hunt, 7/7 Crystals",
             "gtbk": true,
             "customizer": false,
+            "mystery": false,
             "settings": {
                 "mode": "open",
                 "goal": "triforce-hunt"
-            }
+            },
+            "weights": { }
         },
         "wtfrosia": {
             "name": "WTFrosia",
             "description": "Start in Dark World, CT and GT swapped, All Dungeons, Dungeon Items shuffled in the full item pool, Assured Sword, Enemies and Bosses shuffled",
             "gtbk": false,
             "customizer": true,
+            "mystery": false,
             "settings": {
                 "mode": "inverted",
                 "weapons": "assured",
@@ -670,170 +924,9 @@
                     "enemy_shuffle": "shuffled"
                 },
                 "eq": ["PegasusBoots"]
-            }
+            },
+            "weights": { }
         }
-    },
-    "mysteryWeights": {
-        "glitches_required": {
-            "none": 100,
-            "overworld_glitches": 0,
-            "major_glitches": 0,
-            "no_logic": 0
-        },
-        "item_placement": {
-            "basic": 0,
-            "advanced": 100
-        },
-        "mode": {
-            "standard": 40,
-            "open": 40,
-            "inverted": 10,
-            "retro": 10
-        },
-        "goal": {
-            "ganon": 35,
-            "fast_ganon": 35,
-            "dungeons": 15,
-            "pedestal": 20,
-            "triforce-hunt": 5
-        },
-        "accessibility": {
-            "items": 90,
-            "location": 0,
-            "none": 10
-        },
-        "dungeon_items": {
-            "standard": 50,
-            "mc": 0,
-            "mcs": 0,
-            "full": 50
-        },
-        "wild_maps": {
-            "true": 60,
-            "false": 40
-        },
-        "wild_compasses": {
-            "true": 60,
-            "false": 40
-        },
-        "wild_keys": {
-            "true": 60,
-            "false": 40
-        },
-        "wild_big_keys": {
-            "true": 60,
-            "false": 40
-        },
-        "tower_open": {
-            "0": 5,
-            "1": 5,
-            "2": 10,
-            "3": 10,
-            "4": 10,
-            "5": 20,
-            "6": 20,
-            "7": 20,
-            "random": 0
-        },
-        "ganon_open": {
-            "0": 0,
-            "1": 0,
-            "2": 0,
-            "3": 10,
-            "4": 10,
-            "5": 25,
-            "6": 25,
-            "7": 30,
-            "random": 0
-        },
-        "entrance_shuffle": {
-            "none": 70,
-            "simple": 0,
-            "restricted": 10,
-            "full": 0,
-            "crossed": 20,
-            "insanity": 0
-        },
-        "boss_shuffle": {
-            "none": 70,
-            "simple": 0,
-            "full": 30,
-            "random": 0
-        },
-        "enemy_shuffle": {
-            "none": 70,
-            "shuffled": 30,
-            "random": 0
-        },
-        "hints": {
-            "on": 10,
-            "off": 90
-        },
-        "weapons": {
-            "randomized": 50,
-            "assured": 20,
-            "vanilla": 20,
-            "swordless": 10
-        },
-        "item_pool": {
-            "normal": 60,
-            "hard": 30,
-            "expert": 10,
-            "crowd_control": 0
-        },
-        "item_functionality": {
-            "normal": 100,
-            "hard": 0,
-            "expert": 0
-        },
-        "enemy_damage": {
-            "default": 100,
-            "shuffled": 0,
-            "random": 0
-        },
-        "enemy_health": {
-            "default": 70,
-            "easy": 15,
-            "hard": 15,
-            "expert": 0
-        },
-        "starting_items": [
-            {
-                "item": "PegasusBoots",
-                "false": 50,
-                "true": 50
-            },
-            {
-                "item": "OcarinaActive",
-                "false": 80,
-                "true": 20
-            },
-            {
-                "item": "Hookshot",
-                "false": 90,
-                "true": 10
-            },
-            {
-                "item": "FireRod",
-                "false": 90,
-                "true": 10
-            },
-            {
-                "item": "IceRod",
-                "false": 90,
-                "true": 10
-            },
-            {
-                "item": "Flippers",
-                "false": 90,
-                "true": 10
-            },
-            {
-                "item": "MagicMirror",
-                "false": 90,
-                "true": 10
-            }
-        ]
     },
     "gtbkLocations": [
         "R2Fub24ncyBUb3dlciAtIEJvYidzIFRvcmNoOjE=",
@@ -891,7 +984,8 @@
         "I think so, NAME, but that would require me to come up with an acceptably snarky response to whatever you think it means.",
         "Well, NAME, it means that Ryu is going to have his last, last, last, last scotch around 1:45:36 in the race.",
         "The same thing we do every night, NAME, try to take over the world!",
-        "yeah, yeah, yeah."
+        "yeah, yeah, yeah.",
+        "KatiebugBot says that it is Rebecca Black Appreciation Day"
     ],
     "pings": [
         "Let's get ready to Rando!!!",
@@ -989,9 +1083,9 @@
             "countdown": 7
         },
         {
-            "firstLine": "TjMaelstrom, did you get non-alcoholic beer again?!",
+            "firstLine": "KatiebugBot: Have fun stormin' the castle!!!",
             "firstDelay": 5000,
-            "secondLine": "I swear on my mother, who God rest her soul is still alive...",
+            "secondLine": "JexBot: Think it'll work... KatiebugBot: It would take a miracle...",
             "secondDelay": 5000,
             "countdown": 7
         }

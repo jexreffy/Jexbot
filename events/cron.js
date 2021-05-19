@@ -58,15 +58,15 @@ module.exports = (db, dClient, tClient) => {
 
 function rollSeeds(guildId, db, dClient, easyMode, mediumMode, hardMode) {
     const easyCategory = config.categories[easyMode];
-    const easySettings = easyMode === "mystery" ? mysterySettings(config.mysteryWeights) : randomizerSettings(config, easyCategory);
+    const easySettings = easyCategory.mystery ? mysterySettings(easyCategory.weights) : randomizerSettings(config, easyCategory);
     const easyUrl      = easyCategory.customizer ? PLANDO_URL : RANDO_URL;
 
     const mediumCategory = config.categories[mediumMode];
-    const mediumSettings = mediumMode === "mystery" ? mysterySettings(config.mysteryWeights) : randomizerSettings(config, mediumCategory);
+    const mediumSettings = mediumCategory.mystery ? mysterySettings(mediumCategory.weights) : randomizerSettings(config, mediumCategory);
     const mediumUrl      = mediumCategory.customizer ? PLANDO_URL : RANDO_URL;
 
     const hardCategory = config.categories[hardMode];
-    const hardSettings = hardMode === "mystery" ? mysterySettings(config.mysteryWeights) : randomizerSettings(config, hardCategory);
+    const hardSettings = hardCategory.mystery ? mysterySettings(hardCategory.weights) : randomizerSettings(config, hardCategory);
     const hardUrl      = hardCategory.customizer ? PLANDO_URL : RANDO_URL;
 
     let seeds = [];
