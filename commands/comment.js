@@ -6,6 +6,6 @@ module.exports = (config, race, dChannel, username, message) => {
     if (match && match.length > 2 && race.started && player && (player.finished || player.forfeited)) {
         player.comment = match[2];
 
-        if (race.spoilersAllowed) dChannel.send(`**${username} commented ${player.comment}**`).then().catch(console.error);
+        dChannel.send(`**${username} commented ||${player.comment}||**`).then().catch(console.error);
     }
 }

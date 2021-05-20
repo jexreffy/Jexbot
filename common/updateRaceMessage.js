@@ -1,4 +1,5 @@
 const sortPlayers = require('../common/sortPlayers');
+const getRaceTime = require('../common/getRaceTime');
 
 module.exports = (db, race, channel) => {
     let message = {};
@@ -77,7 +78,7 @@ module.exports = (db, race, channel) => {
 
             if (db.getPlayerStreaming(username)) {
                 let userTwitch = db.getPlayerTwitch(username);
-                let twitchBot = (!race.invitational || !race.restream) && db.getPlayerTwitchBot(username) ? " :robot:" : "";
+                let twitchBot = !race.invitational && db.getPlayerTwitchBot(username) ? " :robot:" : "";
                 if (!userTwitch) {
                     userTwitch = username;
                 }
@@ -88,11 +89,7 @@ module.exports = (db, race, channel) => {
             }
 
             if (race.players[i].time) {
-                let time = race.players[i].time;
-                let seconds = Math.floor((time / 1000) % 60);
-                let minutes = Math.floor((time / (1000 * 60)) % 60);
-                let hours = Math.floor((time / (1000 * 60 * 60)) % 24);
-                status += ((i !== 0) ? '\n' : '') + (i + 1) + ". " + hours.toString().padStart(2, "0") + ':' + minutes.toString().padStart(2, "0") + ':' + seconds.toString().padStart(2, "0");
+                status += ((i !== 0) ? '\n' : '') + (i + 1) + ". " + getRaceTime(race.players[i].time);
             } else if (race.players[i].forfeited) {
                 status += ((i !== 0) ? '\n' : '') + 'DNF';
             } else if (race.players[i].ready) {
@@ -129,8 +126,9 @@ module.exports = (db, race, channel) => {
             "\n`.unready` - Sets player not ready to start" +
             "\n`.roll` - Only type this if your self esteem can handle it, or understand how Random Number Generators work..." +
             "\n`.streaming {on|off}` - Sets if the player is streaming the race and should be included in the Multistream" +
-            "\n`.twitch {Twitch username}` - Change stream URL to your Twitch username if different from your Discord username" +
-            "\n`.twitchBot {on|off}` - Sets if JexBot connects to the Player's Twitch stream" ;
+            "\n`.twitch {Twitch username}` - Change stream URL to your Twitch username if different from your Discord username";
+
+        if (!race.invitational) racerCommands += "\n`.twitchBot {on|off}` - Sets if JexBot connects to the Player's Twitch stream" ;
 
         viewerCommands = "Prefixes: `.` or `!`" +
             "\n`.spaceballs` - Resets the clock since the last Spaceballs reference";
