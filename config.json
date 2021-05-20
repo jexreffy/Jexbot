@@ -372,7 +372,7 @@
         },
         "inverted": {
             "name": "Inverted",
-            "description": "Start in Dark World, CT and GT swapped, Defeat Ganon",
+            "description": "Inverted Start, Defeat Ganon",
             "gtbk": true,
             "customizer": false,
             "mystery": false,
@@ -384,7 +384,7 @@
         },
         "invertedcrosskeys": {
             "name": "Inverted Crosskeys",
-            "description": "Start in Dark World, CT and GT swapped, Fast Ganon, Crossworld Entrance Shuffle, Dungeon Items shuffled in the full item pool",
+            "description": "Inverted Start, Fast Ganon, Crossworld Entrance Shuffle, Dungeon Items shuffled in the full item pool",
             "gtbk": false,
             "customizer": false,
             "mystery": false,
@@ -399,7 +399,7 @@
         },
         "invertedkeys": {
             "name": "Inverted Keysanity",
-            "description": "Start in Dark World, CT and GT swapped, Fast Ganon, Dungeon Items shuffled in the full item pool",
+            "description": "Inverted Start, Fast Ganon, Dungeon Items shuffled in the full item pool",
             "gtbk": false,
             "customizer": false,
             "mystery": false,
@@ -412,7 +412,7 @@
         },
         "invrosia": {
             "name": "Invrosia",
-            "description": "Start in Dark World, CT and GT swapped, Defeat Ganon, Assured Sword, Bosses cannot hold Dungeon Items, Big Keys expect GTBK are randomized",
+            "description": "Inverted Start, Assured Sword, Bosses cannot hold Dungeon Items, Big Keys expect GTBK are randomized",
             "gtbk": true,
             "customizer": true,
             "mystery": false,
@@ -432,7 +432,7 @@
         },
         "invrosiaboots": {
             "name": "Invrosia Boots",
-            "description": "Start in Dark World, CT and GT swapped, Defeat Ganon, Assured Sword, Starting Boots, Bosses cannot hold Dungeon Items, Big Keys expect GTBK are randomized",
+            "description": "Inverted Start, Assured Sword, Starting Boots, Bosses cannot hold Dungeon Items, Big Keys expect GTBK are randomized",
             "gtbk": true,
             "customizer": true,
             "mystery": false,
@@ -726,10 +726,10 @@
                     "none": 0
                 },
                 "dungeon_items": {
-                    "standard": 100,
+                    "standard": 50,
                     "mc": 0,
                     "mcs": 0,
-                    "full": 0
+                    "full": 50
                 },
                 "wild_maps": {
                     "true": 60,
@@ -899,10 +899,10 @@
                     "none": 10
                 },
                 "dungeon_items": {
-                    "standard": 50,
+                    "standard": 30,
                     "mc": 0,
                     "mcs": 0,
-                    "full": 50
+                    "full": 70
                 },
                 "wild_maps": {
                     "true": 60,
@@ -1383,7 +1383,7 @@
         },
         "wtfrosia": {
             "name": "WTFrosia",
-            "description": "Start in Dark World, CT and GT swapped, All Dungeons, Dungeon Items shuffled in the full item pool, Assured Sword, Enemies and Bosses shuffled",
+            "description": "Inverted Start, All Dungeons, Dungeon Items shuffled in the full item pool, Assured Sword, Enemies and Bosses shuffled",
             "gtbk": false,
             "customizer": true,
             "mystery": false,

@@ -7,22 +7,46 @@ const updateRaceMessage = require('../common/updateRaceMessage');
 module.exports = (config, db, race, dChannel, message) => {
     if (race && race.seedLink) return;
 
-    let helpMatch = message.content.match(/^[.!](\broll help\b)/i);
+    let categories = Object.keys(config.categories);
+    let categoryName = config.defaultCategory;
+    let username = message.author.username;
 
-    if (helpMatch && helpMatch.length > 0) {
-        let keys = Object.keys(config.categories);
-        let message = `**.roll {mode}**\nModes:\n`;
+    let helpMatch = message.content.match(/^[.!](\broll help\b) ([a-zA-Z0-9%]{4,20})/i);
 
-        for (let i = 0; i < keys.length; i++) {
-            message += `\n\`${keys[i]}\` - ${config.categories[keys[i]].name}`;
+    if (helpMatch && helpMatch.length > 2) {
+        for (let i = 0; i < categories.length; i++) {
+            if (helpMatch[2] === categories[i]) {
+                categoryName = categories[i];
+                break;
+            }
         }
+
+        let category = config.categories[categoryName];
+
+        let message = `**Category ${categoryName} - ${category.name}**\n\n\`\`\`${category.description}`;
+
+        if (!(category.mystery || category.random)) {
+            message += `\nSettings: {${JSON.stringify(category.settings)}}`;
+        }
+
+        message += `\`\`\``;
 
         dChannel.send(message).then().catch(console.error);
         return;
     }
 
-    let categoryName = config.defaultCategory;
-    let username = message.author.username;
+    helpMatch = message.content.match(/^[.!](\broll help\b)/i);
+
+    if (helpMatch && helpMatch.length > 0) {
+        let message = `**.roll {mode}**\nModes:\n`;
+
+        for (let i = 0; i < categories.length; i++) {
+            message += `\n\`${categories[i]}\` - ${config.categories[categories[i]].name}`;
+        }
+
+        dChannel.send(message).then().catch(console.error);
+        return;
+    }
 
     if (message.attachments && message.attachments.size > 0) {
         /*let attachment = message.attachments.first();
@@ -41,8 +65,6 @@ module.exports = (config, db, race, dChannel, message) => {
             let match = message.content.match(/^[.!](\broll\b) ([a-zA-Z0-9<>:]{4,20})/i);
 
             if (match && match.length > 2) {
-                let categories = Object.keys(config.categories);
-
                 for (let i = 0; i < categories.length; i++) {
                     if (match[2] === categories[i]) {
                         categoryName = categories[i];
