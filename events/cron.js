@@ -3,6 +3,7 @@ const config = require('../config.json');
 const broadcastMessage = require('../common/broadcastMessage');
 const broadcastTwitch = require('../common/broadcastTwitch');
 const categorySettings = require('../common/categorySettings');
+const getRandom = require('../common/getRandom');
 const processSeed = require('../common/processSeed');
 
 module.exports = (db, dClient, tClient) => {
@@ -68,7 +69,7 @@ function rollSeeds(guildId, db, dClient, easySettings, mediumSettings, hardSetti
                 let dChannel = dClient.channels.cache.find(channel => channel.name === config.guilds[guildId].sotwChannel);
                 let role = dChannel.guild.roles.cache.find(r => r.name === config.guilds[guildId].pingRole);
 
-                let message = `${role} ${config.sotwMessage} ${config.sotwSponsor[Math.floor(Math.random() * config.sotwSponsor.length)]}`;
+                let message = `${role} ${config.sotwMessage} ${config.sotwSponsor[getRandom(config.sotwSponsor.length)]}`;
 
                 for (let i = 0; i < seeds.length; i++) {
                     message += `\n${seeds[i].name} ${seeds[i].link} ${seeds[i].code}`;

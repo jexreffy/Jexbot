@@ -1,11 +1,12 @@
+const getRandom = require('../common/getRandom');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (config, db, race, dChannel) => {
     const sleep = m => new Promise(r => setTimeout(r, m));
     (async() => {
         let countdown = config.countdowns[race.countdownIndex];
-        let jokeTime = Math.floor(Math.random() * config.jokeCountdownMax);
-        let jokeUnits = config.jokeUnits[Math.floor(Math.random() * config.jokeUnits.length)];
+        let jokeTime = getRandom(config.jokeCountdownMax);
+        let jokeUnits = config.jokeUnits[getRandom(config.jokeUnits.length)];
         dChannel.send(`**The race will start in ${jokeTime} ${jokeUnits}**`).then().catch(console.error);
         await sleep(100);
 

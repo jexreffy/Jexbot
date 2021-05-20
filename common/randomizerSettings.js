@@ -1,3 +1,4 @@
+const getRandom = require('../common/getRandom');
 const getCustomizerSettings = require('../common/getCustomizerSettings');
 const getRandomizerSettings = require('../common/getRandomizerSettings');
 const processStartingEquipment = require('../common/processStartingEquipment');
@@ -18,7 +19,7 @@ module.exports = (config, category) => {
             for (let i = 0; i < subkeys.length; i++) {
                 let subkey = subkeys[i];
                 if (key === "custom" && subkey === "jex.GTBKinGT") {
-                    let location = config.gtbkLocations[Math.floor(Math.random() * Math.floor(config.gtbkLocations.length))];
+                    let location = config.gtbkLocations[getRandom(config.gtbkLocations.length)];
                     settings.l[location] = "BigKeyA2:1"
                     settings.custom.item.count.BigKeyA2 = 0;
                 } else {

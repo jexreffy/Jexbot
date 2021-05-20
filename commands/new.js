@@ -1,3 +1,4 @@
+const getRandom = require('../common/getRandom');
 const setRaceCategory = require('../common/setRaceCategory');
 const updateRaceMessage = require('../common/updateRaceMessage');
 const resetRace = require('../common/resetRace');
@@ -10,8 +11,8 @@ module.exports = (config, db, race, dChannel, message) => {
 
         resetRace(race);
 
-        race.pingIndex = Math.floor(Math.random() * Math.floor(config.pings.length));
-        race.countdownIndex = Math.floor(Math.random() * Math.floor(config.countdowns.length));
+        race.pingIndex = getRandom(config.pings.length);
+        race.countdownIndex = getRandom(config.countdowns.length);
         race.mutlistream = 'https://multistre.am/';
         race.status = 'PRE-RACE: WAITING FOR PLAYERS';
 

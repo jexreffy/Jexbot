@@ -1,3 +1,4 @@
+const getRandom = require('../common/getRandom');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (config, db, race, dChannel, username, coop) => {
@@ -20,7 +21,7 @@ module.exports = (config, db, race, dChannel, username, coop) => {
         let playersUsed = [];
 
         do {
-            let i = Math.floor(Math.random() * race.players.length);
+            let i = getRandom(race.players.length);
             if (playersUsed.indexOf(i) < 0) {
                 playersUsed.push(i);
 

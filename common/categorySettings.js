@@ -1,3 +1,4 @@
+const getRandom = require('../common/getRandom');
 const mysterySettings = require('../common/mysterySettings');
 const randomizerSettings = require('../common/randomizerSettings');
 
@@ -17,7 +18,9 @@ module.exports = (config, categoryName) => {
         retVal.settings = mysterySettings(category.weights);
     } else if (category.random) {
         let categoryList = category.categories.length > 0 ? category.categories : Object.keys(config.categories);
-        category = config.categories[categoryList[Math.floor(Math.random() * Math.floor(categoryList.length))]];
+        do {
+            category = config.categories[categoryList[getRandom(categoryList.length)]];
+        } while (category.mystery);
 
         retVal.settings = randomizerSettings(config, category);
         retVal.settings.spoilers = "mystery";

@@ -1,3 +1,4 @@
+const getRandom = require('../common/getRandom');
 const setRaceCategory = require('../common/setRaceCategory');
 const resetRace = require('../common/resetRace');
 const join = require('./join');
@@ -11,7 +12,7 @@ module.exports = (config, db, race, dChannel, message) => {
         const guildId = dChannel.guild.id;
 
         race.invitational = true;
-        race.countdownIndex = Math.floor(Math.random() * Math.floor(config.countdowns.length));
+        race.countdownIndex = getRandom(config.countdowns.length);
         race.mutlistream = 'https://multistre.am/';
         race.status = 'PRE-RACE: WAITING FOR PLAYERS';
 
