@@ -559,20 +559,20 @@
                     "full": 0
                 },
                 "wild_maps": {
-                    "true": 80,
-                    "false": 20
+                    "true": 20,
+                    "false": 80
                 },
                 "wild_compasses": {
-                    "true": 80,
-                    "false": 20
+                    "true": 20,
+                    "false": 80
                 },
                 "wild_keys": {
-                    "true": 80,
-                    "false": 20
+                    "true": 20,
+                    "false": 80
                 },
                 "wild_big_keys": {
-                    "true": 80,
-                    "false": 20
+                    "true": 20,
+                    "false": 80
                 },
                 "tower_open": {
                     "0": 5,
@@ -770,9 +770,9 @@
                     "random": 0
                 },
                 "entrance_shuffle": {
-                    "none": 100,
-                    "simple": 0,
-                    "restricted": 0,
+                    "none": 70,
+                    "simple": 20,
+                    "restricted": 10,
                     "full": 0,
                     "crossed": 0,
                     "insanity": 0
@@ -859,7 +859,7 @@
                 ]
             }
         },
-        "mystery": {
+        "mysteryladder": {
             "name": "Mystery Ladder",
             "description": "All settings are randomly chosen per the ALTTPR Ladder settings. You must play the seed to figure out what it is.",
             "gtbk": false,
