@@ -1,5 +1,5 @@
 module.exports = (config, db, race, guildId, mode) => {
-    if (mode === "easy" || mode === "medium" || mode === "hard") {
+    if (mode === "sotweasy" || mode === "sotwmedium" || mode === "sotwhard") {
         let seed = db.getSotwSeed(guildId, mode);
 
         race.category = seed.category;
