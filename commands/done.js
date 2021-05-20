@@ -1,4 +1,5 @@
 ﻿const broadcastMessage = require('../common/broadcastMessage');
+const getRaceTime = require('../common/getRaceTime');
 const onRunnerFinished = require('../common/onRunnerFinished');
 
 module.exports = (config, db, race, dChannel, tClient, username, message) => {
@@ -14,12 +15,7 @@ module.exports = (config, db, race, dChannel, tClient, username, message) => {
         }
         player.time = time;
 
-        let seconds = Math.floor((time / 1000) % 60);
-        let minutes = Math.floor((time / (1000 * 60)) % 60);
-        let hours = Math.floor((time / (1000 * 60 * 60)) % 24);
-        let msgTime = hours.toString().padStart(2, "0") + ':' + minutes.toString().padStart(2, "0") + ':' + seconds.toString().padStart(2, "0");
-
-        broadcastMessage(config, dChannel, tClient, `${username} has finished with a time of ${msgTime}.`, true);
+        broadcastMessage(config, dChannel, tClient, `${username} has finished with a time of ${getRaceTime(time)}.`, true);
 
         onRunnerFinished(config, db, race, dChannel, tClient, message);
     } else {

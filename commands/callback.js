@@ -1,4 +1,5 @@
 const broadcastMessage = require('../common/broadcastMessage');
+const getRaceTime = require('../common/getRaceTime');
 
 module.exports = (config, race, dChannel, tClient, tChannel) => {
     if (race.started && (!race.lastCallback || (Math.floor((Date.now() - race.lastCallback)) / 1000) > config.minimumNewCallbackSeconds)) {
@@ -9,11 +10,6 @@ module.exports = (config, race, dChannel, tClient, tChannel) => {
             time = 0;
         }
 
-        let seconds = Math.floor((time / 1000) % 60);
-        let minutes = Math.floor((time / (1000 * 60) - 1) % 60);
-        let hours = Math.floor((time / (1000 * 60 * 60)) % 24);
-        let msgTime = hours.toString().padStart(2, "0") + ':' + minutes.toString().padStart(2, "0") + ':' + seconds.toString().padStart(2, "0");
-
-        broadcastMessage(config, dChannel, tClient, `${msgTime}, go back to ${tChannel.replace('#', '')}'s stream.`, true);
+        broadcastMessage(config, dChannel, tClient, `${getRaceTime(time)}, go back to ${tChannel.replace('#', '')}'s stream.`, true);
     }
 }
