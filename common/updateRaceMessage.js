@@ -77,7 +77,7 @@ module.exports = (db, race, channel) => {
 
             if (db.getPlayerStreaming(username)) {
                 let userTwitch = db.getPlayerTwitch(username);
-                let twitchBot = !race.restream && db.getPlayerTwitchBot(username) ? " :robot:" : "";
+                let twitchBot = (!race.invitational || !race.restream) && db.getPlayerTwitchBot(username) ? " :robot:" : "";
                 if (!userTwitch) {
                     userTwitch = username;
                 }

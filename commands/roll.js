@@ -1,12 +1,8 @@
 const axios = require('axios');
-const mysterySettings = require('../common/mysterySettings');
-const randomizerSettings = require('../common/randomizerSettings');
+const categorySettings = require('../common/categorySettings');
 const plandoSettings = require('../common/plandoSettings');
 const processSeed = require('../common/processSeed');
 const updateRaceMessage = require('../common/updateRaceMessage');
-
-const RANDO_URL = 'https://alttpr.com/api/randomizer';
-const PLANDO_URL = 'https://alttpr.com/api/customizer';
 
 module.exports = (config, db, race, dChannel, message) => {
     if (race && race.seedLink) return;
@@ -58,19 +54,14 @@ module.exports = (config, db, race, dChannel, message) => {
             dChannel.send(`**Generating ${config.categories[categoryName].name} seed...**`).then().catch(console.error);
         }
 
-        const category = config.categories[categoryName];
-        const settings = category.mystery ? mysterySettings(category.weights) : randomizerSettings(config, category);
-
-        const url = category.customizer ? PLANDO_URL : RANDO_URL;
-
-        rollSeed(config, db, race, dChannel, url, settings, username, categoryName);
+        rollSeed(config, db, race, dChannel, username, categorySettings(config, categoryName));
     }
 }
 
-function rollSeed(config, db, race, dChannel, url, settings, username, categoryName) {
-    axios.post(url, settings).then(result => {
+function rollSeed(config, db, race, dChannel, username, category) {
+    axios.post(category.url, category.settings).then(result => {
         let guildId = dChannel.guild.id;
-        let seed = processSeed(config, guildId, null, categoryName, result);
+        let seed = processSeed(config, guildId, category.name, category.title, result);
 
         if (race) {
             race.seedRoller = username;

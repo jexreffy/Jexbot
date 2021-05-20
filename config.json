@@ -62,15 +62,15 @@
                 "ambrosia"
             ],
             "sotwMedium": [
-                "tourney2021",
-                "tourney2021",
-                "tourney2021",
-                "tourney2021"
+                "mysterymedium",
+                "enemizer",
+                "randomcrystals",
+                "keysanity"
             ],
             "sotwHard": [
                 "adkeysanity",
                 "crosskeys",
-                "mystery",
+                "mysteryladder",
                 "swordless"
             ],
             "codeMap": [
@@ -125,6 +125,7 @@
             "gtbk": true,
             "customizer": true,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "goal": "dungeons"
@@ -137,6 +138,7 @@
             "gtbk": true,
             "customizer": true,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "goal": "dungeons",
@@ -150,6 +152,7 @@
             "gtbk": false,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "dungeon_items": "full",
                 "goal": "dungeons",
@@ -163,6 +166,7 @@
             "gtbk": false,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "dungeon_items": "full",
                 "goal": "dungeons",
@@ -177,6 +181,7 @@
             "gtbk": true,
             "customizer": true,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "standard",
                 "weapons": "assured",
@@ -193,6 +198,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "accessibility": "none"
@@ -205,6 +211,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "standard",
                 "weapons": "assured",
@@ -218,6 +225,7 @@
             "gtbk": false,
             "customizer": true,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "goal": "fast_ganon",
@@ -235,6 +243,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "standard",
                 "weapons": "assured"
@@ -247,6 +256,7 @@
             "gtbk": true,
             "customizer": true,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "standard",
                 "weapons": "assured",
@@ -260,6 +270,7 @@
             "gtbk": true,
             "customizer": true,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "standard",
                 "goal": "dungeons",
@@ -274,6 +285,7 @@
             "gtbk": false,
             "customizer": true,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "standard",
                 "goal": "fast_ganon",
@@ -288,6 +300,7 @@
             "gtbk": false,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "dungeon_items": "full",
                 "goal": "fast_ganon",
@@ -302,6 +315,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "enemizer": {
@@ -317,6 +331,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "enemizer": {
@@ -331,6 +346,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "item": {
@@ -345,6 +361,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "item": {
@@ -359,6 +376,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "inverted"
             },
@@ -370,6 +388,7 @@
             "gtbk": false,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "dungeon_items": "full",
                 "goal": "fast_ganon",
@@ -384,6 +403,7 @@
             "gtbk": false,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "dungeon_items": "full",
                 "mode": "inverted"
@@ -396,6 +416,7 @@
             "gtbk": true,
             "customizer": true,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "inverted",
                 "weapons": "assured",
@@ -415,6 +436,7 @@
             "gtbk": true,
             "customizer": true,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "inverted",
                 "weapons": "assured",
@@ -435,6 +457,7 @@
             "gtbk": false,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "dungeon_items": "full",
                 "mode": "open"
@@ -447,6 +470,7 @@
             "gtbk": false,
             "customizer": true,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "goal": "dungeons",
@@ -469,6 +493,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "dungeon_items": "mc",
                 "mode": "open"
@@ -481,18 +506,366 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "dungeon_items": "mcs",
                 "mode": "open"
             },
             "weights": { }
         },
-        "mystery": {
-            "name": "Mystery",
-            "description": "All settings are randomly chosen. You must play the seed to figure out what it is.",
+        "mysteryeasy": {
+            "name": "Mystery Easy",
+            "description": "All settings are randomly chosen per Seed of the Week Easy Difficulty. You must play the seed to figure out what it is.",
             "gtbk": false,
             "customizer": true,
             "mystery": true,
+            "random": false,
+            "settings": {
+                "spoilers": "mystery"
+            },
+            "weights": {
+                "glitches_required": {
+                    "none": 100,
+                    "overworld_glitches": 0,
+                    "major_glitches": 0,
+                    "no_logic": 0
+                },
+                "item_placement": {
+                    "basic": 100,
+                    "advanced": 0
+                },
+                "mode": {
+                    "standard": 50,
+                    "open": 50,
+                    "inverted": 0,
+                    "retro": 0
+                },
+                "goal": {
+                    "ganon": 35,
+                    "fast_ganon": 35,
+                    "dungeons": 15,
+                    "pedestal": 20,
+                    "triforce-hunt": 5
+                },
+                "accessibility": {
+                    "items": 100,
+                    "location": 0,
+                    "none": 0
+                },
+                "dungeon_items": {
+                    "standard": 100,
+                    "mc": 0,
+                    "mcs": 0,
+                    "full": 0
+                },
+                "wild_maps": {
+                    "true": 80,
+                    "false": 20
+                },
+                "wild_compasses": {
+                    "true": 80,
+                    "false": 20
+                },
+                "wild_keys": {
+                    "true": 80,
+                    "false": 20
+                },
+                "wild_big_keys": {
+                    "true": 80,
+                    "false": 20
+                },
+                "tower_open": {
+                    "0": 5,
+                    "1": 5,
+                    "2": 10,
+                    "3": 10,
+                    "4": 10,
+                    "5": 20,
+                    "6": 20,
+                    "7": 20,
+                    "random": 0
+                },
+                "ganon_open": {
+                    "0": 0,
+                    "1": 0,
+                    "2": 0,
+                    "3": 10,
+                    "4": 10,
+                    "5": 25,
+                    "6": 25,
+                    "7": 30,
+                    "random": 0
+                },
+                "entrance_shuffle": {
+                    "none": 100,
+                    "simple": 0,
+                    "restricted": 0,
+                    "full": 0,
+                    "crossed": 0,
+                    "insanity": 0
+                },
+                "boss_shuffle": {
+                    "none": 100,
+                    "simple": 0,
+                    "full": 0,
+                    "random": 0
+                },
+                "enemy_shuffle": {
+                    "none": 100,
+                    "shuffled": 0,
+                    "random": 0
+                },
+                "hints": {
+                    "on": 50,
+                    "off": 50
+                },
+                "weapons": {
+                    "randomized": 50,
+                    "assured": 40,
+                    "vanilla": 10,
+                    "swordless": 0
+                },
+                "item_pool": {
+                    "normal": 100,
+                    "hard": 0,
+                    "expert": 0,
+                    "crowd_control": 0
+                },
+                "item_functionality": {
+                    "normal": 100,
+                    "hard": 0,
+                    "expert": 0
+                },
+                "enemy_damage": {
+                    "default": 100,
+                    "shuffled": 0,
+                    "random": 0
+                },
+                "enemy_health": {
+                    "default": 70,
+                    "easy": 30,
+                    "hard": 0,
+                    "expert": 0
+                },
+                "starting_items": [
+                    {
+                        "item": "PegasusBoots",
+                        "false": 50,
+                        "true": 50
+                    },
+                    {
+                        "item": "OcarinaActive",
+                        "false": 80,
+                        "true": 20
+                    },
+                    {
+                        "item": "Hookshot",
+                        "false": 90,
+                        "true": 10
+                    },
+                    {
+                        "item": "FireRod",
+                        "false": 90,
+                        "true": 10
+                    },
+                    {
+                        "item": "IceRod",
+                        "false": 90,
+                        "true": 10
+                    },
+                    {
+                        "item": "Flippers",
+                        "false": 90,
+                        "true": 10
+                    },
+                    {
+                        "item": "MagicMirror",
+                        "false": 90,
+                        "true": 10
+                    }
+                ]
+            }
+        },
+        "mysterymedium": {
+            "name": "Mystery Medium",
+            "description": "All settings are randomly chosen per the Seed of the Week Medium Difficulty. You must play the seed to figure out what it is.",
+            "gtbk": false,
+            "customizer": true,
+            "mystery": true,
+            "random": false,
+            "settings": {
+                "spoilers": "mystery"
+            },
+            "weights": {
+                "glitches_required": {
+                    "none": 100,
+                    "overworld_glitches": 0,
+                    "major_glitches": 0,
+                    "no_logic": 0
+                },
+                "item_placement": {
+                    "basic": 0,
+                    "advanced": 100
+                },
+                "mode": {
+                    "standard": 40,
+                    "open": 40,
+                    "inverted": 0,
+                    "retro": 20
+                },
+                "goal": {
+                    "ganon": 35,
+                    "fast_ganon": 35,
+                    "dungeons": 15,
+                    "pedestal": 20,
+                    "triforce-hunt": 5
+                },
+                "accessibility": {
+                    "items": 100,
+                    "location": 0,
+                    "none": 0
+                },
+                "dungeon_items": {
+                    "standard": 100,
+                    "mc": 0,
+                    "mcs": 0,
+                    "full": 0
+                },
+                "wild_maps": {
+                    "true": 60,
+                    "false": 40
+                },
+                "wild_compasses": {
+                    "true": 60,
+                    "false": 40
+                },
+                "wild_keys": {
+                    "true": 60,
+                    "false": 40
+                },
+                "wild_big_keys": {
+                    "true": 60,
+                    "false": 40
+                },
+                "tower_open": {
+                    "0": 5,
+                    "1": 5,
+                    "2": 10,
+                    "3": 10,
+                    "4": 10,
+                    "5": 20,
+                    "6": 20,
+                    "7": 20,
+                    "random": 0
+                },
+                "ganon_open": {
+                    "0": 0,
+                    "1": 0,
+                    "2": 0,
+                    "3": 10,
+                    "4": 10,
+                    "5": 25,
+                    "6": 25,
+                    "7": 30,
+                    "random": 0
+                },
+                "entrance_shuffle": {
+                    "none": 100,
+                    "simple": 0,
+                    "restricted": 0,
+                    "full": 0,
+                    "crossed": 0,
+                    "insanity": 0
+                },
+                "boss_shuffle": {
+                    "none": 80,
+                    "simple": 10,
+                    "full": 10,
+                    "random": 0
+                },
+                "enemy_shuffle": {
+                    "none": 80,
+                    "shuffled": 20,
+                    "random": 0
+                },
+                "hints": {
+                    "on": 50,
+                    "off": 50
+                },
+                "weapons": {
+                    "randomized": 50,
+                    "assured": 40,
+                    "vanilla": 10,
+                    "swordless": 0
+                },
+                "item_pool": {
+                    "normal": 70,
+                    "hard": 30,
+                    "expert": 0,
+                    "crowd_control": 0
+                },
+                "item_functionality": {
+                    "normal": 100,
+                    "hard": 0,
+                    "expert": 0
+                },
+                "enemy_damage": {
+                    "default": 100,
+                    "shuffled": 0,
+                    "random": 0
+                },
+                "enemy_health": {
+                    "default": 70,
+                    "easy": 30,
+                    "hard": 0,
+                    "expert": 0
+                },
+                "starting_items": [
+                    {
+                        "item": "PegasusBoots",
+                        "false": 50,
+                        "true": 50
+                    },
+                    {
+                        "item": "OcarinaActive",
+                        "false": 80,
+                        "true": 20
+                    },
+                    {
+                        "item": "Hookshot",
+                        "false": 90,
+                        "true": 10
+                    },
+                    {
+                        "item": "FireRod",
+                        "false": 90,
+                        "true": 10
+                    },
+                    {
+                        "item": "IceRod",
+                        "false": 90,
+                        "true": 10
+                    },
+                    {
+                        "item": "Flippers",
+                        "false": 90,
+                        "true": 10
+                    },
+                    {
+                        "item": "MagicMirror",
+                        "false": 90,
+                        "true": 10
+                    }
+                ]
+            }
+        },
+        "mystery": {
+            "name": "Mystery Ladder",
+            "description": "All settings are randomly chosen per the ALTTPR Ladder settings. You must play the seed to figure out what it is.",
+            "gtbk": false,
+            "customizer": true,
+            "mystery": true,
+            "random": false,
             "settings": {
                 "spoilers": "mystery"
             },
@@ -665,6 +1038,7 @@
             "gtbk": true,
             "customizer": true,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "standard",
                 "crystals": {
@@ -687,6 +1061,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open"
             },
@@ -698,6 +1073,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "weapons": "assured"
@@ -710,6 +1086,7 @@
             "gtbk": true,
             "customizer": true,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "eq": ["PegasusBoots"]
@@ -722,6 +1099,7 @@
             "gtbk": false,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "goal": "fast_ganon"
@@ -734,6 +1112,7 @@
             "gtbk": true,
             "customizer": true,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "eq": ["OcarinaActive"]
@@ -746,11 +1125,109 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "goal": "pedestal"
             },
             "weights": { }
+        },
+        "random": {
+            "name": "Random",
+            "description": "A Random Category is selected from the list of all JexBot categories. You must play the seed to figure out what category it is.",
+            "gtbk": false,
+            "customizer": false,
+            "mystery": false,
+            "random": true,
+            "settings": {
+                "spoilers": "mystery"
+            },
+            "categories": []
+        },
+        "randomeasy": {
+            "name": "Random Easy Category",
+            "description": "A Random Category is selected from the list of JexBot Categories that fall within Seed of the Week Easy Difficulty. You must play the seed to figure out what category it is.",
+            "gtbk": false,
+            "customizer": false,
+            "mystery": false,
+            "random": true,
+            "settings": {
+                "spoilers": "mystery"
+            },
+            "categories": [
+                "ad",
+                "adboots",
+                "adkeysanity",
+                "adkeysanityboots",
+                "ambrosia",
+                "beginner",
+                "blitzmode",
+                "casual",
+                "casualboots",
+                "casualbootsdungeons",
+                "casualbootsfast",
+                "keysanity",
+                "mcshuffle",
+                "mcsshuffle",
+                "open",
+                "openassured",
+                "openboots",
+                "openfast",
+                "openflute",
+                "pedestal",
+                "reduced",
+                "standard",
+                "standardboots",
+                "standardfast",
+                "standardvanilla",
+                "triforce"
+            ]
+        },
+        "randommedium": {
+            "name": "Random Medium Category",
+            "description": "A Random Category is selected from the list of JexBot Categories that fall within Seed of the Week Medium Difficulty. You must play the seed to figure out what category it is.",
+            "gtbk": false,
+            "customizer": false,
+            "mystery": false,
+            "random": true,
+            "settings": {
+                "spoilers": "mystery"
+            },
+            "categories": [
+                "ad",
+                "adboots",
+                "adkeysanity",
+                "adkeysanityboots",
+                "ambrosia",
+                "beginner",
+                "blitzmode",
+                "casual",
+                "casualboots",
+                "casualbootsdungeons",
+                "casualbootsfast",
+                "enemizer",
+                "enemizerbosses",
+                "harditempool",
+                "keysanity",
+                "ladders7pot",
+                "mcshuffle",
+                "mcsshuffle",
+                "open",
+                "openassured",
+                "openboots",
+                "openfast",
+                "openflute",
+                "pedestal",
+                "randomcrystals",
+                "reduced",
+                "retro",
+                "standard",
+                "standardboots",
+                "standardfast",
+                "standardvanilla",
+                "tourney2021",
+                "triforce"
+            ]
         },
         "randomcrystals": {
             "name": "Random Crystals",
@@ -758,6 +1235,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "crystals": {
                     "ganon": "random",
@@ -773,6 +1251,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "crystals": {
                     "ganon": "6",
@@ -788,6 +1267,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "retro"
             },
@@ -799,26 +1279,12 @@
             "gtbk": false,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "dungeon_items": "full",
                 "goal": "fast_ganon",
                 "mode": "retro",
                 "entrances": "crossed",
-                "weapons": "assured"
-            },
-            "weights": { }
-        },
-        "retrancefull": {
-            "name": "Retrance Full",
-            "description": "Open Start, Fast Ganon, Full Entrance Shuffle, Assured Sword, Universal Keys, Other Dungeon Items Shuffled, Bow cost money to use",
-            "gtbk": false,
-            "customizer": false,
-            "mystery": false,
-            "settings": {
-                "dungeon_items": "full",
-                "goal": "fast_ganon",
-                "mode": "retro",
-                "entrances": "full",
                 "weapons": "assured"
             },
             "weights": { }
@@ -829,6 +1295,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "standard"
             },
@@ -840,6 +1307,7 @@
             "gtbk": true,
             "customizer": true,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "standard",
                 "eq": ["PegasusBoots"]
@@ -852,6 +1320,7 @@
             "gtbk": false,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "standard",
                 "goal": "fast_ganon"
@@ -864,6 +1333,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "weapons": "vanilla"
@@ -876,6 +1346,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "weapons": "swordless"
@@ -888,6 +1359,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "standard",
                 "item": {
@@ -902,6 +1374,7 @@
             "gtbk": true,
             "customizer": false,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "open",
                 "goal": "triforce-hunt"
@@ -914,6 +1387,7 @@
             "gtbk": false,
             "customizer": true,
             "mystery": false,
+            "random": false,
             "settings": {
                 "mode": "inverted",
                 "weapons": "assured",

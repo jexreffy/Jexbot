@@ -2,12 +2,8 @@ const axios = require('axios');
 const config = require('../config.json');
 const broadcastMessage = require('../common/broadcastMessage');
 const broadcastTwitch = require('../common/broadcastTwitch');
-const mysterySettings = require('../common/mysterySettings');
-const randomizerSettings = require('../common/randomizerSettings');
+const categorySettings = require('../common/categorySettings');
 const processSeed = require('../common/processSeed');
-
-const RANDO_URL = 'https://alttpr.com/api/randomizer';
-const PLANDO_URL = 'https://alttpr.com/api/customizer';
 
 module.exports = (db, dClient, tClient) => {
     const guildId = db.getActiveRace();
@@ -49,36 +45,25 @@ module.exports = (db, dClient, tClient) => {
                     hardIndex = hardIndex >= config.guilds[guildId].sotwHard.length - 1 ? 0 : hardIndex + 1;
 
                     db.setSotwNext(guildId, easyIndex, mediumIndex, hardIndex, new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), 0, 0, 0).valueOf());
-                    rollSeeds(guildId, db, dClient, easyMode, mediumMode, hardMode);
+
+                    rollSeeds(guildId, db, dClient, categorySettings(config, easyMode), categorySettings(config, mediumMode), categorySettings(config, hardMode));
                 }
             }
         }
     }
 };
 
-function rollSeeds(guildId, db, dClient, easyMode, mediumMode, hardMode) {
-    const easyCategory = config.categories[easyMode];
-    const easySettings = easyCategory.mystery ? mysterySettings(easyCategory.weights) : randomizerSettings(config, easyCategory);
-    const easyUrl      = easyCategory.customizer ? PLANDO_URL : RANDO_URL;
-
-    const mediumCategory = config.categories[mediumMode];
-    const mediumSettings = mediumCategory.mystery ? mysterySettings(mediumCategory.weights) : randomizerSettings(config, mediumCategory);
-    const mediumUrl      = mediumCategory.customizer ? PLANDO_URL : RANDO_URL;
-
-    const hardCategory = config.categories[hardMode];
-    const hardSettings = hardCategory.mystery ? mysterySettings(hardCategory.weights) : randomizerSettings(config, hardCategory);
-    const hardUrl      = hardCategory.customizer ? PLANDO_URL : RANDO_URL;
-
+function rollSeeds(guildId, db, dClient, easySettings, mediumSettings, hardSettings) {
     let seeds = [];
 
-    axios.post(easyUrl, easySettings).then(easyResult => {
-        seeds.push(processSeed(config, guildId, easyMode, easyCategory.name, easyResult));
+    axios.post(easySettings.url, easySettings.settings).then(easyResult => {
+        seeds.push(processSeed(config, guildId, easySettings.name, easySettings.title, easyResult));
 
-        axios.post(mediumUrl, mediumSettings).then(mediumResult => {
-            seeds.push(processSeed(config, guildId, mediumMode, mediumCategory.name, mediumResult));
+        axios.post(mediumSettings.url, mediumSettings.settings).then(mediumResult => {
+            seeds.push(processSeed(config, guildId, mediumSettings.name, mediumSettings.title, mediumResult));
 
-            axios.post(hardUrl, hardSettings).then(hardResult => {
-                seeds.push(processSeed(config, guildId, hardMode, hardCategory.name, hardResult));
+            axios.post(hardSettings.url, hardSettings.settings).then(hardResult => {
+                seeds.push(processSeed(config, guildId, hardSettings.name, hardSettings.title, hardResult));
 
                 let dChannel = dClient.channels.cache.find(channel => channel.name === config.guilds[guildId].sotwChannel);
                 let role = dChannel.guild.roles.cache.find(r => r.name === config.guilds[guildId].pingRole);
