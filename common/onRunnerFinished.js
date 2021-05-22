@@ -9,10 +9,6 @@ module.exports = (config, db, race, dChannel, tClient, message) => {
     message.member.roles.remove(role.id).then().catch(console.error);
 
     if (race.remainingPlayers < 1) {
-        race.finished = true;
-        race.status = 'RACE FINISHED';
-        db.setActiveRace(null);
-
         if (!(race.teams || race.multiworld)) {
             sortPlayers(race.players, false);
 
@@ -24,26 +20,30 @@ module.exports = (config, db, race, dChannel, tClient, message) => {
 
         const sleep = m => new Promise(r => setTimeout(r, m));
         (async() => {
-            updateRaceMessage(db, race, dChannel);
-            await sleep(5000);
-            broadcastMessage(config, dChannel, tClient, `The race has finished.`, true);
             if (!race.gtbkWinner) {
                 await sleep(5000);
                 gtbkWinner(config, race, dChannel, tClient);
             }
+
+            await sleep(5000);
+            race.finished = true;
+            race.status = 'RACE FINISHED';
+            updateRaceMessage(db, race, dChannel);
+            broadcastMessage(config, dChannel, tClient, `The race has finished.`, true);
+            db.setActiveRace(null);
         })();
     } else if (!race.invitational && race.remainingPlayers <= race.players.length / 2 && !race.spoilersAllowed) {
         race.spoilersAllowed = true;
 
         const sleep = m => new Promise(r => setTimeout(r, m));
         (async() => {
-            updateRaceMessage(db, race, dChannel);
             await sleep(5000);
             broadcastMessage(config, dChannel, tClient, `Spoilers are now allowed for the race.`, true);
             await sleep(5000);
             gtbkWinner(config, race, dChannel, tClient);
+            updateRaceMessage(db, race, dChannel);
         })();
-    } else {
+    } else if (!race.invitational && race.spoilersAllowed) {
         updateRaceMessage(db, race, dChannel);
     }
 }

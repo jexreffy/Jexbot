@@ -205,7 +205,7 @@ function processTwitchLadderCommands(dChannel, tClient, tChannel, config, db, ra
     if (message.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i)) {
         blueballs(race, tClient, tChannel, message);
     } else if (message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i)) {
-        gtbk(config, race, tClient, tChannel, message);
+        gtbk(config, race, dChannel, tClient, tChannel, message);
     } else if (message.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i)) {
         gtGuess(config, race, dChannel, tClient, tChannel, tags.username, message);
     } else if (message.match(/^[.!](\bgtstart\b)/i)) {
@@ -231,7 +231,7 @@ function processTwitchRaceActiveCommands(dChannel, tClient, tChannel, config, db
     } else if (message.match(/^[!](\bdick\b)/i)) {
         dick(config, db, race, dChannel, tClient);
     } else if (message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i)) {
-        gtbk(config, race, tClient, tChannel, message);
+        gtbk(config, race, dChannel, tClient, tChannel, message);
     } else if (message.match(/^[.!](\bgtenter\b)/i)) {
         gtEnter(config, race, tClient, tChannel);
     } else if (message.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i)) {

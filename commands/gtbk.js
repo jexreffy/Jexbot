@@ -1,4 +1,6 @@
-module.exports = (config, race, tClient, tChannel, message) => {
+const gtbkWinner = require('../common/gtbkWinner');
+
+module.exports = (config, race, dChannel, tClient, tChannel, message) => {
     if (!config.categories[race.category].gtbk || !race.guessGameStarted || race.gtbk >= 0) return;
 
     let match = message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i);
@@ -7,7 +9,7 @@ module.exports = (config, race, tClient, tChannel, message) => {
     if (race.ladder || race.invitational) {
         race.gtbk = guess;
         race.gtRunner = "TheCrystalCompany";
-        const gtbkWinner = require('../common/gtbkWinner');
+
         gtbkWinner(config, race, null, tClient);
     } else if (race.gtRunner !== null) {
         let response = config.gtGuessFound.replace('LOCATION', guess);
@@ -16,9 +18,13 @@ module.exports = (config, race, tClient, tChannel, message) => {
 
         let player = race.players.find(x => x.twitch === tChannel);
 
-        if ((tChannel.toLowerCase() === race.restream.toLowerCase() && race.gtRunner === race.restream.toLowerCase()) || (player && race.gtRunner && race.gtRunner === player.twitch)) {
+        if ((tChannel.toLowerCase() === race.restream.toLowerCase() && race.gtRunner === race.restream.toLowerCase()) ||
+            (player && race.gtRunner && race.gtRunner === player.twitch)) {
             race.gtbk = guess;
+
+            if (race.spoilersAllowed) {
+                gtbkWinner(config, race, dChannel, tClient);
+            }
         }
     }
-
 }
