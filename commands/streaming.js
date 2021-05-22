@@ -8,7 +8,7 @@ module.exports = (db, race, dChannel, message, username) => {
     if (player) {
         db.setPlayerStreaming(username, isStreaming);
 
-        let userTwitch = data.getPlayerTwitch(username);
+        let userTwitch = db.getPlayerTwitch(username);
         if (!userTwitch) {
             userTwitch = username;
         }
