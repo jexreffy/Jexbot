@@ -6,7 +6,7 @@ module.exports = (db, race, dChannel, message, username) => {
 
     let player = race.players.find(x => x.username === username);
     if (player) {
-        let userTwitch = data.getPlayerTwitch(username);
+        let userTwitch = db.getPlayerTwitch(username);
         if (!userTwitch) {
             userTwitch = username;
         }
