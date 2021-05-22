@@ -17,6 +17,18 @@ module.exports = (config, db, race, dChannel, tClient, username, message) => {
 
         broadcastMessage(config, dChannel, tClient, `${username} has finished with a time of ${getRaceTime(time)}.`, true);
 
+        if (race.teams) {
+            let allDone = true;
+            race.players.forEach(x => {
+                if (player.team === x.team) {
+                    allDone = allDone && x.finished;
+                }
+            })
+            if (allDone) {
+                broadcastMessage(config, dChannel, tClient, `Team ${(player.team + 1)} has finished.`, true);
+            }
+        }
+
         onRunnerFinished(config, db, race, dChannel, tClient, message);
     } else {
         let time = new Date();

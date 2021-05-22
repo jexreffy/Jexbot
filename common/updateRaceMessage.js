@@ -78,24 +78,23 @@ module.exports = (db, race, channel) => {
 
             if (db.getPlayerStreaming(username)) {
                 let userTwitch = db.getPlayerTwitch(username);
-                let twitchBot = !race.invitational && db.getPlayerTwitchBot(username) ? " :robot:" : "";
                 if (!userTwitch) {
                     userTwitch = username;
                 }
 
-                names += ((i !== 0) ? '\n' : '') + "[" + userTwitch + "](https://twitch.tv/" + userTwitch + ") " + twitchBot;
+                names += `${((i !== 0) ? '\n' : '')}[${username}](https://twitch.tv/"${userTwitch}) ${(!race.invitational && db.getPlayerTwitchBot(username) ? ' :robot:' : '')}`;
             } else {
-                names += ((i !== 0) ? '\n' : '') + username;
+                names += `${((i !== 0) ? '\n' : '')}${username}`;
             }
 
             if (race.players[i].time) {
-                status += ((i !== 0) ? '\n' : '') + (i + 1) + ". " + getRaceTime(race.players[i].time);
+                status += `${((i !== 0) ? '\n' : '')}${(!race.teams ? (i + 1) + '. ' : '')}${getRaceTime(race.players[i].time)}`;
             } else if (race.players[i].forfeited) {
-                status += ((i !== 0) ? '\n' : '') + 'DNF';
+                status += `${((i !== 0) ? '\n' : '')}DNF`;
             } else if (race.players[i].ready) {
-                status += ((i !== 0) ? '\n' : '') + 'Ready';
+                status += `${((i !== 0) ? '\n' : '')}Ready`;
             } else {
-                status += ((i !== 0) ? '\n' : '') + 'Not Ready';
+                status += `${((i !== 0) ? '\n' : '')}Not Ready`;
             }
         }
     } else {
