@@ -27,6 +27,10 @@ module.exports = (config, db, race, dChannel, tClient, message) => {
             updateRaceMessage(db, race, dChannel);
             await sleep(5000);
             broadcastMessage(config, dChannel, tClient, `The race has finished.`, true);
+            if (!race.gtbkWinner) {
+                await sleep(5000);
+                gtbkWinner(config, race, dChannel, tClient);
+            }
         })();
     } else if (!race.invitational && race.remainingPlayers <= race.players.length / 2 && !race.spoilersAllowed) {
         race.spoilersAllowed = true;

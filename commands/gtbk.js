@@ -9,14 +9,14 @@ module.exports = (config, race, tClient, tChannel, message) => {
         race.gtRunner = "TheCrystalCompany";
         const gtbkWinner = require('../common/gtbkWinner');
         gtbkWinner(config, race, null, tClient);
-    } else {
+    } else if (race.gtRunner !== null) {
         let response = config.gtGuessFound.replace('LOCATION', guess);
 
         if (tClient) tClient.say(tChannel, response).then().catch(console.error);
 
         let player = race.players.find(x => x.twitch === tChannel);
 
-        if (player && race.gtRunner && race.gtRunner === player.twitch) {
+        if ((tChannel.toLowerCase() === race.restream.toLowerCase() && race.gtRunner === race.restream.toLowerCase()) || (player && race.gtRunner && race.gtRunner === player.twitch)) {
             race.gtbk = guess;
         }
     }
