@@ -43,7 +43,7 @@ module.exports = (config, db, race, dChannel, tClient, message) => {
             gtbkWinner(config, race, dChannel, tClient);
             updateRaceMessage(db, race, dChannel);
         })();
-    } else if (!race.invitational && race.spoilersAllowed) {
+    } else if (!race.invitational) {
         updateRaceMessage(db, race, dChannel);
     }
 }
