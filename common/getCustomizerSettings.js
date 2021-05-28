@@ -43,7 +43,7 @@ module.exports = () => {
         },
         "mode": "open",
         "weapons": "randomized",
-        "hints": "on",
+        "hints": "off",
         "item": {
             "pool": "normal",
             "functionality": "normal"
