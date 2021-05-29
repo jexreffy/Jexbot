@@ -29,10 +29,15 @@ module.exports = (config, db, race, dChannel, message) => {
 
         db.setActiveRace(guildId);
 
-        //let playerOne = dChannel.client.users.cache.filter(user => user.username === match[3]).array()[0];
-        //let playerTwo = dChannel.client.users.cache.filter(user => user.username === match[4]).array()[0];
+        /*let idOne = db.getPlayerDiscordId(match[3]);
+        let idTwo = db.getPlayerDiscordId(match[4]);
 
-        //dChannel.send(`<@${match[3]}> <@${match[4]}> ${config.invitationalPing}`);
+        let playerOne = dChannel.client.users.cache.find(user => user.id === idOne);
+        let playerTwo = dChannel.client.users.cache.find(user => user.id === idTwo);
+
+        console.log(playerOne);
+
+        dChannel.send(`<@${playerOne.id}> <@${playerTwo.id}> ${config.invitationalPing}`);*/
         dChannel.send(embed).then(x => {
             race.messageId = x.id;
             join(config, db, race, dChannel, match[3], message, true);

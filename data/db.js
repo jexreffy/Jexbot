@@ -53,6 +53,7 @@ pool.getConnection(function(err, connection) {
     connection.query(`SELECT
                     players.id as id,
                     players.username as username,
+                    players.discordId as discordId,
                     players.twitch as twitch,
                     players.streaming as streaming,
                     players.twitchBot as twitchBot,
@@ -77,6 +78,7 @@ pool.getConnection(function(err, connection) {
 
             player.id = playerRow.id;
             player.username = playerRow.username;
+            player.discordId = playerRow.discordId;
             player.twitch = playerRow.twitch;
             player.streaming = playerRow.streaming === 1;
             player.twitchBot = playerRow.twitchBot === 1;
@@ -145,8 +147,8 @@ function getPlayerIndexByName(username) {
 
 function createPlayer(player) {
     pool.getConnection(function(err, connection) {
-        let sql = `INSERT INTO players(username, twitch, streaming, twitchBot) VALUES(?, ?, ?, ?)`;
-        let data = [player.username, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0];
+        let sql = `INSERT INTO players(username, discordId, twitch, streaming, twitchBot) VALUES(?, ?, ?, ?)`;
+        let data = [player.username, player.discordId, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0];
 
         connection.query(sql, data, (error, results, fields) => {
             connection.release();
@@ -161,9 +163,9 @@ function createPlayer(player) {
 function savePlayer(player) {
     pool.getConnection(function(err, connection) {
         let sql = `UPDATE players
-                SET username = ?, twitch = ?, streaming = ?, twitchBot = ?
+                SET username = ?, discordId = ?, twitch = ?, streaming = ?, twitchBot = ?
                 WHERE id = ?`;
-        let data = [player.username, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0, player.id];
+        let data = [player.username, player.discordId, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0, player.id];
 
         connection.query(sql, data, (error, results, fields) => {
             connection.release();
@@ -267,6 +269,15 @@ module.exports = {
             return false;
         }
         return (players[playerIndex][category].matches >= placementMatches);
+    },
+    getPlayerDiscordId: function(username) {
+        let playerIndex = getPlayerIndexByName(username);
+        return players[playerIndex].discordId;
+    },
+    setPlayerDiscordId: function(username, discordId) {
+        let playerIndex = getPlayerIndexByName(username);
+        players[playerIndex].discordId = discordId;
+        savePlayer(players[playerIndex]);
     },
     getPlayerTwitch: function(username) {
         let playerIndex = getPlayerIndexByName(username);
