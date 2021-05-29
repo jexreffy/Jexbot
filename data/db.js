@@ -147,7 +147,7 @@ function getPlayerIndexByName(username) {
 
 function createPlayer(player) {
     pool.getConnection(function(err, connection) {
-        let sql = `INSERT INTO players(username, discordId, twitch, streaming, twitchBot) VALUES(?, ?, ?, ?)`;
+        let sql = `INSERT INTO players(username, discordId, twitch, streaming, twitchBot) VALUES(?, ?, ?, ?, ?)`;
         let data = [player.username, player.discordId, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0];
 
         connection.query(sql, data, (error, results, fields) => {
