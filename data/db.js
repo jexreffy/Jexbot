@@ -58,7 +58,8 @@ pool.getConnection(function(err, connection) {
                     players.twitchBot as twitchBot,
                     elo.mode as mode,
                     elo.elo as elo,
-                    elo.matches as matches
+                    elo.matches as matches,
+                    elo.pb as pb
                   FROM players, elo
                   WHERE players.id = elo.player_id`, (playerErr, playerRows) => {
         if (playerErr) {
@@ -82,6 +83,7 @@ pool.getConnection(function(err, connection) {
             player[playerRow.mode] = {};
             player[playerRow.mode].elo = playerRow.elo;
             player[playerRow.mode].matches = playerRow.matches;
+            player[playerRow.mode].pb = playerRow.pb;
         });
 
         connection.query(`SELECT * FROM server WHERE id = 1`, (serverErr, serverRow) => {
@@ -185,9 +187,9 @@ function createElo(player, category) {
 function saveElo(player, category) {
     pool.getConnection(function(err, connection) {
         let sql = `UPDATE elo
-                SET elo = ?, matches = ?
+                SET elo = ?, matches = ?, pb = ?
                 WHERE player_id = ? AND mode = ?`;
-        let data = [player[category].elo, player[category].matches, player.id, category];
+        let data = [player[category].elo, player[category].matches, player[category].pb, player.id, category];
 
         connection.query(sql, data, (error, results, fields) => {
             connection.release();
@@ -293,6 +295,26 @@ module.exports = {
         players[playerIndex].streaming = streaming;
         savePlayer(players[playerIndex]);
     },
+    getPlayerPB: function(username, category) {
+        let playerIndex = getPlayerIndexByName(username);
+        if (!players[playerIndex][category]) {
+            players[playerIndex][category] = {};
+        }
+        let pb = players[playerIndex][category].pb;
+        if (pb) {
+            return pb;
+        } else {
+            players[playerIndex][category].elo = 1000;
+            players[playerIndex][category].pb = 18000000;
+            createElo(players[playerIndex], category);
+            return 18000000;
+        }
+    },
+    setPlayerPB: function(username, category, pb) {
+        let playerIndex = getPlayerIndexByName(username);
+        players[playerIndex][category].pb = pb;
+        saveElo(players[playerIndex], category);
+    },
     getPlayerElo: function(username, category) {
         let playerIndex = getPlayerIndexByName(username);
         if (!players[playerIndex][category]) {
@@ -303,6 +325,7 @@ module.exports = {
             return elo;
         } else {
             players[playerIndex][category].elo = 1000;
+            players[playerIndex][category].pb = 18000000;
             createElo(players[playerIndex], category);
             return 1000;
         }

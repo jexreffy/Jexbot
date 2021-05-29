@@ -13,7 +13,11 @@ module.exports = (config, db, race, dChannel, tClient, username, message) => {
         if (time < 0) {
             time = 0;
         }
-        player.time = time;
+        player.time = (time / 1000) * 1000; //Floor to the nearest second for record keeping purposes.
+
+        if (db.getPlayerPB(username, race.category) > player.time) {
+            db.setPlayerPB(username, race.category, player.time);
+        }
 
         broadcastMessage(config, dChannel, tClient, `${username} has finished with a time of ${getRaceTime(time)}.`, true);
 

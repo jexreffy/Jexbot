@@ -25,6 +25,7 @@ const leave = require('../commands/leave');
 const mode = require('../commands/mode');
 const multiworld = require('../commands/multiworld');
 const newRace = require('../commands/new');
+const pb = require('../commands/pb');
 const rank = require('../commands/rank');
 const ready = require('../commands/ready');
 const reset = require('../commands/reset');
@@ -95,6 +96,8 @@ function processDiscordInactiveCommands(dClient, tClient, config, db, race, mess
         leaderboard(config, db, message.channel, message);
     } else if (message.content.match(/^[.!](\bnew\b)/i)) {
         newRace(config, db, race, message.channel, message);
+    } else if (message.content.match(/^[.!](\bpb\b)/i)) {
+        pb(config, db, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\brank\b)/i)) {
         rank(config, db, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\broll\b)/i)) {
@@ -153,7 +156,9 @@ function processDiscordRaceLobbyCommands(dClient, tClient, config, db, race, mes
         leave(config, db, race, message.channel, message.author.username, message);
     } else if (message.content.match(/^[.!](\bmultiworld\b) (https:\/\/[a-zA-Z0-9_%\/?,.]{4,200})/i)) {
         multiworld(config, db, race, message.channel, message.author.username, message);
-    }else if (message.content.match(/^[.!](\brank\b)/i)) {
+    } else if (message.content.match(/^[.!](\bpb\b)/i)) {
+        pb(config, db, message.channel, message, message.author.username);
+    } else if (message.content.match(/^[.!](\brank\b)/i)) {
         rank(config, db, message.channel, message, message.author.username);
     } else if (message.content.match(/^[.!](\bready\b)/i)) {
         ready(config, db, race, message.channel, message.author.username);
