@@ -131,6 +131,7 @@ function getPlayerIndexByName(username) {
     } else {
         player = {
             username: username,
+            discordId: null,
             twitch: null,
             streaming: false,
             twitchBot: false,
