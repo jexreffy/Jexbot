@@ -4,7 +4,7 @@ const db = require('./data/db.js');
 const fs = require('fs');
 
 const Discord = require('discord.js');
-const dClient = new Discord.Client();
+const dClient = new Discord.Client({fetchAllMembers: true});
 
 const Twitch = require('tmi.js');
 let tClient = null;

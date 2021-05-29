@@ -46,7 +46,6 @@ function processDiscordCommand(db, dClient, tClient, message) {
     if (message.author.bot) return;
 
     const guildId = message.guild.id;
-
     const channel = config.guilds[guildId].channel;
 
     if (message.channel.name !== channel) {

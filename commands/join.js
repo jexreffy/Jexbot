@@ -20,7 +20,12 @@ module.exports = (config, db, race, dChannel, username, message) => {
         let player = race.players.find(x => x.username === playerToAdd);
 
         if (!(race.started || race.finished || player)) {
-            if (!race.invitational) race.teams = false;
+            if (race.invitational) {
+                let member = message.channel.members.find(x => x.user.username === playerToAdd);
+                dChannel.send(`<@${member.id}> You have been added to an invitational race`);
+            } else {
+                race.teams = false;
+            }
 
             let newPlayer = {
                 username: playerToAdd

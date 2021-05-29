@@ -4,11 +4,8 @@ module.exports = (config, db, race, player, message) => {
     race.remainingPlayers += 1;
 
     let role = message.guild.roles.cache.find(r => r.name === config.guilds[message.guild.id].racerRole);
-    message.member.roles.add(role.id).then().catch(console.error);
-
-    if (!db.getPlayerDiscordId(username)) {
-        db.setPlayerDiscordId(username, message.author.id);
-    }
+    let member = message.channel.members.find(x => x.user.username === username);
+    member.roles.add(role.id).then().catch(console.error);
 
     if (db.getPlayerStreaming(username)) {
         let userTwitch = db.getPlayerTwitch(username);

@@ -6,7 +6,8 @@ const elo = require('../elo/elo.js');
 
 module.exports = (config, db, race, dChannel, tClient, message) => {
     let role = message.guild.roles.cache.find(r => r.name === config.guilds[message.guild.id].racerRole);
-    message.member.roles.remove(role.id).then().catch(console.error);
+    let member = message.channel.members.find(x => x.user.username === message.author.username);
+    member.roles.add(role.id).then().catch(console.error);
 
     if (race.remainingPlayers < 1) {
         if (!(race.teams || race.multiworld)) {
