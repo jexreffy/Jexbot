@@ -22,6 +22,7 @@ const kick = require('../commands/kick');
 const ladder = require('../commands/ladder');
 const leaderboard = require('../commands/leaderboard');
 const leave = require('../commands/leave');
+const lock = require('../commands/lock');
 const mode = require('../commands/mode');
 const multiworld = require('../commands/multiworld');
 const newRace = require('../commands/new');
@@ -154,6 +155,8 @@ function processDiscordRaceLobbyCommands(dClient, tClient, config, db, race, mes
         leaderboard(config, db, message.channel, message);
     } else if (message.content.match(/^[.!](\bleave\b)/i)) {
         leave(config, db, race, message.channel, message.author.username, message);
+    } else if (message.content.match(/^[.!](\block\b)/i)) {
+        lock(config, db, race, message.channel, message.author.username);
     } else if (message.content.match(/^[.!](\bmultiworld\b) (https:\/\/[a-zA-Z0-9_%\/?,.]{4,200})/i)) {
         multiworld(config, db, race, message.channel, message.author.username, message);
     } else if (message.content.match(/^[.!](\bpb\b)/i)) {

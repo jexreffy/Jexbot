@@ -13,7 +13,7 @@ module.exports = (config, db, race, dChannel, username) => {
                 x.ready = false;
                 x.time = null;
             });
-            race.status = 'RESTARTED PRE-RACE: WAITING FOR PLAYERS';
+            race.status = 'RESTARTED PRE-RACE: WAITING FOR PLAYERS TO JOIN';
             updateRaceMessage(db, race, dChannel);
         }
     }

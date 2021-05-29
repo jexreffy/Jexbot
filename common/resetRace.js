@@ -3,6 +3,7 @@ module.exports = (race) => {
     race.invitational = false;
     race.teams = false;
     race.multiworld = false;
+    race.locked = false;
     race.started = false;
     race.finished = false;
     race.startedAt = null;

@@ -3,7 +3,7 @@ const startRace = require('../common/startRace');
 const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (config, db, race, dChannel, username, message) => {
-    if (!race.invitational) {
+    if (!race.locked) {
         let player = race.players.find(x => x.username === username);
 
         if (!race.finished && player) {

@@ -14,7 +14,7 @@ module.exports = (config, db, race, dChannel, message) => {
         race.pingIndex = getRandom(config.pings.length);
         race.countdownIndex = getRandom(config.countdowns.length);
         race.mutlistream = 'https://multistre.am/';
-        race.status = 'PRE-RACE: WAITING FOR PLAYERS';
+        race.status = 'PRE-RACE: WAITING FOR PLAYERS TO JOIN';
 
         setRaceCategory(config, db, race, guildId, match && match.length > 2 ? match[2] : "");
 

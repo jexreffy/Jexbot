@@ -12,9 +12,10 @@ module.exports = (config, db, race, dChannel, message) => {
         const guildId = dChannel.guild.id;
 
         race.invitational = true;
+        race.locked = true;
         race.countdownIndex = getRandom(config.countdowns.length);
         race.mutlistream = 'https://multistre.am/';
-        race.status = 'PRE-RACE: WAITING FOR PLAYERS';
+        race.status = 'INVITATIONAL RACE: WAITING FOR PLAYERS TO READY UP';
 
         setRaceCategory(config, db, race, guildId, match && match.length > 2 ? match[2] : "");
 
