@@ -3,7 +3,11 @@ const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (config, db, race, dChannel, username, coop) => {
     if (!race.started && config.referees.includes(username)) {
-        if (coop && race.players.length % 2 !== 0) {
+        if (race.invitational && race.players.length <= 0) {
+            race.teams = true;
+            updateRaceMessage(db, race, dChannel);
+            return;
+        } else if (coop && race.players.length % 2 !== 0) {
             dChannel.send(`**${config.teamPlayerError.replace('Teams', 'Co-op')}**`).then().catch(console.error);
             return;
         } else if (!coop && (race.players.length > config.teamPlayers.length || config.teamPlayers[race.players.length] <= 0)){

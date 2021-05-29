@@ -24,7 +24,7 @@ module.exports = (config, db, race, dChannel) => {
             race.status = 'Starting in: ' + i;
             updateRaceMessage(db, race, dChannel);
             let allReady = race.players.every(x => x.ready === true);
-            if (!allReady) {
+            if (!(race.gatekeeper || allReady)) {
                 race.status = 'INTERRUPTED: WAITING FOR PLAYERS';
                 updateRaceMessage(db, race, dChannel);
                 return;

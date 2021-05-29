@@ -89,7 +89,7 @@ function processDiscordCommand(db, dClient, tClient, message) {
 function processDiscordInactiveCommands(dClient, tClient, config, db, race, message) {
     if (message.content.match(/^[.!](\bcomment\b) ([ a-zA-Z0-9,./<>?;':"{}|`~!@#$%^&*()=_+]{0,1000})/i)) {
         comment(config, race, message.channel, message.author.username, message);
-    } else if (message.content.match(/^[.!](\binvitational\b) ([a-zA-Z0-9<>:]{4,20}) ([a-zA-Z0-9<>:_]{4,30}) ([a-zA-Z0-9<>:_]{4,30})/i)) {
+    } else if (message.content.match(/^[.!](\binvitational\b)/i)) {
         invitational(config, db, race, message.channel, message);
     } else if (message.content.match(/^[.!](\bladder\b) ([a-zA-Z0-9%]{4,20})/i)) {
         ladder(config, db, race, message.channel, message);
@@ -148,7 +148,7 @@ function processDiscordRaceLobbyCommands(dClient, tClient, config, db, race, mes
     } else if (message.content.match(/^[.!](\bgatekeeper\b)/i)) {
         gatekeeper(config, db, race, message.channel, message.author.username);
     } else if (message.content.match(/^[.!](\bjoin\b)/i)) {
-        join(config, db, race, message.channel, message.author.username, message, false);
+        join(config, db, race, message.channel, message.author.username, message);
     } else if (message.content.match(/^[.!](\bkick\b) ([a-zA-Z0-9%]{0,20})/i)) {
         kick(config, db, race, message.channel, tClient, message);
     } else if (message.content.match(/^[.!](\bleaderboard\b)/i)) {
