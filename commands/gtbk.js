@@ -1,7 +1,7 @@
 const gtbkWinner = require('../common/gtbkWinner');
 
 module.exports = (config, race, dChannel, tClient, tChannel, message) => {
-    if (!config.categories[race.category].gtbk || !race.guessGameStarted || race.gtbk >= 0) return;
+    if (!config.categories[race.category].gtbk || !race.guessGameStarted) return;
 
     let match = message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i);
     let guess = parseInt(match[2]);
@@ -15,6 +15,8 @@ module.exports = (config, race, dChannel, tClient, tChannel, message) => {
         let response = config.gtGuessFound.replace('LOCATION', guess);
 
         if (tClient) tClient.say(tChannel, response).then().catch(console.error);
+
+        if (race.gtbk >= 0) return;
 
         let player = race.players.find(x => x.twitch === tChannel);
 

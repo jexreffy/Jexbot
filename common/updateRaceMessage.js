@@ -69,7 +69,7 @@ module.exports = (db, race, channel) => {
             if (race.teams && i === 0) {
                 names += `---Team ${race.players[i].team + 1}---\n`;
                 status += `----------\n`;
-            }if (race.teams && i > 0 && race.players[i - 1].team < race.players[i].team) {
+            } else if (race.teams && i > 0 && race.players[i - 1].team < race.players[i].team) {
                 names += `\n---Team ${race.players[i].team + 1}---`;
                 status += `\n----------`;
             }
