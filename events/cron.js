@@ -14,13 +14,27 @@ module.exports = (db, dClient, tClient) => {
 
         if (!race.started || race.finished) return;
 
+        let now = Date.now();
+
         let dChannel = dClient.channels.cache.find(channel => channel.name === config.guilds[guildId].channel);
 
-        if (!race.ladder && !race.invitational && config.categories[race.category].gtbk && !race.guessGameStarted && (Math.floor(Date.now() - race.startedAt) / 1000) > config.minimumGuessStartSeconds) {
+        if (race.teams && race.relay) {
+            for (let i = 0; i < race.legStartTime.length; i++) {
+                let startTime = race.legStartTime[i];
+                if (startTime > 0 && startTime - now <= config.relayLegDelaySeconds * 500) {
+                    let hasFinished = race.players.filter(x => x.team === i && x.finished);
+                    let nextPlayer = race.players.find(x => x.team === i && x.leg === hasFinished.length);
+                    countdownNextPlayer(dChannel, nextPlayer, startTime - now, config.relayLegDelaySeconds / 2);
+                    race.legStartTime[i] = 0;
+                }
+            }
+        }
+
+        if (!(race.ladder || race.invitational) && config.categories[race.category].gtbk && !race.guessGameStarted && (Math.floor(now - race.startedAt) / 1000) > config.minimumGuessStartSeconds) {
             race.guessGameStarted = true;
             broadcastMessage(config, dChannel, tClient, config.gtGuessIntro, false);
-        } else if (!race.lastHello || (Math.floor(Date.now() - race.lastHello) / 1000) > config.helloInterval) {
-            race.lastHello = Date.now();
+        } else if (!race.lastHello || (Math.floor(now - race.lastHello) / 1000) > config.helloInterval) {
+            race.lastHello = now;
             broadcastTwitch(config, tClient, race.ladder ? config.helloLadder : race.invitational ? config.helloInvitational : config.helloRace);
         }
 
@@ -81,4 +95,31 @@ function rollSeeds(guildId, db, dClient, easySettings, mediumSettings, hardSetti
             }).catch(console.error);
         }).catch(console.error);
     }).catch(console.error);
+}
+
+function countdownNextPlayer(dChannel, nextPlayer, remainingTime, delayTime) {
+    const sleep = m => new Promise(r => setTimeout(r, m));
+    (async() => {
+        let nextMember = dChannel.members.find(x => x.user.username === nextPlayer.username);
+        dChannel.send(`${nextPlayer.username} Your leg of the relay will start in ${delayTime / 60} minutes.`).then().catch(console.error);
+        let oneMinuteLeft = remainingTime - 60000;
+        await sleep(oneMinuteLeft);
+
+        dChannel.send(`<@${nextMember.id}> Your leg of the relay will start in 60 seconds.`);
+        await sleep(30000);
+
+        dChannel.send(`${nextPlayer.username} Your leg of the relay will start in 30 seconds.`);
+        await sleep(20000);
+
+        dChannel.send(`${nextPlayer.username} Your leg of the relay will start in 10 seconds.`);
+        await sleep(5000);
+
+
+        for (let i = 5; i > 0; i--) {
+            dChannel.send(`**${nextPlayer.username} ${i}**`).then().catch(console.error);
+            await sleep(1000);
+        }
+
+        dChannel.send(`**${nextPlayer.username} GO!!!**`).then().catch(console.error);
+    })();
 }

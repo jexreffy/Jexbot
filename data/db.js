@@ -305,6 +305,7 @@ module.exports = {
             return pb;
         } else {
             players[playerIndex][category].elo = 1000;
+            players[playerIndex][category].matches = 0;
             players[playerIndex][category].pb = 18000000;
             createElo(players[playerIndex], category);
             return 18000000;
@@ -325,6 +326,7 @@ module.exports = {
             return elo;
         } else {
             players[playerIndex][category].elo = 1000;
+            players[playerIndex][category].matches = 0;
             players[playerIndex][category].pb = 18000000;
             createElo(players[playerIndex], category);
             return 1000;
@@ -455,10 +457,10 @@ module.exports = {
     getSotwSeed(guildId, level) {
         let index = 0;
         switch (level) {
-            case "medium":
+            case "sotwmedium":
                 index = 1;
                 break;
-            case "hard":
+            case "sotwhard":
                 index = 2;
                 break;
         }

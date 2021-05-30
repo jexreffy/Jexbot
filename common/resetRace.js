@@ -4,6 +4,7 @@ module.exports = (race) => {
     race.teams = false;
     race.multiworld = false;
     race.locked = false;
+    race.relay = false;
     race.started = false;
     race.finished = false;
     race.startedAt = null;
@@ -38,6 +39,8 @@ module.exports = (race) => {
     race.dickCount = 0;
 
     race.guesses = [];
+    race.legs = [];
+    race.legStartTime = [];
 
     for (let i = 0; i < 22; i++) {
         race.guesses.push(null);

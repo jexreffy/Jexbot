@@ -115,6 +115,7 @@
     "minimumNewDickSeconds": 30,
     "minimumNewSpaceballsSeconds": 30,
     "minimumGuessStartSeconds": 3900,
+    "relayLegDelaySeconds": 600,
     "defaultLeaderboardSize": "25",
     "defaultCategory": "standard",
     "referees": ["jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken", "KillerApp23", "Jixson", "RGBHive", "Ruzzelljr"],

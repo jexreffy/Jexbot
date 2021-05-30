@@ -1,7 +1,11 @@
-module.exports = (players, teams) => {
+module.exports = (players, teams, relay) => {
     players.sort(function(a, b) {
         if (teams && a.team !== b.team) {
             return a.team - b.team;
+        }
+
+        if (teams && relay) {
+            return a.leg - b.leg;
         }
 
         if (!a.time) {

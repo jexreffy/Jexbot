@@ -10,24 +10,34 @@ module.exports = (db, race, channel) => {
     let desc = "The Legend of Zelda: A Link to the Past Randomizer Race"
 
     if (race.categoryName) {
-        desc += `\n Mode: ${race.categoryName}`;
+        desc += `\n Category: ${race.categoryName}`;
     }
 
     if (race.gatekeeper) {
         desc += `\n Gatekeeper: ${race.gatekeeper}`;
     }
 
-    if (race.seedLink) {
-        desc += `\n Race Seed: ${race.seedLink}`;
+    if (race.relay) {
+        for (let i = 0; i < race.legs.length; i++) {
+            desc += `\n Leg ${i + 1} Category: ${race.legs[i].name}`;
+            desc += `\n Leg ${i + 1} Seed: ${race.legs[i].link}`;
+            desc += `\n Leg ${i + 1} Code: ${race.legs[i].code}`;
+        }
+    } else {
+        if (race.seedLink) {
+            desc += `\n Race Seed: ${race.seedLink}`;
+        }
+
+        if (race.seedCode) {
+            desc += `\n Seed Code: ${race.seedCode}`;
+        }
+
+        if (race.seedRoller) {
+            desc += `\n Rolled By: ${race.seedRoller}`;
+        }
     }
 
-    if (race.seedCode) {
-        desc += `\n Seed Code: ${race.seedCode}`;
-    }
 
-    if (race.seedRoller) {
-        desc += `\n Rolled By: ${race.seedRoller}`;
-    }
 
     if (race.restream) {
         desc += `\n Restream: <https://twitch.tv/${race.restream.substr(1)}>`;
@@ -60,7 +70,7 @@ module.exports = (db, race, channel) => {
 
     embed.description = desc;
 
-    sortPlayers(race.players, race.teams);
+    sortPlayers(race.players, race.teams, race.relay);
 
     let names = "";
     let status = "";

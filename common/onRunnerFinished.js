@@ -7,11 +7,11 @@ const elo = require('../elo/elo.js');
 module.exports = (config, db, race, dChannel, tClient, message) => {
     let role = message.guild.roles.cache.find(r => r.name === config.guilds[message.guild.id].racerRole);
     let member = message.channel.members.find(x => x.user.username === message.author.username);
-    member.roles.add(role.id).then().catch(console.error);
+    member.roles.remove(role.id).then().catch(console.error);
 
     if (race.remainingPlayers < 1) {
         if (!(race.teams || race.multiworld)) {
-            sortPlayers(race.players, false);
+            sortPlayers(race.players, false, false);
 
             let adjustments = elo.resolveMatch(db, race.players, race.category);
             for (let i = 0; i < race.players.length; i++) {
@@ -44,7 +44,7 @@ module.exports = (config, db, race, dChannel, tClient, message) => {
             gtbkWinner(config, race, dChannel, tClient);
             updateRaceMessage(db, race, dChannel);
         })();
-    } else if (!race.invitational) {
+    } else {
         updateRaceMessage(db, race, dChannel);
     }
 }

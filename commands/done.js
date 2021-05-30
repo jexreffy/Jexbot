@@ -6,6 +6,12 @@ module.exports = (config, db, race, dChannel, tClient, username, message) => {
     let player = race.players.find(x => x.username === username);
 
     if (race.started && player && !player.finished && !player.forfeited) {
+        if (race.teams && race.relay) {
+            let hasFinished = race.players.filter(x => x.team === player.team && x.finished);
+
+            if (player.leg !== hasFinished.length) return;
+        }
+
         player.finished = true;
         race.remainingPlayers -= 1;
 
@@ -15,8 +21,12 @@ module.exports = (config, db, race, dChannel, tClient, username, message) => {
         }
         player.time = (time / 1000) * 1000; //Floor to the nearest second for record keeping purposes.
 
-        if (db.getPlayerPB(username, race.category) > player.time) {
-            db.setPlayerPB(username, race.category, player.time);
+        let category = race.category;
+        if (race.teams && race.relay) {
+            category = race.legs[player.leg].category;
+        }
+        if (db.getPlayerPB(username, category) > player.time) {
+            db.setPlayerPB(username, category, player.time);
         }
 
         broadcastMessage(config, dChannel, tClient, `${username} has finished with a time of ${getRaceTime(time)}.`, true);
@@ -30,6 +40,14 @@ module.exports = (config, db, race, dChannel, tClient, username, message) => {
             })
             if (allDone) {
                 broadcastMessage(config, dChannel, tClient, `Team ${(player.team + 1)} has finished.`, true);
+            } else if (race.relay) {
+                race.legStartTime[player.team] = Date.now() + config.relayLegDelaySeconds * 1000;
+
+                let nextPlayer = race.players.find(x => x.team === player.team && x.leg === player.leg + 1);
+                let thisMember = dChannel.members.find(x => x.user.username === player.username);
+                let nextMember = dChannel.members.find(x => x.user.username === nextPlayer.username);
+                dChannel.send(`<@${thisMember.id}> You mush let the credits run to completion **WITHOUT** fast forwarding.`);
+                dChannel.send(`<@${nextMember.id}> ${player.username} has finished. You will be able to start your leg of the relay in ${config.relayLegDelaySeconds / 60} minutes.`);
             }
         }
 

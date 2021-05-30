@@ -17,7 +17,12 @@ module.exports = (config, db, race, dChannel, message) => {
         race.mutlistream = 'https://multistre.am/';
         race.status = 'INVITATIONAL RACE: WAITING FOR PLAYERS TO READY UP';
 
-        setRaceCategory(config, db, race, guildId, match && match.length > 2 ? match[2] : "");
+        if (match && match.length > 2 && match[2] === "relay") {
+            race.teams = true;
+            race.relay = true;
+        } else {
+            setRaceCategory(config, db, race, guildId, match && match.length > 2 ? match[2] : "");
+        }
 
         let embed = {
             'content': "",

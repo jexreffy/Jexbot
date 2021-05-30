@@ -37,9 +37,26 @@ module.exports = (config, db, race, dChannel) => {
         race.status = 'GO!!!';
         race.started = true;
         race.startedAt = Date.now();
-        updateRaceMessage(db, race, dChannel);
+
+        if (race.teams && race.relay) {
+            let teamCount = 0;
+            for (let i = 0; i < race.players.length; i++) {
+                if (teamCount < race.players[i].team + 1) {
+                    teamCount = race.players[i].team + 1;
+                }
+            }
+
+            for (let i = 0; i < teamCount; i++) {
+                race.legStartTime.push(0);
+            }
+        }
+
+
         dChannel.send(`**GO!!!**`).then().catch(console.error);
-        await sleep(2000);
+        await sleep(100);
+
+        updateRaceMessage(db, race, dChannel);
+        await sleep(1900);
 
         race.status = 'RACE STARTED';
         updateRaceMessage(db, race, dChannel);

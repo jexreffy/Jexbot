@@ -3,7 +3,7 @@ const updateRaceMessage = require('../common/updateRaceMessage');
 
 module.exports = (config, db, race, dChannel, username, message) => {
     let playerToAdd = null;
-    let teamToAdd = null;
+    let teamToAdd = -1;
 
     if (race.invitational && config.referees.includes(username)) {
         let match = message.content.match(race.teams ? /^[.!](\bjoin\b) ([a-zA-Z0-9]{4,30}) ((1)|(2))/i : /^[.!](\bjoin\b) ([a-zA-Z0-9]{4,30})/i);
@@ -21,7 +21,7 @@ module.exports = (config, db, race, dChannel, username, message) => {
 
         if (!(race.started || race.finished || player)) {
             if (race.invitational) {
-                let member = message.channel.members.find(x => x.user.username === playerToAdd);
+                let member = dChannel.members.find(x => x.user.username === playerToAdd);
                 dChannel.send(`<@${member.id}> You have been added to an invitational race`);
             } else {
                 race.teams = false;
@@ -31,7 +31,13 @@ module.exports = (config, db, race, dChannel, username, message) => {
                 username: playerToAdd
             };
 
-            if (teamToAdd) newPlayer.team = teamToAdd;
+            if (teamToAdd >= 0) {
+                newPlayer.team = teamToAdd;
+
+                if (race.relay) {
+                    newPlayer.leg = race.players.filter(x => x.team === teamToAdd).length;
+                }
+            }
 
             onRunnerAdded(config, db, race, newPlayer, message);
             updateRaceMessage(db, race, dChannel);
