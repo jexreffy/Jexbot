@@ -26,7 +26,7 @@ module.exports = (config, categoryName) => {
         retVal.settings.spoilers = "mystery";
     } else {
         retVal.settings = randomizerSettings(config, category);
-        retVal.settings.notes = retVal.description;
+        retVal.settings.notes = `${retVal.title}: ${retVal.description}`;
     }
 
     retVal.url = category.customizer ? PLANDO_URL : RANDO_URL;
