@@ -5,12 +5,16 @@ module.exports = (config, db, race, dChannel, username, tClient, tChannel) => {
         let message = config.crewMessage + " ";
 
         for (let i = 0; i < race.crew.length; i++) {
-            message += `https://twitch.tv/${race.crew[i].twitch}${i !== race.crew.length - 1 ? ' ' : ''}`;
+            if (race.crew[i].twitch) {
+                message += `https://twitch.tv/${race.crew[i].twitch.substr(1)}${i !== race.crew.length - 1 ? ' ' : ''}`;
+            } else {
+                message += `https://twitch.tv/${race.crew[i].username}${i !== race.crew.length - 1 ? ' ' : ''}`;
+            }
         }
 
         tClient.say(tChannel, message).then().catch(console.error);
     } else {
-        let crew = race.players.find(x => x.username === username);
+        let crew = race.crew.find(x => x.username === username);
 
         if (!(race.started || race.finished || crew)) {
             let newCrew = {

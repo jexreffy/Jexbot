@@ -10,7 +10,7 @@ module.exports = (config, race, tClient, tChannel) => {
             if (race.players[i].twitch) {
                 message += `https://twitch.tv/${race.players[i].twitch.substr(1)}${i !== race.players.length - 1 ? ' ' : ''}`;
             } else {
-                message += `${race.players[i].username}${i !== race.players.length - 1 ? ' ' : ''}`;
+                message += `https://twitch.tv/${race.players[i].username}${i !== race.players.length - 1 ? ' ' : ''}`;
             }
         }
 
