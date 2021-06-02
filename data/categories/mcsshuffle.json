@@ -1,0 +1,14 @@
+{
+  "category": "mcsshuffle",
+  "name": "MCS Shuffle",
+  "description": "Open Start, Defeat Ganon, 7/7 Crystals, Maps, Compasses, and Small Keys shuffled in the full item pool",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "dungeon_items": "mcs",
+    "mode": "open"
+  },
+  "weights": { }
+}

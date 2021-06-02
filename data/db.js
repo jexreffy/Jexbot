@@ -9,6 +9,19 @@ const placementMatches = (eloConfig.placementMatches);
 
 let races = raceDb;
 
+let categoryKeys = [];
+let categories = {};
+
+fs.readdir('./data/categories/', (err, files) => {
+    files.forEach(file => {
+        const category = require(`../data/categories/${file}`);
+        const categoryKey = file.split('.')[0];
+
+        categoryKeys.push(categoryKey);
+        categories[categoryKey] = category;
+    });
+});
+
 let server = {
     "spaceballs": 0,
     "activeRace": null,
@@ -56,7 +69,7 @@ pool.getConnection(function(err, connection) {
                     players.twitch as twitch,
                     players.streaming as streaming,
                     players.twitchBot as twitchBot,
-                    elo.mode as mode,
+                    elo.category as category,
                     elo.elo as elo,
                     elo.matches as matches,
                     elo.pb as pb
@@ -80,10 +93,10 @@ pool.getConnection(function(err, connection) {
             player.twitch = playerRow.twitch;
             player.streaming = playerRow.streaming === 1;
             player.twitchBot = playerRow.twitchBot === 1;
-            player[playerRow.mode] = {};
-            player[playerRow.mode].elo = playerRow.elo;
-            player[playerRow.mode].matches = playerRow.matches;
-            player[playerRow.mode].pb = playerRow.pb;
+            player[playerRow.category] = {};
+            player[playerRow.category].elo = playerRow.elo;
+            player[playerRow.category].matches = playerRow.matches;
+            player[playerRow.category].pb = playerRow.pb;
         });
 
         connection.query(`SELECT * FROM server WHERE id = 1`, (serverErr, serverRow) => {
@@ -174,7 +187,7 @@ function savePlayer(player) {
 
 function createElo(player, category) {
     pool.getConnection(function(err, connection) {
-        let sql = `INSERT INTO elo(player_id, mode) VALUES(?, ?)`;
+        let sql = `INSERT INTO elo(player_id, category) VALUES(?, ?)`;
         let data = [player.id, category];
 
         connection.query(sql, data, (error, results, fields) => {
@@ -188,7 +201,7 @@ function saveElo(player, category) {
     pool.getConnection(function(err, connection) {
         let sql = `UPDATE elo
                 SET elo = ?, matches = ?, pb = ?
-                WHERE player_id = ? AND mode = ?`;
+                WHERE player_id = ? AND category = ?`;
         let data = [player[category].elo, player[category].matches, player[category].pb, player.id, category];
 
         connection.query(sql, data, (error, results, fields) => {
@@ -259,6 +272,12 @@ function saveSotwSeedData(guildId) {
 }
 
 module.exports = {
+    getCategory: function(category) {
+      return categories[category];
+    },
+    getCategories: function() {
+      return categoryKeys;
+    },
     checkPlayerRanked: function(username, category) {
         let playerIndex = getPlayerIndexByName(username);
         if (!players[playerIndex][category]) {

@@ -7,21 +7,21 @@ const updateRaceMessage = require('../common/updateRaceMessage');
 module.exports = (config, db, race, dChannel, message) => {
     if (race && race.seedLink) return;
 
-    let categories = Object.keys(config.categories);
+    let categories = db.getCategories();
     let categoryName = config.defaultCategory;
     let username = message.author.username;
 
     let helpMatch = message.content.match(/^[.!](\broll help\b) ([a-zA-Z0-9%]{4,20})/i);
 
     if (helpMatch && helpMatch.length > 2) {
-        helpCategory(config, dChannel, categories, helpMatch[2]);
+        helpCategory(config, db, dChannel, categories, helpMatch[2]);
         return;
     }
 
     helpMatch = message.content.match(/^[.!](\broll help\b)/i);
 
     if (helpMatch && helpMatch.length > 0) {
-        helpGeneral(config, dChannel, categories);
+        helpGeneral(config, db, dChannel, categories);
         return;
     }
 
@@ -52,16 +52,14 @@ module.exports = (config, db, race, dChannel, message) => {
                     }
                 }
 
-                rollSeed(config, db, race, dChannel, username, categorySettings(config, categoryName));
+                rollSeed(config, db, race, dChannel, username, categorySettings(config, db, categoryName));
             }
         }
-
-
     } else if (race) {
         dChannel.send(`**${username} has sealed their fate. I'd pray to RN Jesus while the seed is rolling if I were you...**`).then().catch(console.error);
-        categoryName = race.category;
+        categoryName = race.categoryToRoll;
 
-        rollSeed(config, db, race, dChannel, username, categorySettings(config, categoryName));
+        rollSeed(config, db, race, dChannel, username, categorySettings(config, db, categoryName));
     } else {
         let match = message.content.match(/^[.!](\broll\b) ([a-zA-Z0-9<>:]{4,20})/i);
 
@@ -74,13 +72,15 @@ module.exports = (config, db, race, dChannel, message) => {
             }
         }
 
-        dChannel.send(`**Generating ${config.categories[categoryName].name} seed...**`).then().catch(console.error);
+        let settings = categorySettings(config, db, categoryName);
 
-        rollSeed(config, db, race, dChannel, username, categorySettings(config, categoryName));
+        dChannel.send(`**Generating ${settings.title} seed...**`).then().catch(console.error);
+
+        rollSeed(config, db, race, dChannel, username, settings);
     }
 }
 
-function helpCategory(config, dChannel, categories, helpMatch) {
+function helpCategory(config, db, dChannel, categories, helpMatch) {
     let categoryName = config.defaultCategory;
     for (let i = 0; i < categories.length; i++) {
         if (helpMatch[2] === categories[i]) {
@@ -89,7 +89,7 @@ function helpCategory(config, dChannel, categories, helpMatch) {
         }
     }
 
-    let category = config.categories[categoryName];
+    let category = db.getCategory(categoryName);
 
     let message = `**Category ${categoryName} - ${category.name}**\n\n\`\`\`${category.description}`;
 
@@ -102,11 +102,11 @@ function helpCategory(config, dChannel, categories, helpMatch) {
     dChannel.send(message).then().catch(console.error);
 }
 
-function helpGeneral(config, dChannel, categories) {
-    let message = `**.roll {mode}**\nModes:\n`;
+function helpGeneral(config, db, dChannel, categories) {
+    let message = `**.roll {category}**\nCategories:\n`;
 
     for (let i = 0; i < categories.length; i++) {
-        message += `\n\`${categories[i]}\` - ${config.categories[categories[i]].name}`;
+        message += `\n\`${categories[i]}\` - ${db.getCategory(categories[i]).name}`;
     }
 
     dChannel.send(message).then().catch(console.error);

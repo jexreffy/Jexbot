@@ -1,0 +1,17 @@
+{
+  "category": "retrance",
+  "name": "Retrance",
+  "description": "Open Start, Fast Ganon, Crossworld Entrance Shuffle, Assured Sword, Universal Keys, Other Dungeon Items Shuffled, Bow cost money to use",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "dungeon_items": "full",
+    "goal": "fast_ganon",
+    "mode": "retro",
+    "entrances": "crossed",
+    "weapons": "assured"
+  },
+  "weights": { }
+}

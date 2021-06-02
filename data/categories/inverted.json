@@ -1,0 +1,13 @@
+{
+  "category": "inverted",
+  "name": "Inverted",
+  "description": "Inverted Start, Defeat Ganon",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "inverted"
+  },
+  "weights": { }
+}

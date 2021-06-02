@@ -5,21 +5,22 @@ const randomizerSettings = require('../common/randomizerSettings');
 const RANDO_URL = 'https://alttpr.com/api/randomizer';
 const PLANDO_URL = 'https://alttpr.com/api/customizer';
 
-module.exports = (config, categoryName) => {
-    let category = config.categories[categoryName];
+module.exports = (config, db, categoryName) => {
+    let category = db.getCategory(categoryName);
 
     let retVal = {
         name: categoryName,
         title: category.name,
         description: category.description,
+        gtbk: category.gtbk
     };
 
     if (category.mystery) {
         retVal.settings = mysterySettings(category.weights);
     } else if (category.random) {
-        let categoryList = category.categories.length > 0 ? category.categories : Object.keys(config.categories);
+        let categoryList = category.categories.length > 0 ? category.categories : db.getCategories();
         do {
-            category = config.categories[categoryList[getRandom(categoryList.length)]];
+            category = db.getCategory(categoryList[getRandom(categoryList.length)]);
         } while (category.mystery);
 
         retVal.settings = randomizerSettings(config, category);

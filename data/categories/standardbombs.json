@@ -1,0 +1,16 @@
+{
+  "category": "standard",
+  "name": "Standard",
+  "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "standard",
+    "custom": {
+      "jex.uncleItem": "TenBombs"
+    }
+  },
+  "weights": { }
+}

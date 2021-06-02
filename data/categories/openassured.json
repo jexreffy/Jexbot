@@ -1,0 +1,14 @@
+{
+  "category": "openassured",
+  "name": "Open Assured Sword",
+  "description": "Open Start, Defeat Ganon, 7/7 Crystals, Assured Sword",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "weapons": "assured"
+  },
+  "weights": { }
+}

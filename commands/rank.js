@@ -5,12 +5,12 @@ module.exports = (config, db, channel, message, username) => {
     let categoryTitle = categoryName;
 
     if (match && match.length > 2) {
-        let categories = Object.keys(config.categories);
+        let categories = db.getCategories();
 
         for (let i = 0; i < categories.length; i++) {
             if (match[2] === categories[i]) {
                 categoryName = categories[i];
-                categoryTitle = config.categories[categoryName].name;
+                categoryTitle = db.getCategory(categoryName).name;
                 break;
             }
         }

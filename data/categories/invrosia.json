@@ -1,0 +1,21 @@
+{
+  "category": "invrosia",
+  "name": "Invrosia",
+  "description": "Inverted Start, Assured Sword, Bosses cannot hold Dungeon Items, Big Keys expect GTBK are randomized",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "inverted",
+    "weapons": "assured",
+    "custom": {
+      "region.bossNormalLocation": false,
+      "region.wildBigKeys": true,
+      "rom.freeItemMenu": true,
+      "rom.freeItemText": true,
+      "jex.GTBKinGT": true
+    }
+  },
+  "weights": { }
+}

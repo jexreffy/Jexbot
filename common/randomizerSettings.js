@@ -22,6 +22,11 @@ module.exports = (config, category) => {
                     let location = config.gtbkLocations[getRandom(config.gtbkLocations.length)];
                     settings.l[location] = "BigKeyA2:1"
                     settings.custom.item.count.BigKeyA2 = 0;
+                } else if (key === "custom" && subkey === "jex.uncleItem") {
+                    let location = config.uncleLocation;
+                    let item = category.settings[key][subkey];
+                    settings.l[location] = item;
+                    settings.custom.item.count[item]--;
                 } else {
                     settings[key][subkey] = category.settings[key][subkey];
                 }

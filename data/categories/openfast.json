@@ -1,0 +1,14 @@
+{
+  "category": "openfast",
+  "name": "Open Fast Ganon",
+  "description": "Open Start, Fast Ganon, 7/7 Crystals",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "goal": "fast_ganon"
+  },
+  "weights": { }
+}

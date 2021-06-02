@@ -1,0 +1,14 @@
+{
+  "category": "beatable",
+  "name": "Beatable",
+  "description": "Open Start, the Randomizer only ensures the game can be beaten, some items and dungeons may be inaccessible",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "accessibility": "none"
+  },
+  "weights": { }
+}

@@ -1,0 +1,17 @@
+{
+  "category": "reduced",
+  "name": "Reduced Crystals",
+  "description": "Open Start, Defeat Ganon, 6/6 Crystals",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "crystals": {
+      "ganon": "6",
+      "tower": "6"
+    },
+    "mode": "open"
+  },
+  "weights": { }
+}

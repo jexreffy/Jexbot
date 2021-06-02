@@ -1,0 +1,15 @@
+{
+  "category": "adkeysanity",
+  "name": "AD Keysanity",
+  "description": "Open Start, All Dungeons, Dungeon Items shuffled in the full item pool",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "dungeon_items": "full",
+    "goal": "dungeons",
+    "mode": "open"
+  },
+  "weights": { }
+}

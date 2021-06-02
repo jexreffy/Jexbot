@@ -1,0 +1,40 @@
+{
+  "category": "randomeasy",
+  "name": "Random Easy Category",
+  "description": "A Random Category is selected from the list of JexBot Categories that fall within Seed of the Week Easy Difficulty. You must play the seed to figure out what category it is.",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": true,
+  "settings": {
+    "spoilers": "mystery"
+  },
+  "categories": [
+    "ad",
+    "adboots",
+    "adkeysanity",
+    "adkeysanityboots",
+    "ambrosia",
+    "beginner",
+    "blitzmode",
+    "casual",
+    "casualboots",
+    "casualbootsdungeons",
+    "casualbootsfast",
+    "keysanity",
+    "mcshuffle",
+    "mcsshuffle",
+    "open",
+    "openassured",
+    "openboots",
+    "openfast",
+    "openflute",
+    "pedestal",
+    "reduced",
+    "standard",
+    "standardboots",
+    "standardfast",
+    "standardvanilla",
+    "triforce"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "category": "retro",
+  "name": "Retro",
+  "description": "Open Start, Defeat Ganon, 7/7 Crystals, Universal Keys, Bow cost money to use",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "retro"
+  },
+  "weights": { }
+}

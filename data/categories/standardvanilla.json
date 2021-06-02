@@ -1,0 +1,14 @@
+{
+  "category": "standardvanilla",
+  "name": "Standard Vanilla Sword",
+  "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Vanilla Sword",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "standard",
+    "weapons": "vanilla"
+  },
+  "weights": { }
+}

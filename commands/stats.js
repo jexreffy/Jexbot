@@ -6,13 +6,13 @@ module.exports = (config, db, race, channel, message) => {
     let stats = null;
     let player = false;
 
-    let categories = Object.keys(config.categories);
+    let categories = db.getCategories();
 
     if (categoryName) {
         for (let i = 0; i < categories.length; i++) {
             if (match[2] === categories[i]) {
                 categoryName = categories[i];
-                categoryTitle = config.categories[categoryName].name;
+                categoryTitle = db.getCategory(categoryName).name;
                 break;
             }
         }
@@ -36,7 +36,7 @@ module.exports = (config, db, race, channel, message) => {
 
             for (let i = 0; i < categories.length; i++) {
                 if (title === categories[i]) {
-                    title = config.categories[title].name;
+                    title = db.getCategory(title).name;
                     break;
                 }
             }

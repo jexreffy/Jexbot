@@ -1,7 +1,7 @@
 const broadcastMessage = require('../common/broadcastMessage');
 
 module.exports = (config, race, dChannel, tClient, tChannel, username, message) => {
-    if (!config.categories[race.category].gtbk || !race.guessGameStarted) return;
+    if (!race.guessGameEnabled || !race.guessGameStarted) return;
 
     let match = message.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i);
     let guess = parseInt(match[2]);

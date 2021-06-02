@@ -18,6 +18,7 @@ module.exports = (race) => {
     race.crew = [];
     race.lastCallback = null;
     race.blueballs = -1;
+    race.guessGameEnabled = false;
     race.guessGameStarted = false;
     race.guessGameFinished = false;
     race.gtRunner = null;
@@ -28,6 +29,7 @@ module.exports = (race) => {
     race.gatekeeper = null;
     race.category = '';
     race.categoryName = '';
+    race.categoryDescription = '';
     race.messageId = null;
     race.seedCode = null;
     race.seedLink = null;

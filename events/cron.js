@@ -30,7 +30,7 @@ module.exports = (db, dClient, tClient) => {
             }
         }
 
-        if (!(race.ladder || race.invitational) && config.categories[race.category].gtbk && !race.guessGameStarted && (Math.floor(now - race.startedAt) / 1000) > config.minimumGuessStartSeconds) {
+        if (!(race.ladder || race.invitational) && race.guessGameEnabled && !race.guessGameStarted && (Math.floor(now - race.startedAt) / 1000) > config.minimumGuessStartSeconds) {
             race.guessGameStarted = true;
             broadcastMessage(config, dChannel, tClient, config.gtGuessIntro, false);
         } else if (!race.lastHello || (Math.floor(now - race.lastHello) / 1000) > config.helloInterval) {
@@ -48,20 +48,20 @@ module.exports = (db, dClient, tClient) => {
                 let guildId = keys[i];
                 if (config.guilds[guildId].sotwEnabled) {
                     let easyIndex = db.getEasySotw(guildId);
-                    let easyMode = config.guilds[guildId].sotwEasy[easyIndex];
+                    let easyCategory = config.guilds[guildId].sotwEasy[easyIndex];
                     easyIndex = easyIndex >= config.guilds[guildId].sotwEasy.length - 1 ? 0 : easyIndex + 1;
 
                     let mediumIndex = db.getMediumSotw(guildId);
-                    let mediumMode = config.guilds[guildId].sotwMedium[mediumIndex];
+                    let mediumCategory = config.guilds[guildId].sotwMedium[mediumIndex];
                     mediumIndex = mediumIndex >= config.guilds[guildId].sotwMedium.length - 1 ? 0 : mediumIndex + 1;
 
                     let hardIndex = db.getHardSotw(guildId);
-                    let hardMode = config.guilds[guildId].sotwHard[hardIndex];
+                    let hardCategory = config.guilds[guildId].sotwHard[hardIndex];
                     hardIndex = hardIndex >= config.guilds[guildId].sotwHard.length - 1 ? 0 : hardIndex + 1;
 
                     db.setSotwNext(guildId, easyIndex, mediumIndex, hardIndex, new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), 0, 0, 0).valueOf());
 
-                    rollSeeds(guildId, db, dClient, categorySettings(config, easyMode), categorySettings(config, mediumMode), categorySettings(config, hardMode));
+                    rollSeeds(guildId, db, dClient, categorySettings(config, db, easyCategory), categorySettings(config, db, mediumCategory), categorySettings(config, db, hardCategory));
                 }
             }
         }

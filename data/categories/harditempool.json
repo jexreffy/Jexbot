@@ -1,0 +1,16 @@
+{
+  "category": "harditempool",
+  "name": "Hard Item Pool",
+  "description": "Open Start, Defeat Ganon, 7/7 Crystals, Hart Item Pool",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "item": {
+      "pool": "hard"
+    }
+  },
+  "weights": { }
+}

@@ -1,0 +1,14 @@
+{
+  "category": "standardfast",
+  "name": "Standard Fast Ganon",
+  "description": "Escape Sequence Start, Fast Ganon, 7/7 Crystals",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "standard",
+    "goal": "fast_ganon"
+  },
+  "weights": { }
+}

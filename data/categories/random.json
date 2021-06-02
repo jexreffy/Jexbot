@@ -1,0 +1,13 @@
+{
+  "category": "random",
+  "name": "Random",
+  "description": "A Random Category is selected from the list of all JexBot categories. You must play the seed to figure out what category it is.",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": true,
+  "settings": {
+    "spoilers": "mystery"
+  },
+  "categories": []
+}

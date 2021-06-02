@@ -1,0 +1,16 @@
+{
+  "category": "casualbootsdungeons",
+  "name": "AD Casual Boots",
+  "description": "Escape Sequence Start, All Dungeons, 7/7 Crystals, Assured Sword, Starting Boots",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "standard",
+    "goal": "dungeons",
+    "weapons": "assured",
+    "eq": ["PegasusBoots"]
+  },
+  "weights": { }
+}

@@ -1,0 +1,174 @@
+{
+  "category": "mysteryladder",
+  "name": "Mystery Ladder",
+  "description": "All settings are randomly chosen per the ALTTPR Ladder settings. You must play the seed to figure out what it is.",
+  "gtbk": false,
+  "customizer": true,
+  "mystery": true,
+  "random": false,
+  "settings": {
+    "spoilers": "mystery"
+  },
+  "weights": {
+    "glitches_required": {
+      "none": 100,
+      "overworld_glitches": 0,
+      "major_glitches": 0,
+      "no_logic": 0
+    },
+    "item_placement": {
+      "basic": 0,
+      "advanced": 100
+    },
+    "mode": {
+      "standard": 40,
+      "open": 40,
+      "inverted": 10,
+      "retro": 10
+    },
+    "goal": {
+      "ganon": 35,
+      "fast_ganon": 35,
+      "dungeons": 15,
+      "pedestal": 20,
+      "triforce-hunt": 5
+    },
+    "accessibility": {
+      "items": 90,
+      "location": 0,
+      "none": 10
+    },
+    "dungeon_items": {
+      "standard": 30,
+      "mc": 0,
+      "mcs": 0,
+      "full": 70
+    },
+    "wild_maps": {
+      "true": 60,
+      "false": 40
+    },
+    "wild_compasses": {
+      "true": 60,
+      "false": 40
+    },
+    "wild_keys": {
+      "true": 60,
+      "false": 40
+    },
+    "wild_big_keys": {
+      "true": 60,
+      "false": 40
+    },
+    "tower_open": {
+      "0": 5,
+      "1": 5,
+      "2": 10,
+      "3": 10,
+      "4": 10,
+      "5": 20,
+      "6": 20,
+      "7": 20,
+      "random": 0
+    },
+    "ganon_open": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 10,
+      "4": 10,
+      "5": 25,
+      "6": 25,
+      "7": 30,
+      "random": 0
+    },
+    "entrance_shuffle": {
+      "none": 70,
+      "simple": 0,
+      "restricted": 10,
+      "full": 0,
+      "crossed": 20,
+      "insanity": 0
+    },
+    "boss_shuffle": {
+      "none": 70,
+      "simple": 0,
+      "full": 30,
+      "random": 0
+    },
+    "enemy_shuffle": {
+      "none": 70,
+      "shuffled": 30,
+      "random": 0
+    },
+    "hints": {
+      "on": 10,
+      "off": 90
+    },
+    "weapons": {
+      "randomized": 50,
+      "assured": 20,
+      "vanilla": 20,
+      "swordless": 10
+    },
+    "item_pool": {
+      "normal": 60,
+      "hard": 30,
+      "expert": 10,
+      "crowd_control": 0
+    },
+    "item_functionality": {
+      "normal": 100,
+      "hard": 0,
+      "expert": 0
+    },
+    "enemy_damage": {
+      "default": 100,
+      "shuffled": 0,
+      "random": 0
+    },
+    "enemy_health": {
+      "default": 70,
+      "easy": 15,
+      "hard": 15,
+      "expert": 0
+    },
+    "starting_items": [
+      {
+        "item": "PegasusBoots",
+        "false": 50,
+        "true": 50
+      },
+      {
+        "item": "OcarinaActive",
+        "false": 80,
+        "true": 20
+      },
+      {
+        "item": "Hookshot",
+        "false": 90,
+        "true": 10
+      },
+      {
+        "item": "FireRod",
+        "false": 90,
+        "true": 10
+      },
+      {
+        "item": "IceRod",
+        "false": 90,
+        "true": 10
+      },
+      {
+        "item": "Flippers",
+        "false": 90,
+        "true": 10
+      },
+      {
+        "item": "MagicMirror",
+        "false": 90,
+        "true": 10
+      }
+    ]
+  }
+}

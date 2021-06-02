@@ -1,0 +1,14 @@
+{
+  "category": "openflute",
+  "name": "Open Flute",
+  "description": "Open Start, Defeat Ganon, 7/7 Crystals, Starting Flute",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "eq": ["OcarinaActive"]
+  },
+  "weights": { }
+}

@@ -1,0 +1,13 @@
+{
+  "category": "open",
+  "name": "Open",
+  "description": "Open Start, Defeat Ganon, 7/7 Crystals",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open"
+  },
+  "weights": { }
+}

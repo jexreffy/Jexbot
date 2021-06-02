@@ -1,7 +1,7 @@
 const gtbkWinner = require('../common/gtbkWinner');
 
 module.exports = (config, race, dChannel, tClient, tChannel, message) => {
-    if (!config.categories[race.category].gtbk || !race.guessGameStarted) return;
+    if (!race.guessGameEnabled || !race.guessGameStarted) return;
 
     let match = message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i);
     let guess = parseInt(match[2]);

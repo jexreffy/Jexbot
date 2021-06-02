@@ -1,0 +1,16 @@
+{
+  "category": "tourney2021",
+  "name": "Standard Hard Item Pool",
+  "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Hard Item Pool",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "standard",
+    "item": {
+      "pool": "hard"
+    }
+  },
+  "weights": { }
+}

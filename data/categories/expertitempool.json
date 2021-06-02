@@ -1,0 +1,16 @@
+{
+  "category": "expertitempool",
+  "name": "Expert Item Pool",
+  "description": "Open Start, Defeat Ganon, 7/7 Crystals, Expert Item Pool",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "item": {
+      "pool": "expert"
+    }
+  },
+  "weights": { }
+}

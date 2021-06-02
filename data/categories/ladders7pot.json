@@ -1,0 +1,24 @@
+{
+  "category": "ladders7pot",
+  "name": "Ladder S7 Potpourri",
+  "description": "Open Start, All Dungeons, Small and Big Keys Randomized, Boss Shuffle, Start w/ Flute, Hookshot, and Ice Rod",
+  "gtbk": false,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "goal": "dungeons",
+    "enemizer": {
+      "boss_shuffle": "full"
+    },
+    "eq": ["OcarinaActive", "Hookshot", "IceRod"],
+    "custom": {
+      "region.wildKeys": true,
+      "region.wildBigKeys": true,
+      "rom.freeItemMenu": true,
+      "rom.freeItemText": true
+    }
+  },
+  "weights": { }
+}

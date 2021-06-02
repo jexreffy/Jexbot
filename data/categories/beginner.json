@@ -1,0 +1,15 @@
+{
+  "category": "beginner",
+  "name": "Beginner",
+  "description": "Escape Sequence Start, Defeat Ganon, Assured Sword, Basic Item Placement",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "standard",
+    "weapons": "assured",
+    "item_placement": "basic"
+  },
+  "weights": { }
+}

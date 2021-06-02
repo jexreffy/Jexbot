@@ -1,0 +1,16 @@
+{
+  "category": "crosskeys",
+  "name": "Crosskeys",
+  "description": "Open Start, Fast Ganon, Crossworld Entrance Shuffle, Dungeon Items shuffled in the full item pool",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "dungeon_items": "full",
+    "goal": "fast_ganon",
+    "mode": "open",
+    "entrances": "crossed"
+  },
+  "weights": { }
+}

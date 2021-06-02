@@ -1,0 +1,21 @@
+{
+  "category": "wtfrosia",
+  "name": "WTFrosia",
+  "description": "Inverted Start, All Dungeons, Dungeon Items shuffled in the full item pool, Assured Sword, Enemies and Bosses shuffled",
+  "gtbk": false,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "inverted",
+    "weapons": "assured",
+    "goal": "dungeons",
+    "dungeon_items": "full",
+    "enemizer": {
+      "boss_shuffle": "full",
+      "enemy_shuffle": "shuffled"
+    },
+    "eq": ["PegasusBoots"]
+  },
+  "weights": { }
+}

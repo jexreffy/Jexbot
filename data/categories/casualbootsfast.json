@@ -1,0 +1,16 @@
+{
+  "category": "casualbootsfast",
+  "name": "Casual Boots Fast Ganon",
+  "description": "Escape Sequence Start, Fast Ganon, 7/7 Crystals, Assured Sword, Starting Boots",
+  "gtbk": false,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "standard",
+    "goal": "fast_ganon",
+    "weapons": "assured",
+    "eq": ["PegasusBoots"]
+  },
+  "weights": { }
+}

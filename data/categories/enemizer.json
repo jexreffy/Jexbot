@@ -1,0 +1,17 @@
+{
+  "category": "enemizer",
+  "name": "Enemizer",
+  "description": "Open Start, Defeat Ganon, 7/7 Crystals, Enemies and Bosses shuffled",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "enemizer": {
+      "boss_shuffle": "full",
+      "enemy_shuffle": "shuffled"
+    }
+  },
+  "weights": { }
+}

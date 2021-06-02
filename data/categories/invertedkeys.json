@@ -1,0 +1,14 @@
+{
+  "category": "invertedkeys",
+  "name": "Inverted Keysanity",
+  "description": "Inverted Start, Fast Ganon, Dungeon Items shuffled in the full item pool",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "dungeon_items": "full",
+    "mode": "inverted"
+  },
+  "weights": { }
+}

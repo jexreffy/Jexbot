@@ -1,0 +1,16 @@
+{
+  "category": "invertedcrosskeys",
+  "name": "Inverted Crosskeys",
+  "description": "Inverted Start, Fast Ganon, Crossworld Entrance Shuffle, Dungeon Items shuffled in the full item pool",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "dungeon_items": "full",
+    "goal": "fast_ganon",
+    "mode": "inverted",
+    "entrances": "crossed"
+  },
+  "weights": { }
+}

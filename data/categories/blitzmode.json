@@ -1,0 +1,19 @@
+{
+  "category": "blitzmode",
+  "name": "Blitz Mode",
+  "description": "Open Start, Fast Ganon, 4/4 Crystals, Start w/ Boots, Flute, Pearl, Mitts, Master Sword, and Lamp",
+  "gtbk": false,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "goal": "fast_ganon",
+    "crystals": {
+      "ganon": "4",
+      "tower": "4"
+    },
+    "eq": ["ProgressiveSword", "ProgressiveSword", "MoonPearl", "Lamp", "PegasusBoots", "ProgressiveGlove", "ProgressiveGlove", "OcarinaActive"]
+  },
+  "weights": { }
+}

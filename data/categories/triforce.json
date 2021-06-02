@@ -1,0 +1,14 @@
+{
+  "category": "triforce",
+  "name": "Triforce Hunt",
+  "description": "Open Start, Triforce Hunt, 7/7 Crystals",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "goal": "triforce-hunt"
+  },
+  "weights": { }
+}

@@ -1,0 +1,14 @@
+{
+  "category": "keysanity",
+  "name": "Keysanity",
+  "description": "Open Start, Defeat Ganon, 7/7 Crystals, Dungeon Items shuffled in the full item pool",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "dungeon_items": "full",
+    "mode": "open"
+  },
+  "weights": { }
+}

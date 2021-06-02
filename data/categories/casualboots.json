@@ -1,0 +1,15 @@
+{
+  "category": "casualboots",
+  "name": "Casual Boots",
+  "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Assured Sword, Starting Boots",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "standard",
+    "weapons": "assured",
+    "eq": ["PegasusBoots"]
+  },
+  "weights": { }
+}

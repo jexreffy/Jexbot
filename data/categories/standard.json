@@ -1,0 +1,13 @@
+{
+  "category": "standard",
+  "name": "Standard",
+  "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "standard"
+  },
+  "weights": { }
+}

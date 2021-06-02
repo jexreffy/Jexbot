@@ -1,0 +1,14 @@
+{
+  "category": "swordless",
+  "name": "Swordless",
+  "description": "Open Start, Defeat Ganon, 7/7 Crystals, No Swords",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "weapons": "swordless"
+  },
+  "weights": { }
+}

@@ -20,6 +20,7 @@ module.exports = (config, db, race, dChannel, message) => {
         if (match && match.length > 2 && match[2] === "relay") {
             race.teams = true;
             race.relay = true;
+            race.guessGameEnabled = false;
         } else {
             setRaceCategory(config, db, race, guildId, match && match.length > 2 ? match[2] : "");
         }

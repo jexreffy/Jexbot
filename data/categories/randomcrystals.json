@@ -1,0 +1,17 @@
+{
+  "category": "randomcrystals",
+  "name": "Random Crystals",
+  "description": "Open Start, Defeat Ganon, Random/Random Crystals",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "crystals": {
+      "ganon": "random",
+      "tower": "random"
+    },
+    "mode": "open"
+  },
+  "weights": { }
+}
