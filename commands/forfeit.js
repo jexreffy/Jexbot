@@ -32,6 +32,20 @@ module.exports = (config, db, race, dChannel, tClient, username, message) => {
             if (allDone) {
                 broadcastMessage(config, dChannel, tClient, `Team ${(player.team + 1)} has forfeited.`, true);
             } else {
+                let time = Date.now() - race.startedAt;
+                if (time < 0) {
+                    time = 0;
+                }
+
+                let teamTime = 0;
+                race.players.forEach(x => {
+                    if (player.team === x.team && x.finished) {
+                        teamTime += x.time;
+                    }
+                })
+
+                player.time = (time / 1000) * 1000 - teamTime;
+
                 race.legStartTime[player.team] = Date.now() + (config.relayLegDelaySeconds + config.relayForfeitDelaySeconds) * 1000;
 
                 let nextPlayer = race.players.find(x => x.team === player.team && x.leg === player.leg + 1);

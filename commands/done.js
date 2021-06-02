@@ -19,17 +19,29 @@ module.exports = (config, db, race, dChannel, tClient, username, message) => {
         if (time < 0) {
             time = 0;
         }
-        player.time = (time / 1000) * 1000; //Floor to the nearest second for record keeping purposes.
 
         let category = race.category;
         if (race.teams && race.relay) {
             category = race.legs[player.leg].category;
+            let teamTime = 0;
+            race.players.forEach(x => {
+                if (player.team === x.team && x.finished) {
+                    teamTime += x.time;
+                }
+            })
+
+            player.time = (time / 1000) * 1000 - teamTime;
+
+            broadcastMessage(config, dChannel, tClient, `${username} has finished with an individual time of ${getRaceTime(player.time)} and an overall time of ${getRaceTime(time)}.`, true);
+        } else {
+            player.time = (time / 1000) * 1000; //Floor to the nearest second for record keeping purposes.
+
+            broadcastMessage(config, dChannel, tClient, `${username} has finished with a time of ${getRaceTime(time)}.`, true);
         }
+
         if (db.getPlayerPB(username, category) > player.time) {
             db.setPlayerPB(username, category, player.time);
         }
-
-        broadcastMessage(config, dChannel, tClient, `${username} has finished with a time of ${getRaceTime(time)}.`, true);
 
         if (race.teams) {
             let allDone = true;
