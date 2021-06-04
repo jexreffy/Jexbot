@@ -3,8 +3,8 @@ const config = require('./config.json');
 const db = require('./data/db.js');
 const fs = require('fs');
 
-const Discord = require('discord.js');
-const dClient = new Discord.Client({fetchAllMembers: true});
+const JexDiscord = require('./services/discord');
+const jexDiscord = new JexDiscord();
 
 const Twitch = require('tmi.js');
 let tClient = null;
@@ -14,6 +14,17 @@ const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
+
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+})
+
+app.listen(process.env.HTTP_PORT, () => {
+    console.log(`HTTP Server Listening at ${process.env.HTTP_PORT}`)
+})
 
 function connectToTwitch(race) {
     let channels = [];
@@ -71,23 +82,8 @@ function disconnectFromTwitch() {
     }).catch(console.error);
 }
 
-fs.readdir('./events/', (err, files) => {
-    files.forEach(file => {
-        const eventHandler = require(`./events/${file}`);
-        const eventName = file.split('.')[0];
 
-        if (eventName !== 'cron') {
-            dClient.on(eventName, (message) => {
-                eventHandler(db, dClient, tClient, message);
-            });
-        }
-    });
-});
 
-dClient.login(process.env.DISCORD_BOT_TOKEN).then(x => {
-    let time = new Date();
-    console.log(time.toLocaleString('en-US') + ' Discord connected');
-}).catch(console.error);
 
 const cron = require('node-cron');
 const cronEvent = require('./events/cron');
