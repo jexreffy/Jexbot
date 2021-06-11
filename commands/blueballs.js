@@ -1,12 +1,38 @@
-module.exports = (race, tClient, tChannel, message) => {
-    if (race.blueballs >= 0) return;
+'use strict'
+const JexCommand = require('../commands/command');
 
-    let match = message.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i);
-    let blueballs = parseInt(match[2]);
+module.exports = class CommandBlueBalls extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
 
-    if (blueballs < 0 || blueballs > 15) return;
+    get commandName() {
+        return 'blueballs';
+    }
 
-    race.blueballs = blueballs;
+    get isRaceCommand() {
+        return true;
+    }
 
-    if (tClient) tClient.say(tChannel, `Aga 1 Blue Balls recorded as ${blueballs}`).then().catch(console.error);
+    isCommandValid(context) {
+        return context.activeRace.blueballs < 0;
+    }
+
+    executeCommand(context) {
+        let match = context.message.match(/^[.!](\bblueballs\b) ([0-9]{1,2})/i);
+
+        if (!match || match.length <= 2) return;
+
+        let blueballs = parseInt(match[2]);
+
+        if (blueballs < 0 || blueballs > 15) return;
+
+        context.activeRace.blueballs = blueballs;
+
+        if (context.origination === this._app.TWITCH) {
+            context.twitchClient.say(context.messageChannel, `Aga 1 Blue Balls recorded as ${blueballs}`).then().catch(console.error);
+        }
+
+        this._app.db.setRaceData(context.guildId, context.activeRace);
+    }
 }

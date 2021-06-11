@@ -1,28 +1,44 @@
-const getRandom = require('../common/getRandom');
-const setRaceCategory = require('../common/setRaceCategory');
-const resetRace = require('../common/resetRace');
-const updateRaceMessage = require('../common/updateRaceMessage');
+'use strict'
+const JexCommand = require('../commands/command');
 
-module.exports = (config, db, race, dChannel, message) => {
-    if (race.finished && config.referees.includes(message.author.username)) {
-        let match = message.content.match(/^[.!](\binvitational\b) ([a-zA-Z0-9]{4,20})/i);
+module.exports = class CommandInvitational extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
 
-        resetRace(race);
+    get commandName() {
+        return 'invitational';
+    }
 
-        const guildId = dChannel.guild.id;
+    get isRaceCommand() {
+        return true;
+    }
 
-        race.invitational = true;
-        race.locked = true;
-        race.countdownIndex = getRandom(config.countdowns.length);
-        race.mutlistream = 'https://multistre.am/';
-        race.status = 'INVITATIONAL RACE: WAITING FOR PLAYERS TO READY UP';
+    isCommandValid(context) {
+        return context.origination === this._app.DISCORD &&
+               context.activeRace.finished &&
+               this._app.config['referees'].includes(context.username);
+    }
+
+    executeCommand(context) {
+        let match = context.message.match(/^[.!](\binvitational\b) ([a-zA-Z0-9<>:]{4,20})/i);
+
+        const guildId = context.guildId;
+
+        this._app.routines['resetRace'](context.activeRace);
+
+        context.activeRace.invitational = true;
+        context.activeRace.locked = true;
+        context.activeRace.countdownIndex = getRandom(config.countdowns.length);
+        context.activeRace.mutlistream = 'https://multistre.am/';
+        context.activeRace.status = 'INVITATIONAL RACE: WAITING FOR PLAYERS TO READY UP';
 
         if (match && match.length > 2 && match[2] === "relay") {
-            race.teams = true;
-            race.relay = true;
-            race.guessGameEnabled = false;
+            context.activeRace.teams = true;
+            context.activeRace.relay = true;
+            context.activeRace.guessGameEnabled = false;
         } else {
-            setRaceCategory(config, db, race, guildId, match && match.length > 2 ? match[2] : "");
+            this._app.routines['setRaceCategory'](this._app, context, match && match.length > 2 ? match[2] : "");
         }
 
         let embed = {
@@ -33,13 +49,14 @@ module.exports = (config, db, race, dChannel, message) => {
             }
         };
 
-        db.setActiveRace(guildId);
+        this._app.db.setActiveRace(guildId);
 
-        dChannel.send(embed).then(x => {
-            race.messageId = x.id;
-            updateRaceMessage(db, race, dChannel);
+        context.raceChannel.send(embed).then(x => {
+            context.activeRace.messageId = x.id;
+            this._app.db.setRaceData(context.guildId, context.activeRace);
+            this._app.routines['updateRaceMessage'](this._app, context);
         }).catch((error) => {
             console.log(error);
         });
     }
-};
+}

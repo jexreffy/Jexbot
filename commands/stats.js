@@ -1,63 +1,83 @@
-module.exports = (config, db, race, channel, message) => {
-    const centerPad = (str, length, char = ' ') => str.padStart((str.length + length) / 2, char).padEnd(length, char);
-    let match = message.content.match(/^[.!](\bstats\b) ([a-zA-Z 0-9%]{0,30})/i);
-    let categoryName = match && match.length > 2 ? match[2] : null;
-    let categoryTitle = categoryName;
-    let stats = null;
-    let player = false;
+'use strict'
+const JexCommand = require('../commands/command');
 
-    let categories = db.getCategories();
-
-    if (categoryName) {
-        for (let i = 0; i < categories.length; i++) {
-            if (match[2] === categories[i]) {
-                categoryName = categories[i];
-                categoryTitle = db.getCategory(categoryName).name;
-                break;
-            }
-        }
-
-        stats = db.getCategoryStats(categoryName);
-        if (!stats) {
-            stats = db.getPlayerStats(message.author.username);
-            player = true;
-        }
-    } else {
-        stats = db.getPlayerStats(message.author.username);
-        player = true;
+module.exports = class CommandStats extends JexCommand {
+    constructor(app) {
+        super(app);
     }
 
-    let output = '';
-    if (stats && player) {
-        output += message.author.username + ' stats';
-        output += '\n Stream: <' + stats.twitch + '>';
-        stats.categories.forEach(element => {
-            let title = element.name;
+    get commandName() {
+        return 'stats';
+    }
 
+    get isRaceCommand() {
+        return true;
+    }
+
+    isCommandValid(context) {
+        return context.origination === this._app.DISCORD;
+    }
+
+    executeCommand(context) {
+        let match = context.message.match(/^[.!](\bstats\b) ([a-zA-Z0-9%]{0,20})/i);
+        let categoryName = this._app.config['defaultCategory'];
+        let categoryTitle = categoryName;
+        let stats = null;
+        let player = false;
+
+        let categories = this._app.db.getCategories();
+
+        if (match && match.length > 2) {
             for (let i = 0; i < categories.length; i++) {
-                if (title === categories[i]) {
-                    title = db.getCategory(title).name;
+                if (match[2] === categories[i]) {
+                    categoryName = categories[i];
+                    categoryTitle = this._app.db.getCategory(categoryName).name;
                     break;
                 }
             }
 
-            output += '\n' + ('`Category: ' + title).padEnd(35, " ") + '`';
-            output += '\n' + ('`  Rank: ' + element.rank).padEnd(35, " ") + '`';
-            output += '\n' + ('`  Elo: ' + element.elo).padEnd(35, " ") + '`';
-            output += '\n' + ('`  Matches: ' + element.matches).padEnd(35, " ") + '`';
-        });
-    } else if (stats) {
-        output += 'Stats:';
-        output += '\n`' + centerPad((categoryTitle), 24) + '`';
-        output += '\n`' + (' Players: ' + stats.categoryPlayers).padEnd(24, " ") + '`';
-        output += '\n`' + (' Matches: ' + stats.totalRuns).padEnd(24, " ") + '`';
-        output += '\n`' + centerPad(('Top 3'), 24) + '`';
-        output += '\n`' + ('1.' + stats.top[0].username).padEnd(19, " ") + (stats.top[0].elo + ' ').padEnd(5, " ") + '`';
-        output += '\n`' + ('2.' + stats.top[1].username).padEnd(19, " ") + (stats.top[1].elo + ' ').padEnd(5, " ") + '`';
-        output += '\n`' + ('3.' + stats.top[2].username).padEnd(19, " ") + (stats.top[2].elo + ' ').padEnd(5, " ") + '`';
-    }
+            stats = this._app.db.getCategoryStats(categoryName);
+            if (!stats) {
+                stats = this._app.db.getPlayerStats(context.username);
+                player = true;
+            }
+        } else {
+            stats = this._app.db.getPlayerStats(context.username);
+            player = true;
+        }
 
-    if (stats) {
-        channel.send(output).then().catch(console.error);
+        let output = '';
+        if (stats && player) {
+            output += context.username + ' stats';
+            output += '\n Stream: <' + stats.twitch + '>';
+            stats.categories.forEach(element => {
+                let title = element.name;
+
+                for (let i = 0; i < categories.length; i++) {
+                    if (title === categories[i]) {
+                        title = this._app.db.getCategory(title).name;
+                        break;
+                    }
+                }
+
+                output += '\n' + ('`Category: ' + title).padEnd(35, " ") + '`';
+                output += '\n' + ('`  Rank: ' + element.rank).padEnd(35, " ") + '`';
+                output += '\n' + ('`  Elo: ' + element.elo).padEnd(35, " ") + '`';
+                output += '\n' + ('`  Matches: ' + element.matches).padEnd(35, " ") + '`';
+            });
+        } else if (stats) {
+            output += 'Stats:';
+            output += '\n`' + this._app.routines['centerPad']((categoryTitle), 24) + '`';
+            output += '\n`' + (' Players: ' + stats.categoryPlayers).padEnd(24, " ") + '`';
+            output += '\n`' + (' Matches: ' + stats.totalRuns).padEnd(24, " ") + '`';
+            output += '\n`' + this._app.routines['centerPad'](('Top 3'), 24) + '`';
+            output += '\n`' + ('1.' + stats.top[0].username).padEnd(19, " ") + (stats.top[0].elo + ' ').padEnd(5, " ") + '`';
+            output += '\n`' + ('2.' + stats.top[1].username).padEnd(19, " ") + (stats.top[1].elo + ' ').padEnd(5, " ") + '`';
+            output += '\n`' + ('3.' + stats.top[2].username).padEnd(19, " ") + (stats.top[2].elo + ' ').padEnd(5, " ") + '`';
+        }
+
+        if (stats) {
+            context.raceChannel.send(output).then().catch(console.error);
+        }
     }
-};
+}

@@ -1,44 +1,65 @@
-﻿const broadcastMessage = require('../common/broadcastMessage');
-const onRunnerFinished = require('../common/onRunnerFinished');
+﻿'use strict'
+const JexCommand = require('../commands/command');
 
-module.exports = (config, db, race, dChannel, tClient, username, message) => {
-    let player = race.players.find(x => x.username === username);
+module.exports = class CommandDone extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
 
-    if (race.started && player && !player.finished && !player.forfeited) {
+    get commandName() {
+        return 'done';
+    }
+
+    get isRaceCommand() {
+        return true;
+    }
+
+    isCommandValid(context) {
+        let player = context.activeRace.players.find(x => x.username === context.username);
+
+        return context.origination === this._app.DISCORD &&
+            context.activeRace.started &&
+            !context.activeRace.finished &&
+            player && !player.finished && !player.forfeited;
+    }
+
+    executeCommand(context) {
+        let player = context.activeRace.players.find(x => x.username === context.username);
+
         player.forfeited = true;
-        race.remainingPlayers -= 1;
+        context.activeRace.remainingPlayers -= 1;
 
-        broadcastMessage(config, dChannel, tClient, `${username} has forfeited.`, true);
+        this._app.routines['broadcastMessage'](this._app, context,  `${context.username} has forfeited.`, true);
 
-        if (race.teams && !race.relay) {
+        if (context.activeRace.teams && !context.activeRace.relay) {
             let anyForfeit = false;
-            race.players.forEach(x => {
+            context.activeRace.players.forEach(x => {
                 if (player.team === x.team) {
                     anyForfeit = anyForfeit || x.forfeited;
                 }
             })
             if (!anyForfeit) {
-                broadcastMessage(config, dChannel, tClient, `Team ${(player.team + 1)} has forfeited.`, true);
+                this._app.routines['broadcastMessage'](this._app, context,  `Team ${(player.team + 1)} has forfeited.`, true);
             }
-        } else if (race.teams && race.relay) {
+        } else if (context.activeRace.teams && context.activeRace.relay) {
             player.finished = true;
 
             let allDone = true;
-            race.players.forEach(x => {
+            context.activeRace.players.forEach(x => {
                 if (player.team === x.team) {
                     allDone = allDone && x.finished;
                 }
             })
             if (allDone) {
-                broadcastMessage(config, dChannel, tClient, `Team ${(player.team + 1)} has forfeited.`, true);
+                this._app.routines['broadcastMessage'](this._app, context,  `Team ${(player.team + 1)} has forfeited.`, true);
             } else {
-                let time = Date.now() - race.startedAt;
+                let time = Date.now() - context.activeRace.startedAt;
                 if (time < 0) {
                     time = 0;
                 }
 
                 let teamTime = 0;
-                race.players.forEach(x => {
+                context.activeRace.players.forEach(x => {
                     if (player.team === x.team && x.finished) {
                         teamTime += x.time;
                     }
@@ -46,19 +67,18 @@ module.exports = (config, db, race, dChannel, tClient, username, message) => {
 
                 player.time = (time / 1000) * 1000 - teamTime;
 
-                race.legStartTime[player.team] = Date.now() + (config.relayLegDelaySeconds + config.relayForfeitDelaySeconds) * 1000;
+                context.activeRace.legStartTime[player.team] = Date.now() + (this._app.config['relayLegDelaySeconds'] + this._app.config['relayForfeitDelaySeconds']) * 1000;
 
-                let nextPlayer = race.players.find(x => x.team === player.team && x.leg === player.leg + 1);
-                let thisMember = dChannel.members.find(x => x.user.username === player.username);
-                let nextMember = dChannel.members.find(x => x.user.username === nextPlayer.username);
-                dChannel.send(`<@${thisMember.id}> You mush let the credits run to completion **WITHOUT** fast forwarding.`);
-                dChannel.send(`<@${nextMember.id}> ${player.username} has finished. You will be able to start your leg of the relay in ${(config.relayLegDelaySeconds + config.relayForfeitDelaySeconds) / 60} minutes.`);
+                let nextPlayer = context.activeRace.players.find(x => x.team === player.team && x.leg === player.leg + 1);
+                let thisMember = context.raceChannel.members.find(x => x.user.username === player.username);
+                let nextMember = context.raceChannel.members.find(x => x.user.username === nextPlayer.username);
+                context.raceChannel.send(`<@${thisMember.id}> You mush let the credits run to completion **WITHOUT** fast forwarding.`);
+                context.raceChannel.send(`<@${nextMember.id}> ${player.username} has finished. You will be able to start your leg of the relay in ${(this._app.config['relayLegDelaySeconds'] + this._app.config['relayForfeitDelaySeconds']) / 60} minutes.`);
             }
         }
 
-        onRunnerFinished(config, db, race, dChannel, tClient, message);
-    } else {
-        let time = new Date();
-        console.log(time.toLocaleString('en-US') + ' forfeit: ' + username + ' is not in the race!');
+        this._app.routines['onRunnerFinished'](this._app, context, player);
+
+        this._app.db.setRaceData(context.guildId, context.activeRace);
     }
-};
+}

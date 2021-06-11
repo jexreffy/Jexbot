@@ -1,7 +1,8 @@
-const broadcastTwitch = require('../common/broadcastTwitch');
+'use strict'
+module.exports = (app, context, message, bold) => {
+    if (context.raceChannel) {
+        context.raceChannel.send(bold ? `**${message}**` : message).then().catch(console.error);
+    }
 
-module.exports = (config, dChannel, tClient, message, bold) => {
-    if (dChannel) dChannel.send(bold ? `**${message}**` : message).then().catch(console.error);
-
-    broadcastTwitch(config, tClient, message);
+    app.routines["broadcastTwitch"](app, context, message);
 };

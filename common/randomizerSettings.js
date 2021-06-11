@@ -1,29 +1,32 @@
-const getRandom = require('../common/getRandom');
-const getCustomizerSettings = require('../common/getCustomizerSettings');
-const getRandomizerSettings = require('../common/getRandomizerSettings');
-const processStartingEquipment = require('../common/processStartingEquipment');
-
-module.exports = (config, category) => {
-    let settings = category.customizer ? getCustomizerSettings() : getRandomizerSettings();
+'use strict'
+module.exports = (app, category) => {
+    let settings = app.routines[category.customizer ? 'getCustomizerSettings' : 'getRandomizerSettings']();
 
     let keys = Object.keys(category.settings);
 
     for (let i = 0; i < keys.length; i++) {
         let key = keys[i];
 
-        if (key === "eq") {
-            processStartingEquipment(settings, category.settings['eq']);
+        if (key === 'eq') {
+            app.routines['processStartingEquipment'](settings, category.settings['eq']);
         } else if (typeof category.settings[key] === 'object' && category.settings[key] !== null) {
             let subkeys = Object.keys(category.settings[key]);
 
             for (let i = 0; i < subkeys.length; i++) {
                 let subkey = subkeys[i];
-                if (key === "custom" && subkey === "jex.GTBKinGT") {
-                    let location = config.gtbkLocations[getRandom(config.gtbkLocations.length)];
-                    settings.l[location] = "BigKeyA2:1"
+                if (key === 'custom' && subkey.startsWith('itemCount.')) {
+                    let item = subkey.split('.')[1];
+                    settings.custom.item.count[item] = category.settings[key][subkey];
+                } else if (key === 'custom' && subkey.startsWith('dropCount.')) {
+                    let item = subkey.split('.')[1];
+                    settings.custom.drop.count[item] = category.settings[key][subkey];
+                } else if (key === 'custom' && subkey === 'jex.GTBKinGT') {
+                    let locationIndex = app.routines['getRandom'](app.config['gtbkLocations'].length)
+                    let location = app.config['gtbkLocations'][locationIndex];
+                    settings.l[location] = 'BigKeyA2:1'
                     settings.custom.item.count.BigKeyA2 = 0;
-                } else if (key === "custom" && subkey === "jex.uncleItem") {
-                    let location = config.uncleLocation;
+                } else if (key === 'custom' && subkey === 'jex.uncleItem') {
+                    let location = app.config['uncleLocation'];
                     let item = category.settings[key][subkey];
                     settings.l[location] = item;
                     settings.custom.item.count[item]--;

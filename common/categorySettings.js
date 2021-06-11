@@ -1,12 +1,6 @@
-const getRandom = require('../common/getRandom');
-const mysterySettings = require('../common/mysterySettings');
-const randomizerSettings = require('../common/randomizerSettings');
-
-const RANDO_URL = 'https://alttpr.com/api/randomizer';
-const PLANDO_URL = 'https://alttpr.com/api/customizer';
-
-module.exports = (config, db, categoryName) => {
-    let category = db.getCategory(categoryName);
+'use strict'
+module.exports = (app, categoryName) => {
+    let category = app.db.getCategory(categoryName);
 
     let retVal = {
         name: categoryName,
@@ -16,21 +10,21 @@ module.exports = (config, db, categoryName) => {
     };
 
     if (category.mystery) {
-        retVal.settings = mysterySettings(category.weights);
+        retVal.settings = app.routines['mysterySettings'](app, category.weights);
     } else if (category.random) {
-        let categoryList = category.categories.length > 0 ? category.categories : db.getCategories();
+        let categoryList = category.categories.length > 0 ? category.categories : app.db.getCategories();
         do {
-            category = db.getCategory(categoryList[getRandom(categoryList.length)]);
+            category = app.db.getCategory(categoryList[app.routines['getRandom'](categoryList.length)]);
         } while (category.mystery);
 
-        retVal.settings = randomizerSettings(config, category);
+        retVal.settings = app.routines['randomizerSettings'](app, category);
         retVal.settings.spoilers = "mystery";
     } else {
-        retVal.settings = randomizerSettings(config, category);
+        retVal.settings = app.routines['randomizerSettings'](app, category);
         retVal.settings.notes = `${retVal.title}: ${retVal.description}`;
     }
 
-    retVal.url = category.customizer ? PLANDO_URL : RANDO_URL;
+    retVal.url = category.customizer ? 'https://alttpr.com/api/customizer' : 'https://alttpr.com/api/randomizer';
 
     return retVal;
 }

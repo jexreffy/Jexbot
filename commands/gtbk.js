@@ -1,31 +1,54 @@
-const gtbkWinner = require('../common/gtbkWinner');
+'use strict'
+const JexCommand = require('../commands/command');
 
-module.exports = (config, race, dChannel, tClient, tChannel, message) => {
-    if (!race.guessGameEnabled || !race.guessGameStarted) return;
+module.exports = class CommandGTBK extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
 
-    let match = message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i);
-    let guess = parseInt(match[2]);
+    get commandName() {
+        return 'gtbk';
+    }
 
-    if (race.ladder || race.invitational) {
-        race.gtbk = guess;
-        race.gtRunner = "TheCrystalCompany";
+    get isRaceCommand() {
+        return true;
+    }
 
-        gtbkWinner(config, race, null, tClient);
-    } else if (race.gtRunner !== null) {
-        let response = config.gtGuessFound.replace('LOCATION', guess);
+    isCommandValid(context) {
+        return context.origination === this._app.TWITCH &&
+               context.activeRace.guessGameEnabled &&
+               context.activeRace.guessGameStarted;
+    }
 
-        if (tClient) tClient.say(tChannel, response).then().catch(console.error);
+    executeCommand(context) {
+        let match = message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i);
+        let guess = parseInt(match[2]);
 
-        if (race.gtbk >= 0) return;
+        if (context.activeRace.ladder || context.activeRace.invitational) {
+            context.activeRace.gtbk = guess;
+            context.activeRace.gtRunner = "TheCrystalCompany";
 
-        let player = race.players.find(x => x.twitch === tChannel);
+            this._app.routines['gtbkWinner'](this._app, context);
+            this._app.db.setRaceData(context.guildId, context.activeRace);
+        } else if (context.activeRace.gtRunner !== null) {
+            let response = this._app.config['gtGuessFound'].replace('LOCATION', guess);
 
-        if ((tChannel.toLowerCase() === race.restream.toLowerCase() && race.gtRunner === race.restream.toLowerCase()) ||
-            (player && race.gtRunner && race.gtRunner === player.twitch)) {
-            race.gtbk = guess;
+            context.twitchClient.say(context.messageChannel, response).then().catch(console.error);
 
-            if (race.spoilersAllowed) {
-                gtbkWinner(config, race, dChannel, tClient);
+            if (context.activeRace.gtbk >= 0) return;
+
+            let player = context.activeRace.players.find(x => x.twitch === context.messageChannel);
+
+            if ((context.messageChannel.toLowerCase() === context.activeRace.restream.toLowerCase() &&
+                context.activeRace.gtRunner === context.activeRace.restream.toLowerCase()) ||
+                (player && context.activeRace.gtRunner && context.activeRace.gtRunner === player.twitch)) {
+                context.activeRace.gtbk = guess;
+
+                if (context.activeRace.spoilersAllowed) {
+                    this._app.routines['gtbkWinner'](this._app, context);
+                }
+
+                this._app.db.setRaceData(context.guildId, context.activeRace);
             }
         }
     }

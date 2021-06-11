@@ -1,13 +1,37 @@
-module.exports = (config, race, tClient, tChannel) => {
-    if (race.ladder || race.invitational || !race.guessGameEnabled || !race.guessGameStarted) return;
+'use strict'
+const JexCommand = require('../commands/command');
 
-    if (tClient) tClient.say(tChannel, config.gtGuessEnter).then().catch(console.error);
+module.exports = class CommandGTEnter extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
 
-    if (race.gtRunner) return;
+    get commandName() {
+        return 'gtenter';
+    }
 
-    let player = race.players.find(x => x.twitch === tChannel);
+    get isRaceCommand() {
+        return true;
+    }
 
-    if (tChannel.toLowerCase() === race.restream.toLowerCase() || player) {
-        race.gtRunner = tChannel;
+    isCommandValid(context) {
+        return context.origination === this._app.TWITCH &&
+               !context.activeRace.ladder &&
+               !context.activeRace.invitational &&
+               context.activeRace.guessGameEnabled &&
+               context.activeRace.guessGameStarted;
+    }
+
+    executeCommand(context) {
+        context.twitchClient.say(context.messageChannel, this._app.config['gtGuessEnter']).then().catch(console.error);
+
+        if (context.activeRace.gtRunner) return;
+
+        let player = context.activeRace.players.find(x => x.twitch === context.messageChannel);
+
+        if (context.messageChannel.toLowerCase() === context.activeRace.restream.toLowerCase() || player) {
+            context.activeRace.gtRunner = context.messageChannel;
+            this._app.db.setRaceData(context.guildId, context.activeRace);
+        }
     }
 }

@@ -109,6 +109,11 @@
             ]
         }
     },
+    "eloK": 60,
+    "eloKPlacement": 100,
+    "eloN": 1000,
+    "eloPlacementMatches": 1,
+    "eloDefault": 1000,
     "helloInterval": 1800,
     "jokeCountdownMax": 100,
     "minimumNewCallbackSeconds": 60,
@@ -117,7 +122,7 @@
     "minimumGuessStartSeconds": 3900,
     "relayLegDelaySeconds": 600,
     "relayForfeitDelaySeconds": 300,
-    "defaultLeaderboardSize": "25",
+    "defaultLeaderboardSize": 25,
     "defaultCategory": "standard",
     "referees": ["jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken", "KillerApp23", "Jixson", "RGBHive", "Ruzzelljr"],
     "uncleLocation": "TGluaydzIFVuY2xlOjE=",

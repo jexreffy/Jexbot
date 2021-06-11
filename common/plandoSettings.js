@@ -1,7 +1,6 @@
-const getCustomizerSettings = require('../common/getCustomizerSettings');
-
-module.exports = (plando) => {
-    let settings = getCustomizerSettings();
+'use strict'
+module.exports = (app, plando) => {
+    let settings = app.routines['getCustomizerSettings']();
 
     settings.glitches = plando["randomizer.glitches_required"];
     settings.item_placement = plando["randomizer.item_placement"];

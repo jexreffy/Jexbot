@@ -1,18 +1,38 @@
-const broadcastTwitch = require('../common/broadcastTwitch');
-const getRandom = require('../common/getRandom');
-const updateRaceMessage = require('../common/updateRaceMessage');
+'use strict'
+const JexCommand = require('../commands/command');
 
-module.exports = (config, db, race, dChannel, tClient) => {
-    if (race.started && (!race.lastDickTime || (Math.floor((Date.now() - race.lastDickTime)) / 1000) > config.minimumNewDickSeconds)) {
-        race.dickCount += 1;
-        race.lastDickTime = Date.now();
+module.exports = class CommandDick extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
 
-        if (race.initiatedAt) {
-            updateRaceMessage(db, race, dChannel);
+    get commandName() {
+        return 'dick';
+    }
+
+    get isRaceCommand() {
+        return true;
+    }
+
+    isCommandValid(context) {
+        return context.activeRace.started &&
+               (!context.activeRace.lastDickTime ||
+                   (Math.floor((Date.now() - context.activeRace.lastDickTime)) / 1000) > this._app.config['minimumNewDickSeconds']);
+    }
+
+    executeCommand(context) {
+        context.activeRace.dickCount += 1;
+        context.activeRace.lastDickTime = Date.now();
+
+        this._app.db.setRaceData(context.guildId, context.activeRace);
+
+        if (context.activeRace.initiatedAt) {
+            this._app.routines['updateRaceMessage'](this._app, context);
         }
 
-        let dickMessage = `${race.seedRoller} ${config.dickMessages[getRandom(config.dickMessages.length)].replace('RICHARD', race.dickCount)}`;
+        let dickIndex = this._app.routines['getRandom'](this._app.config['dickMessages'].length);
+        let dickMessage = `${context.activeRace.seedRoller} ${this._app.config['dickMessages'][dickIndex].replace('RICHARD', context.activeRace.dickCount)}`;
 
-        broadcastTwitch(config, tClient, dickMessage);
+        this._app.routines['broadcastTwitch'](this._app, context, dickMessage);
     }
-};
+}

@@ -1,35 +1,50 @@
-const onRunnerFinished = require('../common/onRunnerFinished');
-const onRunnerRemoved = require('../common/onRunnerRemoved');
-const startRace = require('../common/startRace');
-const updateRaceMessage = require('../common/updateRaceMessage');
+'use strict'
+const JexCommand = require('../commands/command');
 
-module.exports = (config, db, race, dChannel, tClient, message) => {
-    if (config.referees.includes(message.author.username)) {
-        let match = message.content.match(/^[.!](\bkick\b)([ ]{0,1})([a-zA-Z0-9%]{0,20})/i);
-        let player = race.players.find(x => x.username === match[3]);
-
-        if (!race.finished && player) {
-            onRunnerRemoved(config, db, race, player, message);
-    
-            let allReady = race.players.every(x => x.ready === true);
-            if (!race.started && !race.gatekeeper && allReady && race.players.length > 1) {
-                if (race.teams) {
-                    race.teams = false;
-                    race.players[0].ready = false;
-                    updateRaceMessage(db, race, dChannel);
-                } else {
-                    startRace(config, db, race, dChannel);
-                }
-            } else if (race.started) {
-                player.forfeited = true;
-                onRunnerFinished(config, db, race, dChannel, tClient, message);
-            } else if (!race.started) {
-                race.teams = false;
-                updateRaceMessage(db, race, dChannel);
-            }
-        } else {
-            let time = new Date();
-            console.log(time.toLocaleString('en-US') + ' leave: ' + player.username + ' is not in the race!');
-        }
+module.exports = class CommandKick extends JexCommand {
+    constructor(app) {
+        super(app);
     }
-};
+
+    get commandName() {
+        return 'kick';
+    }
+
+    get isRaceCommand() {
+        return true;
+    }
+
+    isCommandValid(context) {
+        return context.origination === this._app.DISCORD &&
+               !context.activeRace.finished &&
+               this._app.config['referees'].includes(context.username);
+    }
+
+    executeCommand(context) {
+        let match = context.message.match(/^[.!](\bkick\b) ([a-zA-Z0-9%]{0,20})/i);
+        let player = context.activeRace.players.find(x => x.username === match[3]);
+
+        if (!context.activeRace.finished && player) {
+            this._app.routines['onRunnerRemoved'](this._app, context, player);
+
+            let allReady = context.activeRace.players.every(x => x.ready === true);
+            if (!context.activeRace.started && !context.activeRace.gatekeeper && allReady && context.activeRace.players.length > 1) {
+                if (context.activeRace.teams) {
+                    context.activeRace.teams = false;
+                    context.activeRace.players[0].ready = false;
+                    this._app.routines['updateRaceMessage'](this._app, context);
+                } else {
+                    this._app.routines['startRace'](this._app, context);
+                }
+            } else if (context.activeRace.started) {
+                player.forfeited = true;
+                this._app.routines['onRunnerFinished'](this._app, context, player);
+            } else if (!context.activeRace.started) {
+                context.activeRace.teams = false;
+                this._app.routines['updateRaceMessage'](this._app, context);
+            }
+        }
+
+        this._app.db.setRaceData(context.guildId, context.activeRace);
+    }
+}

@@ -1,3 +1,4 @@
+'use strict'
 module.exports = (race) => {
     race.ladder = false;
     race.invitational = false;

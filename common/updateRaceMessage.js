@@ -1,7 +1,7 @@
-const sortPlayers = require('../common/sortPlayers');
-const getRaceTime = require('../common/getRaceTime');
+'use strict'
+module.exports = (app, context) => {
+    let race = context.activeRace;
 
-module.exports = (db, race, channel) => {
     let message = {};
     let embed = {};
     embed.color = 65280;
@@ -37,8 +37,6 @@ module.exports = (db, race, channel) => {
         }
     }
 
-
-
     if (race.restream) {
         desc += `\n Restream: <https://twitch.tv/${race.restream.substr(1)}>`;
     } else if (race.mutlistream) {
@@ -70,7 +68,7 @@ module.exports = (db, race, channel) => {
 
     embed.description = desc;
 
-    sortPlayers(race.players, race.teams, race.relay);
+    app.routines["sortPlayers"](race.players, race.teams, race.relay);
 
     let names = "";
     let status = "";
@@ -86,19 +84,19 @@ module.exports = (db, race, channel) => {
 
             let username = race.players[i].username;
 
-            if (db.getPlayerStreaming(username)) {
-                let userTwitch = db.getPlayerTwitch(username);
+            if (app.db.getPlayerStreaming(username)) {
+                let userTwitch = app.db.getPlayerTwitch(username);
                 if (!userTwitch) {
                     userTwitch = username;
                 }
 
-                names += `${((i !== 0) ? '\n' : '')}[${username}](https://twitch.tv/"${userTwitch}) ${(!race.invitational && db.getPlayerTwitchBot(username) ? ' :robot:' : '')}`;
+                names += `${((i !== 0) ? '\n' : '')}[${username}](https://twitch.tv/"${userTwitch}) ${(!race.invitational && app.db.getPlayerTwitchBot(username) ? ' :robot:' : '')}`;
             } else {
                 names += `${((i !== 0) ? '\n' : '')}${username}`;
             }
 
             if (race.players[i].time) {
-                status += `${((i !== 0) ? '\n' : '')}${(!race.teams ? (i + 1) + '. ' : '')}${getRaceTime(race.players[i].time)}`;
+                status += `${((i !== 0) ? '\n' : '')}${(!race.teams ? (i + 1) + '. ' : '')}${app.routines["getRaceTime"](race.players[i].time)}`;
             } else if (race.players[i].forfeited) {
                 status += `${((i !== 0) ? '\n' : '')}DNF`;
             } else if (race.players[i].ready) {
@@ -143,7 +141,7 @@ module.exports = (db, race, channel) => {
             "\n`.spaceballs` - Resets the clock since the last Spaceballs reference";
     }
 
-    const time = db.getSpaceballs();
+    const time = app.db.getSpaceballs();
     let dt = new Date(time);
     let spaceTime = `${dt.toLocaleString('en-US', { timeZone: 'America/New_York' })}`;
 
@@ -161,7 +159,7 @@ module.exports = (db, race, channel) => {
         'embed': embed
     }
 
-    channel.messages.fetch(race.messageId).then(x => {
+    context.raceChannel.messages.fetch(race.messageId).then(x => {
         x.edit(message).then().catch(console.error)
     }).catch(console.error);
 };

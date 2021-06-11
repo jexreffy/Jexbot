@@ -1,3 +1,4 @@
+'use strict'
 module.exports = (time) => {
     let seconds = Math.floor((time / 1000) % 60);
     let minutes = Math.floor((time / (1000 * 60)) % 60);

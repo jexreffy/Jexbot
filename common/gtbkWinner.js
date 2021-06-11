@@ -1,35 +1,34 @@
-const broadcastMessage = require('../common/broadcastMessage');
-
-module.exports = (config, race, dChannel, tClient) => {
+'use strict'
+module.exports = (app, context) => {
     let response = null;
 
-    if (race.guesses[race.gtbk - 1]) {
-        race.gtbkWinner = race.guesses[race.gtbk - 1];
-        race.gtbkGuess = race.gtbk;
-        response = `${race.gtbkWinner} correctly guessed ${race.gtbk}. Congratulations!`;
+    if (context.activeRace.guesses[context.activeRace.gtbk - 1]) {
+        context.activeRace.gtbkWinner = context.activeRace.guesses[context.activeRace.gtbk - 1];
+        context.activeRace.gtbkGuess = context.activeRace.gtbk;
+        response = `${context.activeRace.gtbkWinner} correctly guessed ${context.activeRace.gtbk}. Congratulations!`;
     }
 
     if (!response) {
-        for (let i = race.gtbk - 1; i >= 0; i--) {
-            if (race.guesses[i]) {
-                race.gtbkWinner = race.guesses[i];
-                race.gtbkGuess = i + 1;
-                response = `${race.gtbkWinner} guessed ${race.gtbkGuess} and was the closest to the correct answer of ${race.gtbk}. Congratulations!`;
+        for (let i = context.activeRace.gtbk - 1; i >= 0; i--) {
+            if (context.activeRace.guesses[i]) {
+                context.activeRace.gtbkWinner = context.activeRace.guesses[i];
+                context.activeRace.gtbkGuess = i + 1;
+                response = `${context.activeRace.gtbkWinner} guessed ${context.activeRace.gtbkGuess} and was the closest to the correct answer of ${context.activeRace.gtbk}. Congratulations!`;
                 break;
             }
         }
     }
 
     if (!response) {
-        for (let i = race.gtbk; i < race.guesses; i++) {
-            if (race.guesses[i]) {
-                race.gtbkWinner = race.guesses[i];
-                race.gtbkGuess = i + 1;
-                response = `${race.gtbkWinner} guessed ${race.gtbkGuess} and was the closest to the correct answer of ${race.gtbk}. Congratulations!`;
+        for (let i = context.activeRace.gtbk; i < context.activeRace.guesses; i++) {
+            if (context.activeRace.guesses[i]) {
+                context.activeRace.gtbkWinner = context.activeRace.guesses[i];
+                context.activeRace.gtbkGuess = i + 1;
+                response = `${context.activeRace.gtbkWinner} guessed ${context.activeRace.gtbkGuess} and was the closest to the correct answer of ${context.activeRace.gtbk}. Congratulations!`;
                 break;
             }
         }
     }
 
-    if (response) broadcastMessage(config, dChannel, tClient, response, true);
+    if (response) app.routines['broadcastMessage'](app, context, response, true);
 }

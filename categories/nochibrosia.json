@@ -1,0 +1,21 @@
+{
+  "category": "nochibrosia",
+  "name": "Nochibrosia",
+  "description": "Escape Sequence Start, Defeat Ganon, Randomized Sword, Uncle Spoils Boots Location, Bosses cannot hold Dungeon Items, Full Boss Shuffle",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "standard",
+    "weapons": "randomized",
+    "enemizer": {
+      "boss_shuffle": "full"
+    },
+    "custom": {
+      "spoil.BootsLocation": true,
+      "region.bossNormalLocation": false
+    }
+  },
+  "weights": { }
+}

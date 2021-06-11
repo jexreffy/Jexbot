@@ -1,7 +1,8 @@
-module.exports = (config, tClient, message) => {
-    if (!tClient) return;
+'use strict'
+module.exports = (app, context, message) => {
+    if (!context.twitchClient) return;
 
-    for (let i = 0; i < tClient.channels.length; i++) {
-        tClient.say(`${tClient.channels[i]}`, message).then().catch(console.error);
+    for (let i = 0; i < context.twitchClient.channels.length; i++) {
+        context.twitchClient.say(`${context.twitchClient.channels[i]}`, message).then().catch(console.error);
     }
 };

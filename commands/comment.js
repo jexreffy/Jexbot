@@ -1,11 +1,37 @@
+'use strict'
+const JexCommand = require('../commands/command');
 
-module.exports = (config, race, dChannel, username, message) => {
-    let player = race.players.find(x => x.username === username);
-    let match = message.content.match(/^[.!](\bcomment\b) ([ a-zA-Z0-9,./<>?;':"{}|`~!@#$%^&*()=_+]{0,1000})/i);
+module.exports = class CommandComment extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
 
-    if (match && match.length > 2 && race.started && player && (player.finished || player.forfeited)) {
+    get commandName() {
+        return 'comment';
+    }
+
+    get isRaceCommand() {
+        return true;
+    }
+
+    isCommandValid(context) {
+        let player = context.activeRace.players.find(x => x.username === context.username);
+        let match = context.message.match(/^[.!](\bcomment\b) ([ a-zA-Z0-9,./<>?;':"{}|`~!@#$%^&*()=_+]{0,1000})/i);
+
+        return context.origination === this._app.DISCORD &&
+               match && match.length > 2 &&
+               context.activeRace.started &&
+               player && (player.finished || player.forfeited);
+    }
+
+    executeCommand(context) {
+        let player = context.activeRace.players.find(x => x.username === context.username);
+        let match = context.message.match(/^[.!](\bcomment\b) ([ a-zA-Z0-9,./<>?;':"{}|`~!@#$%^&*()=_+]{0,1000})/i);
+
         player.comment = match[2];
 
-        dChannel.send(`**${username} commented ||${player.comment}||**`).then().catch(console.error);
+        context.raceChannel.send(`**${context.username} commented ||${player.comment}||**`).then().catch(console.error);
+
+        this._app.db.setRaceData(context.guildId, context.activeRace);
     }
 }

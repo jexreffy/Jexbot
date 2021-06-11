@@ -1,3 +1,4 @@
+'use strict'
 module.exports = (players, teams, relay) => {
     players.sort(function(a, b) {
         if (teams && a.team !== b.team) {

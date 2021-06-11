@@ -1,12 +1,32 @@
-const updateRaceMessage = require('../common/updateRaceMessage');
+'use strict'
+const JexCommand = require('../commands/command');
 
-module.exports = (config, db, race, dChannel, message) => {
-    if (!race.started && config.referees.includes(message.author.username)) {
-        let match = message.content.match(/^[.!](\brestream\b) ((\bon\b)|(\boff\b))/i);
-        let isRestream = match[3] === "on";
+module.exports = class CommandRestream extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
 
-        race.restream = isRestream ? config.guilds[message.guild.id].restreamChannel : null;
+    get commandName() {
+        return 'restream';
+    }
 
-        updateRaceMessage(db, race, dChannel);
+    get isRaceCommand() {
+        return true;
+    }
+
+    isCommandValid(context) {
+        return context.origination === this._app.DISCORD &&
+               !context.activeRace.started &&
+               this._app.config['referees'].includes(context.username);
+    }
+
+    executeCommand(context) {
+        let match = context.message.match(/^[.!](\brestream\b) ((\bon\b)|(\boff\b))/i);
+        let isRestream = match[3] === 'on';
+
+        context.activeRace.restream = isRestream ? this._app.config['guilds'][context.guildId]['restreamChannel'] : null;
+
+        this._app.db.setRaceData(context.guildId, context.activeRace);
+        this._app.routines['updateRaceMessage'](this._app, context);
     }
 }

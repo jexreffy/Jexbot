@@ -1,8 +1,6 @@
-const getCustomizerSettings = require('../common/getCustomizerSettings');
-const processStartingEquipment = require('../common/processStartingEquipment');
-
-module.exports = (weights) => {
-    let settings = getCustomizerSettings();
+'use strict'
+module.exports = (app, weights) => {
+    let settings = app.routines['getCustomizerSettings']();
 
     settings.spoilers = "mystery";
     settings.glitches = determineSetting(weights["glitches_required"]);
@@ -35,7 +33,7 @@ module.exports = (weights) => {
 
     if (items.length > 0) {
         settings.entrances = "none";
-        processStartingEquipment(settings, items);
+        app.routines['processStartingEquipment'](settings, items);
     } else {
         settings.entrances = determineSetting(weights["entrance_shuffle"]);
     }

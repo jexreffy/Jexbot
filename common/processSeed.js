@@ -1,4 +1,5 @@
-module.exports = (config, guildId, category, categoryName, result) => {
+'use strict'
+module.exports = (codeStartAt, codeMap, category, categoryName, result) => {
     let retVal = {};
 
     retVal.category = category;
@@ -7,7 +8,7 @@ module.exports = (config, guildId, category, categoryName, result) => {
     retVal.code = ``;
 
     for (let p = 0; p < result.data.patch.length; p++) {
-        let startAt = parseInt(config.codeStartAt)
+        let startAt = codeStartAt;
 
         let key = parseInt(Object.keys(result.data.patch[p])[0]);
 
@@ -24,7 +25,7 @@ module.exports = (config, guildId, category, categoryName, result) => {
         let offset = startAt - key;
 
         for (let c = 0; c < 5; c++) {
-            retVal.code += `<${config.guilds[guildId].codeMap[data[c + offset]]}>${c < 4 ? ' ' : ''}`
+            retVal.code += `<${codeMap[data[c + offset]]}>${c < 4 ? ' ' : ''}`
         }
 
         break;

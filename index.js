@@ -1,13 +1,5 @@
+'use strict'
 require('dotenv').config();
-const config = require('./config.json');
-const db = require('./data/db.js');
-const fs = require('fs');
-
-const JexDiscord = require('./services/discord');
-const jexDiscord = new JexDiscord();
-
-const Twitch = require('tmi.js');
-let tClient = null;
 
 const readline = require('readline');
 const rl = readline.createInterface({
@@ -15,87 +7,5 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-const express = require('express');
-const app = express();
-
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-})
-
-app.listen(process.env.HTTP_PORT, () => {
-    console.log(`HTTP Server Listening at ${process.env.HTTP_PORT}`)
-})
-
-function connectToTwitch(race) {
-    let channels = [];
-
-    if (race.ladder) {
-        channels.push(config.botOwnerTwitch);
-    } else {
-        if (race.invitational && race.restream) {
-            channels.push(race.restream);
-        } else if (!race.invitational) {
-            if (race.restream) channels.push(race.restream);
-
-            for (let i = 0; i < race.players.length; i++) {
-                if (db.getPlayerTwitchBot(race.players[i].username)) {
-                    channels.push(race.players[i].twitch);
-                }
-            }
-        }
-    }
-
-    if (channels.length <= 0) return;
-
-    tClient = new Twitch.Client({
-        identity: {
-            username: process.env.TWITCH_BOT_NAME,
-            password: process.env.TWITCH_BOT_TOKEN
-        },
-        channels: channels
-    });
-
-    fs.readdir('./events/', (err, files) => {
-        files.forEach(file => {
-            const eventHandler = require(`./events/${file}`);
-            const eventName = file.split('.')[0];
-
-            if (eventName === 'message') {
-                tClient.on(eventName, (channel, tags, message, self) => {
-                    eventHandler(db, dClient, tClient, channel, tags, message, self);
-                });
-            }
-        });
-    });
-
-    tClient.connect().then(x => {
-        let time = new Date();
-        console.log(time.toLocaleString('en-US') + ' Twitch connected');
-    }).catch(console.error);
-}
-
-function disconnectFromTwitch() {
-    tClient.disconnect().then(x => {
-        let time = new Date();
-        console.log(time.toLocaleString('en-US') + ' Twitch disconnected');
-        tClient = null;
-    }).catch(console.error);
-}
-
-
-
-
-const cron = require('node-cron');
-const cronEvent = require('./events/cron');
-cron.schedule('*/5 * * * * *', () => {
-    const guildId = db.getActiveRace();
-    if (guildId !== null) {
-        let race = db.getRaceData(guildId);
-
-        if (race.started && !tClient) connectToTwitch(race);
-    } else {
-        if (tClient) disconnectFromTwitch();
-    }
-
-    cronEvent(db, dClient, tClient);
-}, {});
+const App = require('./services/app');
+let app = new App();
