@@ -21,36 +21,24 @@ module.exports = class JexDatabase {
         "spaceballs": 0,
         "activeRace": null,
         "sotwLast": 0,
-        "sotw": {
-            "574586257079009280": [
-                0,
-                0,
-                0
-            ],
-            "515731524616847367": [
-                0,
-                0,
-                0
-            ]
-        },
-        "sotwSeeds": {
-            "574586257079009280": [
-                0,
-                0,
-                0
-            ],
-            "515731524616847367": [
-                0,
-                0,
-                0
-            ]
-        }
+        "sotw": {},
+        "sotwSeeds": {}
     };
 
     constructor(app) {
         this.#app = app;
+        this.#initializeServer();
         this.#initializeCategories();
         this.#initializePlayers();
+    }
+
+    #initializeServer() {
+        for (let i = 0; i < this.#app.guilds.length; i++) {
+            let guildId = this.#app.guilds[i];
+
+            this.#server.sotw[guildId] = [0, 0, 0];
+            this.#server.sotwSeeds[guildId] = [{}, {}, {}];
+        }
     }
 
     #initializeCategories() {
