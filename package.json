@@ -5,7 +5,7 @@
     "scripts": {
         "start": "node index.js",
         "dev": "nodemon index.js",
-        "test": "mocha"
+        "test": "mocha --recursive"
     },
     "devDependencies": {
         "nodemon": "^1.19.4"
