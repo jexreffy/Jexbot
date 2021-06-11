@@ -15,7 +15,6 @@ module.exports = class CronSeedOfTheWeek extends JexCron {
     }
 
     shouldTick(context) {
-        console.log('helloTick');
         return context.activeRace.started &&
                !context.activeRace.finished &&
                (!context.activeRace.lastHello ||
