@@ -3,7 +3,7 @@
   "name": "AD Keysanity Boots",
   "description": "Open Start, All Dungeons, Dungeon Items shuffled in the full item pool, Starting Boots",
   "gtbk": false,
-  "customizer": false,
+  "customizer": true,
   "mystery": false,
   "random": false,
   "settings": {

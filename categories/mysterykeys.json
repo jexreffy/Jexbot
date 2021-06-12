@@ -12,7 +12,7 @@
       "ganon": "5",
       "tower": "5"
     },
-    "eq": ["PegasusBoots", "OcarinaActive"],
+    "eq": ["PegasusBoots", "OcarinaInactive"],
     "custom": {
       "region.wildBigKeys": true,
       "rom.freeItemMenu": false,

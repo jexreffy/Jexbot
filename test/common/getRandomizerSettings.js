@@ -20,10 +20,6 @@ describe('getRandomizerSettings', function() {
             expect(getRandomizerSettings().dungeon_items).to.equal('standard');
         });
 
-        it('advanced item placement', function () {
-            expect(getRandomizerSettings().item_placement).to.equal('advanced');
-        });
-
         it('items accessibility', function () {
             expect(getRandomizerSettings().accessibility).to.equal('items');
         });

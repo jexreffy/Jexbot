@@ -10,7 +10,7 @@ module.exports = () => {
             "ganon": "7",
             "tower": "7"
         },
-        "mode": "open",
+        "mode": "standard",
         "weapons": "randomized",
         "hints": "off",
         "item": {

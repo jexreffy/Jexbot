@@ -21,12 +21,12 @@ module.exports = () => {
         },
         "tournament": true,
         "spoilers": "off",
-        "lang":"en",
+        "lang": "en",
         "enemizer": {
-            "boss_shuffle":"none",
-            "enemy_shuffle":"none",
-            "enemy_damage":"default",
-            "enemy_health":"default"
+            "boss_shuffle": "none",
+            "enemy_shuffle": "none",
+            "enemy_damage": "default",
+            "enemy_health": "default"
         }
     };
 }

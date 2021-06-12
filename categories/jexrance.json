@@ -1,0 +1,25 @@
+{
+  "category": "jexrance",
+  "name": "Jexrance",
+  "description": "Escape Sequence Start, All Dungeons, Random Boss Shuffle, Crossworld Entrance Shuffle, Assured Sword, Universal Keys, Other Dungeon Items Shuffled, Bow cost money to use, No Crystals to Open GT, Hints Available",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "dungeon_items": "full",
+    "goal": "dungeons",
+    "crystals": {
+      "ganon": "7",
+      "tower": "0"
+    },
+    "mode": "retro",
+    "entrances": "crossed",
+    "hints": "on",
+    "weapons": "assured",
+    "enemizer": {
+      "boss_shuffle": "random"
+    }
+  },
+  "weights": { }
+}
