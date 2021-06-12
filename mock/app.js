@@ -53,8 +53,6 @@ module.exports = class MockApp {
 
                 this.#routines[routineName] = routine;
             });
-
-            console.log('done');
         });
     }
 
