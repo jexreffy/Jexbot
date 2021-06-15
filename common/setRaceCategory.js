@@ -7,7 +7,7 @@ module.exports = (app, context, selectedCategory) => {
 
         context.activeRace.category = seed.category;
         context.activeRace.categoryName = seed.name;
-        context.activeRace.categoryDescription = db.getCategory(seed.category).description;
+        context.activeRace.categoryDescription = app.db.getCategory(seed.category).description;
         context.activeRace.seedLink = seed.link;
         context.activeRace.seedCode = seed.code;
         context.activeRace.seedRoller = 'JexBot';

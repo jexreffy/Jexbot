@@ -7,7 +7,7 @@ let app = new App();
 
 describe('randomizerSettings', function() {
     context('verify all categories are generated correctly', function () {
-        it('verify ad settings', function () {
+        it('verify ad settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/ad.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -30,9 +30,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify adboots settings', function () {
+        it('verify adboots settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/adboots.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -253,9 +254,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify adkeysanity settings', function () {
+        it('verify adkeysanity settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/adkeysanity.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -278,9 +280,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify adkeysanityboots settings', function () {
+        it('verify adkeysanityboots settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/adkeysanityboots.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -501,9 +504,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify ambrosia settings', function () {
+        it('verify ambrosia settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/ambrosia.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -723,9 +727,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify beatable settings', function () {
+        it('verify beatable settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/beatable.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -748,9 +753,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify beginner settings', function () {
+        it('verify beginner settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/beginner.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -773,9 +779,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify blitzmode settings', function () {
+        it('verify blitzmode settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/blitzmode.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -1003,9 +1010,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify casual settings', function () {
+        it('verify casual settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/casual.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -1028,9 +1036,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify casualboots settings', function () {
+        it('verify casualboots settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/casualboots.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -1251,9 +1260,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify casualbootsdungeons settings', function () {
+        it('verify casualbootsdungeons settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/casualbootsdungeons.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -1474,9 +1484,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify casualbootsfast settings', function () {
+        it('verify casualbootsfast settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/casualbootsfast.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -1697,9 +1708,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify crosskeys settings', function () {
+        it('verify crosskeys settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/crosskeys.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -1722,9 +1734,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify enemizer settings', function () {
+        it('verify enemizer settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/enemizer.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -1747,9 +1760,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('shuffled');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify enemizerbosses settings', function () {
+        it('verify enemizerbosses settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/enemizerbosses.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -1772,9 +1786,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify expertitempool settings', function () {
+        it('verify expertitempool settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/expertitempool.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -1797,9 +1812,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify harditempool settings', function () {
+        it('verify harditempool settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/harditempool.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -1822,10 +1838,11 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
 
-        it('verify inverted settings', function () {
+        it('verify inverted settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/inverted.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -1848,9 +1865,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify invertedcrosskeys settings', function () {
+        it('verify invertedcrosskeys settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/invertedcrosskeys.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -1873,9 +1891,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify invertedkeys settings', function () {
+        it('verify invertedkeys settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/invertedkeys.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -1898,9 +1917,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify invrosia settings', function () {
+        it('verify invrosia settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/invrosia.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -2122,9 +2142,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify invrosiaboots settings', function () {
+        it('verify invrosiaboots settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/invrosiaboots.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -2347,9 +2368,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify jexrance settings', function () {
+        it('verify jexrance settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/jexrance.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -2372,9 +2394,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify keysanity settings', function () {
+        it('verify keysanity settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/keysanity.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -2397,9 +2420,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify ladders7pot settings', function () {
+        it('verify ladders7pot settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/ladders7pot.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -2622,9 +2646,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify ladders8swordless settings', function () {
+        it('verify ladders8swordless settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/ladders8swordless.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -2844,9 +2869,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify mcshuffle settings', function () {
+        it('verify mcshuffle settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/mcshuffle.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -2869,9 +2895,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify mcsshuffle settings', function () {
+        it('verify mcsshuffle settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/mcsshuffle.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -2894,9 +2921,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify mysterykeys settings', function () {
+        it('verify mysterykeys settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/mysterykeys.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -3120,9 +3148,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify nochibrosia settings', function () {
+        it('verify nochibrosia settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/nochibrosia.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -3342,9 +3371,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify open settings', function () {
+        it('verify open settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/open.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -3367,9 +3397,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify openassured settings', function () {
+        it('verify openassured settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/openassured.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -3392,9 +3423,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify openboots settings', function () {
+        it('verify openboots settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/openboots.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -3615,9 +3647,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify openfast settings', function () {
+        it('verify openfast settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/openfast.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -3640,9 +3673,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify openflute settings', function () {
+        it('verify openflute settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/openflute.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -3863,9 +3897,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify pedestal settings', function () {
+        it('verify pedestal settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/pedestal.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -3888,9 +3923,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify randomcrystals settings', function () {
+        it('verify randomcrystals settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/randomcrystals.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -3913,9 +3949,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify reduced settings', function () {
+        it('verify reduced settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/reduced.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -3938,9 +3975,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify retrance settings', function () {
+        it('verify retrance settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/retrance.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -3963,9 +4001,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify retro settings', function () {
+        it('verify retro settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/retro.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -3988,9 +4027,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify standard settings', function () {
+        it('verify standard settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/standard.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -4013,9 +4053,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify standardarcher settings', function () {
+        it('verify standardarcher settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/standardarcher.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -4236,9 +4277,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify standardbombs settings', function () {
+        it('verify standardbombs settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/standardbombs.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -4459,9 +4501,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify standardboots settings', function () {
+        it('verify standardboots settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/standardboots.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -4682,9 +4725,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify standardbyrna settings', function () {
+        it('verify standardbyrna settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/standardbyrna.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -4905,9 +4949,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify standardfast settings', function () {
+        it('verify standardfast settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/standardfast.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -4930,9 +4975,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify standardfire settings', function () {
+        it('verify standardfire settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/standardfire.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -5153,9 +5199,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify standardhammer settings', function () {
+        it('verify standardhammer settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/standardhammer.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -5376,9 +5423,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify standardryu settings', function () {
+        it('verify standardryu settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/standardryu.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -5599,9 +5647,10 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
 
-        it('verify standardvanilla settings', function () {
+        it('verify standardvanilla settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/standardvanilla.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -5624,9 +5673,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify swordless settings', function () {
+        it('verify swordless settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/swordless.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -5649,9 +5699,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify tourney2021 settings', function () {
+        it('verify tourney2021 settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/tourney2021.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -5674,9 +5725,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify triforce settings', function () {
+        it('verify triforce settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/triforce.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -5699,9 +5751,10 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_shuffle).to.equal('none');
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
         });
 
-        it('verify wtfrosia settings', function () {
+        it('verify wtfrosia settings', function (done) {
             let settings = randomizerSettings(app, require('../../categories/wtfrosia.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
@@ -5922,6 +5975,12 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['ArrowRefill5']).to.equal(5);
             expect(settings.custom.drop.count['ArrowRefill10']).to.equal(3);
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
+            done();
         });
+    });
+
+    after(function (done) {
+        app.db.close();
+        done();
     });
 });

@@ -9,13 +9,7 @@ module.exports = class JexDatabase {
     #categoryKeys = [];
     #categories = {};
     #players = [];
-    #pool = Mysql.createPool({
-        connectionLimit: 2,
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASS,
-        database: process.env.DB_NAME
-    });
+    #pool;
     #races = raceDb;
     #server = {
         "spaceballs": 0,
@@ -25,11 +19,17 @@ module.exports = class JexDatabase {
         "sotwSeeds": {}
     };
 
-    constructor(app) {
+    constructor(app, connection) {
         this.#app = app;
+        this.#pool = Mysql.createPool(connection);
+
         this.#initializeServer();
         this.#initializeCategories();
         this.#initializePlayers();
+    }
+
+    close() {
+        this.#pool.end();
     }
 
     #initializeServer() {

@@ -1,8 +1,10 @@
 'use strict'
+const JexDatabase = require('../services/db');
 const fs = require('fs');
 
 module.exports = class MockApp {
     #config = require('../config.json');
+    #db;
     #globalCommandKeys = [];
     #globalCommands = {};
     #guilds = [];
@@ -23,6 +25,14 @@ module.exports = class MockApp {
 
     #initializeServices() {
         this.#guilds = Object.keys(this.#config['guilds']);
+
+        this.#db = new JexDatabase(this, {
+            connectionLimit: 2,
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'jexbottest'
+        });
     }
 
     #initializeCommands() {
@@ -58,6 +68,10 @@ module.exports = class MockApp {
 
     get config() {
         return this.#config;
+    }
+
+    get db() {
+        return this.#db;
     }
 
     get guilds() {

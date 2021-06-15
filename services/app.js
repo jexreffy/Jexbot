@@ -1,4 +1,3 @@
-'use strict'
 const JexDatabase = require('../services/db');
 const JexDiscord = require('../services/discord');
 const JexHttp = require('../services/http');
@@ -35,7 +34,13 @@ module.exports = class JexBotApp {
     #initializeServices() {
         this.#guilds = Object.keys(this.#config['guilds']);
 
-        this.#db = new JexDatabase(this);
+        this.#db = new JexDatabase(this, {
+            connectionLimit: 2,
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            database: process.env.DB_NAME
+        });
         this.#discord = new JexDiscord(this);
         this.#http = new JexHttp(this);
         this.#twitch = new JexTwitch(this);
