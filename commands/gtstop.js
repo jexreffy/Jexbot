@@ -23,7 +23,7 @@ module.exports = class CommandGTStop extends JexCommand {
     executeCommand(context) {
         context.activeRace.guessGameFinished = true;
         let message = `${this._app.config[context.activeRace.ladder ? 'gtLadderPrefix' : 'gtRacePrefix']} ${this._app.config['gtStopMessage']}`
-        context.twitchClient.say(context.messageChannel, message).then().catch(console.error);
+        this._app.sendToTwitchChannel(context.guildId, context.messageChannel, message).then().catch(console.error);
         this._app.db.setRaceData(context.guildId, context.activeRace);
     }
 }

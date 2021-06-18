@@ -5,7 +5,7 @@ module.exports = (app, context, player) => {
     context.activeRace.remainingPlayers += 1;
 
     let role = app.getRacerRole(context.guildId);
-    let member = context.raceChannel.members.find(x => x.user.username === username);
+    let member = app.findDiscordMember(context.guildId, username);
     member.roles.add(role.id).then().catch(console.error);
 
     if (app.db.getPlayerStreaming(username)) {

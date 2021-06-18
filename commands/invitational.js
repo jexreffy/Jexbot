@@ -49,9 +49,7 @@ module.exports = class CommandInvitational extends JexCommand {
             }
         };
 
-        this._app.db.setActiveRace(guildId);
-
-        context.raceChannel.send(embed).then(x => {
+        this._app.sendToDiscordRaceChannel(embed).then(x => {
             context.activeRace.messageId = x.id;
             this._app.db.setRaceData(context.guildId, context.activeRace);
             this._app.routines['updateRaceMessage'](this._app, context);

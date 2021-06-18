@@ -159,7 +159,7 @@ module.exports = (app, context) => {
         'embed': embed
     }
 
-    context.raceChannel.messages.fetch(race.messageId).then(x => {
+    app.findDiscordMessage(context.guildId, context.activeRace.messageId).then(x => {
         x.edit(message).then().catch(console.error)
     }).catch(console.error);
 };

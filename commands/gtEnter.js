@@ -23,7 +23,7 @@ module.exports = class CommandGTEnter extends JexCommand {
     }
 
     executeCommand(context) {
-        context.twitchClient.say(context.messageChannel, this._app.config['gtGuessEnter']).then().catch(console.error);
+        this._app.sendToTwitchChannel(context.guildId, context.messageChannel, this._app.config['gtGuessEnter']).then().catch(console.error);
 
         if (context.activeRace.gtRunner) return;
 

@@ -77,7 +77,7 @@ module.exports = class CommandStats extends JexCommand {
         }
 
         if (stats) {
-            context.raceChannel.send(output).then().catch(console.error);
+            this._app.sendToDiscordRaceChannel(output).then().catch(console.error);
         }
     }
 }

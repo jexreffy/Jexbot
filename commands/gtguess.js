@@ -32,10 +32,10 @@ module.exports = class CommandGTStop extends JexCommand {
             if (context.activeRace.guesses[i] === context.username) {
                 response = `${context.activeRace.guesses[i]} has already guessed ${i + 1} for the GTBK Guessing Game.`;
                 if (context.origination === this._app.TWITCH) {
-                    context.twitchClient.say(context.messageChannel, response).then().catch(console.error);
+                    this._app.sendToTwitchChannel(context.guildId, context.messageChannel, response).then().catch(console.error);
                 } else if (context.origination === this._app.DISCORD &&
                            !context.activeRace.invitational) {
-                    context.raceChannel.send(`**${response}**`).then().catch(console.error);
+                    this._app.sendToDiscordRaceChannel(`**${response}**`).then().catch(console.error);
                 }
                 return;
             }
@@ -45,17 +45,17 @@ module.exports = class CommandGTStop extends JexCommand {
             response = `${context.activeRace.guesses[guess - 1]} has already guessed ${guess} for the GTBK Guessing Game.`;
 
             if (context.origination === this._app.TWITCH) {
-                context.twitchClient.say(context.messageChannel, response).then().catch(console.error);
+                this._app.sendToTwitchChannel(context.guildId, context.messageChannel, response).then().catch(console.error);
             }  else if (context.origination === this._app.DISCORD &&
                         !context.activeRace.invitational) {
-                context.raceChannel.send(`**${response}**`).then().catch(console.error);
+                this._app.sendToDiscordRaceChannel(`**${response}**`).then().catch(console.error);
             }
         } else {
             context.activeRace.guesses[guess - 1] = context.username;
             response = `${context.username} has guessed ${guess} for the GTBK Guessing Game.`;
 
             if (context.activeRace.ladder || context.activeRace.invitational) {
-                context.twitchClient.say(context.messageChannel, response).then().catch(console.error);
+                this._app.sendToTwitchChannel(context.guildId, context.messageChannel, response).then().catch(console.error);
             } else {
                 this._app.routines['broadcastMessage'](this._app, context, response, true);
             }

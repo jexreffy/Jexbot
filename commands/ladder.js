@@ -34,7 +34,6 @@ module.exports = class CommandLadder extends JexCommand {
 
         this._app.routines['setRaceCategory'](this._app, context, match && match.length > 2 ? match[2] : "");
 
-        this._app.db.setActiveRace(guildId);
         this._app.db.setRaceData(context.guildId, context.activeRace);
     }
 }

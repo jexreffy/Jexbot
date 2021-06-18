@@ -33,6 +33,6 @@ module.exports = class CommandRunners extends JexCommand {
             }
         }
 
-        context.twitchClient.say(context.messageChannel, message).then().catch(console.error);
+        this._app.sendToTwitchChannel(context.guildId, context.messageChannel, message).then().catch(console.error);
     }
 }

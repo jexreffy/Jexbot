@@ -62,7 +62,6 @@ module.exports = class CronSeedOfTheWeek extends JexCron {
                 this._app.axios.post(hardSettings.url, hardSettings.settings).then(hardResult => {
                     seeds.push(this._app.routines['processSeed'](codeStartAt, codeMap, hardSettings.name, hardSettings.title, hardResult));
 
-                    let dChannel = this._app.getRaceChannel(guildId);
                     let role = this._app.getPingRole(guildId);
                     let randomSponsor = this._app.routines['getRandom'](this._app.config['sotwSponsor'].length);
                     let message = `${role} ${this._app.config['sotwMessage']} ${this._app.config['sotwSponsor'][randomSponsor]}`;
@@ -71,7 +70,7 @@ module.exports = class CronSeedOfTheWeek extends JexCron {
                         message += `\n${seeds[i].name} ${seeds[i].link} ${seeds[i].code}`;
                     }
 
-                    dChannel.send(message).then().catch(console.error);
+                    this._app.sendToDiscordSotwChannel(guildId, message);
 
                     this._app.db.setSotwSeeds(guildId, seeds[0], seeds[1], seeds[2]);
                 }).catch(console.error);

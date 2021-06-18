@@ -33,7 +33,7 @@ module.exports = class CommandGTBK extends JexCommand {
         } else if (context.activeRace.gtRunner !== null) {
             let response = this._app.config['gtGuessFound'].replace('LOCATION', guess);
 
-            context.twitchClient.say(context.messageChannel, response).then().catch(console.error);
+            this._app.sendToTwitchChannel(context.guildId, context.messageChannel, response).then().catch(console.error);
 
             if (context.activeRace.gtbk >= 0) return;
 

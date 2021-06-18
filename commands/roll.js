@@ -69,7 +69,7 @@ module.exports = class CommandRoll extends JexCommand {
                 }
             }
         } else if (!context.activeRace.finished) {
-            context.raceChannel.send(`**${username} has sealed their fate. I'd pray to RN Jesus while the seed is rolling if I were you...**`).then().catch(console.error);
+            this._app.sendToDiscordRaceChannel(`**${username} has sealed their fate. I'd pray to RN Jesus while the seed is rolling if I were you...**`).then().catch(console.error);
             categoryName = context.activeRace.categoryToRoll;
 
             let settings = this._app.routines['categorySettings'](this._app, categoryName);
@@ -88,7 +88,7 @@ module.exports = class CommandRoll extends JexCommand {
 
             let settings = this._app.routines['categorySettings'](this._app, categoryName);
 
-            context.raceChannel.send(`**Generating ${settings.title} seed...**`).then().catch(console.error);
+            this._app.sendToDiscordRaceChannel(`**Generating ${settings.title} seed...**`).then().catch(console.error);
 
             this.#rollSeed(this._app, context, settings);
         }
@@ -111,7 +111,7 @@ module.exports = class CommandRoll extends JexCommand {
                 this._app.routines['updateRaceMessage'](this._app, context);
             }
 
-            context.raceChannel.send(`${seed.link} ${seed.code}`).then().catch(console.error);
+            this._app.sendToDiscordRaceChannel(`${seed.link} ${seed.code}`).then().catch(console.error);
         }).catch(console.error);
     }
 
@@ -134,7 +134,7 @@ module.exports = class CommandRoll extends JexCommand {
 
         message += `\`\`\``;
 
-        context.raceChannel.send(message).then().catch(console.error);
+        this._app.sendToDiscordRaceChannel(message).then().catch(console.error);
     }
 
     static #helpGeneral(app, context, categories) {
@@ -144,7 +144,7 @@ module.exports = class CommandRoll extends JexCommand {
             message += `\n\`${categories[i]}\` - ${app.db.getCategory(categories[i]).name}`;
         }
 
-        context.raceChannel.send(message).then().catch(console.error);
+        this._app.sendToDiscordRaceChannel(message).then().catch(console.error);
     }
 }
 

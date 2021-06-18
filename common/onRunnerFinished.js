@@ -1,7 +1,7 @@
 'use strict'
 module.exports = (app, context, player) => {
     let role = app.getRacerRole(context.guildId);
-    let member = context.raceChannel.members.find(x => x.user.username === player.username);
+    let member = app.findDiscordMember(context.guildId, player.username);
     member.roles.remove(role.id).then().catch(console.error);
 
     if (context.activeRace.remainingPlayers < 1) {
@@ -26,7 +26,6 @@ module.exports = (app, context, player) => {
             context.activeRace.status = 'RACE FINISHED';
             app.routines['updateRaceMessage'](this._app, context);
             app.routines['broadcastMessage'](this._app, context, `The race has finished.`, true);
-            app.db.setActiveRace(null);
         })();
     } else if (!context.activeRace.invitational &&
                context.activeRace.remainingPlayers <= context.activeRace.players.length / 2 && !context.activeRace.spoilersAllowed) {

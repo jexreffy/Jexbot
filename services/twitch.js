@@ -17,8 +17,8 @@ module.exports = class JexBotTwitch {
         }
     }
 
-    getClientForGuild(guildId) {
-        return this.#clients[guildId];
+    getChannelsForGuild(guildId) {
+        return this.#clients[guildId].channels;
     }
 
     getGuildForChannel(channel) {
@@ -30,6 +30,10 @@ module.exports = class JexBotTwitch {
         }
 
         return null;
+    }
+
+    isConnectedToTwitch(guildId) {
+        return this.#clients[guildId] !== null;
     }
 
     connectToTwitch(guildId) {
@@ -78,5 +82,12 @@ module.exports = class JexBotTwitch {
             console.log(`${new Date().toLocaleString('en-US')} Twitch disconnected`);
             this.#clients[guildId] = null;
         }).catch(console.error);
+    }
+
+    sendToTwitchChannel(guildId, channel, message) {
+        return new Promise((resolve, reject) => {
+            this.#clients[guildId].say(channel, message);
+            resolve();
+        });
     }
 }

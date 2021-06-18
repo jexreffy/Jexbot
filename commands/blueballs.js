@@ -30,7 +30,7 @@ module.exports = class CommandBlueBalls extends JexCommand {
         context.activeRace.blueballs = blueballs;
 
         if (context.origination === this._app.TWITCH) {
-            context.twitchClient.say(context.messageChannel, `Aga 1 Blue Balls recorded as ${blueballs}`).then().catch(console.error);
+            this._app.sendToTwitchChannel(context.guildId, context.messageChannel, `Aga 1 Blue Balls recorded as ${blueballs}`).then().catch(console.error);
         }
 
         this._app.db.setRaceData(context.guildId, context.activeRace);

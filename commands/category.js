@@ -19,6 +19,6 @@ module.exports = class CommandCategory extends JexCommand {
     }
 
     executeCommand(context) {
-        context.twitchClient.say(context.messageChannel, `${context.activeRace.categoryName}: ${context.activeRace.categoryDescription}`).then().catch(console.error);
+        this._app.sendToTwitchChannel(context.guildId, context.messageChannel, `${context.activeRace.categoryName}: ${context.activeRace.categoryDescription}`).then().catch(console.error);
     }
 }

@@ -17,7 +17,6 @@ module.exports = class JexBotApp {
     #raceCommandKeys = [];
     #raceCommands = {};
     #routines = {};
-    #sleep = m => new Promise(r => setTimeout(r, m));
     #twitch;
 
     CRON = 'cron';
@@ -113,8 +112,24 @@ module.exports = class JexBotApp {
         return this.#routines;
     }
 
-    get sleep() {
-        return this.#sleep;
+    sleep(m) {
+        return new Promise((resolve, reject) => setTimeout(resolve, m));
+    }
+
+    connectToTwitch(guildId) {
+        this.#twitch.connectToTwitch(guildId);
+    }
+
+    disconnectFromTwitch(guildId) {
+        this.#twitch.disconnectFromTwitch(guildId);
+    }
+
+    findDiscordMember(guildId, username) {
+        return this.#discord.findMember(guildId, username);
+    }
+
+    findDiscordMessage(guildId, messageId) {
+        return this.#discord.findMessage(guildId, messageId);
     }
 
     getRacerRole(guildId) {
@@ -123,6 +138,26 @@ module.exports = class JexBotApp {
 
     getPingRole(guildId) {
         return this.#discord.getPingRole(guildId);
+    }
+
+    getTwitchChannels(guildId) {
+        return this.#twitch.getChannelsForGuild(guildId);
+    }
+
+    isConnectedToTwitch(guildId) {
+        return this.#twitch.isConnectedToTwitch(guildId);
+    }
+
+    sendToDiscordRaceChannel(guildId, message) {
+        return this.#discord.sendToRaceChannel(guildId, message);
+    }
+
+    sendToDiscordSotwChannel(guildId, message) {
+        return this.#discord.sendToSotwChannel(guildId, message);
+    }
+
+    sendToTwitchChannel(guildId, channel, message) {
+        return this.#twitch.sendToTwitchChannel(guildId, channel, message);
     }
 
     onDiscordMessageReceived(message) {
@@ -135,10 +170,8 @@ module.exports = class JexBotApp {
             activeRace: this.#db.getRaceData(guildId),
             guildId: guildId,
             message: message.content,
-            messageChannel: message.channel,
+            messageChannel: null,
             origination: this.DISCORD,
-            raceChannel: raceChannel,
-            twitchClient: this.#twitch.getClientForGuild(guildId),
             username: message.author.username
         };
 
@@ -166,8 +199,6 @@ module.exports = class JexBotApp {
             message: message,
             messageChannel: channel,
             origination: this.TWITCH,
-            raceChannel: this.#discord.getRaceChannel(guildId),
-            twitchClient: this.#twitch.getClientForGuild(guildId),
             username: tags.username
         };
 
@@ -209,8 +240,6 @@ module.exports = class JexBotApp {
                 message: null,
                 messageChannel: null,
                 origination: this.CRON,
-                raceChannel: this.#discord.getRaceChannel(guildId),
-                twitchClient: this.#twitch.getClientForGuild(guildId),
                 username: null
             });
 

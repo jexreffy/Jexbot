@@ -5,16 +5,16 @@ module.exports = (app, context) => {
         let countdown = app.config['countdowns'][race.countdownIndex];
         let jokeTime = app.routines['getRandom'](app.config['jokeCountdownMax']);
         let jokeUnits = app.config['jokeUnits'][app.routines['getRandom'](app.config['jokeUnits'].length)];
-        context.raceChannel.send(`**The race will start in ${jokeTime} ${jokeUnits}**`).then().catch(console.error);
+        app.sendToDiscordRaceChannel(`**The race will start in ${jokeTime} ${jokeUnits}**`).then().catch(console.error);
         await sleep(100);
 
         context.activeRace.status = countdown.firstLine;
-        context.raceChannel.send(`**${context.activeRace.status}**`).then().catch(console.error);
+        app.sendToDiscordRaceChannel(`**${context.activeRace.status}**`).then().catch(console.error);
         app.routines['updateRaceMessage'](this._app, context);
         await sleep(countdown.firstDelay);
 
         context.activeRace.status = countdown.secondLine;
-        context.raceChannel.send(`**${race.status}**`).then().catch(console.error);
+        app.sendToDiscordRaceChannel(`**${race.status}**`).then().catch(console.error);
         app.routines['updateRaceMessage'](this._app, context);
         await sleep(countdown.secondDelay);
 
@@ -28,11 +28,11 @@ module.exports = (app, context) => {
                 return;
             }
 
-            if (i <= 5) context.raceChannel.send(`**${i}**`).then().catch(console.error);
+            if (i <= 5) app.sendToDiscordRaceChannel(`**${i}**`).then().catch(console.error);
             await sleep(1000);
         }
 
-        context.raceChannel.send(`**GO!!!**`).then().catch(console.error);
+        app.sendToDiscordRaceChannel(`**GO!!!**`).then().catch(console.error);
         await sleep(100);
 
         context.activeRace.status = 'GO!!!';

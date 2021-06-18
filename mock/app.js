@@ -1,17 +1,16 @@
 'use strict'
 const JexDatabase = require('../services/db');
+const MockDiscord = require('../mock/discord');
+const MockTwitch = require('../mock/twitch');
 const fs = require('fs');
 
 module.exports = class MockApp {
     #config = require('../config.json');
     #db;
-    #globalCommandKeys = [];
-    #globalCommands = {};
+    #discord;
     #guilds = [];
-    #raceCommandKeys = [];
-    #raceCommands = {};
     #routines = {};
-    #sleep = m => new Promise(r => setTimeout(r, m));
+    #twitch;
 
     CRON = 'cron';
     DISCORD = 'discord';
@@ -19,7 +18,6 @@ module.exports = class MockApp {
 
     constructor() {
         this.#initializeServices();
-        this.#initializeCommands();
         this.#initializeRoutines();
     }
 
@@ -33,26 +31,9 @@ module.exports = class MockApp {
             password: '',
             database: 'jexbottest'
         });
-    }
 
-    #initializeCommands() {
-        fs.readdir('./commands/', (err, files) => {
-            files.forEach(file => {
-                if (file !== 'command.js') {
-                    const commandClass = require(`../commands/${file}`);
-                    const command = new commandClass(this);
-                    const commandName = command.commandName;
-
-                    if (command.isRaceCommand) {
-                        this.#raceCommandKeys.push(commandName);
-                        this.#raceCommands[commandName] = command;
-                    } else {
-                        this.#globalCommandKeys.push(commandName);
-                        this.#globalCommands[commandName] = command;
-                    }
-                }
-            });
-        });
+        this.#discord = new MockDiscord(this);
+        this.#twitch = new MockTwitch(this);
     }
 
     #initializeRoutines() {
@@ -82,7 +63,43 @@ module.exports = class MockApp {
         return this.#routines;
     }
 
-    get sleep() {
-        return this.#sleep;
+    sleep(m) {
+        return new Promise((resolve, reject) => setTimeout(resolve, m));
+    }
+
+    findDiscordMember(guildId, username) {
+        return this.#discord.findMember(guildId, username);
+    }
+
+    findDiscordMessage(guildId, messageId) {
+        return this.#discord.findMessage(guildId, messageId);
+    }
+
+    getRacerRole(guildId) {
+        return this.#discord.getRacerRole(guildId);
+    }
+
+    getPingRole(guildId) {
+        return this.#discord.getPingRole(guildId);
+    }
+
+    getTwitchChannels(guildId) {
+        return this.#twitch.getChannelsForGuild(guildId);
+    }
+
+    isConnectedToTwitch(guildId) {
+        return this.#twitch.isConnectedToTwitch(guildId);
+    }
+
+    sendToDiscordRaceChannel(guildId, message) {
+        return this.#discord.sendToRaceChannel(guildId, message);
+    }
+
+    sendToDiscordSotwChannel(guildId, message) {
+        return this.#discord.sendToSotwChannel(guildId, message);
+    }
+
+    sendToTwitchChannel(guildId, channel, message) {
+        return this.#twitch.sendToTwitchChannel(guildId, message);
     }
 }

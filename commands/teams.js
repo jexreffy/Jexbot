@@ -27,7 +27,7 @@ module.exports = class CommandTeams extends JexCommand {
             this._app.routines['updateRaceMessage'](this._app, context);
             return;
         } else if (context.activeRace.players.length > this._app.config['teamPlayers'].length || this._app.config['teamPlayers'][context.activeRace.players.length] <= 0){
-            context.raceChannel.send(`**${this._app.config['teamPlayerError']}**`).then().catch(console.error);
+            this._app.sendToDiscordRaceChannel(`**${this._app.config['teamPlayerError']}**`).then().catch(console.error);
             return;
         }
 
@@ -38,7 +38,7 @@ module.exports = class CommandTeams extends JexCommand {
 
         this._app.routines['generateTeams'](this._app, context, playerCount);
 
-        context.raceChannel.send(`**${this._app.config['teamGenerated']}**`).then().catch(console.error);
+        this._app.sendToDiscordRaceChannel(`**${this._app.config['teamGenerated']}**`).then().catch(console.error);
         this._app.db.setRaceData(context.guildId, context.activeRace);
         this._app.routines['updateRaceMessage'](this._app, context);
     }

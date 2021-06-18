@@ -20,6 +20,6 @@ module.exports = class CommandHelp extends JexCommand {
 
     executeCommand(context) {
         let message = context.activeRace.ladder ? 'helpLadder' : (context.activeRace.invitational ? 'helpInvitational' : 'helpRace');
-        context.twitchClient.say(context.messageChannel, this._app.config[message]).then().catch(console.error);
+        this._app.sendToTwitchChannel(context.guildId, context.messageChannel, this._app.config[message]).then().catch(console.error);
     }
 }

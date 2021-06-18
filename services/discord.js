@@ -54,6 +54,14 @@ module.exports = class JexBotDiscord {
         return this.#discordClient;
     }
 
+    findMember(guildId, username) {
+        return this.#raceChannels[guildId].members.find(x => x.user.username === username);
+    }
+
+    findMessage(guildId, messageId) {
+        return this.#raceChannels[guildId].messages.fetch(messageId);
+    }
+
     getRaceChannel(guildId) {
         return this.#raceChannels[guildId];
     }
@@ -68,6 +76,14 @@ module.exports = class JexBotDiscord {
 
     getRacerRole(guildId) {
         return this.#racerRoles[guildId];
+    }
+
+    sendToRaceChannel(guildId, message) {
+        return this.#raceChannels[guildId].send(message);
+    }
+
+    sendToSotwChannel(guildId, message) {
+        return this.#sotwChannels[guildId].send(message);
     }
 
     static #onDisconnect(event) {
