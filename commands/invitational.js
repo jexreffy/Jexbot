@@ -29,7 +29,7 @@ module.exports = class CommandInvitational extends JexCommand {
 
         context.activeRace.invitational = true;
         context.activeRace.locked = true;
-        context.activeRace.countdownIndex = getRandom(config.countdowns.length);
+        context.activeRace.countdownIndex = this._app.routines['getRandom'](this._app.config['countdowns'].length);
         context.activeRace.mutlistream = 'https://multistre.am/';
         context.activeRace.status = 'INVITATIONAL RACE: WAITING FOR PLAYERS TO READY UP';
 
@@ -49,7 +49,7 @@ module.exports = class CommandInvitational extends JexCommand {
             }
         };
 
-        this._app.sendToDiscordRaceChannel(embed).then(x => {
+        this._app.sendToDiscordRaceChannel(context.guildId, embed).then(x => {
             context.activeRace.messageId = x.id;
             this._app.db.setRaceData(context.guildId, context.activeRace);
             this._app.routines['updateRaceMessage'](this._app, context);

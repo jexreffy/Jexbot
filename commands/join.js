@@ -39,7 +39,7 @@ module.exports = class CommandJoin extends JexCommand {
             if (!(context.activeRace.started || context.activeRace.finished || player)) {
                 if (context.activeRace.invitational) {
                     let member = this._app.findDiscordMember(context.guildId, playerToAdd);
-                    this._app.sendToDiscordRaceChannel(`<@${member.id}> You have been added to an invitational race`);
+                    this._app.sendToDiscordRaceChannel(context.guildId, `<@${member.id}> You have been added to an invitational race`);
                 } else {
                     context.activeRace.teams = false;
                 }

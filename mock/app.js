@@ -75,6 +75,14 @@ module.exports = class MockApp {
         return this.#discord.findMessage(guildId, messageId);
     }
 
+    getRaceChannelMessages(guildId) {
+        return this.#discord.getRaceChannelMessages(guildId);
+    }
+
+    getSotwChannelMessages(guildId) {
+        return this.#discord.getSotwChannelMessages(guildId);
+    }
+
     getRacerRole(guildId) {
         return this.#discord.getRacerRole(guildId);
     }

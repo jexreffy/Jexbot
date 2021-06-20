@@ -35,7 +35,7 @@ module.exports = class CommandGTStop extends JexCommand {
                     this._app.sendToTwitchChannel(context.guildId, context.messageChannel, response).then().catch(console.error);
                 } else if (context.origination === this._app.DISCORD &&
                            !context.activeRace.invitational) {
-                    this._app.sendToDiscordRaceChannel(`**${response}**`).then().catch(console.error);
+                    this._app.sendToDiscordRaceChannel(context.guildId, `**${response}**`).then().catch(console.error);
                 }
                 return;
             }
@@ -48,7 +48,7 @@ module.exports = class CommandGTStop extends JexCommand {
                 this._app.sendToTwitchChannel(context.guildId, context.messageChannel, response).then().catch(console.error);
             }  else if (context.origination === this._app.DISCORD &&
                         !context.activeRace.invitational) {
-                this._app.sendToDiscordRaceChannel(`**${response}**`).then().catch(console.error);
+                this._app.sendToDiscordRaceChannel(context.guildId, `**${response}**`).then().catch(console.error);
             }
         } else {
             context.activeRace.guesses[guess - 1] = context.username;

@@ -2,19 +2,18 @@
 
 module.exports = class MockDiscord {
     #app;
-    #raceChannelMessages = [];
-    #sotwChannelMessages = [];
+    #raceChannelMessages = {};
+    #sotwChannelMessages = {};
 
     constructor(app) {
         this.#app = app;
-    }
 
-    get raceChannelMessages() {
-        return this.#raceChannelMessages;
-    }
+        const guilds = app.guilds;
 
-    get sotwChannelMessages() {
-        return this.#sotwChannelMessages;
+        for (let i = 0; i < guilds.length; i++) {
+            this.#raceChannelMessages[guilds[i]] = [];
+            this.#sotwChannelMessages[guilds[i]] = [];
+        }
     }
 
     findMember(guildId, username) {
@@ -22,7 +21,9 @@ module.exports = class MockDiscord {
     }
 
     findMessage(guildId, messageId) {
-        return `message${guildId}${messageId}`;
+        return new Promise((resolve, reject) => {
+            resolve(this.#raceChannelMessages[guildId][messageId]);
+        });
     }
 
     getPingRole(guildId) {
@@ -33,13 +34,32 @@ module.exports = class MockDiscord {
         return `racer${guildId}`;
     }
 
+    getRaceChannelMessages(guildId) {
+        return this.#raceChannelMessages[guildId];
+    }
+
+    getSotwChannelMessages(guildId) {
+        return this.#sotwChannelMessages[guildId];
+    }
+
     sendToRaceChannel(guildId, message) {
         return new Promise((resolve, reject) => {
             let retVal = {
-                id: this.#raceChannelMessages.length
+                id: this.#raceChannelMessages[guildId].length
             };
 
-            this.#raceChannelMessages.push(message);
+            let newMessage = {
+                id: retVal.id,
+                message: message,
+                edit: function(x) {
+                    return new Promise((resolve, reject) => {
+                        this.message = x;
+                        resolve();
+                    });
+                }
+            }
+
+            this.#raceChannelMessages[guildId].push(newMessage);
 
             resolve(retVal);
         });
@@ -48,10 +68,21 @@ module.exports = class MockDiscord {
     sendToSotwChannel(guildId, message) {
         return new Promise((resolve, reject) => {
             let retVal = {
-                id: this.#sotwChannelMessages.length
+                id: this.#sotwChannelMessages[guildId].length
             };
 
-            this.#sotwChannelMessages.push(message);
+            let newMessage = {
+                id: retVal.id,
+                message: message,
+                edit: function(x) {
+                    return new Promise((resolve, reject) => {
+                        this.message = x;
+                        resolve();
+                    });
+                }
+            }
+
+            this.#sotwChannelMessages[guildId].push(newMessage);
 
             resolve(retVal);
         });

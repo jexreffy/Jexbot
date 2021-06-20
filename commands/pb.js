@@ -37,6 +37,6 @@ module.exports = class CommandPB extends JexCommand {
 
         let output = `\` ${context.username} PB ${categoryTitle}: ${this._app.routines['getRaceTime'](this._app.db.getPlayerPB(context.username, categoryName))}\``;
 
-        this._app.sendToDiscordRaceChannel(this._app.routines['centerPad'](output, 24)).then().catch(console.error);
+        this._app.sendToDiscordRaceChannel(context.guildId, this._app.routines['centerPad'](output, 24)).then().catch(console.error);
     }
 }

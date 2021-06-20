@@ -42,8 +42,8 @@ module.exports = class CommandNew extends JexCommand {
             }
         };
 
-        this._app.sendToDiscordRaceChannel(`${this._app.getPingRole(guildId)} ${this._app.config['pings'][context.activeRace.pingIndex]}`).then(x => {
-            this._app.sendToDiscordRaceChannel(embed).then(x => {
+        this._app.sendToDiscordRaceChannel(guildId, `${this._app.getPingRole(guildId)} ${this._app.config['pings'][context.activeRace.pingIndex]}`).then(x => {
+            this._app.sendToDiscordRaceChannel(guildId, embed).then(x => {
                 context.activeRace.messageId = x.id;
                 this._app.db.setRaceData(context.guildId, context.activeRace);
                 this._app.routines['updateRaceMessage'](this._app, context);

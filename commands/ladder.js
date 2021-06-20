@@ -30,10 +30,10 @@ module.exports = class CommandLadder extends JexCommand {
 
         context.activeRace.ladder = true;
         context.activeRace.started = true;
-        context.activeRace.startedAt = race.initiatedAt;
+        context.activeRace.startedAt = context.activeRace.initiatedAt;
 
         this._app.routines['setRaceCategory'](this._app, context, match && match.length > 2 ? match[2] : "");
 
-        this._app.db.setRaceData(context.guildId, context.activeRace);
+        this._app.db.setRaceData(guildId, context.activeRace);
     }
 }

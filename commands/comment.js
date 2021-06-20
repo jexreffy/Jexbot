@@ -30,7 +30,7 @@ module.exports = class CommandComment extends JexCommand {
 
         player.comment = match[2];
 
-        this._app.sendToDiscordRaceChannel(`**${context.username} commented ||${player.comment}||**`).then().catch(console.error);
+        this._app.sendToDiscordRaceChannel(context.guildId, `**${context.username} commented ||${player.comment}||**`).then().catch(console.error);
 
         this._app.db.setRaceData(context.guildId, context.activeRace);
     }

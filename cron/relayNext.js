@@ -39,26 +39,26 @@ module.exports = class CronRelayNext extends JexCron {
     #countdownNextPlayer(app, context, nextPlayer, remainingTime, delayTime) {
         (async() => {
             let nextMember = app.findDiscordMember(context.guildId, nextPlayer.username);
-            app.sendToDiscordRaceChannel(`${nextPlayer.username} Your leg of the relay will start in ${delayTime / 60} minutes.`).then().catch(console.error);
+            app.sendToDiscordRaceChannel(context.guildId, `${nextPlayer.username} Your leg of the relay will start in ${delayTime / 60} minutes.`).then().catch(console.error);
             let oneMinuteLeft = remainingTime - 60000;
             await app.sleep(oneMinuteLeft);
 
-            app.sendToDiscordRaceChannel(`<@${nextMember.id}> Your leg of the relay will start in 60 seconds.`);
+            app.sendToDiscordRaceChannel(context.guildId, `<@${nextMember.id}> Your leg of the relay will start in 60 seconds.`);
             await app.sleep(30000);
 
-            app.sendToDiscordRaceChannel(`${nextPlayer.username} Your leg of the relay will start in 30 seconds.`);
+            app.sendToDiscordRaceChannel(context.guildId, `${nextPlayer.username} Your leg of the relay will start in 30 seconds.`);
             await app.sleep(20000);
 
-            app.sendToDiscordRaceChannel(`${nextPlayer.username} Your leg of the relay will start in 10 seconds.`);
+            app.sendToDiscordRaceChannel(context.guildId, `${nextPlayer.username} Your leg of the relay will start in 10 seconds.`);
             await app.sleep(5000);
 
 
             for (let i = 5; i > 0; i--) {
-                app.sendToDiscordRaceChannel(`**${nextPlayer.username} ${i}**`).then().catch(console.error);
+                app.sendToDiscordRaceChannel(context.guildId, `**${nextPlayer.username} ${i}**`).then().catch(console.error);
                 await app.sleep(1000);
             }
 
-            app.sendToDiscordRaceChannel(`**${nextPlayer.username} GO!!!**`).then().catch(console.error);
+            app.sendToDiscordRaceChannel(context.guildId, `**${nextPlayer.username} GO!!!**`).then().catch(console.error);
         })();
     }
 }

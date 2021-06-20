@@ -47,7 +47,7 @@ module.exports = class CommandLeaderboard extends JexCommand {
                 output += '\n   `' + ((i + 1).toString().padStart(2, " ") + '. ' + board[i].username.replace(/\W/gi, "")).padEnd(24, " ");
                 output += (board[i].elo + ' ').padEnd(10, " ") + '`';
             }
-            this._app.sendToDiscordRaceChannel(output).then().catch(console.error);
+            this._app.sendToDiscordRaceChannel(context.guildId, output).then().catch(console.error);
         }
     }
 }

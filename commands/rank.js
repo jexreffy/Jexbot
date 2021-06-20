@@ -46,7 +46,7 @@ module.exports = class CommandRank extends JexCommand {
                 output += 'unranked `';
             }
 
-            this._app.sendToDiscordRaceChannel(this._app.routines['centerPad'](output, 24)).then().catch(console.error);
+            this._app.sendToDiscordRaceChannel(context.guildId, this._app.routines['centerPad'](output, 24)).then().catch(console.error);
         }
     }
 }

@@ -67,10 +67,13 @@ module.exports = class MockTwitch {
     }
 
     sendToTwitchChannel(guildId, channel, message) {
-        if (!this.#messages[guildId]) {
-            this.#messages[guildId] = [];
-        }
+        return new Promise((resolve, reject) => {
+            if (!this.#messages[guildId]) {
+                this.#messages[guildId] = [];
+            }
 
-        this.#messages[guildId].push(`message${channel}${message}`);
+            this.#messages[guildId].push(`message${channel}${message}`);
+            resolve();
+        });
     }
 }

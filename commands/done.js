@@ -78,8 +78,8 @@ module.exports = class CommandDone extends JexCommand {
                 let nextPlayer = context.activeRace.players.find(x => x.team === player.team && x.leg === player.leg + 1);
                 let thisMember = this._app.findDiscordMember(context.guildId, player.username);
                 let nextMember = this._app.findDiscordMember(context.guildId, nextPlayer.username);
-                this._app.sendToDiscordRaceChannel(`<@${thisMember.id}> You mush let the credits run to completion **WITHOUT** fast forwarding.`);
-                this._app.sendToDiscordRaceChannel(`<@${nextMember.id}> ${player.username} has finished. You will be able to start your leg of the relay in ${this._app.config['relayLegDelaySeconds'] / 60} minutes.`);
+                this._app.sendToDiscordRaceChannel(context.guildId, `<@${thisMember.id}> You mush let the credits run to completion **WITHOUT** fast forwarding.`);
+                this._app.sendToDiscordRaceChannel(context.guildId, `<@${nextMember.id}> ${player.username} has finished. You will be able to start your leg of the relay in ${this._app.config['relayLegDelaySeconds'] / 60} minutes.`);
             }
         }
 
