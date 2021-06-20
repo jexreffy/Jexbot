@@ -105,6 +105,9 @@ describe('ladder', function() {
 
             expect(context.activeRace.ladder).to.equal(true);
             expect(context.activeRace.invitational).to.equal(false);
+            expect(context.activeRace.locked).to.equal(false);
+            expect(context.activeRace.teams).to.equal(false);
+            expect(context.activeRace.relay).to.equal(false);
             expect(context.activeRace.started).to.equal(true);
             expect(context.activeRace.startedAt).to.equal(context.activeRace.initiatedAt);
             expect(context.activeRace.categoryToRoll).to.equal('standard');

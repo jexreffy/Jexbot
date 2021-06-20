@@ -101,6 +101,9 @@ describe('new', function() {
 
             expect(context.activeRace.ladder).to.equal(false);
             expect(context.activeRace.invitational).to.equal(false);
+            expect(context.activeRace.locked).to.equal(false);
+            expect(context.activeRace.teams).to.equal(false);
+            expect(context.activeRace.relay).to.equal(false);
             expect(context.activeRace.started).to.equal(false);
             expect(context.activeRace.pingIndex).is.greaterThanOrEqual(0).and.lessThan(app.config['pings'].length);
             expect(context.activeRace.countdownIndex).is.greaterThanOrEqual(0).and.lessThan(app.config['countdowns'].length);

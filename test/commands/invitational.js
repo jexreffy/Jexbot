@@ -101,6 +101,7 @@ describe('invitational', function() {
 
             expect(context.activeRace.ladder).to.equal(false);
             expect(context.activeRace.invitational).to.equal(true);
+            expect(context.activeRace.locked).to.equal(true);
             expect(context.activeRace.teams).to.equal(false);
             expect(context.activeRace.relay).to.equal(false);
             expect(context.activeRace.started).to.equal(false);
@@ -141,6 +142,7 @@ describe('invitational', function() {
 
             expect(context.activeRace.ladder).to.equal(false);
             expect(context.activeRace.invitational).to.equal(true);
+            expect(context.activeRace.locked).to.equal(true);
             expect(context.activeRace.teams).to.equal(true);
             expect(context.activeRace.relay).to.equal(true);
             expect(context.activeRace.started).to.equal(false);
