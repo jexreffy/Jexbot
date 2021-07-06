@@ -22,7 +22,7 @@ module.exports = class CommandRestream extends JexCommand {
 
     executeCommand(context) {
         let match = context.message.match(/^[.!](\brestream\b) ((\bon\b)|(\boff\b))/i);
-        let isRestream = match[3] === 'on';
+        let isRestream = match && match[3] === 'on';
 
         context.activeRace.restream = isRestream ? this._app.config['guilds'][context.guildId]['restreamChannel'] : null;
 
