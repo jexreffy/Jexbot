@@ -29,7 +29,7 @@ module.exports = class CommandGTEnter extends JexCommand {
 
         let player = context.activeRace.players.find(x => x.twitch === context.messageChannel);
 
-        if (context.messageChannel.toLowerCase() === context.activeRace.restream.toLowerCase() || player) {
+        if ((context.activeRace.restream && context.messageChannel.toLowerCase() === context.activeRace.restream.toLowerCase()) || player) {
             context.activeRace.gtRunner = context.messageChannel;
             this._app.db.setRaceData(context.guildId, context.activeRace);
         }

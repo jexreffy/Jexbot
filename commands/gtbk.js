@@ -39,7 +39,8 @@ module.exports = class CommandGTBK extends JexCommand {
 
             let player = context.activeRace.players.find(x => x.twitch === context.messageChannel);
 
-            if ((context.messageChannel.toLowerCase() === context.activeRace.restream.toLowerCase() &&
+            if ((context.activeRace.restream &&
+                context.messageChannel.toLowerCase() === context.activeRace.restream.toLowerCase() &&
                 context.activeRace.gtRunner === context.activeRace.restream.toLowerCase()) ||
                 (player && context.activeRace.gtRunner && context.activeRace.gtRunner === player.twitch)) {
                 context.activeRace.gtbk = guess;

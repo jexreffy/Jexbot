@@ -70,16 +70,38 @@ module.exports = class CommandDone extends JexCommand {
                     allDone = allDone && x.finished;
                 }
             })
+
             if (allDone) {
                 this._app.routines['broadcastMessage'](this._app, context, `Team ${(player.team + 1)} has finished.`, true);
             } else if (context.activeRace.relay) {
                 context.activeRace.legStartTime[player.team] = Date.now() + this._app.config['relayLegDelaySeconds'] * 1000;
 
-                let nextPlayer = context.activeRace.players.find(x => x.team === player.team && x.leg === player.leg + 1);
                 let thisMember = this._app.findDiscordMember(context.guildId, player.username);
-                let nextMember = this._app.findDiscordMember(context.guildId, nextPlayer.username);
                 this._app.sendToDiscordRaceChannel(context.guildId, `<@${thisMember.id}> You mush let the credits run to completion **WITHOUT** fast forwarding.`);
+
+                let nextPlayer = context.activeRace.players.find(x => x.team === player.team && x.leg === player.leg + 1);
+                let nextMember = this._app.findDiscordMember(context.guildId, nextPlayer.username);
                 this._app.sendToDiscordRaceChannel(context.guildId, `<@${nextMember.id}> ${player.username} has finished. You will be able to start your leg of the relay in ${this._app.config['relayLegDelaySeconds'] / 60} minutes.`);
+
+                let allFinished = true;
+
+                context.activeRace.players.forEach(x => {
+                    if (player.leg === x.leg && player.team !== x.team) {
+                        allFinished = allFinished && x.finished;
+                    }
+                });
+
+                if (allFinished) {
+                    context.activeRace.players.forEach(x => {
+                        if (player.leg === x.leg && player.team !== x.team && x.forfeited) {
+                            context.activeRace.legStartTime[x.team] = Date.now() + (this._app.config['relayLegDelaySeconds'] + this._app.config['relayForfeitDelaySeconds']) * 1000;
+
+                            let nextPlayer = context.activeRace.players.find(y => y.team === x.team && y.leg === x.leg + 1);
+                            let nextForfeit = this._app.findDiscordMember(context.guildId, nextPlayer.username);
+                            this._app.sendToDiscordRaceChannel(context.guildId, `<@${nextForfeit.id}> ${player.username} has finished. You will be able to start your leg of the relay in ${(this._app.config['relayLegDelaySeconds'] + this._app.config['relayForfeitDelaySeconds']) / 60} minutes.`);
+                        }
+                    });
+                }
             }
         }
 

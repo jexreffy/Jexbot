@@ -1,14 +1,28 @@
 'use strict'
 const expect = require('chai').expect;
+
+const config = require('../../config.json');
+const getCustomizerSettings = require('../../common/getCustomizerSettings');
+const getRandomizerSettings = require('../../common/getRandomizerSettings');
+const getRandom = require('../../common/getRandom');
+const processStartingEquipment = require('../../common/processStartingEquipment');
 const randomizerSettings = require('../../common/randomizerSettings');
 
-let App = require('../../mock/app');
-let app = new App();
-
 describe('randomizerSettings', function() {
+    let mockApp = {
+        config: config,
+        db: { },
+        routines: {
+            'getCustomizerSettings': getCustomizerSettings,
+            'getRandomizerSettings': getRandomizerSettings,
+            'getRandom': getRandom,
+            'processStartingEquipment': processStartingEquipment
+        }
+    };
+
     context('verify all categories are generated correctly', function () {
         it('verify ad settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/ad.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/ad.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -34,7 +48,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify adboots settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/adboots.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/adboots.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -258,7 +272,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify adkeysanity settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/adkeysanity.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/adkeysanity.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -284,7 +298,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify adkeysanityboots settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/adkeysanityboots.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/adkeysanityboots.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -508,7 +522,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify ambrosia settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/ambrosia.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/ambrosia.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -731,7 +745,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify beatable settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/beatable.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/beatable.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -757,7 +771,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify beginner settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/beginner.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/beginner.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('basic');
@@ -783,7 +797,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify blitzmode settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/blitzmode.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/blitzmode.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -1014,7 +1028,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify casual settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/casual.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/casual.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -1040,7 +1054,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify casualboots settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/casualboots.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/casualboots.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -1264,7 +1278,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify casualbootsdungeons settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/casualbootsdungeons.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/casualbootsdungeons.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -1488,7 +1502,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify casualbootsfast settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/casualbootsfast.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/casualbootsfast.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -1712,7 +1726,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify crosskeys settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/crosskeys.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/crosskeys.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -1738,7 +1752,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify enemizer settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/enemizer.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/enemizer.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -1764,7 +1778,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify enemizerbosses settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/enemizerbosses.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/enemizerbosses.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -1790,7 +1804,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify expertitempool settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/expertitempool.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/expertitempool.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -1816,7 +1830,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify harditempool settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/harditempool.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/harditempool.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -1843,7 +1857,7 @@ describe('randomizerSettings', function() {
 
 
         it('verify inverted settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/inverted.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/inverted.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -1869,7 +1883,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify invertedcrosskeys settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/invertedcrosskeys.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/invertedcrosskeys.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -1895,7 +1909,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify invertedkeys settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/invertedkeys.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/invertedkeys.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -1921,7 +1935,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify invrosia settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/invrosia.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/invrosia.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -1943,7 +1957,7 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
             expect(Object.keys(settings.l)).has.a.lengthOf(1);
-            expect(app.config['gtbkLocations']).to.contain(Object.keys(settings.l)[0]);
+            expect(mockApp.config['gtbkLocations']).to.contain(Object.keys(settings.l)[0]);
             expect(settings.l[Object.keys(settings.l)]).to.equal('BigKeyA2:1');
             expect(settings.eq).has.a.lengthOf(3);
             expect(settings.eq[0]).to.equal('BossHeartContainer');
@@ -2146,7 +2160,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify invrosiaboots settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/invrosiaboots.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/invrosiaboots.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -2168,7 +2182,7 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
             expect(Object.keys(settings.l)).has.a.lengthOf(1);
-            expect(app.config['gtbkLocations']).to.contain(Object.keys(settings.l)[0]);
+            expect(mockApp.config['gtbkLocations']).to.contain(Object.keys(settings.l)[0]);
             expect(settings.l[Object.keys(settings.l)]).to.equal('BigKeyA2:1');
             expect(settings.eq).has.a.lengthOf(4);
             expect(settings.eq[0]).to.equal('PegasusBoots');
@@ -2372,7 +2386,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify jexrance settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/jexrance.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/jexrance.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -2398,7 +2412,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify keysanity settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/keysanity.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/keysanity.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -2424,7 +2438,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify ladders7pot settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/ladders7pot.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/ladders7pot.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -2650,7 +2664,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify ladders8swordless settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/ladders8swordless.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/ladders8swordless.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -2873,7 +2887,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify mcshuffle settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/mcshuffle.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/mcshuffle.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -2899,7 +2913,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify mcsshuffle settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/mcsshuffle.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/mcsshuffle.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -2925,7 +2939,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify mysterykeys settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/mysterykeys.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/mysterykeys.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -2947,7 +2961,7 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
             expect(Object.keys(settings.l)).has.a.lengthOf(1);
-            expect(app.config['gtbkLocations']).to.contain(Object.keys(settings.l)[0]);
+            expect(mockApp.config['gtbkLocations']).to.contain(Object.keys(settings.l)[0]);
             expect(settings.l[Object.keys(settings.l)]).to.equal('BigKeyA2:1');
             expect(settings.eq).has.a.lengthOf(5);
             expect(settings.eq[0]).to.equal('OcarinaInactive');
@@ -3152,7 +3166,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify nochibrosia settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/nochibrosia.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/nochibrosia.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -3375,7 +3389,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify open settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/open.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/open.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -3401,7 +3415,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify openassured settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/openassured.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/openassured.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -3427,7 +3441,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify openboots settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/openboots.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/openboots.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -3651,7 +3665,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify openfast settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/openfast.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/openfast.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -3677,7 +3691,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify openflute settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/openflute.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/openflute.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -3901,7 +3915,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify pedestal settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/pedestal.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/pedestal.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -3927,7 +3941,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify randomcrystals settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/randomcrystals.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/randomcrystals.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -3953,7 +3967,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify reduced settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/reduced.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/reduced.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -3979,7 +3993,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify retrance settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/retrance.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/retrance.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -4005,7 +4019,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify retro settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/retro.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/retro.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -4031,7 +4045,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify standard settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/standard.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/standard.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -4057,7 +4071,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify standardarcher settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/standardarcher.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/standardarcher.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -4079,7 +4093,7 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
             expect(Object.keys(settings.l)).has.a.lengthOf(1);
-            expect(settings.l[app.config['uncleLocation']]).to.equal('ProgressiveBow');
+            expect(settings.l[mockApp.config['uncleLocation']]).to.equal('ProgressiveBow');
             expect(settings.eq).has.a.lengthOf(3);
             expect(settings.eq[0]).to.equal('BossHeartContainer');
             expect(settings.eq[1]).to.equal('BossHeartContainer');
@@ -4281,7 +4295,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify standardbombs settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/standardbombs.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/standardbombs.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -4303,7 +4317,7 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
             expect(Object.keys(settings.l)).has.a.lengthOf(1);
-            expect(settings.l[app.config['uncleLocation']]).to.equal('TenBombs');
+            expect(settings.l[mockApp.config['uncleLocation']]).to.equal('TenBombs');
             expect(settings.eq).has.a.lengthOf(3);
             expect(settings.eq[0]).to.equal('BossHeartContainer');
             expect(settings.eq[1]).to.equal('BossHeartContainer');
@@ -4505,7 +4519,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify standardboots settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/standardboots.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/standardboots.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -4729,7 +4743,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify standardbyrna settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/standardbyrna.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/standardbyrna.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -4751,7 +4765,7 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
             expect(Object.keys(settings.l)).has.a.lengthOf(1);
-            expect(settings.l[app.config['uncleLocation']]).to.equal('CaneOfByrna');
+            expect(settings.l[mockApp.config['uncleLocation']]).to.equal('CaneOfByrna');
             expect(settings.eq).has.a.lengthOf(3);
             expect(settings.eq[0]).to.equal('BossHeartContainer');
             expect(settings.eq[1]).to.equal('BossHeartContainer');
@@ -4953,7 +4967,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify standardfast settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/standardfast.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/standardfast.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -4979,7 +4993,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify standardfire settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/standardfire.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/standardfire.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -5001,7 +5015,7 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
             expect(Object.keys(settings.l)).has.a.lengthOf(1);
-            expect(settings.l[app.config['uncleLocation']]).to.equal('FireRod');
+            expect(settings.l[mockApp.config['uncleLocation']]).to.equal('FireRod');
             expect(settings.eq).has.a.lengthOf(3);
             expect(settings.eq[0]).to.equal('BossHeartContainer');
             expect(settings.eq[1]).to.equal('BossHeartContainer');
@@ -5203,7 +5217,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify standardhammer settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/standardhammer.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/standardhammer.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -5225,7 +5239,7 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
             expect(Object.keys(settings.l)).has.a.lengthOf(1);
-            expect(settings.l[app.config['uncleLocation']]).to.equal('Hammer');
+            expect(settings.l[mockApp.config['uncleLocation']]).to.equal('Hammer');
             expect(settings.eq).has.a.lengthOf(3);
             expect(settings.eq[0]).to.equal('BossHeartContainer');
             expect(settings.eq[1]).to.equal('BossHeartContainer');
@@ -5427,7 +5441,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify standardryu settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/standardryu.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/standardryu.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -5449,7 +5463,7 @@ describe('randomizerSettings', function() {
             expect(settings.enemizer.enemy_damage).to.equal('default');
             expect(settings.enemizer.enemy_health).to.equal('default');
             expect(Object.keys(settings.l)).has.a.lengthOf(1);
-            expect(settings.l[app.config['uncleLocation']]).to.equal('CaneOfSomaria');
+            expect(settings.l[mockApp.config['uncleLocation']]).to.equal('CaneOfSomaria');
             expect(settings.eq).has.a.lengthOf(3);
             expect(settings.eq[0]).to.equal('BossHeartContainer');
             expect(settings.eq[1]).to.equal('BossHeartContainer');
@@ -5651,7 +5665,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify standardvanilla settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/standardvanilla.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/standardvanilla.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -5677,7 +5691,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify swordless settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/swordless.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/swordless.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -5703,7 +5717,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify tourney2021 settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/tourney2021.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/tourney2021.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -5729,7 +5743,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify triforce settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/triforce.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/triforce.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -5755,7 +5769,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify wtfrosia settings', function (done) {
-            let settings = randomizerSettings(app, require('../../categories/wtfrosia.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/wtfrosia.json'));
             expect(settings.allow_quickswap).to.equal(true);
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');
@@ -5977,10 +5991,5 @@ describe('randomizerSettings', function() {
             expect(settings.custom.drop.count['Fairy']).to.equal(1);
             done();
         });
-    });
-
-    after(function (done) {
-        app.db.close();
-        done();
     });
 });

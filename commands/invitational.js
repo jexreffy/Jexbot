@@ -23,8 +23,6 @@ module.exports = class CommandInvitational extends JexCommand {
     executeCommand(context) {
         let match = context.message.match(/^[.!](\binvitational\b) ([a-zA-Z0-9<>:]{4,20})/i);
 
-        const guildId = context.guildId;
-
         this._app.routines['resetRace'](context.activeRace);
 
         context.activeRace.invitational = true;
