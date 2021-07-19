@@ -4,7 +4,7 @@ const sinon = require('sinon');
 
 const config = require('../../config.json');
 
-describe('close', function() {
+describe('command close', function() {
     let mockApp = {
         CRON: 'cron',
         DISCORD: 'discord',
@@ -31,7 +31,7 @@ describe('close', function() {
         });
 
         it('verify command is race command', function (done) {
-            expect(closeCommand.isRaceCommand).to.equal(true);
+            expect(closeCommand.isRaceCommand).to.be.true;
             done();
         });
 
@@ -49,11 +49,11 @@ describe('close', function() {
                 username: `jexreffy`
             }
 
-            expect(closeCommand.isCommandValid(context)).to.equal(false);
+            expect(closeCommand.isCommandValid(context)).to.be.false;
 
             context.origination = mockApp.DISCORD;
 
-            expect(closeCommand.isCommandValid(context)).to.equal(true);
+            expect(closeCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
@@ -72,11 +72,11 @@ describe('close', function() {
                 username: `TheLostCarol`
             }
 
-            expect(closeCommand.isCommandValid(context)).to.equal(false);
+            expect(closeCommand.isCommandValid(context)).to.be.false;
 
             context.username = 'jexreffy'
 
-            expect(closeCommand.isCommandValid(context)).to.equal(true);
+            expect(closeCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
@@ -98,11 +98,11 @@ describe('close', function() {
                 username: `jexreffy`
             }
 
-            expect(closeCommand.isCommandValid(context)).to.equal(true);
+            expect(closeCommand.isCommandValid(context)).to.be.true;
 
             closeCommand.executeCommand(context);
 
-            expect(context.activeRace.finished).to.equal(true);
+            expect(context.activeRace.finished).to.be.true;
             expect(context.activeRace.status).to.equal('RACE CLOSED');
 
             expect(setRaceStub.calledOnce).to.be.true;
@@ -126,11 +126,11 @@ describe('close', function() {
                 username: `jexreffy`
             }
 
-            expect(closeCommand.isCommandValid(context)).to.equal(true);
+            expect(closeCommand.isCommandValid(context)).to.be.true;
 
             closeCommand.executeCommand(context);
 
-            expect(context.activeRace.finished).to.equal(true);
+            expect(context.activeRace.finished).to.be.true;
             expect(context.activeRace.status).to.equal('RACE CLOSED');
 
             expect(setRaceStub.calledOnce).to.be.true;

@@ -4,7 +4,7 @@ const sinon = require('sinon');
 
 const config = require('../../config.json');
 
-describe('start', function() {
+describe('command start', function() {
     let mockApp = {
         CRON: 'cron',
         DISCORD: 'discord',
@@ -28,7 +28,7 @@ describe('start', function() {
         });
 
         it('verify command is race command', function (done) {
-            expect(startCommand.isRaceCommand).to.equal(true);
+            expect(startCommand.isRaceCommand).to.be.true;
             done();
         });
 
@@ -45,11 +45,11 @@ describe('start', function() {
                 username: `jexreffy`
             }
 
-            expect(startCommand.isCommandValid(context)).to.equal(false);
+            expect(startCommand.isCommandValid(context)).to.be.false;
 
             context.origination = mockApp.DISCORD;
 
-            expect(startCommand.isCommandValid(context)).to.equal(true);
+            expect(startCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
@@ -67,11 +67,11 @@ describe('start', function() {
                 username: `jexreffy`
             }
 
-            expect(startCommand.isCommandValid(context)).to.equal(true);
+            expect(startCommand.isCommandValid(context)).to.be.true;
 
             context.activeRace.started = true;
 
-            expect(startCommand.isCommandValid(context)).to.equal(false);
+            expect(startCommand.isCommandValid(context)).to.be.false;
 
             done();
         });
@@ -89,11 +89,11 @@ describe('start', function() {
                 username: `TheLostCarol`
             }
 
-            expect(startCommand.isCommandValid(context)).to.equal(false);
+            expect(startCommand.isCommandValid(context)).to.be.false;
 
             context.username = 'jexreffy'
 
-            expect(startCommand.isCommandValid(context)).to.equal(true);
+            expect(startCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
@@ -113,7 +113,7 @@ describe('start', function() {
                 username: `jexreffy`
             }
 
-            expect(startCommand.isCommandValid(context)).to.equal(true);
+            expect(startCommand.isCommandValid(context)).to.be.true;
 
             startCommand.executeCommand(context);
 

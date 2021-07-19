@@ -5,6 +5,6 @@ module.exports = (app, context, message) => {
     let channels = app.getTwitchChannels(context.guildId);
 
     for (let i = 0; i < channels.length; i++) {
-        this._app.sendToTwitchChannel(context.guildId, `${channels[i]}`, message).then().catch(console.error);
+        app.sendToTwitchChannel(context.guildId, `${channels[i]}`, message).then().catch(console.error);
     }
 };

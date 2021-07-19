@@ -4,7 +4,7 @@ const sinon = require('sinon');
 
 const config = require('../../config.json');
 
-describe('help', function() {
+describe('command help', function() {
     let mockApp = {
         CRON: 'cron',
         DISCORD: 'discord',
@@ -28,7 +28,7 @@ describe('help', function() {
         });
 
         it('verify command is race command', function (done) {
-            expect(helpCommand.isRaceCommand).to.equal(true);
+            expect(helpCommand.isRaceCommand).to.be.true;
             done();
         });
 
@@ -45,11 +45,11 @@ describe('help', function() {
                 username: `jexreffy`
             }
 
-            expect(helpCommand.isCommandValid(context)).to.equal(false);
+            expect(helpCommand.isCommandValid(context)).to.be.false;
 
             context.origination = mockApp.TWITCH;
 
-            expect(helpCommand.isCommandValid(context)).to.equal(true);
+            expect(helpCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
@@ -69,7 +69,7 @@ describe('help', function() {
                 username: `jexreffy`
             }
 
-            expect(helpCommand.isCommandValid(context)).to.equal(true);
+            expect(helpCommand.isCommandValid(context)).to.be.true;
 
             helpCommand.executeCommand(context);
 
@@ -92,7 +92,7 @@ describe('help', function() {
                 username: `jexreffy`
             }
 
-            expect(helpCommand.isCommandValid(context)).to.equal(true);
+            expect(helpCommand.isCommandValid(context)).to.be.true;
 
             helpCommand.executeCommand(context);
 
@@ -115,7 +115,7 @@ describe('help', function() {
                 username: `jexreffy`
             }
 
-            expect(helpCommand.isCommandValid(context)).to.equal(true);
+            expect(helpCommand.isCommandValid(context)).to.be.true;
 
             helpCommand.executeCommand(context);
 

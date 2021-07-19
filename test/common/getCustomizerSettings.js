@@ -5,7 +5,7 @@ const getCustomizerSettings = require('../../common/getCustomizerSettings');
 describe('getCustomizerSettings', function() {
     context('verify default customizer settings', function() {
         it('allows quickswap', function () {
-            expect(getCustomizerSettings().allow_quickswap).to.equal(true);
+            expect(getCustomizerSettings().allow_quickswap).to.be.true;
         });
 
         it('no glitches', function () {
@@ -61,7 +61,7 @@ describe('getCustomizerSettings', function() {
         });
 
         it('race seed', function () {
-            expect(getCustomizerSettings().tournament).to.equal(true);
+            expect(getCustomizerSettings().tournament).to.be.true;
         });
 
         it('spoilers off', function () {
@@ -96,7 +96,7 @@ describe('getCustomizerSettings', function() {
         });
 
         it('no custom prize packs', function () {
-            expect(getCustomizerSettings().custom['customPrizePacks']).to.equal(false);
+            expect(getCustomizerSettings().custom['customPrizePacks']).to.be.false;
         });
 
         it('no item requirement', function () {
@@ -104,7 +104,7 @@ describe('getCustomizerSettings', function() {
         });
 
         it('do not allow dark room navigation', function () {
-            expect(getCustomizerSettings().custom['item.require.Lamp']).to.equal(false);
+            expect(getCustomizerSettings().custom['item.require.Lamp']).to.be.false;
         });
 
         it('no timers', function () {
@@ -117,52 +117,52 @@ describe('getCustomizerSettings', function() {
         });
 
         it('prizes are shuffled properly', function () {
-            expect(getCustomizerSettings().custom['prize.crossWorld']).to.equal(true);
-            expect(getCustomizerSettings().custom['prize.shuffleCrystals']).to.equal(true);
-            expect(getCustomizerSettings().custom['prize.shufflePendants']).to.equal(true);
+            expect(getCustomizerSettings().custom['prize.crossWorld']).to.be.true;
+            expect(getCustomizerSettings().custom['prize.shuffleCrystals']).to.be.true;
+            expect(getCustomizerSettings().custom['prize.shufflePendants']).to.be.true;
         });
 
         it('bosses can have dungeon items', function () {
-            expect(getCustomizerSettings().custom['region.bossNormalLocation']).to.equal(true);
+            expect(getCustomizerSettings().custom['region.bossNormalLocation']).to.be.true;
         });
 
         it('no special dungeon item setup', function () {
-            expect(getCustomizerSettings().custom['region.wildBigKeys']).to.equal(false);
-            expect(getCustomizerSettings().custom['region.wildCompasses']).to.equal(false);
-            expect(getCustomizerSettings().custom['region.wildKeys']).to.equal(false);
-            expect(getCustomizerSettings().custom['region.wildMaps']).to.equal(false);
+            expect(getCustomizerSettings().custom['region.wildBigKeys']).to.be.false;
+            expect(getCustomizerSettings().custom['region.wildCompasses']).to.be.false;
+            expect(getCustomizerSettings().custom['region.wildKeys']).to.be.false;
+            expect(getCustomizerSettings().custom['region.wildMaps']).to.be.false;
             expect(getCustomizerSettings().custom['rom.dungeonCount']).to.equal('off');
-            expect(getCustomizerSettings().custom['rom.freeItemMenu']).to.equal(false);
-            expect(getCustomizerSettings().custom['rom.freeItemText']).to.equal(false);
-            expect(getCustomizerSettings().custom['rom.mapOnPickup']).to.equal(false);
+            expect(getCustomizerSettings().custom['rom.freeItemMenu']).to.be.false;
+            expect(getCustomizerSettings().custom['rom.freeItemText']).to.be.false;
+            expect(getCustomizerSettings().custom['rom.mapOnPickup']).to.be.false;
         });
 
         it('uncle does not spoil boots', function () {
-            expect(getCustomizerSettings().custom['spoil.BootsLocation']).to.equal(false);
+            expect(getCustomizerSettings().custom['spoil.BootsLocation']).to.be.false;
         });
 
         it('no retro settings', function () {
-            expect(getCustomizerSettings().custom['rom.rupeeBow']).to.equal(false);
-            expect(getCustomizerSettings().custom['rom.genericKeys']).to.equal(false);
+            expect(getCustomizerSettings().custom['rom.rupeeBow']).to.be.false;
+            expect(getCustomizerSettings().custom['rom.genericKeys']).to.be.false;
         });
 
         it('no glitches logic', function () {
             expect(getCustomizerSettings().custom['rom.logicMode']).to.equal('NoGlitches');
-            expect(getCustomizerSettings().custom['canBombJump']).to.equal(false);
-            expect(getCustomizerSettings().custom['canBootsClip']).to.equal(false);
-            expect(getCustomizerSettings().custom['canBunnyRevive']).to.equal(false);
-            expect(getCustomizerSettings().custom['canBunnySurf']).to.equal(false);
-            expect(getCustomizerSettings().custom['canDungeonRevive']).to.equal(false);
-            expect(getCustomizerSettings().custom['canFakeFlipper']).to.equal(false);
-            expect(getCustomizerSettings().custom['canMirrorClip']).to.equal(false);
-            expect(getCustomizerSettings().custom['canMirrorWrap']).to.equal(false);
-            expect(getCustomizerSettings().custom['canOneFrameClipOW']).to.equal(false);
-            expect(getCustomizerSettings().custom['canOneFrameClipUW']).to.equal(false);
-            expect(getCustomizerSettings().custom['canOWYBA']).to.equal(false);
-            expect(getCustomizerSettings().custom['canSuperBunny']).to.equal(false);
-            expect(getCustomizerSettings().custom['canSuperSpeed']).to.equal(false);
-            expect(getCustomizerSettings().custom['canWaterFairyRevive']).to.equal(false);
-            expect(getCustomizerSettings().custom['canWaterWalk']).to.equal(false);
+            expect(getCustomizerSettings().custom['canBombJump']).to.be.false;
+            expect(getCustomizerSettings().custom['canBootsClip']).to.be.false;
+            expect(getCustomizerSettings().custom['canBunnyRevive']).to.be.false;
+            expect(getCustomizerSettings().custom['canBunnySurf']).to.be.false;
+            expect(getCustomizerSettings().custom['canDungeonRevive']).to.be.false;
+            expect(getCustomizerSettings().custom['canFakeFlipper']).to.be.false;
+            expect(getCustomizerSettings().custom['canMirrorClip']).to.be.false;
+            expect(getCustomizerSettings().custom['canMirrorWrap']).to.be.false;
+            expect(getCustomizerSettings().custom['canOneFrameClipOW']).to.be.false;
+            expect(getCustomizerSettings().custom['canOneFrameClipUW']).to.be.false;
+            expect(getCustomizerSettings().custom['canOWYBA']).to.be.false;
+            expect(getCustomizerSettings().custom['canSuperBunny']).to.be.false;
+            expect(getCustomizerSettings().custom['canSuperSpeed']).to.be.false;
+            expect(getCustomizerSettings().custom['canWaterFairyRevive']).to.be.false;
+            expect(getCustomizerSettings().custom['canWaterWalk']).to.be.false;
         });
 
         it('default items', function () {

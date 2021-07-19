@@ -5,7 +5,7 @@ const getRandomizerSettings = require('../../common/getRandomizerSettings');
 describe('getRandomizerSettings', function() {
     context('verify default randomizer settings', function() {
         it('allows quickswap', function () {
-            expect(getRandomizerSettings().allow_quickswap).to.equal(true);
+            expect(getRandomizerSettings().allow_quickswap).to.be.true;
         });
 
         it('no glitches', function () {
@@ -61,7 +61,7 @@ describe('getRandomizerSettings', function() {
         });
 
         it('race seed', function () {
-            expect(getRandomizerSettings().tournament).to.equal(true);
+            expect(getRandomizerSettings().tournament).to.be.true;
         });
 
         it('spoilers off', function () {

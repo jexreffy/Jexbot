@@ -4,7 +4,7 @@ const sinon = require('sinon');
 
 const config = require('../../config.json');
 
-describe('restream', function() {
+describe('command restream', function() {
     let mockApp = {
         CRON: 'cron',
         DISCORD: 'discord',
@@ -31,7 +31,7 @@ describe('restream', function() {
         });
 
         it('verify command is race command', function (done) {
-            expect(restreamCommand.isRaceCommand).to.equal(true);
+            expect(restreamCommand.isRaceCommand).to.be.true;
             done();
         });
 
@@ -48,11 +48,11 @@ describe('restream', function() {
                 username: `jexreffy`
             }
 
-            expect(restreamCommand.isCommandValid(context)).to.equal(false);
+            expect(restreamCommand.isCommandValid(context)).to.be.false;
 
             context.origination = mockApp.DISCORD;
 
-            expect(restreamCommand.isCommandValid(context)).to.equal(true);
+            expect(restreamCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
@@ -70,11 +70,11 @@ describe('restream', function() {
                 username: `jexreffy`
             }
 
-            expect(restreamCommand.isCommandValid(context)).to.equal(true);
+            expect(restreamCommand.isCommandValid(context)).to.be.true;
 
             context.activeRace.started = true;
 
-            expect(restreamCommand.isCommandValid(context)).to.equal(false);
+            expect(restreamCommand.isCommandValid(context)).to.be.false;
 
             done();
         });
@@ -92,11 +92,11 @@ describe('restream', function() {
                 username: `TheLostCarol`
             }
 
-            expect(restreamCommand.isCommandValid(context)).to.equal(false);
+            expect(restreamCommand.isCommandValid(context)).to.be.false;
 
             context.username = 'jexreffy'
 
-            expect(restreamCommand.isCommandValid(context)).to.equal(true);
+            expect(restreamCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
@@ -117,7 +117,7 @@ describe('restream', function() {
                 username: `jexreffy`
             }
 
-            expect(restreamCommand.isCommandValid(context)).to.equal(true);
+            expect(restreamCommand.isCommandValid(context)).to.be.true;
 
             restreamCommand.executeCommand(context);
 
@@ -143,7 +143,7 @@ describe('restream', function() {
                 username: `jexreffy`
             }
 
-            expect(restreamCommand.isCommandValid(context)).to.equal(true);
+            expect(restreamCommand.isCommandValid(context)).to.be.true;
 
             restreamCommand.executeCommand(context);
 
@@ -169,7 +169,7 @@ describe('restream', function() {
                 username: `jexreffy`
             }
 
-            expect(restreamCommand.isCommandValid(context)).to.equal(true);
+            expect(restreamCommand.isCommandValid(context)).to.be.true;
 
             restreamCommand.executeCommand(context);
 

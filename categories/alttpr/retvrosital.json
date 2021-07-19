@@ -1,0 +1,31 @@
+{
+  "category": "retvrosital",
+  "name": "Retvrosital",
+  "description": "Inverted Start, Pedestal Goal, 0/7 Crystals, Assured Sword, Bosses cannot hold Dungeon Items, Universal Keys, Dungeon Items Shuffled",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "inverted",
+    "goal": "pedestal",
+    "weapons": "assured",
+    "crystals": {
+      "ganon": "7",
+      "tower": "0"
+    },
+    "custom": {
+      "region.bossNormalLocation": false,
+      "region.wildMaps": true,
+      "region.wildCompasses": true,
+      "region.wildKeys": true,
+      "region.wildBigKeys": true,
+      "rom.freeItemMenu": true,
+      "rom.freeItemText": true,
+      "rom.mapOnPickup": true,
+      "rom.dungeonCount": "pickup",
+      "rom.genericKeys": true
+    }
+  },
+  "weights": { }
+}

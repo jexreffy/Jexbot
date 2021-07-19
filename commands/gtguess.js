@@ -15,13 +15,18 @@ module.exports = class CommandGTStop extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.TWITCH &&
-            context.activeRace.guessGameEnabled &&
-            context.activeRace.guessGameStarted;
+        return context.activeRace.guessGameEnabled &&
+               context.activeRace.guessGameStarted &&
+               !context.activeRace.guessGameFinished &&
+               (!(context.activeRace.ladder || context.activeRace.invitational) ||
+                   context.origination === this._app.TWITCH);
     }
 
     executeCommand(context) {
         let match = context.message.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i);
+
+        if (!match) return;
+
         let guess = parseInt(match[2]);
 
         if (guess < 1 || guess > 22) return;
@@ -31,23 +36,18 @@ module.exports = class CommandGTStop extends JexCommand {
         for (let i = 0; i < context.activeRace.guesses.length; i++) {
             if (context.activeRace.guesses[i] === context.username) {
                 response = `${context.activeRace.guesses[i]} has already guessed ${i + 1} for the GTBK Guessing Game.`;
-                if (context.origination === this._app.TWITCH) {
-                    this._app.sendToTwitchChannel(context.guildId, context.messageChannel, response).then().catch(console.error);
-                } else if (context.origination === this._app.DISCORD &&
-                           !context.activeRace.invitational) {
-                    this._app.sendToDiscordRaceChannel(context.guildId, `**${response}**`).then().catch(console.error);
-                }
-                return;
+                break;
             }
         }
 
-        if (context.activeRace.guesses[guess - 1]) {
+        if (!response && context.activeRace.guesses[guess - 1]) {
             response = `${context.activeRace.guesses[guess - 1]} has already guessed ${guess} for the GTBK Guessing Game.`;
+        }
 
+        if (response) {
             if (context.origination === this._app.TWITCH) {
                 this._app.sendToTwitchChannel(context.guildId, context.messageChannel, response).then().catch(console.error);
-            }  else if (context.origination === this._app.DISCORD &&
-                        !context.activeRace.invitational) {
+            }  else if (context.origination === this._app.DISCORD) {
                 this._app.sendToDiscordRaceChannel(context.guildId, `**${response}**`).then().catch(console.error);
             }
         } else {

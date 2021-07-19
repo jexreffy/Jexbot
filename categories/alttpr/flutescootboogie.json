@@ -1,0 +1,14 @@
+{
+  "category": "flutescootboogie",
+  "name": "Flute, Scoot, and Boogie",
+  "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Starting Boots and Inactive Flute",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "standard",
+    "eq": [ "PegasusBoots", "OcarinaInactive" ]
+  },
+  "weights": { }
+}

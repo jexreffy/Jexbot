@@ -4,7 +4,7 @@ const sinon = require('sinon');
 
 const config = require('../../config.json');
 
-describe('lock', function() {
+describe('command lock', function() {
     let mockApp = {
         CRON: 'cron',
         DISCORD: 'discord',
@@ -31,7 +31,7 @@ describe('lock', function() {
         });
 
         it('verify command is race command', function (done) {
-            expect(lockCommand.isRaceCommand).to.equal(true);
+            expect(lockCommand.isRaceCommand).to.be.true;
             done();
         });
 
@@ -49,11 +49,11 @@ describe('lock', function() {
                 username: `jexreffy`
             }
 
-            expect(lockCommand.isCommandValid(context)).to.equal(false);
+            expect(lockCommand.isCommandValid(context)).to.be.false;
 
             context.origination = mockApp.DISCORD;
 
-            expect(lockCommand.isCommandValid(context)).to.equal(true);
+            expect(lockCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
@@ -72,11 +72,11 @@ describe('lock', function() {
                 username: `jexreffy`
             }
 
-            expect(lockCommand.isCommandValid(context)).to.equal(true);
+            expect(lockCommand.isCommandValid(context)).to.be.true;
 
             context.activeRace.started = true;
 
-            expect(lockCommand.isCommandValid(context)).to.equal(false);
+            expect(lockCommand.isCommandValid(context)).to.be.false;
 
             done();
         });
@@ -95,11 +95,11 @@ describe('lock', function() {
                 username: `TheLostCarol`
             }
 
-            expect(lockCommand.isCommandValid(context)).to.equal(false);
+            expect(lockCommand.isCommandValid(context)).to.be.false;
 
             context.username = 'jexreffy'
 
-            expect(lockCommand.isCommandValid(context)).to.equal(true);
+            expect(lockCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
@@ -121,11 +121,11 @@ describe('lock', function() {
                 username: `jexreffy`
             }
 
-            expect(lockCommand.isCommandValid(context)).to.equal(true);
+            expect(lockCommand.isCommandValid(context)).to.be.true;
 
             lockCommand.executeCommand(context);
 
-            expect(context.activeRace.locked).to.equal(true);
+            expect(context.activeRace.locked).to.be.true;
             expect(context.activeRace.status).to.equal('SIGNUPS CLOSED: WAITING FOR PLAYERS TO READY UP');
 
             expect(setRaceStub.calledOnce).to.be.true;

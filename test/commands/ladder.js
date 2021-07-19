@@ -6,7 +6,7 @@ const config = require('../../config.json');
 const resetRace = require('../../common/resetRace');
 const setRaceCategory = require('../../common/setRaceCategory');
 
-describe('ladder', function() {
+describe('command ladder', function() {
     let mockApp = {
         CRON: 'cron',
         DISCORD: 'discord',
@@ -40,7 +40,7 @@ describe('ladder', function() {
         });
 
         it('verify command is race command', function (done) {
-            expect(ladderCommand.isRaceCommand).to.equal(true);
+            expect(ladderCommand.isRaceCommand).to.be.true;
             done();
         });
 
@@ -56,11 +56,11 @@ describe('ladder', function() {
                 username: `jexreffy`
             }
 
-            expect(ladderCommand.isCommandValid(context)).to.equal(false);
+            expect(ladderCommand.isCommandValid(context)).to.be.false;
 
             context.origination = mockApp.DISCORD;
 
-            expect(ladderCommand.isCommandValid(context)).to.equal(true);
+            expect(ladderCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
@@ -77,11 +77,11 @@ describe('ladder', function() {
                 username: `jexreffy`
             }
 
-            expect(ladderCommand.isCommandValid(context)).to.equal(false);
+            expect(ladderCommand.isCommandValid(context)).to.be.false;
 
             context.activeRace.finished = true;
 
-            expect(ladderCommand.isCommandValid(context)).to.equal(true);
+            expect(ladderCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
@@ -98,21 +98,21 @@ describe('ladder', function() {
                 username: `TheLostCarol`
             }
 
-            expect(ladderCommand.isCommandValid(context)).to.equal(false);
+            expect(ladderCommand.isCommandValid(context)).to.be.false;
 
             context.username = 'jexreffy'
 
-            expect(ladderCommand.isCommandValid(context)).to.equal(true);
+            expect(ladderCommand.isCommandValid(context)).to.be.true;
 
             context.guildId = '8165160598710651651';
 
-            expect(ladderCommand.isCommandValid(context)).to.equal(false);
+            expect(ladderCommand.isCommandValid(context)).to.be.false;
 
             done();
         });
 
         it('verify ladder race with no category is initiated correctly', async () => {
-            let category = require(`../../categories/standard.json`);
+            let category = require(`../../categories/alttpr/standard.json`);
 
             let categoriesStub = sinon.stub(mockApp.db, 'getCategories').returns([ 'standard' ]);
             let categoryStub = sinon.stub(mockApp.db, 'getCategory').returns(category);
@@ -129,18 +129,18 @@ describe('ladder', function() {
                 username: `jexreffy`
             }
 
-            expect(ladderCommand.isCommandValid(context)).to.equal(true);
+            expect(ladderCommand.isCommandValid(context)).to.be.true;
 
             ladderCommand.executeCommand(context);
 
             await mockApp.sleep(1);
 
-            expect(context.activeRace.ladder).to.equal(true);
-            expect(context.activeRace.invitational).to.equal(false);
-            expect(context.activeRace.locked).to.equal(false);
-            expect(context.activeRace.teams).to.equal(false);
-            expect(context.activeRace.relay).to.equal(false);
-            expect(context.activeRace.started).to.equal(true);
+            expect(context.activeRace.ladder).to.be.true;
+            expect(context.activeRace.invitational).to.be.false;
+            expect(context.activeRace.locked).to.be.false;
+            expect(context.activeRace.teams).to.be.false;
+            expect(context.activeRace.relay).to.be.false;
+            expect(context.activeRace.started).to.be.true;
             expect(context.activeRace.startedAt).to.equal(context.activeRace.initiatedAt);
             expect(context.activeRace.categoryToRoll).to.equal('standard');
             expect(context.activeRace.category).to.equal(category.category);

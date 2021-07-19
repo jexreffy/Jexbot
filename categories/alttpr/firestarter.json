@@ -1,0 +1,17 @@
+{
+  "category": "firestarter",
+  "name": "Fire Starter",
+  "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Starting Lamp, Uncle guaranteed to have Fire Rod",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "standard",
+    "eq": [ "Lamp" ],
+    "custom": {
+      "jex.uncleItem": "FireRod"
+    }
+  },
+  "weights": { }
+}

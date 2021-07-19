@@ -24,7 +24,7 @@ module.exports = class CronGTAnnounce extends JexCron {
 
     tick(context) {
         context.activeRace.guessGameStarted = true;
-        this._app.routines['broadcastTwitch'](this._app, context, this._app.config['gtGuessIntro']);
+        this._app.routines['broadcastMessage'](this._app, context, this._app.config['gtGuessIntro'], false);
         return true;
     }
 }

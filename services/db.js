@@ -24,7 +24,7 @@ module.exports = class JexDatabase {
         this.#pool = Mysql.createPool(connection);
 
         this.#initializeServer();
-        this.#initializeCategories();
+        this.#initializeCategories('alttpr');
         this.#initializePlayers();
     }
 
@@ -41,10 +41,10 @@ module.exports = class JexDatabase {
         }
     }
 
-    #initializeCategories() {
-        fs.readdir('./categories/', (err, files) => {
+    #initializeCategories(game) {
+        fs.readdir(`./categories/${game}/`, (err, files) => {
             files.forEach(file => {
-                const category = require(`../categories/${file}`);
+                const category = require(`../categories/${game}/${file}`);
                 const categoryKey = file.split('.')[0];
 
                 this.#categoryKeys.push(categoryKey);

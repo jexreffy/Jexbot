@@ -21,8 +21,13 @@ module.exports = class CommandGTBK extends JexCommand {
     }
 
     executeCommand(context) {
-        let match = message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i);
+        let match = context.message.match(/^[.!](\bgtbk\b) ([0-9]{1,2})/i);
+
+        if (!match) return;
+
         let guess = parseInt(match[2]);
+
+        if (guess < 1 || guess > 22) return;
 
         if (context.activeRace.ladder || context.activeRace.invitational) {
             context.activeRace.gtbk = guess;
@@ -42,7 +47,7 @@ module.exports = class CommandGTBK extends JexCommand {
             if ((context.activeRace.restream &&
                 context.messageChannel.toLowerCase() === context.activeRace.restream.toLowerCase() &&
                 context.activeRace.gtRunner === context.activeRace.restream.toLowerCase()) ||
-                (player && context.activeRace.gtRunner && context.activeRace.gtRunner === player.twitch)) {
+                (player && context.activeRace.gtRunner === player.twitch)) {
                 context.activeRace.gtbk = guess;
 
                 if (context.activeRace.spoilersAllowed) {

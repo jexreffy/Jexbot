@@ -14,14 +14,14 @@ describe('resetRace', function() {
         it('correct values set', function () {
             let race = {}
             resetRace(race);
-            expect(race.ladder).to.equal(false);
-            expect(race.invitational).to.equal(false);
-            expect(race.teams).to.equal(false);
-            expect(race.multiworld).to.equal(false);
-            expect(race.locked).to.equal(false);
-            expect(race.relay).to.equal(false);
-            expect(race.started).to.equal(false);
-            expect(race.finished).to.equal(false);
+            expect(race.ladder).to.be.false;
+            expect(race.invitational).to.be.false;
+            expect(race.teams).to.be.false;
+            expect(race.multiworld).to.be.false;
+            expect(race.locked).to.be.false;
+            expect(race.relay).to.be.false;
+            expect(race.started).to.be.false;
+            expect(race.finished).to.be.false;
             expect(race.startedAt).to.equal(null);
             expect(race.initiatedAt).to.equal(Date.now());
             expect(race.escapeItem).to.equal(null);
@@ -33,13 +33,13 @@ describe('resetRace', function() {
             expect(race.crew).has.a.lengthOf(0);
             expect(race.lastCallback).to.equal(null);
             expect(race.blueballs).to.equal(-1);
-            expect(race.guessGameEnabled).to.equal(false);
-            expect(race.guessGameStarted).to.equal(false);
-            expect(race.guessGameFinished).to.equal(false);
+            expect(race.guessGameEnabled).to.be.false;
+            expect(race.guessGameStarted).to.be.false;
+            expect(race.guessGameFinished).to.be.false;
             expect(race.gtRunner).to.equal(null);
             expect(race.gtbk).to.equal(-1);
             expect(race.gtbkWinner).to.equal(null);
-            expect(race.spoilersAllowed).to.equal(false);
+            expect(race.spoilersAllowed).to.be.false;
             expect(race.gtbkGuess).to.equal(-1);
             expect(race.gatekeeper).to.equal(null);
             expect(race.category).to.equal('');

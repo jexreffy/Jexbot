@@ -4,7 +4,7 @@ const sinon = require('sinon');
 
 const config = require('../../config.json');
 
-describe('gatekeeper', function() {
+describe('command gatekeeper', function() {
     let mockApp = {
         CRON: 'cron',
         DISCORD: 'discord',
@@ -31,7 +31,7 @@ describe('gatekeeper', function() {
         });
 
         it('verify command is race command', function (done) {
-            expect(gatekeeperCommand.isRaceCommand).to.equal(true);
+            expect(gatekeeperCommand.isRaceCommand).to.be.true;
             done();
         });
 
@@ -47,11 +47,11 @@ describe('gatekeeper', function() {
                 username: `jexreffy`
             }
 
-            expect(gatekeeperCommand.isCommandValid(context)).to.equal(false);
+            expect(gatekeeperCommand.isCommandValid(context)).to.be.false;
 
             context.origination = mockApp.DISCORD;
 
-            expect(gatekeeperCommand.isCommandValid(context)).to.equal(true);
+            expect(gatekeeperCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
@@ -68,11 +68,11 @@ describe('gatekeeper', function() {
                 username: `jexreffy`
             }
 
-            expect(gatekeeperCommand.isCommandValid(context)).to.equal(true);
+            expect(gatekeeperCommand.isCommandValid(context)).to.be.true;
 
             context.activeRace.started = true;
 
-            expect(gatekeeperCommand.isCommandValid(context)).to.equal(false);
+            expect(gatekeeperCommand.isCommandValid(context)).to.be.false;
 
             done();
         });
@@ -89,11 +89,11 @@ describe('gatekeeper', function() {
                 username: `TheLostCarol`
             }
 
-            expect(gatekeeperCommand.isCommandValid(context)).to.equal(false);
+            expect(gatekeeperCommand.isCommandValid(context)).to.be.false;
 
             context.username = 'jexreffy'
 
-            expect(gatekeeperCommand.isCommandValid(context)).to.equal(true);
+            expect(gatekeeperCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
@@ -113,7 +113,7 @@ describe('gatekeeper', function() {
                 username: `jexreffy`
             }
 
-            expect(gatekeeperCommand.isCommandValid(context)).to.equal(true);
+            expect(gatekeeperCommand.isCommandValid(context)).to.be.true;
 
             gatekeeperCommand.executeCommand(context);
 

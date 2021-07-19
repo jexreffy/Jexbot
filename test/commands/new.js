@@ -7,7 +7,7 @@ const getRandom = require('../../common/getRandom');
 const resetRace = require('../../common/resetRace');
 const setRaceCategory = require('../../common/setRaceCategory');
 
-describe('new', function() {
+describe('command new', function() {
     let mockApp = {
         CRON: 'cron',
         DISCORD: 'discord',
@@ -47,7 +47,7 @@ describe('new', function() {
         });
 
         it('verify command is race command', function (done) {
-            expect(newCommand.isRaceCommand).to.equal(true);
+            expect(newCommand.isRaceCommand).to.be.true;
             done();
         });
 
@@ -63,11 +63,11 @@ describe('new', function() {
                 username: `jexreffy`
             }
 
-            expect(newCommand.isCommandValid(context)).to.equal(false);
+            expect(newCommand.isCommandValid(context)).to.be.false;
 
             context.origination = mockApp.DISCORD;
 
-            expect(newCommand.isCommandValid(context)).to.equal(true);
+            expect(newCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
@@ -84,11 +84,11 @@ describe('new', function() {
                 username: `jexreffy`
             }
 
-            expect(newCommand.isCommandValid(context)).to.equal(false);
+            expect(newCommand.isCommandValid(context)).to.be.false;
 
             context.activeRace.finished = true;
 
-            expect(newCommand.isCommandValid(context)).to.equal(true);
+            expect(newCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
@@ -105,17 +105,17 @@ describe('new', function() {
                 username: `TheLostCarol`
             }
 
-            expect(newCommand.isCommandValid(context)).to.equal(false);
+            expect(newCommand.isCommandValid(context)).to.be.false;
 
             context.username = 'jexreffy'
 
-            expect(newCommand.isCommandValid(context)).to.equal(true);
+            expect(newCommand.isCommandValid(context)).to.be.true;
 
             done();
         });
 
         it('verify new race with no category is initiated correctly', async () => {
-            let category = require(`../../categories/standard.json`);
+            let category = require(`../../categories/alttpr/standard.json`);
 
             let sendStub = sinon.stub(mockApp, 'sendToDiscordRaceChannel').resolves({ id: 1 });
             let categoriesStub = sinon.stub(mockApp.db, 'getCategories').returns([ 'standard' ]);
@@ -134,18 +134,18 @@ describe('new', function() {
                 username: `jexreffy`
             }
 
-            expect(newCommand.isCommandValid(context)).to.equal(true);
+            expect(newCommand.isCommandValid(context)).to.be.true;
 
             newCommand.executeCommand(context);
 
             await mockApp.sleep(1);
 
-            expect(context.activeRace.ladder).to.equal(false);
-            expect(context.activeRace.invitational).to.equal(false);
-            expect(context.activeRace.locked).to.equal(false);
-            expect(context.activeRace.teams).to.equal(false);
-            expect(context.activeRace.relay).to.equal(false);
-            expect(context.activeRace.started).to.equal(false);
+            expect(context.activeRace.ladder).to.be.false;
+            expect(context.activeRace.invitational).to.be.false;
+            expect(context.activeRace.locked).to.be.false;
+            expect(context.activeRace.teams).to.be.false;
+            expect(context.activeRace.relay).to.be.false;
+            expect(context.activeRace.started).to.be.false;
             expect(context.activeRace.pingIndex).is.greaterThanOrEqual(0).and.lessThan(mockApp.config['pings'].length);
             expect(context.activeRace.countdownIndex).is.greaterThanOrEqual(0).and.lessThan(mockApp.config['countdowns'].length);
             expect(context.activeRace.mutlistream).to.equal('https://multistre.am/');

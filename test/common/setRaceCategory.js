@@ -26,7 +26,7 @@ describe('setRaceCategory', function() {
     context('verify categories get selected properly for rolling', function () {
         it('verify no category yields default category', function (done) {
             let categoryKey = mockApp.config['defaultCategory'];
-            let standardCategory = require(`../../categories/standard.json`);
+            let standardCategory = require(`../../categories/alttpr/standard.json`);
             let categoriesStub = sinon.stub(mockApp.db, 'getCategories').returns([ 'standard' ]);
             let categoryStub = sinon.stub(mockApp.db, 'getCategory').returns(standardCategory);
 
@@ -51,7 +51,7 @@ describe('setRaceCategory', function() {
 
         it('verify open category yields correct results', function (done) {
             let categoryKey = 'open';
-            let category = require(`../../categories/${categoryKey}.json`);
+            let category = require(`../../categories/alttpr/${categoryKey}.json`);
             let categoriesStub = sinon.stub(mockApp.db, 'getCategories').returns([ categoryKey ]);
             let categoryStub = sinon.stub(mockApp.db, 'getCategory').withArgs(categoryKey).returns(category);
 
@@ -76,7 +76,7 @@ describe('setRaceCategory', function() {
 
         it('verify crosskeys category yields correct results', function (done) {
             let categoryKey = 'crosskeys';
-            let category = require(`../../categories/${categoryKey}.json`);
+            let category = require(`../../categories/alttpr/${categoryKey}.json`);
             let categoriesStub = sinon.stub(mockApp.db, 'getCategories').returns([ categoryKey ]);
             let categoryStub = sinon.stub(mockApp.db, 'getCategory').withArgs(categoryKey).returns(category);
 
@@ -101,7 +101,7 @@ describe('setRaceCategory', function() {
 
         it('verify Seed of the Week Easy category yields correct results', function (done) {
             let categoryKey = 'casualboots';
-            let category = require(`../../categories/${categoryKey}.json`);
+            let category = require(`../../categories/alttpr/${categoryKey}.json`);
             let categoryItems =  {
                 category: "casualboots",
                 name: "Casual Boots",
@@ -138,7 +138,7 @@ describe('setRaceCategory', function() {
 
         it('verify Seed of the Week Medium category yields correct results', function (done) {
             let categoryKey = 'randomcrystals';
-            let category = require(`../../categories/${categoryKey}.json`);
+            let category = require(`../../categories/alttpr/${categoryKey}.json`);
             let categoryItems = {
                 category: "randomcrystals",
                 name: "Random Crystals",
@@ -175,7 +175,7 @@ describe('setRaceCategory', function() {
 
         it('verify Seed of the Week Hard category yields correct results', function (done) {
             let categoryKey = 'mysteryladder';
-            let category = require(`../../categories/${categoryKey}.json`);
+            let category = require(`../../categories/alttpr/${categoryKey}.json`);
             let categoryItems = {
                 category: "mysteryladder",
                 name: "Mystery Ladder",

@@ -5,9 +5,10 @@
     "scripts": {
         "start": "node index.js",
         "dev": "nodemon index.js",
-        "test": "mocha --recursive"
+        "test": "mocha --recursive --reporter mochawesome"
     },
     "devDependencies": {
+        "mochawesome": "^6.2.2",
         "nodemon": "^1.19.4"
     },
     "dependencies": {

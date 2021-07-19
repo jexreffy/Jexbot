@@ -20,7 +20,7 @@ module.exports = (app, context) => {
     }
 
     if (!response) {
-        for (let i = context.activeRace.gtbk; i < context.activeRace.guesses; i++) {
+        for (let i = context.activeRace.gtbk - 1; i < context.activeRace.guesses.length; i++) {
             if (context.activeRace.guesses[i]) {
                 context.activeRace.gtbkWinner = context.activeRace.guesses[i];
                 context.activeRace.gtbkGuess = i + 1;
