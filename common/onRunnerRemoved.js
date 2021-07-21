@@ -13,5 +13,5 @@ module.exports = (app, context, player) => {
         userTwitch = username;
     }
 
-    context.activeRace.mutlistream = context.activeRace.mutlistream.replace(new RegExp(userTwitch + '/', 'i'), "");
+    context.activeRace.multistream = context.activeRace.multistream.replace(new RegExp(userTwitch + '/', 'i'), "");
 }

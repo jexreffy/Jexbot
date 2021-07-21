@@ -11,10 +11,10 @@ module.exports = (app, context, player) => {
     if (app.db.getPlayerStreaming(username)) {
         let userTwitch = app.db.getPlayerTwitch(username);
         if (userTwitch) {
-            context.activeRace.mutlistream += userTwitch + '/';
+            context.activeRace.multistream += userTwitch + '/';
             player.twitch = `#${userTwitch}`;
         } else {
-            context.activeRace.mutlistream += username.replace(/\W/gi, "") + '/'
+            context.activeRace.multistream += username.replace(/\W/gi, "") + '/'
             player.twitch = `#${username}`;
         }
     }

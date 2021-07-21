@@ -39,8 +39,8 @@ module.exports = (app, context) => {
 
     if (race.restream) {
         desc += `\n Restream: <https://twitch.tv/${race.restream.substr(1)}>`;
-    } else if (race.mutlistream) {
-        desc += `\n Multistream: <${race.mutlistream}>`;
+    } else if (race.multistream) {
+        desc += `\n Multistream: <${race.multistream}>`;
     }
 
     if (race.escapeItem) {

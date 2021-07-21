@@ -147,7 +147,7 @@ describe('command invitational', function() {
             expect(context.activeRace.relay).to.be.false;
             expect(context.activeRace.started).to.be.false;
             expect(context.activeRace.countdownIndex).is.greaterThanOrEqual(0).and.lessThan(mockApp.config['countdowns'].length);
-            expect(context.activeRace.mutlistream).to.equal('https://multistre.am/');
+            expect(context.activeRace.multistream).to.equal('https://multistre.am/');
             expect(context.activeRace.status).to.equal('INVITATIONAL RACE: WAITING FOR PLAYERS TO READY UP');
             expect(context.activeRace.categoryToRoll).to.equal('standard');
             expect(context.activeRace.category).to.equal(category.category);
@@ -194,7 +194,7 @@ describe('command invitational', function() {
             expect(context.activeRace.relay).to.be.true;
             expect(context.activeRace.started).to.be.false;
             expect(context.activeRace.countdownIndex).is.greaterThanOrEqual(0).and.lessThan(mockApp.config['countdowns'].length);
-            expect(context.activeRace.mutlistream).to.equal('https://multistre.am/');
+            expect(context.activeRace.multistream).to.equal('https://multistre.am/');
             expect(context.activeRace.status).to.equal('INVITATIONAL RACE: WAITING FOR PLAYERS TO READY UP');
 
             expect(sendStub.calledOnce).to.be.true;

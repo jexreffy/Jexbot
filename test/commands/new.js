@@ -148,7 +148,7 @@ describe('command new', function() {
             expect(context.activeRace.started).to.be.false;
             expect(context.activeRace.pingIndex).is.greaterThanOrEqual(0).and.lessThan(mockApp.config['pings'].length);
             expect(context.activeRace.countdownIndex).is.greaterThanOrEqual(0).and.lessThan(mockApp.config['countdowns'].length);
-            expect(context.activeRace.mutlistream).to.equal('https://multistre.am/');
+            expect(context.activeRace.multistream).to.equal('https://multistre.am/');
             expect(context.activeRace.status).to.equal('PRE-RACE: WAITING FOR PLAYERS TO JOIN');
             expect(context.activeRace.categoryToRoll).to.equal('standard');
             expect(context.activeRace.category).to.equal(category.category);

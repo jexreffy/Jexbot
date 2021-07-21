@@ -17,7 +17,7 @@ module.exports = class CommandReady extends JexCommand {
     isCommandValid(context) {
         return context.origination === this._app.DISCORD &&
                !context.activeRace.started &&
-               context.activeRace.players.find(x => x.username === context.username);
+               context.activeRace.players.find(x => x.username === context.username) !== undefined;
     }
 
     executeCommand(context) {

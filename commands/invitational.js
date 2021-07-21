@@ -28,7 +28,7 @@ module.exports = class CommandInvitational extends JexCommand {
         context.activeRace.invitational = true;
         context.activeRace.locked = true;
         context.activeRace.countdownIndex = this._app.routines['getRandom'](this._app.config['countdowns'].length);
-        context.activeRace.mutlistream = 'https://multistre.am/';
+        context.activeRace.multistream = 'https://multistre.am/';
         context.activeRace.status = 'INVITATIONAL RACE: WAITING FOR PLAYERS TO READY UP';
 
         if (match && match.length > 2 && match[2] === "relay") {

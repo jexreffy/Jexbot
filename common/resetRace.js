@@ -35,7 +35,7 @@ module.exports = (race) => {
     race.seedCode = null;
     race.seedLink = null;
     race.seedRoller = null;
-    race.mutlistream = '';
+    race.multistream = '';
     race.restream = null;
     race.status = '';
     race.lastDickTime = null;

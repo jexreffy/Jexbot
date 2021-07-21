@@ -49,7 +49,7 @@ describe('resetRace', function() {
             expect(race.seedCode).to.equal(null);
             expect(race.seedLink).to.equal(null);
             expect(race.seedRoller).to.equal(null);
-            expect(race.mutlistream).to.equal('');
+            expect(race.multistream).to.equal('');
             expect(race.restream).to.equal(null);
             expect(race.status).to.equal('');
             expect(race.lastDickTime).to.equal(null);

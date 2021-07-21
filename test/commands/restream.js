@@ -101,14 +101,14 @@ describe('command restream', function() {
             done();
         });
 
-        it('verify restream executes correctly with no argument', async () => {
+        it('verify restream cannot be executed if on or off is not provided with the command', async () => {
             let setRaceStub = sinon.stub(mockApp.db, 'setRaceData');
             let updateEmbedStub = sinon.stub(mockApp.routines, 'updateRaceMessage');
 
             let context = {
                 activeRace: {
                     started: false,
-                    restream: ''
+                    restream: null
                 },
                 guildId: mockApp.config.botOwnerGuild,
                 message: `.restream`,
@@ -121,10 +121,8 @@ describe('command restream', function() {
 
             restreamCommand.executeCommand(context);
 
-            expect(context.activeRace.restream).to.be.null;
-
-            expect(setRaceStub.calledOnce).to.be.true;
-            expect(updateEmbedStub.calledOnce).to.be.true;
+            expect(setRaceStub.notCalled).to.be.true;
+            expect(updateEmbedStub.notCalled).to.be.true;
         });
 
         it('verify restream executes correctly with on argument', async () => {

@@ -15,20 +15,19 @@ module.exports = class CommandTwitchBot extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.DISCORD;
+        return context.origination === this._app.DISCORD &&
+               !context.activeRace.started &&
+               context.activeRace.players.find(x => x.username === context.username) !== undefined;
     }
 
     executeCommand(context) {
         let match = context.message.match(/^[.!](\btwitchbot\b) ((\bon\b)|(\boff\b))/i);
+
+        if (!match || match.length <= 2) return;
+
         let isStreaming = match[3] === 'on';
 
-        let player = context.activeRace.players.find(x => x.username === context.username);
-        if (player) {
-            this._app.db.setPlayerTwitchBot(context.username, isStreaming);
-
-            this._app.routines['updateRaceMessage'](this._app, context);
-        } else {
-            this._app.db.setPlayerTwitchBot(context.username, isStreaming);
-        }
+        this._app.db.setPlayerTwitchBot(context.username, isStreaming);
+        this._app.routines['updateRaceMessage'](this._app, context);
     }
 }
