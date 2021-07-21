@@ -16,7 +16,7 @@ module.exports = class CommandEscape extends JexCommand {
 
     isCommandValid(context) {
         return context.origination === this._app.DISCORD &&
-               !context.activeRace['escapeItem'] &&
+               !context.activeRace.escapeItem &&
                context.activeRace.started;
     }
 

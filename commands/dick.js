@@ -26,9 +26,7 @@ module.exports = class CommandDick extends JexCommand {
 
         this._app.db.setRaceData(context.guildId, context.activeRace);
 
-        if (context.activeRace.initiatedAt) {
-            this._app.routines['updateRaceMessage'](this._app, context);
-        }
+        this._app.routines['updateRaceMessage'](this._app, context);
 
         let dickIndex = this._app.routines['getRandom'](this._app.config['dickMessages'].length);
         let dickMessage = `${context.activeRace.seedRoller} ${this._app.config['dickMessages'][dickIndex].replace('RICHARD', context.activeRace.dickCount)}`;

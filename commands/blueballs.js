@@ -15,7 +15,8 @@ module.exports = class CommandBlueBalls extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.activeRace.blueballs < 0;
+        return context.origination === this._app.TWITCH &&
+               context.activeRace.blueballs < 0;
     }
 
     executeCommand(context) {
@@ -29,9 +30,7 @@ module.exports = class CommandBlueBalls extends JexCommand {
 
         context.activeRace.blueballs = blueballs;
 
-        if (context.origination === this._app.TWITCH) {
-            this._app.sendToTwitchChannel(context.guildId, context.messageChannel, `Aga 1 Blue Balls recorded as ${blueballs}`).then().catch(console.error);
-        }
+        this._app.sendToTwitchChannel(context.guildId, context.messageChannel, `Aga 1 Blue Balls recorded as ${blueballs}`).then().catch(console.error);
 
         this._app.db.setRaceData(context.guildId, context.activeRace);
     }

@@ -29,7 +29,7 @@ module.exports = class CommandCallback extends JexCommand {
             time = 0;
         }
 
-        let message = `${this._app.routines['getRaceTime'](time)}, go back to ${context.channel.replace('#', '')}'s stream.`
+        let message = `${this._app.routines['getRaceTime'](time)}, go back to ${context.messageChannel.replace('#', '')}'s stream.`
 
         this._app.routines['broadcastMessage'](this._app, context, message, true);
 
