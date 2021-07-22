@@ -1,0 +1,16 @@
+{
+  "category": "invertedadcrosskeys",
+  "name": "Inverted AD Crosskeys",
+  "description": "Inverted Start, All Dungeons, Crossworld Entrance Shuffle, Dungeon Items shuffled in the full item pool",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "dungeon_items": "full",
+    "goal": "dungeons",
+    "mode": "inverted",
+    "entrances": "crossed"
+  },
+  "weights": { }
+}
