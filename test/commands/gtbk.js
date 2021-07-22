@@ -41,6 +41,8 @@ describe('command gtbk', function() {
         it('verify gtbk can only be executed from Twitch', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     restream: null,
@@ -74,6 +76,8 @@ describe('command gtbk', function() {
         it('verify gtbk cannot be executed unless the guess game is enabled', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     restream: null,
@@ -107,6 +111,8 @@ describe('command gtbk', function() {
         it('verify gtbk cannot be executed if the guess game has not been started', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     restream: null,
@@ -140,6 +146,8 @@ describe('command gtbk', function() {
         it('verify gtbk does not pay attention to the guessGameFinished variable', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     restream: null,
@@ -177,6 +185,8 @@ describe('command gtbk', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     restream: null,
@@ -217,6 +227,8 @@ describe('command gtbk', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     restream: null,
@@ -284,6 +296,8 @@ describe('command gtbk', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     restream: '#jexreffy',
@@ -328,6 +342,8 @@ describe('command gtbk', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     restream: null,
@@ -386,6 +402,8 @@ describe('command gtbk', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     restream: '#phantomryu',
@@ -439,6 +457,8 @@ describe('command gtbk', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     restream: '#jexreffy',
@@ -483,6 +503,8 @@ describe('command gtbk', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     restream: '#jexreffy',
@@ -527,6 +549,8 @@ describe('command gtbk', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     restream: '#jexreffy',
@@ -571,6 +595,8 @@ describe('command gtbk', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: true,
                     invitational: false,
                     restream: '#jexreffy',
@@ -616,6 +642,8 @@ describe('command gtbk', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: true,
                     invitational: false,
                     restream: '#jexreffy',

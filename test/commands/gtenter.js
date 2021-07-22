@@ -38,6 +38,8 @@ describe('command gtenter', function() {
         it('verify gtenter cannot be executed unless it originates from Twitch', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -66,6 +68,8 @@ describe('command gtenter', function() {
         it('verify gtenter cannot be executed unless the guess game is enabled', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: false,
@@ -94,6 +98,8 @@ describe('command gtenter', function() {
         it('verify gtenter cannot be executed if the guess game has not been started', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -122,6 +128,8 @@ describe('command gtenter', function() {
         it('verify gtenter cannot be executed for ladder and invitational races', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -155,6 +163,8 @@ describe('command gtenter', function() {
         it('verify gtenter does not pay attention to the guessGameFinished variable', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -186,6 +196,8 @@ describe('command gtenter', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -217,6 +229,8 @@ describe('command gtenter', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -263,6 +277,8 @@ describe('command gtenter', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -295,6 +311,8 @@ describe('command gtenter', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,

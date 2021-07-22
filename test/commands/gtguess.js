@@ -42,6 +42,8 @@ describe('command gtguess', function() {
         it('verify gtguess can be executed from Twitch or Discord', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -68,6 +70,8 @@ describe('command gtguess', function() {
         it('verify gtguess cannot be executed unless the guess game is enabled', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: false,
@@ -94,6 +98,8 @@ describe('command gtguess', function() {
         it('verify gtguess cannot be executed if the guess game has not been started', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -120,6 +126,8 @@ describe('command gtguess', function() {
         it('verify gtguess cannot be executed if the guess game has finished', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -146,6 +154,8 @@ describe('command gtguess', function() {
         it('verify gtguess cannot be executed if command originated from Discord and this is either a ladder or invitational race.', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -177,6 +187,8 @@ describe('command gtguess', function() {
         it('verify gtguess can be executed if command originated from Twitch for any type of race.', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -213,6 +225,8 @@ describe('command gtguess', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -247,6 +261,8 @@ describe('command gtguess', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -308,6 +324,8 @@ describe('command gtguess', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -347,6 +365,8 @@ describe('command gtguess', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -386,6 +406,8 @@ describe('command gtguess', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: true,
                     invitational: false,
                     guessGameEnabled: true,
@@ -425,6 +447,8 @@ describe('command gtguess', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: true,
                     guessGameEnabled: true,
@@ -464,6 +488,8 @@ describe('command gtguess', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -505,6 +531,8 @@ describe('command gtguess', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -546,6 +574,8 @@ describe('command gtguess', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,
@@ -587,6 +617,8 @@ describe('command gtguess', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     invitational: false,
                     guessGameEnabled: true,

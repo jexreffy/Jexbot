@@ -38,6 +38,8 @@ describe('command blueballs', function() {
         it('verify blueballs cannot be executed unless it originates from Twitch', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     blueballs: -1
                 },
                 guildId: mockApp.config.botOwnerGuild,
@@ -59,6 +61,8 @@ describe('command blueballs', function() {
         it('verify blueballs cannot be executed if blueballs has already been called', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     blueballs: -1
                 },
                 guildId: mockApp.config.botOwnerGuild,
@@ -83,6 +87,8 @@ describe('command blueballs', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     blueballs: -1
                 },
                 guildId: mockApp.config.botOwnerGuild,
@@ -108,6 +114,8 @@ describe('command blueballs', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     blueballs: -1
                 },
                 guildId: mockApp.config.botOwnerGuild,
@@ -147,6 +155,8 @@ describe('command blueballs', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     blueballs: -1
                 },
                 guildId: mockApp.config.botOwnerGuild,

@@ -8,7 +8,7 @@ describe('resetRace', function() {
             let race = {}
             resetRace(race);
             let keys = Object.keys(race);
-            expect(keys.length).to.equal(43);
+            expect(keys.length).to.equal(44);
         });
 
         it('correct values set', function () {

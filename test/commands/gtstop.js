@@ -38,6 +38,8 @@ describe('command gtstop', function() {
         it('verify gtstop cannot be executed unless it originates from Twitch', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     guessGameEnabled: true,
                     guessGameStarted: true,
@@ -62,6 +64,8 @@ describe('command gtstop', function() {
         it('verify gtstop cannot be executed unless the guess game is enabled', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     guessGameEnabled: false,
                     guessGameStarted: true,
@@ -86,6 +90,8 @@ describe('command gtstop', function() {
         it('verify gtstop cannot be executed if the guess game has not been started', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     guessGameEnabled: true,
                     guessGameStarted: false,
@@ -110,6 +116,8 @@ describe('command gtstop', function() {
         it('verify gtstop cannot be executed if the guess game has already finished', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     guessGameEnabled: true,
                     guessGameStarted: true,
@@ -137,6 +145,8 @@ describe('command gtstop', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     guessGameEnabled: true,
                     guessGameStarted: true,
@@ -165,6 +175,8 @@ describe('command gtstop', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: true,
                     guessGameEnabled: true,
                     guessGameStarted: true,

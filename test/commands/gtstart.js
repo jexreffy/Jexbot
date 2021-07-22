@@ -38,6 +38,8 @@ describe('command gtstart', function() {
         it('verify gtstart cannot be executed unless it originates from Twitch', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     guessGameEnabled: true,
                     guessGameStarted: false
@@ -61,6 +63,8 @@ describe('command gtstart', function() {
         it('verify gtstart cannot be executed unless the guess game is enabled', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     guessGameEnabled: false,
                     guessGameStarted: false
@@ -84,6 +88,8 @@ describe('command gtstart', function() {
         it('verify gtstart cannot be executed if the guess game is already started', function (done) {
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     guessGameEnabled: true,
                     guessGameStarted: false
@@ -110,6 +116,8 @@ describe('command gtstart', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: false,
                     guessGameEnabled: true,
                     guessGameStarted: false
@@ -137,6 +145,8 @@ describe('command gtstart', function() {
 
             let context = {
                 activeRace: {
+                    started: true,
+                    finished: false,
                     ladder: true,
                     guessGameEnabled: true,
                     guessGameStarted: false
