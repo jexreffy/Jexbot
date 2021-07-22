@@ -1,0 +1,14 @@
+{
+  "category": "ad",
+  "name": "All Dungeons",
+  "description": "Open Start, All Dungeons",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "goal": "dungeons"
+  },
+  "weights": { }
+}

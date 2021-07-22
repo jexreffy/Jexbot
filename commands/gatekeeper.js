@@ -1,10 +1,29 @@
-const updateRaceMessage = require('../common/updateRaceMessage');
+'use strict'
+const JexCommand = require('../commands/command');
 
-module.exports = (config, db, race, dChannel, username) => {
-    if (config.referees.includes(username)) {
-        if (!race.started) {
-            race.gatekeeper = username;
-            updateRaceMessage(db, race, dChannel);
-        }
+module.exports = class CommandGatekeeper extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
+
+    get commandName() {
+        return 'gatekeeper';
+    }
+
+    get isRaceCommand() {
+        return true;
+    }
+
+    isCommandValid(context) {
+        return context.origination === this._app.DISCORD &&
+               !context.activeRace.started &&
+               this._app.config['referees'].includes(context.username);
+    }
+
+    executeCommand(context) {
+        context.activeRace.gatekeeper = context.username;
+        this._app.db.setRaceData(context.guildId, context.activeRace);
+
+        this._app.routines['updateRaceMessage'](this._app, context);
     }
 }

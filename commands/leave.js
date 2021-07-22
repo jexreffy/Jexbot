@@ -1,31 +1,44 @@
-const onRunnerRemoved = require('../common/onRunnerRemoved');
-const startRace = require('../common/startRace');
-const updateRaceMessage = require('../common/updateRaceMessage');
+'use strict'
+const JexCommand = require('../commands/command');
 
-module.exports = (config, db, race, dChannel, username, message) => {
-    if (!race.locked) {
-        let player = race.players.find(x => x.username === username);
-
-        if (!race.finished && player) {
-            onRunnerRemoved(config, db, race, player, message);
-
-            let allReady = race.players.every(x => x.ready === true);
-            if (!race.gatekeeper && allReady && race.players.length > 1) {
-                if (race.teams) {
-                    race.teams = false;
-                    race.players[0].ready = false;
-                    updateRaceMessage(db, race, dChannel);
-                } else {
-                    startRace(config, db, race, dChannel);
-                }
-            } else {
-                race.teams = false;
-                updateRaceMessage(db, race, dChannel);
-            }
-
-        } else {
-            let time = new Date();
-            console.log(time.toLocaleString('en-US') + ' leave: ' + username + ' is not in the race!');
-        }
+module.exports = class CommandLeave extends JexCommand {
+    constructor(app) {
+        super(app);
     }
-};
+
+    get commandName() {
+        return 'leave';
+    }
+
+    get isRaceCommand() {
+        return true;
+    }
+
+    isCommandValid(context) {
+        return context.origination === this._app.DISCORD &&
+               !context.activeRace.locked &&
+               !context.activeRace.started &&
+               context.activeRace.players.find(x => x.username === context.username);
+    }
+
+    executeCommand(context) {
+        let player = context.activeRace.players.find(x => x.username === context.username);
+        this._app.routines['onRunnerRemoved'](this._app, context, player);
+
+        let allReady = context.activeRace.players.every(x => x.ready === true);
+        if (!context.activeRace.gatekeeper && allReady && context.activeRace.players.length > 1) {
+            if (context.activeRace.teams) {
+                context.activeRace.teams = false;
+                context.activeRace.players[0].ready = false;
+                this._app.routines['updateRaceMessage'](this._app, context);
+            } else {
+                this._app.routines['startRace'](this._app, context);
+            }
+        } else {
+            context.activeRace.teams = false;
+            this._app.routines['updateRaceMessage'](this._app, context);
+        }
+
+        this._app.db.setRaceData(context.guildId, context.activeRace);
+    }
+}

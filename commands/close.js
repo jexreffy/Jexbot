@@ -1,14 +1,31 @@
-const updateRaceMessage = require('../common/updateRaceMessage');
+'use strict'
+const JexCommand = require('../commands/command');
 
-module.exports = (config, db, race, dChannel, username) => {
-    if (!race.finished && config.referees.includes(username)) {
-        race.finished = true;
-        race.seed = null;
-        race.status = 'RACE CLOSED';
-        db.setActiveRace(null);
+module.exports = class CommandClose extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
 
-        if (!race.ladder) {
-            updateRaceMessage(db, race, dChannel);
+    get commandName() {
+        return 'close';
+    }
+
+    get isRaceCommand() {
+        return true;
+    }
+
+    isCommandValid(context) {
+        return context.origination === this._app.DISCORD &&
+               this._app.config['referees'].includes(context.username);
+    }
+
+    executeCommand(context) {
+        context.activeRace.finished = true;
+        context.activeRace.status = 'RACE CLOSED';
+        this._app.db.setRaceData(context.guildId, context.activeRace);
+
+        if (!context.activeRace.ladder) {
+            this._app.routines['updateRaceMessage'](this._app, context);
         }
     }
-};
+}

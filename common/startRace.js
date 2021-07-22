@@ -1,64 +1,61 @@
-const getRandom = require('../common/getRandom');
-const updateRaceMessage = require('../common/updateRaceMessage');
-
-module.exports = (config, db, race, dChannel) => {
-    const sleep = m => new Promise(r => setTimeout(r, m));
+'use strict'
+module.exports = (app, context) => {
+    const sleep = app.sleep;
     (async() => {
-        let countdown = config.countdowns[race.countdownIndex];
-        let jokeTime = getRandom(config.jokeCountdownMax);
-        let jokeUnits = config.jokeUnits[getRandom(config.jokeUnits.length)];
-        dChannel.send(`**The race will start in ${jokeTime} ${jokeUnits}**`).then().catch(console.error);
+        let countdown = app.config['countdowns'][context.activeRace.countdownIndex];
+        let jokeTime = app.routines['getRandom'](app.config['jokeCountdownMax']);
+        let jokeUnits = app.config['jokeUnits'][app.routines['getRandom'](app.config['jokeUnits'].length)];
+        app.sendToDiscordRaceChannel(context.guildId, `**The race will start in ${jokeTime} ${jokeUnits}**`).then().catch(console.error);
         await sleep(100);
 
-        race.status = countdown.firstLine;
-        dChannel.send(`**${race.status}**`).then().catch(console.error);
-        updateRaceMessage(db, race, dChannel);
+        context.activeRace.status = countdown.firstLine;
+        app.sendToDiscordRaceChannel(context.guildId, `**${context.activeRace.status}**`).then().catch(console.error);
+        app.routines['updateRaceMessage'](app, context);
         await sleep(countdown.firstDelay);
 
-        race.status = countdown.secondLine;
-        dChannel.send(`**${race.status}**`).then().catch(console.error);
-        updateRaceMessage(db, race, dChannel);
+        context.activeRace.status = countdown.secondLine;
+        app.sendToDiscordRaceChannel(context.guildId, `**${context.activeRace.status}**`).then().catch(console.error);
+        app.routines['updateRaceMessage'](app, context);
         await sleep(countdown.secondDelay);
 
         for (let i = countdown.countdown; i > 0; i--) {
-            race.status = 'Starting in: ' + i;
-            updateRaceMessage(db, race, dChannel);
-            let allReady = race.players.every(x => x.ready === true);
-            if (!(race.gatekeeper || allReady)) {
-                race.status = 'INTERRUPTED: WAITING FOR PLAYERS';
-                updateRaceMessage(db, race, dChannel);
+            context.activeRace.status = 'Starting in: ' + i;
+            app.routines['updateRaceMessage'](app, context);
+            let allReady = context.activeRace.players.every(x => x.ready === true);
+            if (!(context.activeRace.gatekeeper || allReady)) {
+                context.activeRace.status = 'INTERRUPTED: WAITING FOR PLAYERS';
+                app.routines['updateRaceMessage'](app, context);
                 return;
             }
 
-            if (i <= 5) dChannel.send(`**${i}**`).then().catch(console.error);
+            if (i <= 5) app.sendToDiscordRaceChannel(context.guildId, `**${i}**`).then().catch(console.error);
             await sleep(1000);
         }
 
-        race.status = 'GO!!!';
-        race.started = true;
-        race.startedAt = Date.now();
+        app.sendToDiscordRaceChannel(context.guildId, `**GO!!!**`).then().catch(console.error);
+        await sleep(100);
 
-        if (race.teams && race.relay) {
+        context.activeRace.status = 'GO!!!';
+        context.activeRace.started = true;
+        context.activeRace.startedAt = Date.now();
+
+        if (context.activeRace.teams && context.activeRace.relay) {
             let teamCount = 0;
-            for (let i = 0; i < race.players.length; i++) {
-                if (teamCount < race.players[i].team + 1) {
-                    teamCount = race.players[i].team + 1;
+            for (let i = 0; i < context.activeRace.players.length; i++) {
+                if (teamCount < context.activeRace.players[i].team + 1) {
+                    teamCount = context.activeRace.players[i].team + 1;
                 }
             }
 
             for (let i = 0; i < teamCount; i++) {
-                race.legStartTime.push(0);
+                context.activeRace.legStartTime.push(0);
             }
         }
 
-
-        dChannel.send(`**GO!!!**`).then().catch(console.error);
-        await sleep(100);
-
-        updateRaceMessage(db, race, dChannel);
+        app.routines['updateRaceMessage'](app, context);
         await sleep(1900);
 
-        race.status = 'RACE STARTED';
-        updateRaceMessage(db, race, dChannel);
+        context.activeRace.status = 'RACE STARTED';
+        app.routines['updateRaceMessage'](app, context);
     })();
 };

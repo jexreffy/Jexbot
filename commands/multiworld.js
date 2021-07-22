@@ -1,17 +1,38 @@
-const updateRaceMessage = require('../common/updateRaceMessage');
+'use strict'
+const JexCommand = require('../commands/command');
 
-module.exports = (config, db, race, dChannel, username, message) => {
-    if (race.seedLink) return;
+module.exports = class CommandMultiWorld extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
 
-    let player = race.players.find(x => x.username === username);
-    let match = message.content.match(/^[.!](\bmultiworld\b) (https:\/\/[a-zA-Z0-9_%\/?,.]{4,200})/i);
-    let seed = match[2];
+    get commandName() {
+        return 'multiworld';
+    }
 
-    if (!race.started && (player || config.referees.includes(username))) {
-        race.multiworld = true;
-        race.seedRoller = "Multiworld";
-        race.seedLink = seed;
-        race.seedCode = "N/A";
-        updateRaceMessage(db, race, dChannel);
+    get isRaceCommand() {
+        return true;
+    }
+
+    isCommandValid(context) {
+        return context.origination === this._app.DISCORD &&
+               !context.activeRace.seedLink &&
+               !context.activeRace.started &&
+               (this._app.config['referees'].includes(context.username) ||
+                   context.activeRace.players.find(x => x.username === context.username));
+    }
+
+    executeCommand(context) {
+        let match = message.content.match(/^[.!](\bmultiworld\b) (https:\/\/[a-zA-Z0-9_%\/?,.]{4,200})/i);
+        let seed = match[2];
+
+        context.activeRace.multiworld = true;
+        context.activeRace.seedRoller = "Multiworld";
+        context.activeRace.seedLink = seed;
+        context.activeRace.seedCode = "N/A";
+
+        this._app.db.setRaceData(context.guildId, context.activeRace);
+
+        this._app.routines['updateRaceMessage'](this._app, context);
     }
 }

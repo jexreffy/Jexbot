@@ -1,50 +1,48 @@
-const broadcastMessage = require('../common/broadcastMessage');
-const gtbkWinner = require('../common/gtbkWinner');
-const sortPlayers = require('../common/sortPlayers');
-const updateRaceMessage = require('../common/updateRaceMessage');
-const elo = require('../elo/elo.js');
-
-module.exports = (config, db, race, dChannel, tClient, message) => {
-    let role = message.guild.roles.cache.find(r => r.name === config.guilds[message.guild.id].racerRole);
-    let member = message.channel.members.find(x => x.user.username === message.author.username);
+'use strict'
+module.exports = (app, context, player) => {
+    let role = app.getRacerRole(context.guildId);
+    let member = app.findDiscordMember(context.guildId, player.username);
     member.roles.remove(role.id).then().catch(console.error);
 
-    if (race.remainingPlayers < 1) {
-        if (!(race.teams || race.multiworld)) {
-            sortPlayers(race.players, false, false);
+    if (context.activeRace.remainingPlayers < 1) {
+        context.activeRace.finished = true;
+        context.activeRace.spoilersAllowed = true;
+        context.activeRace.status = 'RACE FINISHED';
 
-            let adjustments = elo.resolveMatch(db, race.players, race.category);
-            for (let i = 0; i < race.players.length; i++) {
-                race.players[i].adjustment = adjustments[i];
+        if (!(context.activeRace.teams || context.activeRace.multiworld)) {
+            app.routines['sortPlayers'](context.activeRace.players, false, false);
+
+            let adjustments = app.routines['resolveMatchElo'](app, context.activeRace.players, context.activeRace.category);
+            for (let i = 0; i < context.activeRace.players.length; i++) {
+                context.activeRace.players[i].adjustment = adjustments[i];
             }
         }
 
-        const sleep = m => new Promise(r => setTimeout(r, m));
-        (async() => {
-            if (!race.gtbkWinner) {
-                await sleep(5000);
-                gtbkWinner(config, race, dChannel, tClient);
-            }
+        if (!context.activeRace.gtbkWinner) {
+            app.routines['gtbkWinner'](app, context);
+        }
 
+        const sleep = app.sleep;
+        (async() => {
             await sleep(5000);
-            race.finished = true;
-            race.status = 'RACE FINISHED';
-            updateRaceMessage(db, race, dChannel);
-            broadcastMessage(config, dChannel, tClient, `The race has finished.`, true);
-            db.setActiveRace(null);
+            app.routines['updateRaceMessage'](app, context);
+            app.routines['broadcastMessage'](app, context, `The race has finished.`, true);
         })();
-    } else if (!race.invitational && race.remainingPlayers <= race.players.length / 2 && !race.spoilersAllowed) {
-        race.spoilersAllowed = true;
+    } else if (!context.activeRace.invitational &&
+               context.activeRace.remainingPlayers <= context.activeRace.players.length / 2 && !context.activeRace.spoilersAllowed) {
+        context.activeRace.spoilersAllowed = true;
 
-        const sleep = m => new Promise(r => setTimeout(r, m));
+        if (!context.activeRace.gtbkWinner) {
+            app.routines['gtbkWinner'](app, context);
+        }
+
+        const sleep = app.sleep;
         (async() => {
             await sleep(5000);
-            broadcastMessage(config, dChannel, tClient, `Spoilers are now allowed for the race.`, true);
-            await sleep(5000);
-            gtbkWinner(config, race, dChannel, tClient);
-            updateRaceMessage(db, race, dChannel);
+            app.routines['updateRaceMessage'](app, context);
+            app.routines['broadcastMessage'](app, context, `Spoilers are now allowed for the race.`, true);
         })();
     } else {
-        updateRaceMessage(db, race, dChannel);
+        app.routines['updateRaceMessage'](app, context);
     }
 }

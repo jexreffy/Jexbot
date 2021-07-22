@@ -1,6 +1,31 @@
-module.exports = (config, race, tClient, tChannel) => {
-    if (!race.guessGameEnabled || race.guessGameStarted) return;
+'use strict'
+const JexCommand = require('../commands/command');
 
-    race.guessGameStarted = true;
-    if (tClient) tClient.say(tChannel, `${race.ladder ? config.gtLadderPrefix : config.gtRacePrefix} ${config.gtStartMessage}`).then().catch(console.error);
+module.exports = class CommandGTStop extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
+
+    get commandName() {
+        return 'gtstart';
+    }
+
+    get isRaceCommand() {
+        return true;
+    }
+
+    isCommandValid(context) {
+        return context.origination === this._app.TWITCH &&
+               context.activeRace.started &&
+               !context.activeRace.finished &&
+               context.activeRace.guessGameEnabled &&
+               !context.activeRace.guessGameStarted;
+    }
+
+    executeCommand(context) {
+        context.activeRace.guessGameStarted = true;
+        let message = `${this._app.config[context.activeRace.ladder ? 'gtLadderPrefix' : 'gtRacePrefix']} ${this._app.config['gtStartMessage']}`
+        this._app.sendToTwitchChannel(context.guildId, context.messageChannel, message).then().catch(console.error);
+        this._app.db.setRaceData(context.guildId, context.activeRace);
+    }
 }

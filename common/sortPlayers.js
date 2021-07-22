@@ -1,3 +1,4 @@
+'use strict'
 module.exports = (players, teams, relay) => {
     players.sort(function(a, b) {
         if (teams && a.team !== b.team) {
@@ -20,12 +21,12 @@ module.exports = (players, teams, relay) => {
         }
         if (b.forfeited) {
             if (!a.forfeited) {
-                return 1;
+                return -1;
             }
         }
         if (a.forfeited) {
             if (!b.forfeited) {
-                return -1;
+                return 1;
             }
         }
 

@@ -1,32 +1,53 @@
-module.exports = (config, db, channel, message, username) => {
-    const centerPad = (str, length, char = ' ') => str.padStart((str.length + length) / 2, char).padEnd(length, char);
-    let match = message.content.match(/^[.!](\brank\b) ([a-zA-Z0-9%]{0,20})/i);
-    let categoryName = config.defaultCategory;
-    let categoryTitle = categoryName;
+'use strict'
+const JexCommand = require('../commands/command');
 
-    if (match && match.length > 2) {
-        let categories = db.getCategories();
+module.exports = class CommandRank extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
 
-        for (let i = 0; i < categories.length; i++) {
-            if (match[2] === categories[i]) {
-                categoryName = categories[i];
-                categoryTitle = db.getCategory(categoryName).name;
-                break;
+    get commandName() {
+        return 'rank';
+    }
+
+    get isRaceCommand() {
+        return true;
+    }
+
+    isCommandValid(context) {
+        return context.origination === this._app.DISCORD &&
+               context.activeRace.finished;
+    }
+
+    executeCommand(context) {
+        let match = context.message.match(/^[.!](\brank\b) ([a-zA-Z0-9%]{0,20})/i);
+        let categoryName = this._app.config['defaultCategory'];
+        let categoryTitle = categoryName;
+
+        if (match && match.length > 2) {
+            let categories = this._app.db.getCategories();
+
+            for (let i = 0; i < categories.length; i++) {
+                if (match[2] === categories[i]) {
+                    categoryName = categories[i];
+                    categoryTitle = this._app.db.getCategory(categoryName).name;
+                    break;
+                }
             }
         }
-    }
 
-    let board = db.getCategoryLeaderboard(categoryName);
+        let board = this._app.db.getCategoryLeaderboard(categoryName);
 
-    if (board) {
-        let playerRank = board.map(function(e) { return e.username; }).indexOf(username);
-        let output = '` ' + username + ' rank in ' + categoryTitle + ': ';
-        if (playerRank > -1) {
-            output += (playerRank + 1) + '`';
-        } else {
-            output += 'unranked `';
+        if (board) {
+            let playerRank = board.map(function(e) { return e.username; }).indexOf(context.username);
+            let output = '` ' + context.username + ' rank in ' + categoryTitle + ': ';
+            if (playerRank > -1) {
+                output += (playerRank + 1) + '`';
+            } else {
+                output += 'unranked `';
+            }
+
+            this._app.sendToDiscordRaceChannel(context.guildId, this._app.routines['centerPad'](output, 24)).then().catch(console.error);
         }
-
-        channel.send(centerPad(output, 24)).then().catch(console.error);
     }
-};
+}

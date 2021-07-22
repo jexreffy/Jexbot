@@ -1,15 +1,39 @@
-const broadcastMessage = require('../common/broadcastMessage');
-const getRaceTime = require('../common/getRaceTime');
+'use strict'
+const JexCommand = require('../commands/command');
 
-module.exports = (config, race, dChannel, tClient, tChannel) => {
-    if (race.started && (!race.lastCallback || (Math.floor((Date.now() - race.lastCallback)) / 1000) > config.minimumNewCallbackSeconds)) {
-        race.lastCallback = Date.now();
+module.exports = class CommandCallback extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
 
-        let time = race.lastCallback - race.startedAt;
+    get commandName() {
+        return 'callback';
+    }
+
+    get isRaceCommand() {
+        return true;
+    }
+
+    isCommandValid(context) {
+        return context.origination === this._app.TWITCH &&
+               context.activeRace.started &&
+               !context.activeRace.finished &&
+               (!context.activeRace.lastCallback ||
+                   (Math.floor((Date.now() - context.activeRace.lastCallback)) / 1000) > this._app.config['minimumNewCallbackSeconds']);
+    }
+
+    executeCommand(context) {
+        context.activeRace.lastCallback = Date.now();
+
+        let time = context.activeRace.lastCallback - context.activeRace.startedAt;
         if (time < 0) {
             time = 0;
         }
 
-        broadcastMessage(config, dChannel, tClient, `${getRaceTime(time)}, go back to ${tChannel.replace('#', '')}'s stream.`, true);
+        let message = `${this._app.routines['getRaceTime'](time)}, go back to ${context.messageChannel.replace('#', '')}'s stream.`
+
+        this._app.routines['broadcastMessage'](this._app, context, message, true);
+
+        this._app.db.setRaceData(context.guildId, context.activeRace);
     }
 }

@@ -1,44 +1,67 @@
-const broadcastMessage = require('../common/broadcastMessage');
+'use strict'
+const JexCommand = require('../commands/command');
 
-module.exports = (config, race, dChannel, tClient, tChannel, username, message) => {
-    if (!race.guessGameEnabled || !race.guessGameStarted) return;
+module.exports = class CommandGTStop extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
 
-    let match = message.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i);
-    let guess = parseInt(match[2]);
+    get commandName() {
+        return 'gtguess';
+    }
 
-    if (guess < 1 || guess > 22) return;
+    get isRaceCommand() {
+        return true;
+    }
 
-    let response = null;
+    isCommandValid(context) {
+        return context.activeRace.started &&
+               !context.activeRace.finished &&
+               context.activeRace.guessGameEnabled &&
+               context.activeRace.guessGameStarted &&
+               !context.activeRace.guessGameFinished &&
+               (!(context.activeRace.ladder || context.activeRace.invitational) ||
+                   context.origination === this._app.TWITCH);
+    }
 
-    for (let i = 0; i < race.guesses.length; i++) {
-        if (race.guesses[i] === username) {
-            response = `${race.guesses[i]} has already guessed ${i + 1} for the GTBK Guessing Game.`;
-            if (tClient && tChannel) {
-                tClient.say(tChannel, response).then().catch(console.error);
-            } else if (!race.invitational) {
-                dChannel.send(`**${response}**`).then().catch(console.error);
+    executeCommand(context) {
+        let match = context.message.match(/^[.!](\bgtguess\b) ([0-9]{1,2})/i);
+
+        if (!match) return;
+
+        let guess = parseInt(match[2]);
+
+        if (guess < 1 || guess > 22) return;
+
+        let response = null;
+
+        for (let i = 0; i < context.activeRace.guesses.length; i++) {
+            if (context.activeRace.guesses[i] === context.username) {
+                response = `${context.activeRace.guesses[i]} has already guessed ${i + 1} for the GTBK Guessing Game.`;
+                break;
             }
-
-            return;
         }
-    }
 
-    if (race.guesses[guess - 1]) {
-        response = `${race.guesses[guess - 1]} has already guessed ${guess} for the GTBK Guessing Game.`;
-
-        if (tClient && tChannel) {
-            tClient.say(tChannel, response).then().catch(console.error);
-        } else if (!race.invitational) {
-            dChannel.send(`**${response}**`).then().catch(console.error);
+        if (!response && context.activeRace.guesses[guess - 1]) {
+            response = `${context.activeRace.guesses[guess - 1]} has already guessed ${guess} for the GTBK Guessing Game.`;
         }
-    } else {
-        race.guesses[guess - 1] = username;
-        response = `${username} has guessed ${guess} for the GTBK Guessing Game.`;
 
-        if (race.ladder || race.invitational) {
-            tClient.say(tChannel, response).then().catch(console.error);
+        if (response) {
+            if (context.origination === this._app.TWITCH) {
+                this._app.sendToTwitchChannel(context.guildId, context.messageChannel, response).then().catch(console.error);
+            }  else if (context.origination === this._app.DISCORD) {
+                this._app.sendToDiscordRaceChannel(context.guildId, `**${response}**`).then().catch(console.error);
+            }
         } else {
-            broadcastMessage(config, dChannel, tClient, response, true);
+            context.activeRace.guesses[guess - 1] = context.username;
+            response = `${context.username} has guessed ${guess} for the GTBK Guessing Game.`;
+
+            if (context.activeRace.ladder || context.activeRace.invitational) {
+                this._app.sendToTwitchChannel(context.guildId, context.messageChannel, response).then().catch(console.error);
+            } else {
+                this._app.routines['broadcastMessage'](this._app, context, response, true);
+            }
+            this._app.db.setRaceData(context.guildId, context.activeRace);
         }
     }
-};
+}

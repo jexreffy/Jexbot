@@ -1,22 +1,38 @@
-const getRandom = require('../common/getRandom');
-const setRaceCategory = require('../common/setRaceCategory');
-const updateRaceMessage = require('../common/updateRaceMessage');
-const resetRace = require('../common/resetRace');
+'use strict'
+const JexCommand = require('../commands/command');
 
-module.exports = (config, db, race, dChannel, message) => {
-    if (race.finished && config.referees.includes(message.author.username)) {
-        let match = message.content.match(/^[.!](\bnew\b) ([a-zA-Z0-9<>:]{4,20})/i);
+module.exports = class CommandNew extends JexCommand {
+    constructor(app) {
+        super(app);
+    }
 
-        const guildId = dChannel.guild.id;
+    get commandName() {
+        return 'new';
+    }
 
-        resetRace(race);
+    get isRaceCommand() {
+        return true;
+    }
 
-        race.pingIndex = getRandom(config.pings.length);
-        race.countdownIndex = getRandom(config.countdowns.length);
-        race.mutlistream = 'https://multistre.am/';
-        race.status = 'PRE-RACE: WAITING FOR PLAYERS TO JOIN';
+    isCommandValid(context) {
+        return context.origination === this._app.DISCORD &&
+               context.activeRace.finished &&
+               this._app.config['referees'].includes(context.username);
+    }
 
-        setRaceCategory(config, db, race, guildId, match && match.length > 2 ? match[2] : "");
+    executeCommand(context) {
+        let match = context.message.match(/^[.!](\bnew\b) ([a-zA-Z0-9<>:]{4,20})/i);
+
+        const guildId = context.guildId;
+
+        this._app.routines['resetRace'](context.activeRace);
+
+        context.activeRace.pingIndex = this._app.routines['getRandom'](this._app.config['pings'].length);
+        context.activeRace.countdownIndex = this._app.routines['getRandom'](this._app.config['countdowns'].length);
+        context.activeRace.multistream = 'https://multistre.am/';
+        context.activeRace.status = 'PRE-RACE: WAITING FOR PLAYERS TO JOIN';
+
+        this._app.routines['setRaceCategory'](this._app, context, match && match.length > 2 ? match[2] : "");
 
         let embed = {
             'content': "",
@@ -26,15 +42,16 @@ module.exports = (config, db, race, dChannel, message) => {
             }
         };
 
-        db.setActiveRace(guildId);
-        let role = message.guild.roles.cache.find(r => r.name === config.guilds[guildId].pingRole);
-
-        dChannel.send(`${role} ${config.pings[race.pingIndex]}`);
-        dChannel.send(embed).then(x => {
-            race.messageId = x.id;
-            updateRaceMessage(db, race, dChannel);
+        this._app.sendToDiscordRaceChannel(guildId, `${this._app.getPingRole(guildId)} ${this._app.config['pings'][context.activeRace.pingIndex]}`).then(x => {
+            this._app.sendToDiscordRaceChannel(guildId, embed).then(x => {
+                context.activeRace.messageId = x.id;
+                this._app.db.setRaceData(context.guildId, context.activeRace);
+                this._app.routines['updateRaceMessage'](this._app, context);
+            }).catch((error) => {
+                console.log(error);
+            });
         }).catch((error) => {
             console.log(error);
         });
     }
-};
+}

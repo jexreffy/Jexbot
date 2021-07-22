@@ -1,0 +1,20 @@
+{
+  "category": "ladders8swordless",
+  "name": "Ladder Season 8 Swordless",
+  "description": "Open Start, Defeat Ganon, 7/7 Crystals, MC Shuffle, No Swords, Start with Silver Arrows",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+	"dungeon_items": "mc",
+    "weapons": "swordless",
+    "custom": {
+      "itemCount.BowAndSilverArrows": 1,
+      "itemCount.ProgressiveBow": 0,
+      "itemCount.Arrow": 2
+    }
+  },
+  "weights": { }
+}

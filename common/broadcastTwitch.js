@@ -1,7 +1,10 @@
-module.exports = (config, tClient, message) => {
-    if (!tClient) return;
+'use strict'
+module.exports = (app, context, message) => {
+    if (!app.isConnectedToTwitch(context.guildId)) return;
 
-    for (let i = 0; i < tClient.channels.length; i++) {
-        tClient.say(`${tClient.channels[i]}`, message).then().catch(console.error);
+    let channels = app.getTwitchChannels(context.guildId);
+
+    for (let i = 0; i < channels.length; i++) {
+        app.sendToTwitchChannel(context.guildId, `${channels[i]}`, message).then().catch(console.error);
     }
 };

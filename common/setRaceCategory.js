@@ -1,17 +1,23 @@
-module.exports = (config, db, race, guildId, selectedCategory) => {
-    if (selectedCategory === "sotweasy" || selectedCategory === "sotwmedium" || selectedCategory === "sotwhard") {
-        let seed = db.getSotwSeed(guildId, selectedCategory);
+'use strict'
+module.exports = (app, context, selectedCategory) => {
+    if (selectedCategory === 'sotweasy' ||
+        selectedCategory === 'sotwmedium' ||
+        selectedCategory === 'sotwhard') {
+        let seed = app.db.getSotwSeed(context.guildId, selectedCategory);
 
-        race.category = seed.category;
-        race.categoryName = seed.name;
-        race.categoryDescription = db.getCategory(seed.category).description;
-        race.seedLink = seed.link;
-        race.seedCode = seed.code;
-        race.seedRoller = "JexBot";
+        let category = app.db.getCategory(seed.category);
+
+        context.activeRace.category = seed.category;
+        context.activeRace.categoryName = seed.name;
+        context.activeRace.categoryDescription = category.description;
+        context.activeRace.seedLink = seed.link;
+        context.activeRace.seedCode = seed.code;
+        context.activeRace.guessGameEnabled = category.gtbk;
+        context.activeRace.seedRoller = 'JexBot';
 
     } else {
-        let categoryKey = config.defaultCategory;
-        let categories = db.getCategories();
+        let categoryKey = app.config['defaultCategory'];
+        let categories = app.db.getCategories();
 
         for (let i = 0; i < categories.length; i++) {
             if (selectedCategory === categories[i]) {
@@ -20,12 +26,12 @@ module.exports = (config, db, race, guildId, selectedCategory) => {
             }
         }
 
-        let category = db.getCategory(categoryKey);
+        let category = app.db.getCategory(categoryKey);
 
-        race.categoryToRoll = categoryKey;
-        race.category = category.category;
-        race.categoryName = category.name;
-        race.categoryDescription = category.description;
-        race.guessGameEnabled = category.gtbk;
+        context.activeRace.categoryToRoll = categoryKey;
+        context.activeRace.category = category.category;
+        context.activeRace.categoryName = category.name;
+        context.activeRace.categoryDescription = category.description;
+        context.activeRace.guessGameEnabled = category.gtbk;
     }
 }

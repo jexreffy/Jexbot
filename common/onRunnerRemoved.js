@@ -1,16 +1,17 @@
-module.exports = (config, db, race, player, message) => {
+'use strict'
+module.exports = (app, context, player) => {
     let username = player.username;
-    race.players.splice(race.players.indexOf(player), 1);
-    race.remainingPlayers -= 1;
+    context.activeRace.players.splice(context.activeRace.players.indexOf(player), 1);
+    context.activeRace.remainingPlayers -= 1;
 
-    let role = message.guild.roles.cache.find(r => r.name === config.guilds[message.guild.id].racerRole);
-    let member = message.channel.members.find(x => x.user.username === username);
+    let role = app.getRacerRole(context.guildId);
+    let member = app.findDiscordMember(context.guildId, username);
     member.roles.remove(role.id).then().catch(console.error);
 
-    let userTwitch = db.getPlayerTwitch(username);
+    let userTwitch = app.db.getPlayerTwitch(username);
     if (!userTwitch) {
         userTwitch = username;
     }
 
-    race.mutlistream = race.mutlistream.replace(new RegExp(userTwitch + '/', 'i'), "");
+    context.activeRace.multistream = context.activeRace.multistream.replace(new RegExp(userTwitch + '/', 'i'), "");
 }

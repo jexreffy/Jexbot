@@ -1,3 +1,4 @@
+'use strict'
 module.exports = (race) => {
     race.ladder = false;
     race.invitational = false;
@@ -7,6 +8,7 @@ module.exports = (race) => {
     race.relay = false;
     race.started = false;
     race.finished = false;
+    race.connected = false;
     race.startedAt = null;
     race.initiatedAt = Date.now();
     race.escapeItem = null;
@@ -34,7 +36,7 @@ module.exports = (race) => {
     race.seedCode = null;
     race.seedLink = null;
     race.seedRoller = null;
-    race.mutlistream = '';
+    race.multistream = '';
     race.restream = null;
     race.status = '';
     race.lastDickTime = null;
