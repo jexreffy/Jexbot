@@ -18,6 +18,8 @@ module.exports = class CommandGTEnter extends JexCommand {
         return context.origination === this._app.TWITCH &&
                !context.activeRace.ladder &&
                !context.activeRace.invitational &&
+               context.activeRace.started &&
+               !context.activeRace.finished &&
                context.activeRace.guessGameEnabled &&
                context.activeRace.guessGameStarted;
     }

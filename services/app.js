@@ -182,6 +182,7 @@ module.exports = class JexBotApp {
                 message.delete().then().catch(console.error);
             }
         } else {
+            context.messageChannel = message.channel;
             this.#processGlobalCommand(context);
         }
     }
@@ -264,7 +265,7 @@ module.exports = class JexBotApp {
 
         for (let i = 0; i < this.#cronEvents.length; i++) {
             if (shouldSave[i]) {
-                this.#db.setRaceData(this.#guilds[i], context[i]);
+                this.#db.setRaceData(this.#guilds[i], context[i].activeRace);
             }
         }
     }

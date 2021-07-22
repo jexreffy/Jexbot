@@ -7,7 +7,7 @@ module.exports = class CommandDone extends JexCommand {
     }
 
     get commandName() {
-        return 'done';
+        return 'forfeit';
     }
 
     get isRaceCommand() {
@@ -18,9 +18,9 @@ module.exports = class CommandDone extends JexCommand {
         let player = context.activeRace.players.find(x => x.username === context.username);
 
         return context.origination === this._app.DISCORD &&
-            context.activeRace.started &&
-            !context.activeRace.finished &&
-            player && !player.finished && !player.forfeited;
+               context.activeRace.started &&
+               !context.activeRace.finished &&
+               player && !player.finished && !player.forfeited;
     }
 
     executeCommand(context) {

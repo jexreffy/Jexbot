@@ -152,6 +152,7 @@ describe('command streaming', function() {
             expect(context.activeRace.multistream).to.equal('https://multistre.am/');
             expect(getStreamingStub.notCalled).to.be.true;
             expect(getTwitchStub.notCalled).to.be.true;
+            expect(setStreamingStub.notCalled).to.be.true;
             expect(setRaceStub.notCalled).to.be.true;
             expect(updateStub.notCalled).to.be.true;
 

@@ -115,7 +115,7 @@ module.exports = (app, context) => {
     if (race.started) {
         racerCommands = "Prefixes: `.` or `!`" +
             "\n`.done` - Finishes the race for the player" +
-            "\n`.ff` - Forfeits the race for the player";
+            "\n`.forfeit` - Forfeits the race for the player";
 
         viewerCommands = "Prefixes: `.` or `!`" +
             "\n`.blueballs [0-15]` - Sets the number of blue balls Aga 1 threw" +

@@ -16,6 +16,8 @@ module.exports = class CommandGTBK extends JexCommand {
 
     isCommandValid(context) {
         return context.origination === this._app.TWITCH &&
+               context.activeRace.started &&
+               !context.activeRace.finished &&
                context.activeRace.guessGameEnabled &&
                context.activeRace.guessGameStarted;
     }

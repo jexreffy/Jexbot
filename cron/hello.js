@@ -1,7 +1,7 @@
 'use strict'
 const JexCron = require('../cron/cron');
 
-module.exports = class CronSeedOfTheWeek extends JexCron {
+module.exports = class CronHello extends JexCron {
     constructor(app) {
         super(app);
     }

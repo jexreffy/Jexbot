@@ -15,7 +15,9 @@ module.exports = class CommandGTStop extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.activeRace.guessGameEnabled &&
+        return context.activeRace.started &&
+               !context.activeRace.finished &&
+               context.activeRace.guessGameEnabled &&
                context.activeRace.guessGameStarted &&
                !context.activeRace.guessGameFinished &&
                (!(context.activeRace.ladder || context.activeRace.invitational) ||

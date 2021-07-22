@@ -16,6 +16,8 @@ module.exports = class CommandBlueBalls extends JexCommand {
 
     isCommandValid(context) {
         return context.origination === this._app.TWITCH &&
+               context.activeRace.started &&
+               !context.activeRace.finished &&
                context.activeRace.blueballs < 0;
     }
 

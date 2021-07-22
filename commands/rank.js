@@ -15,7 +15,8 @@ module.exports = class CommandRank extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.DISCORD;
+        return context.origination === this._app.DISCORD &&
+               context.activeRace.finished;
     }
 
     executeCommand(context) {

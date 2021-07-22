@@ -15,7 +15,8 @@ module.exports = class CommandJoin extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.DISCORD;
+        return context.origination === this._app.DISCORD &&
+               !context.activeRace.started;
     }
 
     executeCommand(context) {
@@ -56,7 +57,7 @@ module.exports = class CommandJoin extends JexCommand {
                     }
                 }
 
-                this._app.routines['onRunnerAdded'](this._app, context, player);
+                this._app.routines['onRunnerAdded'](this._app, context, newPlayer);
                 this._app.db.setRaceData(context.guildId, context.activeRace);
                 this._app.routines['updateRaceMessage'](this._app, context);
             }

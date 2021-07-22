@@ -20,6 +20,7 @@ describe('resetRace', function() {
             expect(race.multiworld).to.be.false;
             expect(race.locked).to.be.false;
             expect(race.relay).to.be.false;
+            expect(race.connected).to.be.false;
             expect(race.started).to.be.false;
             expect(race.finished).to.be.false;
             expect(race.startedAt).to.equal(null);

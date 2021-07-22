@@ -17,6 +17,7 @@ module.exports = class CommandCallback extends JexCommand {
     isCommandValid(context) {
         return context.origination === this._app.TWITCH &&
                context.activeRace.started &&
+               !context.activeRace.finished &&
                (!context.activeRace.lastCallback ||
                    (Math.floor((Date.now() - context.activeRace.lastCallback)) / 1000) > this._app.config['minimumNewCallbackSeconds']);
     }

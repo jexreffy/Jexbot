@@ -5,6 +5,10 @@ module.exports = (app, context, player) => {
     member.roles.remove(role.id).then().catch(console.error);
 
     if (context.activeRace.remainingPlayers < 1) {
+        context.activeRace.finished = true;
+        context.activeRace.spoilersAllowed = true;
+        context.activeRace.status = 'RACE FINISHED';
+
         if (!(context.activeRace.teams || context.activeRace.multiworld)) {
             app.routines['sortPlayers'](context.activeRace.players, false, false);
 
@@ -14,32 +18,31 @@ module.exports = (app, context, player) => {
             }
         }
 
+        if (!context.activeRace.gtbkWinner) {
+            app.routines['gtbkWinner'](app, context);
+        }
+
         const sleep = app.sleep;
         (async() => {
-            if (!context.activeRace.gtbkWinner) {
-                await sleep(5000);
-                app.routines['gtbkWinner'](this._app, context);
-            }
-
             await sleep(5000);
-            context.activeRace.finished = true;
-            context.activeRace.status = 'RACE FINISHED';
-            app.routines['updateRaceMessage'](this._app, context);
-            app.routines['broadcastMessage'](this._app, context, `The race has finished.`, true);
+            app.routines['updateRaceMessage'](app, context);
+            app.routines['broadcastMessage'](app, context, `The race has finished.`, true);
         })();
     } else if (!context.activeRace.invitational &&
                context.activeRace.remainingPlayers <= context.activeRace.players.length / 2 && !context.activeRace.spoilersAllowed) {
-               context.activeRace.spoilersAllowed = true;
+        context.activeRace.spoilersAllowed = true;
+
+        if (!context.activeRace.gtbkWinner) {
+            app.routines['gtbkWinner'](app, context);
+        }
 
         const sleep = app.sleep;
         (async() => {
             await sleep(5000);
-            app.routines['broadcastMessage'](this._app, context, `Spoilers are now allowed for the race.`, true);
-            await sleep(5000);
-            app.routines['gtbkWinner'](this._app, context);
-            app.routines['updateRaceMessage'](this._app, context);
+            app.routines['updateRaceMessage'](app, context);
+            app.routines['broadcastMessage'](app, context, `Spoilers are now allowed for the race.`, true);
         })();
     } else {
-        app.routines['updateRaceMessage'](this._app, context);
+        app.routines['updateRaceMessage'](app, context);
     }
 }

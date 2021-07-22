@@ -8,6 +8,7 @@ module.exports = (race) => {
     race.relay = false;
     race.started = false;
     race.finished = false;
+    race.connected = false;
     race.startedAt = null;
     race.initiatedAt = Date.now();
     race.escapeItem = null;

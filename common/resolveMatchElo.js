@@ -4,7 +4,7 @@ module.exports = (app, matchPlayers, category) => {
     for (let i = 0; i < matchPlayers.length; i++) {
         let adjustment = 0;
         let playerElo = app.db.getPlayerElo(matchPlayers[i].username, category);
-        let playerK = app.db.checkPlayerRanked(matchPlayers[i].username, category) ? app.config['eloK'] : app.config['KPlacement'];
+        let playerK = app.db.checkPlayerRanked(matchPlayers[i].username, category) ? app.config['eloK'] : app.config['eloKPlacement'];
 
         for (let j = 0; j < i; j++) {
             if (matchPlayers[i].forfeited && matchPlayers[j].forfeited) {

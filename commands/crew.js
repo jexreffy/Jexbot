@@ -15,12 +15,9 @@ module.exports = class CommandCrew extends JexCommand {
     }
 
     isCommandValid(context) {
-        let crew = context.activeRace.crew.find(x => x.username === context.username);
-
         return context.origination === this._app.TWITCH ||
-               !(context.activeRace.started ||
-                   context.activeRace.finished ||
-                   crew);
+               (!context.activeRace.started &&
+               this._app.config['referees'].includes(context.username));
     }
 
     executeCommand(context) {
@@ -37,17 +34,25 @@ module.exports = class CommandCrew extends JexCommand {
 
             this._app.sendToTwitchChannel(context.guildId, context.messageChannel, message).then().catch(console.error);
         } else {
+            let match = context.message.match(/^[.!](\bcrew\b) ([a-zA-Z0-9_]{4,30})/i);
+
+            if (!match || match.length <= 2) return;
+
+            let crewName = match[2];
+
+            let crew = context.activeRace.crew.find(x => x.username === crewName);
+
+            if (crew) return;
+
             let newCrew = {
-                username: context.username
+                username: crewName
             };
 
             context.activeRace.crew.push(newCrew);
 
-            let userTwitch = this._app.db.getPlayerTwitch(context.username);
+            let userTwitch = this._app.db.getPlayerTwitch(crewName);
             if (userTwitch) {
-                newCrew.twitch = userTwitch;
-            } else {
-                newCrew.twitch = context.username;
+                newCrew.twitch = `#${userTwitch}`;
             }
 
             this._app.db.setRaceData(context.guildId, context.activeRace);

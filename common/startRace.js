@@ -2,7 +2,7 @@
 module.exports = (app, context) => {
     const sleep = app.sleep;
     (async() => {
-        let countdown = app.config['countdowns'][race.countdownIndex];
+        let countdown = app.config['countdowns'][context.activeRace.countdownIndex];
         let jokeTime = app.routines['getRandom'](app.config['jokeCountdownMax']);
         let jokeUnits = app.config['jokeUnits'][app.routines['getRandom'](app.config['jokeUnits'].length)];
         app.sendToDiscordRaceChannel(context.guildId, `**The race will start in ${jokeTime} ${jokeUnits}**`).then().catch(console.error);
@@ -10,21 +10,21 @@ module.exports = (app, context) => {
 
         context.activeRace.status = countdown.firstLine;
         app.sendToDiscordRaceChannel(context.guildId, `**${context.activeRace.status}**`).then().catch(console.error);
-        app.routines['updateRaceMessage'](this._app, context);
+        app.routines['updateRaceMessage'](app, context);
         await sleep(countdown.firstDelay);
 
         context.activeRace.status = countdown.secondLine;
-        app.sendToDiscordRaceChannel(context.guildId, `**${race.status}**`).then().catch(console.error);
-        app.routines['updateRaceMessage'](this._app, context);
+        app.sendToDiscordRaceChannel(context.guildId, `**${context.activeRace.status}**`).then().catch(console.error);
+        app.routines['updateRaceMessage'](app, context);
         await sleep(countdown.secondDelay);
 
         for (let i = countdown.countdown; i > 0; i--) {
             context.activeRace.status = 'Starting in: ' + i;
-            app.routines['updateRaceMessage'](this._app, context);
-            let allReady = race.players.every(x => x.ready === true);
+            app.routines['updateRaceMessage'](app, context);
+            let allReady = context.activeRace.players.every(x => x.ready === true);
             if (!(context.activeRace.gatekeeper || allReady)) {
                 context.activeRace.status = 'INTERRUPTED: WAITING FOR PLAYERS';
-                app.routines['updateRaceMessage'](this._app, context);
+                app.routines['updateRaceMessage'](app, context);
                 return;
             }
 
@@ -52,10 +52,10 @@ module.exports = (app, context) => {
             }
         }
 
-        app.routines['updateRaceMessage'](this._app, context);
+        app.routines['updateRaceMessage'](app, context);
         await sleep(1900);
 
         context.activeRace.status = 'RACE STARTED';
-        app.routines['updateRaceMessage'](this._app, context);
+        app.routines['updateRaceMessage'](app, context);
     })();
 };
