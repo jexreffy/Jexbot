@@ -409,7 +409,7 @@ module.exports = class JexDatabase {
 
     #createPlayer(player) {
         this.#pool.getConnection(function(err, connection) {
-            let sql = `INSERT INTO this.#players(username, twitch, streaming, twitchBot) VALUES(?, ?, ?, ?)`;
+            let sql = `INSERT INTO players(username, twitch, streaming, twitchBot) VALUES(?, ?, ?, ?)`;
             let data = [player.username, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0];
 
             connection.query(sql, data, (error, results, fields) => {

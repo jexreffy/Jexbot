@@ -16,8 +16,9 @@ module.exports = class CronRelayNext extends JexCron {
 
     shouldTick(context) {
         return context.activeRace.started &&
-            !context.activeRace.finished &&
-            context.activeRace.teams && context.activeRace.relay;
+               !context.activeRace.finished &&
+               context.activeRace.teams &&
+               context.activeRace.relay;
     }
 
     tick(context) {

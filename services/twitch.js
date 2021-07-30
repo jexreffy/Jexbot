@@ -18,13 +18,14 @@ module.exports = class JexBotTwitch {
     }
 
     getChannelsForGuild(guildId) {
-        return this.#clients[guildId].channels;
+        return this.isConnectedToTwitch(guildId) ? this.#clients[guildId].channels : [];
     }
 
     getGuildForChannel(channel) {
         for (let i = 0; i < this.#guilds.length; i++) {
             let guildId = this.#guilds[i];
-            if (this.#clients[guildId].channels.indexOf(channel) >= 0) {
+            if (this.isConnectedToTwitch(guildId) &&
+                this.#clients[guildId].channels.indexOf(channel) >= 0) {
                 return guildId;
             }
         }
@@ -51,7 +52,7 @@ module.exports = class JexBotTwitch {
                 if (race.restream) channels.push(race.restream);
 
                 for (let i = 0; i < race.players.length; i++) {
-                    if (this.#app.db.getPlayerTwitchBot(race.players[i].username)) {
+                    if (this.#app.db.getPlayerTwitch(race.players[i].username)) {
                         channels.push(race.players[i].twitch);
                     }
                 }
