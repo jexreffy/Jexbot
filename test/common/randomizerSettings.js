@@ -2,11 +2,11 @@
 const expect = require('chai').expect;
 
 const config = require('../../config.json');
-const getCustomizerSettings = require('../../common/getCustomizerSettings');
-const getRandomizerSettings = require('../../common/getRandomizerSettings');
-const getRandom = require('../../common/getRandom');
-const processStartingEquipment = require('../../common/processStartingEquipment');
-const randomizerSettings = require('../../common/randomizerSettings');
+const getCustomizerSettings = require('../../routines/getCustomizerSettings');
+const getRandomizerSettings = require('../../routines/getRandomizerSettings');
+const getRandom = require('../../routines/getRandom');
+const processStartingEquipment = require('../../routines/processStartingEquipment');
+const randomizerSettings = require('../../routines/randomizerSettings');
 
 describe('randomizerSettings', function() {
     let mockApp = {

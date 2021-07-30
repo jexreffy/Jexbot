@@ -3,8 +3,8 @@ const expect = require('chai').expect;
 const sinon = require('sinon');
 
 const config = require('../../config.json');
-const resetRace = require('../../common/resetRace');
-const setRaceCategory = require('../../common/setRaceCategory');
+const resetRace = require('../../routines/resetRace');
+const setRaceCategory = require('../../routines/setRaceCategory');
 
 describe('command ladder', function() {
     let mockApp = {

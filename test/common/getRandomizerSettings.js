@@ -1,6 +1,6 @@
 'use strict'
 const expect = require('chai').expect;
-const getRandomizerSettings = require('../../common/getRandomizerSettings');
+const getRandomizerSettings = require('../../routines/getRandomizerSettings');
 
 describe('getRandomizerSettings', function() {
     context('verify default randomizer settings', function() {

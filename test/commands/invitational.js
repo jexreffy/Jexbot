@@ -3,9 +3,9 @@ const expect = require('chai').expect;
 const sinon = require('sinon');
 
 const config = require('../../config.json');
-const getRandom = require('../../common/getRandom');
-const resetRace = require('../../common/resetRace');
-const setRaceCategory = require('../../common/setRaceCategory');
+const getRandom = require('../../routines/getRandom');
+const resetRace = require('../../routines/resetRace');
+const setRaceCategory = require('../../routines/setRaceCategory');
 
 describe('command invitational', function() {
     let mockApp = {

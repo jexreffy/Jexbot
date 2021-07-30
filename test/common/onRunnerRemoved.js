@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const sinon = require('sinon');
 
 const config = require('../../config.json');
-const onRunnerRemoved = require('../../common/onRunnerRemoved');
+const onRunnerRemoved = require('../../routines/onRunnerRemoved');
 
 describe('onRunnerRemoved', function() {
     let mockApp = {

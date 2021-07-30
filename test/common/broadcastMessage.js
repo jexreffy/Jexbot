@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const sinon = require('sinon');
 
 const config = require('../../config.json');
-const broadcastMessage = require('../../common/broadcastMessage');
+const broadcastMessage = require('../../routines/broadcastMessage');
 
 describe('broadcastMessage', function() {
     let mockApp = {

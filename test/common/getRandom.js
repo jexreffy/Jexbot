@@ -1,6 +1,6 @@
 'use strict'
 const expect = require('chai').expect;
-const getRandom = require('../../common/getRandom');
+const getRandom = require('../../routines/getRandom');
 
 describe('getRandom', function() {
     context('verify random is within bounds', function() {

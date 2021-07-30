@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const sinon = require('sinon');
 
 const config = require('../../config.json');
-const getRandom = require('../../common/getRandom');
+const getRandom = require('../../routines/getRandom');
 
 describe('command dick', function() {
     let mockApp = {

@@ -1,6 +1,6 @@
 'use strict'
 const expect = require('chai').expect;
-const getCustomizerSettings = require('../../common/getCustomizerSettings');
+const getCustomizerSettings = require('../../routines/getCustomizerSettings');
 
 describe('getCustomizerSettings', function() {
     context('verify default customizer settings', function() {

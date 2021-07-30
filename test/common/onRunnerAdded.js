@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const sinon = require('sinon');
 
 const config = require('../../config.json');
-const onRunnerAdded = require('../../common/onRunnerAdded');
+const onRunnerAdded = require('../../routines/onRunnerAdded');
 
 describe('onRunnerAdded', function() {
     let mockApp = {

@@ -1,6 +1,6 @@
 'use strict'
 const expect = require('chai').expect;
-const getRaceTime = require('../../common/getRaceTime');
+const getRaceTime = require('../../routines/getRaceTime');
 
 describe('getRaceTime', function() {
     context('check times are valid', function() {

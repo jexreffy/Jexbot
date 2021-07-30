@@ -1,6 +1,6 @@
 'use strict'
 const expect = require('chai').expect;
-const resetRace = require('../../common/resetRace');
+const resetRace = require('../../routines/resetRace');
 
 describe('resetRace', function() {
     context('reset race object for a new object', function () {

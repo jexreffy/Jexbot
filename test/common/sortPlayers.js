@@ -1,6 +1,6 @@
 'use strict'
 const expect = require('chai').expect;
-const sortPlayers = require('../../common/sortPlayers');
+const sortPlayers = require('../../routines/sortPlayers');
 
 describe('sortPlayers', function() {
     context('check sort algorithms work properly', function () {

@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const sinon = require('sinon');
 
 const config = require('../../config.json');
-const gtbkWinner = require('../../common/gtbkWinner');
+const gtbkWinner = require('../../routines/gtbkWinner');
 
 describe('gtbkWinner', function() {
     let mockApp = {
