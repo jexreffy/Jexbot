@@ -21,6 +21,7 @@ module.exports = (app, categoryName) => {
         retVal.settings.spoilers = "mystery";
     } else {
         retVal.settings = app.routines['randomizerSettings'](app, category);
+        retVal.settings.name = `${retVal.title}`;
         retVal.settings.notes = `${retVal.title}: ${retVal.description}`;
     }
 

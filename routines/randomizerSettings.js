@@ -17,6 +17,8 @@ module.exports = (app, category) => {
                 if (key === 'custom' && subkey.startsWith('itemCount.')) {
                     let item = subkey.split('.')[1];
                     settings.custom.item.count[item] = category.settings[key][subkey];
+                } else if (key === 'custom' && subkey.startsWith('itemOverflow')) {
+                    settings.custom.item.overflow = category.settings[key][subkey];
                 } else if (key === 'custom' && subkey.startsWith('dropCount.')) {
                     let item = subkey.split('.')[1];
                     settings.custom.drop.count[item] = category.settings[key][subkey];

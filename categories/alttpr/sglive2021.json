@@ -1,0 +1,44 @@
+{
+  "category": "sglive2021",
+  "name": "SGLive 2021 Settings",
+  "description": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals, Assured Sword, Starting Boots, New Hard Mode Item Pool",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "standard",
+    "weapons": "assured",
+    "eq": ["PegasusBoots"],
+    "custom": {
+      "itemCount.BottleWithRandom": 0,
+      "itemCount.Bottle": 4,
+      "itemCount.ProgressiveBow": 0,
+      "itemCount.BowAndArrows": 1,
+      "itemCount.SilverArrowUpgrade": 1,
+      "itemCount.BossHeartContainer": 2,
+      "itemCount.PieceOfHeart": 32,
+      "itemCount.HalfMagic": 0,
+      "itemCount.SmallMagic": 1,
+      "overflow": {
+        "replacement": {
+          "Armor": "FiveRupees",
+          "Sword": "TwentyRupees2",
+          "Bottle": "FiveRupees",
+          "BossHeartContainer": "Heart",
+          "PieceOfHeart": "Heart",
+          "Shield": "FiveRupees"
+        },
+        "count": {
+          "Armor": 1,
+          "Sword": 3,
+          "Bottle": 2,
+          "BossHeartContainer": 2,
+          "PieceOfHeart": 32,
+          "Shield": 1
+        }
+      }
+    }
+  },
+  "weights": { }
+}

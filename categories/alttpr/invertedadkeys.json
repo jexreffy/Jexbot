@@ -1,0 +1,15 @@
+{
+  "category": "invertedadkeys",
+  "name": "Inverted AD Keysanity",
+  "description": "Inverted Start, All Dungeons, Dungeon Items shuffled in the full item pool",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "dungeon_items": "full",
+    "goal": "dungeons",
+    "mode": "inverted"
+  },
+  "weights": { }
+}
