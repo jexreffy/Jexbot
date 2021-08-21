@@ -1,0 +1,22 @@
+{
+  "category": "amvrosia",
+  "name": "Amvrosia",
+  "description": "Escape Sequence Start, Assured Sword, Uncle Spoils Boots Location, Bosses cannot hold Dungeon Items, Big Keys expect GTBK are randomized",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "standard",
+    "weapons": "assured",
+    "custom": {
+      "spoil.BootsLocation": true,
+      "region.bossNormalLocation": false,
+      "region.wildBigKeys": true,
+      "rom.freeItemMenu": true,
+      "rom.freeItemText": true,
+      "jex.GTBKinGT": true
+    }
+  },
+  "weights": { }
+}

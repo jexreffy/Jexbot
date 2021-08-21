@@ -20,7 +20,19 @@ module.exports = class CommandFriday extends JexCommand {
     }
 
     executeCommand(context) {
-        let randomIndex = this._app.routines['getRandom'](this._app.config['friday'].length);
+        let hasScotch = context.message.match(/(\bscotch\b)/i) !== null;
+        let hasBeer = context.message.match(/(\bbeer\b)/i) !== null;
+
+        let randomIndex = 0;
+
+        if (hasScotch) {
+            randomIndex = 6;
+        } else if (hasBeer) {
+            randomIndex = 0;
+        } else {
+            randomIndex = this._app.routines['getRandom'](this._app.config['friday'].length);
+        }
+
         context.messageChannel.send(
             this._app.config['friday'][randomIndex].replace('NAME', context.username)
         ).then().catch(console.error);;

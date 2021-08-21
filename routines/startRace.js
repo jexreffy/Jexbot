@@ -3,6 +3,19 @@ module.exports = (app, context) => {
     const sleep = app.sleep;
     (async() => {
         let countdown = app.config['countdowns'][context.activeRace.countdownIndex];
+
+        switch (countdown) {
+            case 1:
+            case 3:
+            case 4:
+            case 5:
+            case 8:
+                app.db.setSpaceballs(Date.now());
+                break;
+            default:
+                break;
+        }
+
         let jokeTime = app.routines['getRandom'](app.config['jokeCountdownMax']);
         let jokeUnits = app.config['jokeUnits'][app.routines['getRandom'](app.config['jokeUnits'].length)];
         app.sendToDiscordRaceChannel(context.guildId, `**The race will start in ${jokeTime} ${jokeUnits}**`).then().catch(console.error);

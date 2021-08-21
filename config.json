@@ -177,13 +177,21 @@
         "I think so, NAME, but we know how TJ feels about non-alcoholic beer.",
         "Time to play games, crack wise, and blame the seed roller for our troubles.",
         "No, actually, I don't know what that means.",
-        "Time for ZephyrBlayze to get upset when I mention that blue is the color of losers when that's Jexreffy's favorite color, so I think he's missing the irony of the statement.",
         "I think so, NAME, but pineapple on pizza is disgusting.",
         "I think so, NAME, but that would require me to come up with an acceptably snarky response to whatever you think it means.",
         "Well, NAME, it means that Ryu is going to have his last, last, last, last scotch around 1:45:36 in the race.",
         "The same thing we do every night, NAME, try to take over the world!",
         "yeah, yeah, yeah.",
-        "KatiebugBot says that it is Rebecca Black Appreciation Day"
+        "KatiebugBot says that it is Rebecca Black Appreciation Day",
+        "We're gonna do Inverted Crosskeys for tonight's race?",
+        "Only 24 hours until Football, and when I mean Football, I mean knock down, drag out, manly Football! Not that wussy game that people call Futbol...",
+        "We'll finally figure out who in fact put the bomp in the bomp bah bomp bah bomp, and the ram in the rama lama ding dong",
+        "Who's on first, what's on second, I don't know. Third base.",
+        "Don't stop believing? Hold onto that feeling?",
+        "Meh...",
+        "What, you think I have the answer?",
+        "42",
+        "||Made you look||"
     ],
     "pings": [
         "Let's get ready to Rando!!!",
@@ -195,7 +203,9 @@
         "Time to end the domination of Dr. Wily",
         "I would be careful, the seed roller is sus...",
         "Nobody blink! Triumph or Die!",
-        "Deja vu - the sensation that you are doing something you have done before."
+        "Deja vu - the sensation that you are doing something you have done before.",
+        "Time for Shades to start pulling teeth to see who's going to be restreamed.",
+        ""
     ],
     "dickMessages": [
         "has been blamed for our runners collective adversity RICHARD times.",
@@ -286,6 +296,41 @@
             "secondLine": "JexBot: Think it'll work... KatiebugBot: It would take a miracle...",
             "secondDelay": 5000,
             "countdown": 7
+        },
+        {
+            "firstLine": "And time for my personal favorite, Spaceballs the Rando Team!",
+            "firstDelay": 5000,
+            "secondLine": "The kids love this one!",
+            "secondDelay": 2500,
+            "countdown": 10
+        },
+        {
+            "firstLine": "Get your Milla breaks in while you still can. You should have plenty of time.",
+            "firstDelay": 5000,
+            "secondLine": "Wait, nobody bought how much time I said you have left... Well fine...",
+            "secondDelay": 2500,
+            "countdown": 5
+        },
+        {
+            "firstLine": "Get ready, this is gonna be a fast start.",
+            "firstDelay": 2000,
+            "secondLine": "No, seriously, I mean it.",
+            "secondDelay": 1000,
+            "countdown": 5
+        },
+        {
+            "firstLine": "Wait, Jexreffy didn't give me anything for this one...",
+            "firstDelay": 2500,
+            "secondLine": "Fuck it, we'll do it live!!!",
+            "secondDelay": 1000,
+            "countdown": 5
+        },
+        {
+            "firstLine": "Bueller... Bueller...",
+            "firstDelay": 2500,
+            "secondLine": "Bueller...",
+            "secondDelay": 1000,
+            "countdown": 5
         }
     ],
     "sotwMessage": "Seeds of the week, brought to you by",
@@ -293,12 +338,13 @@
         "Jexbot.",
         "Red Things. Sometimes they give you health, sometimes they give you money, sometimes they cause people to say catchphrases.",
         "Red Things, because Red is the color of winners, and blue is the color of losers.",
-        "Blue Things, because Red is the color of winners, and blue is the color of losers.",
         "AwesomeStunPrizes.com. Awesome! Stun Prizes! Dot! Com!",
+        "AdequateStunPrices.com. We're not awesome, but at least we're get the job done!",
         "BoringStunPrizes.com. woo...",
         "The Corporation for Public Broadcasting, and viewers like you.",
         "Geico. Fifteen minutes could save you 15% or more of car insurance.",
         "Robo-Caller. We have been trying to reach you regarding your car's extended warranty.",
-        "McDonald's. I'm loving it!"
+        "McDonald's. I'm loving it!",
+        "OnlyFans.com. Because we're only gonna be around for a few more months, so we need all the money we can get now."
     ]
 }
