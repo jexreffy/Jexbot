@@ -1,0 +1,11 @@
+{
+  "category": "intermediate",
+  "name": "Intermediate",
+  "description": "These flags emphasize treasure hunting and introducing some core FE concepts.",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": { },
+  "weights": { }
+}

@@ -84,7 +84,7 @@ module.exports = class JexBotApp {
     #initializeRoutines() {
         fs.readdir('./routines/', (err, files) => {
             files.forEach(file => {
-                const routine = require(`./routines/${file}`);
+                const routine = require(`../routines/${file}`);
                 const routineName = file.split('.')[0];
 
                 this.#routines[routineName] = routine;

@@ -33,8 +33,8 @@ describe('command new', function() {
     beforeEach(function () {
         mockApp.sendToDiscordRaceChannel = function(guildId, message) { };
         mockApp.db = {
-            getCategories: function () { },
-            getCategory: function(category) { },
+            getCategories: function (game) { },
+            getCategory: function(game, category) { },
             setRaceData: function(guildId, race) { }
         };
         mockApp.routines.updateRaceMessage = function(app, context) { };
@@ -128,7 +128,7 @@ describe('command new', function() {
                     finished: true
                 },
                 guildId: mockApp.config.botOwnerGuild,
-                message: `.new`,
+                message: `.new alttpr`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
                 username: `jexreffy`
@@ -150,6 +150,7 @@ describe('command new', function() {
             expect(context.activeRace.countdownIndex).is.greaterThanOrEqual(0).and.lessThan(mockApp.config['countdowns'].length);
             expect(context.activeRace.multistream).to.equal('https://multistre.am/');
             expect(context.activeRace.status).to.equal('PRE-RACE: WAITING FOR PLAYERS TO JOIN');
+            expect(context.activeRace.game).to.equal('alttpr');
             expect(context.activeRace.categoryToRoll).to.equal('standard');
             expect(context.activeRace.category).to.equal(category.category);
             expect(context.activeRace.categoryName).to.equal(category.name);
@@ -160,7 +161,7 @@ describe('command new', function() {
             expect(sendStub.calledWith(context.guildId, `ping${context.guildId} ${mockApp.config['pings'][context.activeRace.pingIndex]}`)).to.be.true;
             expect(categoriesStub.calledOnce).to.be.true;
             expect(categoryStub.calledOnce).to.be.true;
-            expect(categoryStub.calledWith('standard')).to.be.true;
+            expect(categoryStub.calledWith('alttpr', 'standard')).to.be.true;
             expect(setRaceStub.calledOnce).to.be.true;
             expect(updateEmbedStub.calledOnce).to.be.true;
         });

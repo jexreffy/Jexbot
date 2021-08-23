@@ -6,8 +6,14 @@ const fs = require('fs');
 
 module.exports = class JexDatabase {
     #app;
-    #categoryKeys = [];
-    #categories = {};
+    #categoryKeys = {
+        alttpr: [],
+        ff4fe: []
+    };
+    #categories = {
+        alttpr: {},
+        ff4fe: {}
+    };
     #players = [];
     #pool;
     #races = raceDb;
@@ -47,8 +53,8 @@ module.exports = class JexDatabase {
                 const category = require(`../categories/${game}/${file}`);
                 const categoryKey = file.split('.')[0];
 
-                this.#categoryKeys.push(categoryKey);
-                this.#categories[categoryKey] = category;
+                this.#categoryKeys[game].push(categoryKey);
+                this.#categories[game][categoryKey] = category;
             });
         });
     }
@@ -126,12 +132,12 @@ module.exports = class JexDatabase {
         });
     }
 
-    getCategory(category) {
-      return this.#categories[category];
+    getCategory(game, category) {
+      return this.#categories[game][category];
     }
 
-    getCategories() {
-      return this.#categoryKeys;
+    getCategories(game) {
+      return this.#categoryKeys[game];
     }
 
     checkPlayerRanked(username, category) {

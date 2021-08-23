@@ -19,21 +19,17 @@ module.exports = class CommandRoll extends JexCommand {
     }
 
     executeCommand(context) {
-        let categories = this._app.db.getCategories();
-        let categoryName = this._app.config['defaultCategory'];
-        let username = context.username;
+        let helpMatch = context.message.match(/^[.!](\broll help\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9%]{4,20})/i);
 
-        let helpMatch = context.message.match(/^[.!](\broll help\b) ([a-zA-Z0-9%]{4,20})/i);
-
-        if (helpMatch && helpMatch.length > 2) {
-            CommandRoll.#helpCategory(this._app, context, categories, helpMatch[2]);
+        if (helpMatch && helpMatch.length > 5) {
+            CommandRoll.#helpCategory(this._app, context, helpMatch[2], helpMatch[5]);
             return;
         }
 
         helpMatch = context.message.match(/^[.!](\broll help\b)/i);
 
         if (helpMatch && helpMatch.length > 0) {
-            CommandRoll.#helpGeneral(this._app, context, categories);
+            CommandRoll.#helpGeneral(this._app, context);
             return;
         }
 
@@ -47,46 +43,89 @@ module.exports = class CommandRoll extends JexCommand {
                 rollSeed(config, race, dChannel, PLANDO_URL, plandoSettings(result), username);
             }).catch(console.error);
         } else*/ if (context.activeRace && context.activeRace.relay) {
-            let match = message.content.match(/^[.!](\broll\b) ([a-zA-Z0-9<>:]{4,20})/i);
+            let match = context.message.match(/^[.!](\broll\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9<>:]{4,20})/i);
+            let game = match && match.length > 2 ? match[2] : 'alttpr';
+            let category = match && match.length > 5 ? match[5] : '';
 
             if (match && match.length > 2) {
-                if (match[2] === "sotweasy" || match[2] === "sotwmedium" || match[2] === "sotwhard") {
-                    categoryName = match[2];
-                    let seed = this._app.db.getSotwSeed(message.guild.id, categoryName);
+                if (category === 'sotweasy' || category === 'sotwmedium' || category === 'sotwhard') {
+                    let seed = this._app.db.getSotwSeed(message.guild.id, game, category);
                     context.activeRace.legs.push(seed);
                     this._app.db.setRaceData(context.guildId, context.activeRace);
                     this._app.routines['updateRaceMessage'](this._app, context);
-                } else {
+                } else if (game === 'ff4fe') {
+                    let categories = this._app.db.getCategories('ff4fe');
+                    let categoryName = this._app.config['defaultCategory'];
+
                     for (let i = 0; i < categories.length; i++) {
-                        if (match[2] === categories[i]) {
+                        if (category === categories[i]) {
                             categoryName = categories[i];
                             break;
                         }
                     }
 
-                    let settings = this._app.routines['categorySettings'](this._app, categoryName);
+                    let settings = this._app.routines['categorySettings'](this._app, game, categoryName);
+
+                    let seed = {
+                        category: settings.name,
+                        name: settings.title,
+                        link: null,
+                        code: null
+                    }
+
+                    context.activeRace.legs.push(seed);
+                    this._app.db.setRaceData(context.guildId, context.activeRace);
+                    this._app.routines['updateRaceMessage'](this._app, context);
+                } else {
+                    let categories = this._app.db.getCategories(game);
+                    let categoryName = this._app.config['defaultCategory'];
+
+                    for (let i = 0; i < categories.length; i++) {
+                        if (category === categories[i]) {
+                            categoryName = categories[i];
+                            break;
+                        }
+                    }
+
+                    let settings = this._app.routines['categorySettings'](this._app, game, categoryName);
                     this.#rollSeed(this._app, context, settings);
                 }
             }
         } else if (!context.activeRace.finished) {
-            this._app.sendToDiscordRaceChannel(context.guildId, `**${username} has sealed their fate. I'd pray to RN Jesus while the seed is rolling if I were you...**`).then().catch(console.error);
-            categoryName = context.activeRace.categoryToRoll;
+            this._app.sendToDiscordRaceChannel(context.guildId, `**${context.username} has sealed their fate. I'd pray to RN Jesus while the seed is rolling if I were you...**`).then().catch(console.error);
+            let game = context.activeRace.game;
+            let category = context.activeRace.categoryToRoll;
 
-            let settings = this._app.routines['categorySettings'](this._app, categoryName);
+            if (game === 'ff4fe') {
+                this._app.sendToDiscordRaceChannel(context.guildId, `**Jexbot cannot currently roll FF4FE seeds.**`).then().catch(console.error);
+                return;
+            }
+
+            let settings = this._app.routines['categorySettings'](this._app, game, category);
             this.#rollSeed(this._app, context, settings);
         } else {
-            let match = context.message.match(/^[.!](\broll\b) ([a-zA-Z0-9<>:]{4,20})/i);
+            let match = context.message.match(/^[.!](\broll\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9<>:]{4,20})/i);
+            let game = match && match.length > 2 ? match[2] : 'alttpr';
+            let category = match && match.length > 5 ? match[5] : '';
+            let categoryName = this._app.config['defaultCategory'];
+
+            if (game === 'ff4fe') {
+                this._app.sendToDiscordRaceChannel(context.guildId, `**Jexbot cannot currently roll FF4FE seeds.**`).then().catch(console.error);
+                return;
+            }
+
+            let categories = this._app.db.getCategories(game);
 
             if (match && match.length > 2) {
                 for (let i = 0; i < categories.length; i++) {
-                    if (match[2] === categories[i]) {
+                    if (category === categories[i]) {
                         categoryName = categories[i];
                         break;
                     }
                 }
             }
 
-            let settings = this._app.routines['categorySettings'](this._app, categoryName);
+            let settings = this._app.routines['categorySettings'](this._app, game, categoryName);
 
             this._app.sendToDiscordRaceChannel(context.guildId, `**Generating ${settings.title} seed...**`).then().catch(console.error);
 
@@ -115,18 +154,19 @@ module.exports = class CommandRoll extends JexCommand {
         }).catch(console.error);
     }
 
-    static #helpCategory(app, context, categories, helpMatch) {
+    static #helpCategory(app, context, helpGame, helpCategory) {
+        let categories = app.db.getCategories(helpGame);
         let categoryName = app.config['defaultCategory'];
         for (let i = 0; i < categories.length; i++) {
-            if (helpMatch[2] === categories[i]) {
+            if (helpCategory === categories[i]) {
                 categoryName = categories[i];
                 break;
             }
         }
 
-        let category = app.db.getCategory(categoryName);
+        let category = app.db.getCategory(helpGame, categoryName);
 
-        let message = `**Category ${categoryName} - ${category.name}**\n\n\`\`\`${category.description}`;
+        let message = `**Category ${helpGame} ${categoryName} - ${category.name}**\n\n\`\`\`${category.description}`;
 
         if (!(category.mystery || category.random)) {
             message += `\nSettings: {${JSON.stringify(category.settings)}}`;
@@ -137,8 +177,18 @@ module.exports = class CommandRoll extends JexCommand {
         app.sendToDiscordRaceChannel(context.guildId, message).then().catch(console.error);
     }
 
-    static #helpGeneral(app, context, categories) {
-        let message = `**.roll {category}**\nCategories:\n`;
+    static #helpGeneral(app, context) {
+        let message = `**.roll {category}**\nALTTPR Categories:\n`;
+
+        let categories = app.db.getCategories('alttpr');
+
+        for (let i = 0; i < categories.length; i++) {
+            message += `\n\`${categories[i]}\` - ${app.db.getCategory(categories[i]).name}`;
+        }
+
+        message += `\n\nFF4FE Categories (NOTE: Cannot currently be rolled with Jexbot):\n`;
+
+        categories = app.db.getCategories('ff4fe');
 
         for (let i = 0; i < categories.length; i++) {
             message += `\n\`${categories[i]}\` - ${app.db.getCategory(categories[i]).name}`;

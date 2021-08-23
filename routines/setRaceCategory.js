@@ -1,12 +1,13 @@
 'use strict'
-module.exports = (app, context, selectedCategory) => {
+module.exports = (app, context, selectedGame, selectedCategory) => {
     if (selectedCategory === 'sotweasy' ||
         selectedCategory === 'sotwmedium' ||
         selectedCategory === 'sotwhard') {
         let seed = app.db.getSotwSeed(context.guildId, selectedCategory);
 
-        let category = app.db.getCategory(seed.category);
+        let category = app.db.getCategory(selectedGame, seed.category);
 
+        context.activeRace.game = selectedGame;
         context.activeRace.category = seed.category;
         context.activeRace.categoryName = seed.name;
         context.activeRace.categoryDescription = category.description;
@@ -17,7 +18,7 @@ module.exports = (app, context, selectedCategory) => {
 
     } else {
         let categoryKey = app.config['defaultCategory'];
-        let categories = app.db.getCategories();
+        let categories = app.db.getCategories(selectedGame);
 
         for (let i = 0; i < categories.length; i++) {
             if (selectedCategory === categories[i]) {
@@ -26,8 +27,9 @@ module.exports = (app, context, selectedCategory) => {
             }
         }
 
-        let category = app.db.getCategory(categoryKey);
+        let category = app.db.getCategory(selectedGame, categoryKey);
 
+        context.activeRace.game = selectedGame;
         context.activeRace.categoryToRoll = categoryKey;
         context.activeRace.category = category.category;
         context.activeRace.categoryName = category.name;

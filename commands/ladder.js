@@ -23,6 +23,7 @@ module.exports = class CommandLadder extends JexCommand {
 
     executeCommand(context) {
         let match = context.message.match(/^[.!](\bladder\b) ([a-zA-Z0-9<>:]{4,20})/i);
+        let category =  match && match.length > 2 ? match[2] : "";
 
         const guildId = context.guildId;
 
@@ -32,7 +33,7 @@ module.exports = class CommandLadder extends JexCommand {
         context.activeRace.started = true;
         context.activeRace.startedAt = context.activeRace.initiatedAt;
 
-        this._app.routines['setRaceCategory'](this._app, context, match && match.length > 2 ? match[2] : "");
+        this._app.routines['setRaceCategory'](this._app, context, 'alttpr', category);
 
         this._app.db.setRaceData(guildId, context.activeRace);
     }

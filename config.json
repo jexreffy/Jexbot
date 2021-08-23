@@ -191,7 +191,8 @@
         "Meh...",
         "What, you think I have the answer?",
         "42",
-        "||Made you look||"
+        "||Made you look||",
+        "That you guys are going to keep putting you know what that means in your messages to see what canned responses I have programmed"
     ],
     "pings": [
         "Let's get ready to Rando!!!",
@@ -205,7 +206,8 @@
         "Nobody blink! Triumph or Die!",
         "Deja vu - the sensation that you are doing something you have done before.",
         "Time for Shades to start pulling teeth to see who's going to be restreamed.",
-        ""
+        "Oh look, time for another rousing round of corporal masochism",
+        "Time to start Living on a Prayer!"
     ],
     "dickMessages": [
         "has been blamed for our runners collective adversity RICHARD times.",
@@ -331,15 +333,22 @@
             "secondLine": "Bueller...",
             "secondDelay": 1000,
             "countdown": 5
+        },
+        {
+            "firstLine": "||You're gonna spend more time reading this message than you have before the race is going to start, so I really suggest you avoid looking at the next message or you are going to seriously regret it.||",
+            "firstDelay": 2000,
+            "secondLine": "||Fine, you're just giving the smarter ones a head start.||",
+            "secondDelay": 1000,
+            "countdown": 5
         }
     ],
     "sotwMessage": "Seeds of the week, brought to you by",
     "sotwSponsor": [
         "Jexbot.",
         "Red Things. Sometimes they give you health, sometimes they give you money, sometimes they cause people to say catchphrases.",
-        "Red Things, because Red is the color of winners, and blue is the color of losers.",
+        "Non-alcoholic Beer. Refreshing, clean tasting, and keeps you sober so you don't get pulled over.",
         "AwesomeStunPrizes.com. Awesome! Stun Prizes! Dot! Com!",
-        "AdequateStunPrices.com. We're not awesome, but at least we're get the job done!",
+        "AdequateStunPrices.com. We're not awesome, but at least we get the job done!",
         "BoringStunPrizes.com. woo...",
         "The Corporation for Public Broadcasting, and viewers like you.",
         "Geico. Fifteen minutes could save you 15% or more of car insurance.",

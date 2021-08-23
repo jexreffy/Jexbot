@@ -17,8 +17,8 @@ describe('setRaceCategory', function() {
 
     beforeEach(function () {
        mockApp.db = {
-           getCategories: function () { },
-           getCategory: function(category) { },
+           getCategories: function (game) { },
+           getCategory: function(game, category) { },
            getSotwSeed: function(guildId, category) { }
        };
     });
@@ -26,9 +26,9 @@ describe('setRaceCategory', function() {
     context('verify categories get selected properly for rolling', function () {
         it('verify no category yields default category', function (done) {
             let categoryKey = mockApp.config['defaultCategory'];
-            let standardCategory = require(`../../categories/alttpr/standard.json`);
-            let categoriesStub = sinon.stub(mockApp.db, 'getCategories').returns([ 'standard' ]);
-            let categoryStub = sinon.stub(mockApp.db, 'getCategory').returns(standardCategory);
+            let category = require(`../../categories/alttpr/${categoryKey}.json`);
+            let categoriesStub = sinon.stub(mockApp.db, 'getCategories').withArgs('alttpr').returns([ categoryKey ]);
+            let categoryStub = sinon.stub(mockApp.db, 'getCategory').withArgs('alttpr', categoryKey).returns(category);
 
             let context = {
                 guildId: mockApp.config['botOwnerGuild'],
@@ -36,11 +36,12 @@ describe('setRaceCategory', function() {
             };
 
             mockApp.routines['resetRace'](context.activeRace);
-            setRaceCategory(mockApp, context, '');
+            setRaceCategory(mockApp, context, 'alttpr', '');
 
             expect(categoriesStub.calledOnce).to.be.true;
             expect(categoryStub.calledOnce).to.be.true;
-            expect(categoryStub.calledWith(categoryKey)).to.be.true;
+            expect(categoryStub.calledWith('alttpr', categoryKey)).to.be.true;
+            expect(context.activeRace.game).to.equal('alttpr');
             expect(context.activeRace.categoryToRoll).to.equal(categoryKey);
             expect(context.activeRace.category).to.equal(standardCategory.category);
             expect(context.activeRace.categoryName).to.equal(standardCategory.name);
@@ -52,8 +53,8 @@ describe('setRaceCategory', function() {
         it('verify open category yields correct results', function (done) {
             let categoryKey = 'open';
             let category = require(`../../categories/alttpr/${categoryKey}.json`);
-            let categoriesStub = sinon.stub(mockApp.db, 'getCategories').returns([ categoryKey ]);
-            let categoryStub = sinon.stub(mockApp.db, 'getCategory').withArgs(categoryKey).returns(category);
+            let categoriesStub = sinon.stub(mockApp.db, 'getCategories').withArgs('alttpr').returns([ categoryKey ]);
+            let categoryStub = sinon.stub(mockApp.db, 'getCategory').withArgs('alttpr', categoryKey).returns(category);
 
             let context = {
                 guildId: mockApp.config['botOwnerGuild'],
@@ -61,11 +62,12 @@ describe('setRaceCategory', function() {
             };
 
             mockApp.routines['resetRace'](context.activeRace);
-            setRaceCategory(mockApp, context, 'open');
+            setRaceCategory(mockApp, context, 'alttpr', 'open');
 
             expect(categoriesStub.calledOnce).to.be.true;
             expect(categoryStub.calledOnce).to.be.true;
-            expect(categoryStub.calledWith(categoryKey)).to.be.true;
+            expect(categoryStub.calledWith('alttpr', categoryKey)).to.be.true;
+            expect(context.activeRace.game).to.equal('alttpr');
             expect(context.activeRace.categoryToRoll).to.equal(categoryKey);
             expect(context.activeRace.category).to.equal(category.category);
             expect(context.activeRace.categoryName).to.equal(category.name);
@@ -77,8 +79,8 @@ describe('setRaceCategory', function() {
         it('verify crosskeys category yields correct results', function (done) {
             let categoryKey = 'crosskeys';
             let category = require(`../../categories/alttpr/${categoryKey}.json`);
-            let categoriesStub = sinon.stub(mockApp.db, 'getCategories').returns([ categoryKey ]);
-            let categoryStub = sinon.stub(mockApp.db, 'getCategory').withArgs(categoryKey).returns(category);
+            let categoriesStub = sinon.stub(mockApp.db, 'getCategories').withArgs('alttpr').returns([ categoryKey ]);
+            let categoryStub = sinon.stub(mockApp.db, 'getCategory').withArgs('alttpr', categoryKey).returns(category);
 
             let context = {
                 guildId: mockApp.config['botOwnerGuild'],
@@ -86,11 +88,12 @@ describe('setRaceCategory', function() {
             };
 
             mockApp.routines['resetRace'](context.activeRace);
-            setRaceCategory(mockApp, context, 'crosskeys');
+            setRaceCategory(mockApp, context, 'alttpr', 'crosskeys');
 
             expect(categoriesStub.calledOnce).to.be.true;
             expect(categoryStub.calledOnce).to.be.true;
-            expect(categoryStub.calledWith(categoryKey)).to.be.true;
+            expect(categoryStub.calledWith('alttpr', categoryKey)).to.be.true;
+            expect(context.activeRace.game).to.equal('alttpr');
             expect(context.activeRace.categoryToRoll).to.equal(categoryKey);
             expect(context.activeRace.category).to.equal(category.category);
             expect(context.activeRace.categoryName).to.equal(category.name);
@@ -108,8 +111,8 @@ describe('setRaceCategory', function() {
                 link: "<https://alttpr.com/h/bYMNq4W4G0>",
                 code: "<:Bottle:812714328280006676> <:Bombos:812714328079073341> <:Shovel:812714328317755402> <:Flippers:812714328251695105> <:MCHammer:812714328292720662>"
             };
-            let categoriesStub = sinon.stub(mockApp.db, 'getCategories').returns([ categoryKey ]);
-            let categoryStub = sinon.stub(mockApp.db, 'getCategory').withArgs(categoryKey).returns(category);
+            let categoriesStub = sinon.stub(mockApp.db, 'getCategories').withArgs('alttpr').returns([ categoryKey ]);
+            let categoryStub = sinon.stub(mockApp.db, 'getCategory').withArgs('alttpr', categoryKey).returns(category);
             let sotwStub = sinon.stub(mockApp.db, 'getSotwSeed').withArgs(mockApp.config['botOwnerGuild'], 'sotweasy').returns(categoryItems);
 
             let context = {
@@ -118,13 +121,14 @@ describe('setRaceCategory', function() {
             };
 
             mockApp.routines['resetRace'](context.activeRace);
-            setRaceCategory(mockApp, context, 'sotweasy');
+            setRaceCategory(mockApp, context, 'alttpr', 'sotweasy');
 
             expect(categoriesStub.notCalled).to.be.true;
             expect(categoryStub.calledOnce).to.be.true;
-            expect(categoryStub.calledWith(categoryKey)).to.be.true;
+            expect(categoryStub.calledWith('alttpr', categoryKey)).to.be.true;
             expect(sotwStub.calledOnce).to.be.true;
             expect(sotwStub.calledWith(context.guildId, 'sotweasy')).to.be.true;
+            expect(context.activeRace.game).to.equal('alttpr');
             expect(context.activeRace.categoryToRoll).to.be.undefined;
             expect(context.activeRace.category).to.equal(category.category);
             expect(context.activeRace.categoryName).to.equal(category.name);
@@ -145,8 +149,8 @@ describe('setRaceCategory', function() {
                 link: "<https://alttpr.com/h/g5yoK1nAym>",
                 code: "<:Flippers:812714328251695105> <:Powder:812714328310284319> <:Mudora:812714328230854696> <:Boomerang:812714328222335067> <:Bow:812714327928078367>"
             };
-            let categoriesStub = sinon.stub(mockApp.db, 'getCategories').returns([ categoryKey ]);
-            let categoryStub = sinon.stub(mockApp.db, 'getCategory').withArgs(categoryKey).returns(category);
+            let categoriesStub = sinon.stub(mockApp.db, 'getCategories').withArgs('alttpr').returns([ categoryKey ]);
+            let categoryStub = sinon.stub(mockApp.db, 'getCategory').withArgs('alttpr', categoryKey).returns(category);
             let sotwStub = sinon.stub(mockApp.db, 'getSotwSeed').withArgs(mockApp.config['botOwnerGuild'], 'sotwmedium').returns(categoryItems);
 
             let context = {
@@ -155,13 +159,14 @@ describe('setRaceCategory', function() {
             };
 
             mockApp.routines['resetRace'](context.activeRace);
-            setRaceCategory(mockApp, context, 'sotwmedium');
+            setRaceCategory(mockApp, context, 'alttpr', 'sotwmedium');
 
             expect(categoriesStub.notCalled).to.be.true;
             expect(categoryStub.calledOnce).to.be.true;
-            expect(categoryStub.calledWith(categoryKey)).to.be.true;
+            expect(categoryStub.calledWith('alttpr', categoryKey)).to.be.true;
             expect(sotwStub.calledOnce).to.be.true;
             expect(sotwStub.calledWith(context.guildId, 'sotwmedium')).to.be.true;
+            expect(context.activeRace.game).to.equal('alttpr');
             expect(context.activeRace.categoryToRoll).to.be.undefined;
             expect(context.activeRace.category).to.equal(category.category);
             expect(context.activeRace.categoryName).to.equal(category.name);
@@ -182,8 +187,8 @@ describe('setRaceCategory', function() {
                 link: "<https://alttpr.com/h/KJG3l83zM3>",
                 code: "<:Flippers:812714328251695105> <:Mushroom:812714328317755462> <:Mudora:812714328230854696> <:Mushroom:812714328317755462> <:ALotOfLove:817783033712476200>"
             };
-            let categoriesStub = sinon.stub(mockApp.db, 'getCategories').returns([ categoryKey ]);
-            let categoryStub = sinon.stub(mockApp.db, 'getCategory').withArgs(categoryKey).returns(category);
+            let categoriesStub = sinon.stub(mockApp.db, 'getCategories').withArgs('alttpr').returns([ categoryKey ]);
+            let categoryStub = sinon.stub(mockApp.db, 'getCategory').withArgs('alttpr', categoryKey).returns(category);
             let sotwStub = sinon.stub(mockApp.db, 'getSotwSeed').withArgs(mockApp.config['botOwnerGuild'], 'sotwhard').returns(categoryItems);
 
             let context = {
@@ -192,14 +197,15 @@ describe('setRaceCategory', function() {
             };
 
             mockApp.routines['resetRace'](context.activeRace);
-            setRaceCategory(mockApp, context, 'sotwhard');
+            setRaceCategory(mockApp, context, 'alttpr', 'sotwhard');
 
             expect(categoriesStub.notCalled).to.be.true;
             expect(categoryStub.calledOnce).to.be.true;
-            expect(categoryStub.calledWith(categoryKey)).to.be.true;
+            expect(categoryStub.calledWith('alttpr', categoryKey)).to.be.true;
             expect(sotwStub.calledOnce).to.be.true;
             expect(sotwStub.calledWith(context.guildId, 'sotwhard')).to.be.true;
             expect(context.activeRace.categoryToRoll).to.be.undefined;
+            expect(context.activeRace.game).to.equal('alttpr');
             expect(context.activeRace.category).to.equal(category.category);
             expect(context.activeRace.categoryName).to.equal(category.name);
             expect(context.activeRace.categoryDescription).to.equal(category.description);

@@ -1,0 +1,11 @@
+{
+  "category": "highway",
+  "name": "Highway to the Zemus Zone",
+  "description": "Flags for competitive FE play",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": { },
+  "weights": { }
+}

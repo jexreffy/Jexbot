@@ -1,0 +1,11 @@
+{
+  "category": "casual",
+  "name": "Casual",
+  "description": "Relaxed flags for a breezy/introductory playthrough of Free Enterprise",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": { },
+  "weights": { }
+}

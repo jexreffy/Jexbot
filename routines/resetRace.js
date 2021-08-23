@@ -29,6 +29,7 @@ module.exports = (race) => {
     race.spoilersAllowed = false;
     race.gtbkGuess = -1;
     race.gatekeeper = null;
+    race.game = '';
     race.category = '';
     race.categoryName = '';
     race.categoryDescription = '';

@@ -20,19 +20,21 @@ module.exports = class CommandStats extends JexCommand {
     }
 
     executeCommand(context) {
-        let match = context.message.match(/^[.!](\bstats\b) ([a-zA-Z0-9%]{0,20})/i);
+        let match = context.message.match(/^[.!](\bstats\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9<>:]{4,20})/i);
+        let game = match && match.length > 2 ? match[2] : 'alttpr';
+        let category = match && match.length > 5 ? match[5] : '';
         let categoryName = this._app.config['defaultCategory'];
         let categoryTitle = categoryName;
         let stats = null;
         let player = false;
 
-        let categories = this._app.db.getCategories();
+        let categories = this._app.db.getCategories(game);
 
-        if (match && match.length > 2) {
+        if (match && match.length > 5) {
             for (let i = 0; i < categories.length; i++) {
-                if (match[2] === categories[i]) {
+                if (category === categories[i]) {
                     categoryName = categories[i];
-                    categoryTitle = this._app.db.getCategory(categoryName).name;
+                    categoryTitle = this._app.db.getCategory(game, categoryName).name;
                     break;
                 }
             }

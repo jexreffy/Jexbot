@@ -21,7 +21,9 @@ module.exports = class CommandNew extends JexCommand {
     }
 
     executeCommand(context) {
-        let match = context.message.match(/^[.!](\bnew\b) ([a-zA-Z0-9<>:]{4,20})/i);
+        let match = context.message.match(/^[.!](\bnew\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9<>:]{4,20})/i);
+        let game = match && match.length > 2 ? match[2] : 'alttpr';
+        let category = match && match.length > 5 ? match[5] : '';
 
         const guildId = context.guildId;
 
@@ -32,7 +34,7 @@ module.exports = class CommandNew extends JexCommand {
         context.activeRace.multistream = 'https://multistre.am/';
         context.activeRace.status = 'PRE-RACE: WAITING FOR PLAYERS TO JOIN';
 
-        this._app.routines['setRaceCategory'](this._app, context, match && match.length > 2 ? match[2] : "");
+        this._app.routines['setRaceCategory'](this._app, context, game, category);
 
         let embed = {
             'content': "",

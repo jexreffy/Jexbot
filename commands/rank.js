@@ -20,19 +20,19 @@ module.exports = class CommandRank extends JexCommand {
     }
 
     executeCommand(context) {
-        let match = context.message.match(/^[.!](\brank\b) ([a-zA-Z0-9%]{0,20})/i);
+        let match = context.message.match(/^[.!](\brank\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9<>:]{4,20})/i);
+        let game = match && match.length > 2 ? match[2] : 'alttpr';
+        let category = match && match.length > 5 ? match[5] : '';
         let categoryName = this._app.config['defaultCategory'];
         let categoryTitle = categoryName;
 
-        if (match && match.length > 2) {
-            let categories = this._app.db.getCategories();
+        let categories = this._app.db.getCategories(game);
 
-            for (let i = 0; i < categories.length; i++) {
-                if (match[2] === categories[i]) {
-                    categoryName = categories[i];
-                    categoryTitle = this._app.db.getCategory(categoryName).name;
-                    break;
-                }
+        for (let i = 0; i < categories.length; i++) {
+            if (category === categories[i]) {
+                categoryName = categories[i];
+                categoryTitle = this._app.db.getCategory(game, categoryName).name;
+                break;
             }
         }
 

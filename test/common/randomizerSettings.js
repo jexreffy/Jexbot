@@ -1028,7 +1028,7 @@ describe('randomizerSettings', function() {
         });
 
         it('verify casual settings', function (done) {
-            let settings = randomizerSettings(mockApp, require('../../categories/alttpr/casual.json'));
+            let settings = randomizerSettings(mockApp, require('../../categories/alttpr/standardassured.json'));
             expect(settings.allow_quickswap).to.be.true;
             expect(settings.glitches).to.equal('none');
             expect(settings.item_placement).to.equal('advanced');

@@ -21,8 +21,6 @@ module.exports = class CommandInvitational extends JexCommand {
     }
 
     executeCommand(context) {
-        let match = context.message.match(/^[.!](\binvitational\b) ([a-zA-Z0-9<>:]{4,20})/i);
-
         this._app.routines['resetRace'](context.activeRace);
 
         context.activeRace.invitational = true;
@@ -31,12 +29,18 @@ module.exports = class CommandInvitational extends JexCommand {
         context.activeRace.multistream = 'https://multistre.am/';
         context.activeRace.status = 'INVITATIONAL RACE: WAITING FOR PLAYERS TO READY UP';
 
-        if (match && match.length > 2 && match[2] === "relay") {
+        let relayMatch = context.message.match(/^[.!](\binvitational\b) (\brelay\b)/i);
+
+        if (relayMatch && relayMatch.length > 2 && relayMatch[2] === "relay") {
             context.activeRace.teams = true;
             context.activeRace.relay = true;
             context.activeRace.guessGameEnabled = false;
         } else {
-            this._app.routines['setRaceCategory'](this._app, context, match && match.length > 2 ? match[2] : "");
+            let match = context.message.match(/^[.!](\binvitational\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9<>:]{4,20})/i);
+            let game = match && match.length > 2 ? match[2] : 'alttpr';
+            let category = match && match.length > 5 ? match[5] : '';
+
+            this._app.routines['setRaceCategory'](this._app, context, game, category);
         }
 
         let embed = {

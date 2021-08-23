@@ -1,6 +1,6 @@
 'use strict'
-module.exports = (app, categoryName) => {
-    let category = app.db.getCategory(categoryName);
+module.exports = (app, game, categoryName) => {
+    let category = app.db.getCategory(game, categoryName);
 
     let retVal = {
         name: categoryName,
@@ -14,7 +14,7 @@ module.exports = (app, categoryName) => {
     } else if (category.random) {
         let categoryList = category.categories.length > 0 ? category.categories : app.db.getCategories();
         do {
-            category = app.db.getCategory(categoryList[app.routines['getRandom'](categoryList.length)]);
+            category = app.db.getCategory(game, categoryList[app.routines['getRandom'](categoryList.length)]);
         } while (category.mystery);
 
         retVal.settings = app.routines['randomizerSettings'](app, category);

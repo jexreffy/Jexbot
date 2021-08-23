@@ -39,9 +39,9 @@ module.exports = class CronSeedOfTheWeek extends JexCron {
                 this._app.db.setSotwNext(guildId, easyIndex, mediumIndex, hardIndex, new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), 0, 0, 0).valueOf());
 
                 this.#rollSeeds(guildId,
-                                this._app.routines['categorySettings'](this._app, easyCategory),
-                                this._app.routines['categorySettings'](this._app, mediumCategory),
-                                this._app.routines['categorySettings'](this._app, hardCategory));
+                                this._app.routines['categorySettings'](this._app, 'alttpr', easyCategory),
+                                this._app.routines['categorySettings'](this._app, 'alttpr', mediumCategory),
+                                this._app.routines['categorySettings'](this._app, 'alttpr', hardCategory));
             }
         }
 
