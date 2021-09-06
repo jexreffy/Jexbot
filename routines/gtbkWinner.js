@@ -30,5 +30,11 @@ module.exports = (app, context) => {
         }
     }
 
-    if (response) app.routines['broadcastMessage'](app, context, response, true);
+    if (response) {
+        if (context.activeRace.invitational) {
+            app.routines['broadcastTwitch'](app, context, response);
+        } else {
+            app.routines['broadcastMessage'](app, context, response, true);
+        }
+    }
 }

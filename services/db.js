@@ -31,6 +31,7 @@ module.exports = class JexDatabase {
 
         this.#initializeServer();
         this.#initializeCategories('alttpr');
+        this.#initializeCategories('ff4fe');
         this.#initializePlayers();
     }
 

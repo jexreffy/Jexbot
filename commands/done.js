@@ -50,7 +50,7 @@ module.exports = class CommandDone extends JexCommand {
                 }
             })
 
-            player.time = (time / 1000) * 1000 - teamTime;
+            player.time = (time / 1000) * 1000 - ((player.leg === 0) ? 0 : teamTime);
 
             this._app.routines['broadcastMessage'](this._app, context, `${context.username} has finished with an individual time of ${this._app.routines['getRaceTime'](player.time)} and an overall time of ${this._app.routines['getRaceTime'](time)}.`, true);
         } else {

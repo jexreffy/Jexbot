@@ -25,7 +25,7 @@ module.exports = class CommandTwitchBot extends JexCommand {
 
         if (!match || match.length <= 2) return;
 
-        let isStreaming = match[3] === 'on';
+        let isStreaming = match[2] === 'on';
 
         this._app.db.setPlayerTwitchBot(context.username, isStreaming);
         this._app.routines['updateRaceMessage'](this._app, context);

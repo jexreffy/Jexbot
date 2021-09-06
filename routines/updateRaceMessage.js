@@ -135,7 +135,7 @@ module.exports = (app, context) => {
             "\n`.streaming {on|off}` - Sets if the player is streaming the race and should be included in the Multistream" +
             "\n`.twitch {Twitch username}` - Change stream URL to your Twitch username if different from your Discord username";
 
-        if (!race.invitational) racerCommands += "\n`.twitchBot {on|off}` - Sets if JexBot connects to the Player's Twitch stream" ;
+        if (!race.invitational) racerCommands += "\n`.twitchbot {on|off}` - Sets if JexBot connects to the Player's Twitch stream" ;
 
         viewerCommands = "Prefixes: `.` or `!`" +
             "\n`.spaceballs` - Resets the clock since the last Spaceballs reference";

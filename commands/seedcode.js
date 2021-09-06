@@ -23,7 +23,7 @@ module.exports = class CommandSeedCode extends JexCommand {
     }
 
     executeCommand(context) {
-        let match = message.content.match(/^[.!](\bseedcode\b) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100})/i);
+        let match = context.message.match(/^[.!](\bseedcode\b) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100}) ([a-zA-Z0-9<>:]{4,100})/i);
 
         if (!match || match.length <= 6) return;
 

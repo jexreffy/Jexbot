@@ -65,7 +65,7 @@ module.exports = class CommandDone extends JexCommand {
                     }
                 })
 
-                player.time = (time / 1000) * 1000 - teamTime;
+                player.time = (time / 1000) * 1000 - ((player.leg === 0) ? 0 : teamTime);
 
                 let thisMember = this._app.findDiscordMember(context.guildId, player.username);
                 this._app.sendToDiscordRaceChannel(context.guildId, `<@${thisMember.id}> You mush let the credits run to completion **WITHOUT** fast forwarding.`);

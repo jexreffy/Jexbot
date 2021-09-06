@@ -34,7 +34,8 @@ module.exports = class CommandInvitational extends JexCommand {
         if (relayMatch && relayMatch.length > 2 && relayMatch[2] === "relay") {
             context.activeRace.teams = true;
             context.activeRace.relay = true;
-            context.activeRace.guessGameEnabled = false;
+            context.activeRace.guessGameEnabled = true;
+            context.activeRace.seedRoller = 'JexBot';
         } else {
             let match = context.message.match(/^[.!](\binvitational\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9<>:]{4,20})/i);
             let game = match && match.length > 2 ? match[2] : 'alttpr';
