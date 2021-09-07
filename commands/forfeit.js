@@ -35,7 +35,7 @@ module.exports = class CommandDone extends JexCommand {
             let anyForfeit = false;
             context.activeRace.players.forEach(x => {
                 if (player.team === x.team) {
-                    anyForfeit = anyForfeit || x.forfeited;
+                    anyForfeit = anyForfeit || (x.forfeited !== undefined && x.forfeited);
                 }
             })
             if (!anyForfeit) {
@@ -60,7 +60,10 @@ module.exports = class CommandDone extends JexCommand {
 
                 let teamTime = 0;
                 context.activeRace.players.forEach(x => {
-                    if (player.team === x.team && x.finished) {
+                    if (player.team === x.team &&
+                        player.leg > x.leg &&
+                        x.finished !== undefined &&
+                        x.finished) {
                         teamTime += x.time;
                     }
                 })
@@ -75,8 +78,8 @@ module.exports = class CommandDone extends JexCommand {
 
                 context.activeRace.players.forEach(x => {
                     if (player.leg === x.leg && player.team !== x.team) {
-                        allFinished = allFinished && x.finished;
-                        allForfeit = allForfeit && x.forfeited;
+                        allFinished = allFinished && (x.finished !== undefined && x.finished);
+                        allForfeit = allForfeit && (x.forfeited !== undefined && x.forfeited);
                     }
                 });
 

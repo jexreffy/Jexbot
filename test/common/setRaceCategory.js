@@ -43,10 +43,10 @@ describe('setRaceCategory', function() {
             expect(categoryStub.calledWith('alttpr', categoryKey)).to.be.true;
             expect(context.activeRace.game).to.equal('alttpr');
             expect(context.activeRace.categoryToRoll).to.equal(categoryKey);
-            expect(context.activeRace.category).to.equal(standardCategory.category);
-            expect(context.activeRace.categoryName).to.equal(standardCategory.name);
-            expect(context.activeRace.categoryDescription).to.equal(standardCategory.description);
-            expect(context.activeRace.guessGameEnabled).to.equal(standardCategory.gtbk);
+            expect(context.activeRace.category).to.equal(category.category);
+            expect(context.activeRace.categoryName).to.equal(category.name);
+            expect(context.activeRace.categoryDescription).to.equal(category.description);
+            expect(context.activeRace.guessGameEnabled).to.equal(category.gtbk);
             done();
         });
 

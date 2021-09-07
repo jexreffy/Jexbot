@@ -20,7 +20,7 @@ module.exports = class CommandDone extends JexCommand {
         return context.origination === this._app.DISCORD &&
                context.activeRace.started &&
                !context.activeRace.finished &&
-               player && !player.finished && !player.forfeited;
+               player != null && !player.finished && !player.forfeited;
     }
 
     executeCommand(context) {
@@ -45,16 +45,19 @@ module.exports = class CommandDone extends JexCommand {
             category = context.activeRace.legs[player.leg].category;
             let teamTime = 0;
             context.activeRace.players.forEach(x => {
-                if (player.team === x.team && x.finished) {
+                if (player.team === x.team &&
+                    player.leg > x.leg &&
+                    x.finished !== undefined &&
+                    x.finished) {
                     teamTime += x.time;
                 }
-            })
+            });
 
-            player.time = (time / 1000) * 1000 - ((player.leg === 0) ? 0 : teamTime);
+            player.time = ((time / 1000.0) * 1000.0) - teamTime;
 
             this._app.routines['broadcastMessage'](this._app, context, `${context.username} has finished with an individual time of ${this._app.routines['getRaceTime'](player.time)} and an overall time of ${this._app.routines['getRaceTime'](time)}.`, true);
         } else {
-            player.time = (time / 1000) * 1000; //Floor to the nearest second for record keeping purposes.
+            player.time = (time / 1000.0) * 1000.0; //Floor to the nearest second for record keeping purposes.
 
             this._app.routines['broadcastMessage'](this._app, context, `${context.username} has finished with a time of ${this._app.routines['getRaceTime'](time)}.`, true);
         }
