@@ -55,11 +55,11 @@ module.exports = class CommandDone extends JexCommand {
 
             player.time = ((time / 1000.0) * 1000.0) - teamTime;
 
-            this._app.routines['broadcastMessage'](this._app, context, `${context.username} has finished with an individual time of ${this._app.routines['getRaceTime'](player.time)} and an overall time of ${this._app.routines['getRaceTime'](time)}.`, true);
+            this._app.routines['broadcastMessage'](this._app, context, `${context.username} has finished with an individual time of ${this._app.routines['getRaceTime'](player.time)} and an overall time of ${this._app.routines['getRaceTime'](time)}.`, true, true);
         } else {
             player.time = (time / 1000.0) * 1000.0; //Floor to the nearest second for record keeping purposes.
 
-            this._app.routines['broadcastMessage'](this._app, context, `${context.username} has finished with a time of ${this._app.routines['getRaceTime'](time)}.`, true);
+            this._app.routines['broadcastMessage'](this._app, context, `${context.username} has finished with a time of ${this._app.routines['getRaceTime'](time)}.`, true, true);
         }
 
         if (this._app.db.getPlayerPB(context.username, category) > player.time) {
@@ -75,7 +75,7 @@ module.exports = class CommandDone extends JexCommand {
             })
 
             if (allDone) {
-                this._app.routines['broadcastMessage'](this._app, context, `Team ${(player.team + 1)} has finished.`, true);
+                this._app.routines['broadcastMessage'](this._app, context, `Team ${(player.team + 1)} has finished.`, true, true);
             } else if (context.activeRace.relay) {
                 context.activeRace.legStartTime[player.team] = Date.now() + this._app.config['relayLegDelaySeconds'] * 1000;
 

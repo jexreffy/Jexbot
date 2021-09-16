@@ -26,7 +26,7 @@ module.exports = (app, context, player) => {
         (async() => {
             await sleep(5000);
             app.routines['updateRaceMessage'](app, context);
-            app.routines['broadcastMessage'](app, context, `The race has finished.`, true);
+            app.routines['broadcastMessage'](app, context, `The race has finished.`, true, true);
         })();
     } else if (!context.activeRace.invitational &&
                context.activeRace.remainingPlayers <= context.activeRace.players.length / 2 && !context.activeRace.spoilersAllowed) {
@@ -40,7 +40,7 @@ module.exports = (app, context, player) => {
         (async() => {
             await sleep(5000);
             app.routines['updateRaceMessage'](app, context);
-            app.routines['broadcastMessage'](app, context, `Spoilers are now allowed for the race.`, true);
+            app.routines['broadcastMessage'](app, context, `Spoilers are now allowed for the race.`, true, true);
         })();
     } else {
         app.routines['updateRaceMessage'](app, context);

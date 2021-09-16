@@ -31,7 +31,7 @@ describe('broadcastTwitch', function() {
                 guildId: mockApp.config['botOwnerGuild']
             };
 
-            broadcastTwitch(mockApp, context, 'This is the message');
+            broadcastTwitch(mockApp, context, 'This is the message', false);
 
             expect(isConnectedStub.calledOnce).to.be.true;
             expect(getStub.notCalled).to.be.true;
@@ -47,7 +47,7 @@ describe('broadcastTwitch', function() {
                 guildId: mockApp.config['botOwnerGuild']
             };
 
-            broadcastTwitch(mockApp, context, 'This is the message');
+            broadcastTwitch(mockApp, context, 'This is the message', false);
 
             expect(isConnectedStub.calledOnce).to.be.true;
             expect(getStub.calledOnce).to.be.true;
@@ -56,19 +56,19 @@ describe('broadcastTwitch', function() {
 
         it('verify that the message is broadcast if the guild is connected to the supplied twitch channels', async () => {
             let isConnectedStub = sinon.stub(mockApp, 'isConnectedToTwitch').returns(true);
-            let getStub = sinon.stub(mockApp, 'getTwitchChannels').returns([ '#jexreffy', '#phantomryu', '#tjmaelstrom']);
+            let getStub = sinon.stub(mockApp, 'getTwitchChannels').returns([ '#killerapp23', '#phantomryu', '#tjmaelstrom']);
             let sendStub = sinon.stub(mockApp, 'sendToTwitchChannel').resolves();
 
             let context = {
                 guildId: mockApp.config['botOwnerGuild']
             };
 
-            broadcastTwitch(mockApp, context, 'This is the message');
+            broadcastTwitch(mockApp, context, 'This is the message', false);
 
             expect(isConnectedStub.calledOnce).to.be.true;
             expect(getStub.calledOnce).to.be.true;
             expect(sendStub.calledThrice).to.be.true;
-            expect(sendStub.calledWith(context.guildId, '#jexreffy', 'This is the message')).to.be.true;
+            expect(sendStub.calledWith(context.guildId, '#killerapp23', 'This is the message')).to.be.true;
             expect(sendStub.calledWith(context.guildId, '#phantomryu', 'This is the message')).to.be.true;
             expect(sendStub.calledWith(context.guildId, '#tjmaelstrom', 'This is the message')).to.be.true;
         });

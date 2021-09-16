@@ -29,7 +29,7 @@ module.exports = class CommandDone extends JexCommand {
         player.forfeited = true;
         context.activeRace.remainingPlayers -= 1;
 
-        this._app.routines['broadcastMessage'](this._app, context,  `${context.username} has forfeited.`, true);
+        this._app.routines['broadcastMessage'](this._app, context,  `${context.username} has forfeited.`, true, true);
 
         if (context.activeRace.teams && !context.activeRace.relay) {
             let anyForfeit = false;
@@ -39,7 +39,7 @@ module.exports = class CommandDone extends JexCommand {
                 }
             })
             if (!anyForfeit) {
-                this._app.routines['broadcastMessage'](this._app, context,  `Team ${(player.team + 1)} has forfeited.`, true);
+                this._app.routines['broadcastMessage'](this._app, context,  `Team ${(player.team + 1)} has forfeited.`, true, true);
             }
         } else if (context.activeRace.teams && context.activeRace.relay) {
             player.finished = true;
@@ -51,7 +51,7 @@ module.exports = class CommandDone extends JexCommand {
                 }
             })
             if (allDone) {
-                this._app.routines['broadcastMessage'](this._app, context,  `Team ${(player.team + 1)} has forfeited.`, true);
+                this._app.routines['broadcastMessage'](this._app, context,  `Team ${(player.team + 1)} has forfeited.`, true, true);
             } else {
                 let time = Date.now() - context.activeRace.startedAt;
                 if (time < 0) {

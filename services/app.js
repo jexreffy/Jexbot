@@ -21,6 +21,7 @@ module.exports = class JexBotApp {
 
     CRON = 'cron';
     DISCORD = 'discord';
+    HTTP = 'http';
     TWITCH = 'twitch';
 
     constructor() {

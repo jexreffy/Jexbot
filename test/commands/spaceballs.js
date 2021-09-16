@@ -23,7 +23,7 @@ describe('command spaceballs', function() {
             setSpaceballs: function (time) { }
         };
         mockApp.routines = {
-            broadcastMessage: function (app, context, message, bold) { },
+            broadcastMessage: function (app, context, message, bold, delay) { },
             updateRaceMessage: function (app, context) { }
         };
     });

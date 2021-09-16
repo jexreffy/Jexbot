@@ -24,7 +24,7 @@ module.exports = class CronHello extends JexCron {
     tick(context) {
         context.activeRace.lastHello = Date.now();
         let message = context.activeRace.ladder ? this._app.config['helloLadder'] : context.activeRace.invitational ? this._app.config['helloInvitational'] : this._app.config['helloRace'];
-        this._app.routines['broadcastTwitch'](this._app, context, message);
+        this._app.routines['broadcastTwitch'](this._app, context, message, false);
         return true;
     }
 }

@@ -36,6 +36,6 @@ module.exports = class CommandDick extends JexCommand {
 
         let dickMessage = `${context.activeRace.seedRoller} ${this._app.config['dickMessages'][dickIndex].replace('RICHARD', context.activeRace.dickCount)}`;
 
-        this._app.routines['broadcastTwitch'](this._app, context, dickMessage);
+        this._app.routines['broadcastTwitch'](this._app, context, dickMessage, false);
     }
 }

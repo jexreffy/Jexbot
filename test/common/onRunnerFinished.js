@@ -25,7 +25,7 @@ describe('onRunnerFinished', function() {
             setRaceData: function(guildId, race) { }
         };
         mockApp.routines = {
-            broadcastMessage: function (app, context, message, bold) { },
+            broadcastMessage: function (app, context, message, bold, delay) { },
             gtbkWinner: function (app, context) { },
             resolveMatchElo: function (app, players, category) { },
             sortPlayers: function (players, teams, relay) { },

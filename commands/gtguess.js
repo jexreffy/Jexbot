@@ -59,7 +59,7 @@ module.exports = class CommandGTStop extends JexCommand {
             if (context.activeRace.ladder || context.activeRace.invitational) {
                 this._app.sendToTwitchChannel(context.guildId, context.messageChannel, response).then().catch(console.error);
             } else {
-                this._app.routines['broadcastMessage'](this._app, context, response, true);
+                this._app.routines['broadcastMessage'](this._app, context, response, true, false);
             }
             this._app.db.setRaceData(context.guildId, context.activeRace);
         }

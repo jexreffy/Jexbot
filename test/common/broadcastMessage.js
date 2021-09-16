@@ -18,7 +18,7 @@ describe('broadcastMessage', function() {
     beforeEach(function () {
         mockApp.sendToDiscordRaceChannel = function(guildId, message) { };
         mockApp.routines = {
-            broadcastTwitch: function(app, context, message) { }
+            broadcastTwitch: function(app, context, message, delay) { }
         };
     });
 
@@ -31,7 +31,7 @@ describe('broadcastMessage', function() {
                 guildId: mockApp.config['botOwnerGuild']
             };
 
-            broadcastMessage(mockApp, context, 'This is the message', false);
+            broadcastMessage(mockApp, context, 'This is the message', false, false);
 
             expect(sendStub.calledOnce).to.be.true;
             expect(sendStub.calledWith(context.guildId, 'This is the message')).to.be.true;
@@ -46,7 +46,7 @@ describe('broadcastMessage', function() {
                 guildId: mockApp.config['botOwnerGuild']
             };
 
-            broadcastMessage(mockApp, context, 'This is the message', true);
+            broadcastMessage(mockApp, context, 'This is the message', true, false);
 
             expect(sendStub.calledOnce).to.be.true;
             expect(sendStub.calledWith(context.guildId, '**This is the message**')).to.be.true;

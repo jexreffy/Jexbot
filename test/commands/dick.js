@@ -26,7 +26,7 @@ describe('command dick', function() {
         };
         mockApp.routines = {
             getRandom: getRandom,
-            broadcastTwitch: function(app, context, message) { },
+            broadcastTwitch: function(app, context, message, delay) { },
             updateRaceMessage: function (app, context) { }
         };
     });

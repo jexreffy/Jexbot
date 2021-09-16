@@ -19,7 +19,7 @@ describe('cron gtAnnounce', function() {
 
     beforeEach(function () {
         mockApp.routines = {
-            broadcastMessage: function(app, context, message) { }
+            broadcastMessage: function(app, context, message, bold, delay) { }
         };
     });
 

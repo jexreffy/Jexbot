@@ -19,7 +19,7 @@ describe('cron hello', function() {
 
     beforeEach(function () {
         mockApp.routines = {
-            broadcastTwitch: function (app, context, message) { }
+            broadcastTwitch: function (app, context, message, delay) { }
         };
     });
 

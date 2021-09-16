@@ -18,22 +18,16 @@ module.exports = (app, context) => {
 
         let jokeTime = app.routines['getRandom'](app.config['jokeCountdownMax']);
         let jokeUnits = app.config['jokeUnits'][app.routines['getRandom'](app.config['jokeUnits'].length)];
-        app.sendToDiscordRaceChannel(context.guildId, `**The race will start in ${jokeTime} ${jokeUnits}**`).then().catch(console.error);
-        await sleep(100);
-
-        context.activeRace.status = countdown.firstLine;
-        app.sendToDiscordRaceChannel(context.guildId, `**${context.activeRace.status}**`).then().catch(console.error);
-        app.routines['updateRaceMessage'](app, context);
+        app.sendToDiscordRaceChannel(context.guildId, `**The race will start in ${jokeTime} ${jokeUnits}\n${countdown.firstLine}**`).then().catch(console.error);
         await sleep(countdown.firstDelay);
 
-        context.activeRace.status = countdown.secondLine;
-        app.sendToDiscordRaceChannel(context.guildId, `**${context.activeRace.status}**`).then().catch(console.error);
-        app.routines['updateRaceMessage'](app, context);
+        app.sendToDiscordRaceChannel(context.guildId, `**${countdown.secondLine}**`).then().catch(console.error);
         await sleep(countdown.secondDelay);
 
+        let countdownId = -1;
+        let countdownMessage = ``;
+
         for (let i = countdown.countdown; i > 0; i--) {
-            context.activeRace.status = 'Starting in: ' + i;
-            app.routines['updateRaceMessage'](app, context);
             let allReady = context.activeRace.players.every(x => x.ready === true);
             if (!(context.activeRace.gatekeeper || allReady)) {
                 context.activeRace.status = 'INTERRUPTED: WAITING FOR PLAYERS';
@@ -41,7 +35,20 @@ module.exports = (app, context) => {
                 return;
             }
 
-            if (i <= 5) app.sendToDiscordRaceChannel(context.guildId, `**${i}**`).then().catch(console.error);
+            if (i <= 5) {
+                countdownMessage += `${i}... `;
+
+                if (countdownId === -1) {
+                    app.sendToDiscordRaceChannel(context.guildId, `**${countdownMessage}**`).then(x => {
+                        countdownId = x.id;
+                    }).catch(console.error);
+                } else {
+                    app.findDiscordMessage(context.guildId, countdownId).then(x => {
+                        x.edit(`**${countdownMessage}**`).then().catch(console.error);
+                    }).catch(console.error);
+                }
+
+            }
             await sleep(1000);
         }
 
@@ -65,7 +72,6 @@ module.exports = (app, context) => {
             }
         }
 
-        app.routines['updateRaceMessage'](app, context);
         await sleep(1900);
 
         context.activeRace.status = 'RACE STARTED';

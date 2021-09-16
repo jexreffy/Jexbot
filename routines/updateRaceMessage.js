@@ -160,6 +160,6 @@ module.exports = (app, context) => {
     }
 
     app.findDiscordMessage(context.guildId, context.activeRace.messageId).then(x => {
-        x.edit(message).then().catch(console.error)
+        x.edit(message).then().catch(console.error);
     }).catch(console.error);
 };

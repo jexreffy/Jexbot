@@ -24,6 +24,6 @@ module.exports = class CommandSpaceBalls extends JexCommand {
             this._app.routines['updateRaceMessage'](this._app, context);
         }
 
-        this._app.routines['broadcastMessage'](this._app, context, this._app.config['spaceballsClock'], true);
+        this._app.routines['broadcastMessage'](this._app, context, this._app.config['spaceballsClock'], true, false);
     }
 }

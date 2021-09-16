@@ -40,7 +40,7 @@ describe('command new', function() {
             setRaceData: function (guildId, race) {}
         };
         mockApp.routines = {
-            broadcastMessage: function (app, context, message, bold) {},
+            broadcastMessage: function (app, context, message, bold, delay) {},
             getRaceTime: function (time) {},
             onRunnerFinished: function (app, context, player) {}
         };

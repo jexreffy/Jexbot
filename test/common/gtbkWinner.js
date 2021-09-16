@@ -17,7 +17,7 @@ describe('gtbkWinner', function() {
 
     beforeEach(function () {
         mockApp.routines = {
-            broadcastMessage: function (app, context, message, bold) { }
+            broadcastMessage: function (app, context, message, bold, delay) { }
         };
     });
 
