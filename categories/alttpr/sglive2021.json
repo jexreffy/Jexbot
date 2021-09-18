@@ -20,7 +20,7 @@
       "itemCount.PieceOfHeart": 32,
       "itemCount.HalfMagic": 0,
       "itemCount.SmallMagic": 1,
-      "overflow": {
+      "itemOverflow": {
         "replacement": {
           "Armor": "FiveRupees",
           "Sword": "TwentyRupees2",

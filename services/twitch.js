@@ -52,7 +52,7 @@ module.exports = class JexBotTwitch {
                 if (race.restream) channels.push(race.restream);
 
                 for (let i = 0; i < race.players.length; i++) {
-                    if (this.#app.db.getPlayerTwitch(race.players[i].username)) {
+                    if (race.players[i].twitch) {
                         channels.push(race.players[i].twitch);
                     }
                 }
