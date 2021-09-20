@@ -1,0 +1,30 @@
+{
+  "category": "ladders10grabbag",
+  "name": "Ladder S10 Grab Bag",
+  "description": "A Random Category is selected from the list of categories per the Ladder S10 Grab Bag set. You must play the seed to figure out what category it is.",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": true,
+  "settings": {
+    "spoilers": "mystery"
+  },
+  "categories": [
+    "adkeysanity",
+    "ambrosia",
+    "ladders7pot",
+    "ladders8swordless",
+    "enemizer",
+    "harditempool",
+    "invertedadkeys",
+    "invertedkeys",
+    "invrosia",
+    "keysanity",
+    "mcshuffle",
+    "openboots",
+    "reduced",
+    "retrance",
+    "sglive2021",
+    "standard"
+  ]
+}

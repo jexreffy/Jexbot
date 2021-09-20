@@ -43,8 +43,8 @@ module.exports = class JexDatabase {
         for (let i = 0; i < this.#app.guilds.length; i++) {
             let guildId = this.#app.guilds[i];
 
-            this.#server.sotw[guildId] = [0, 0, 0];
-            this.#server.sotwSeeds[guildId] = [{}, {}, {}];
+            this.#server.sotw[guildId] = [0, 0, 0, 0];
+            this.#server.sotwSeeds[guildId] = [{}, {}, {}, {}];
         }
     }
 
@@ -120,11 +120,13 @@ module.exports = class JexDatabase {
                             server.sotw[sotwRow.server][0] = sotwRow.easy;
                             server.sotw[sotwRow.server][1] = sotwRow.medium;
                             server.sotw[sotwRow.server][2] = sotwRow.hard;
+                            server.sotw[sotwRow.server][3] = sotwRow.tourney;
 
                             if (sotwRow.easy_seed) {
                                 server.sotwSeeds[sotwRow.server][0] = JSON.parse(sotwRow.easy_seed);
                                 server.sotwSeeds[sotwRow.server][1] = JSON.parse(sotwRow.medium_seed);
                                 server.sotwSeeds[sotwRow.server][2] = JSON.parse(sotwRow.hard_seed);
+                                server.sotwSeeds[sotwRow.server][3] = JSON.parse(sotwRow.tourney_seed);
                             }
                         });
                     });
@@ -356,6 +358,10 @@ module.exports = class JexDatabase {
         return this.#server.sotw[guildId][2];
     }
 
+    getTourneySotw(guildId) {
+        return this.#server.sotw[guildId][3];
+    }
+
     getLastSotw() {
         return this.#server.sotwLast;
     }
@@ -369,23 +375,28 @@ module.exports = class JexDatabase {
             case "sotwhard":
                 index = 2;
                 break;
+            case "sotwtourney":
+                index = 2;
+                break;
         }
 
         return this.#server.sotwSeeds[guildId][index];
     }
 
-    setSotwNext(guildId, easy, medium, hard, last) {
+    setSotwNext(guildId, easy, medium, hard, tourney, last) {
         this.#server.sotw[guildId][0] = easy;
         this.#server.sotw[guildId][1] = medium;
         this.#server.sotw[guildId][2] = hard;
+        this.#server.sotw[guildId][3] = tourney;
         this.#server.sotwLast = last;
         this.#saveSotwNextData(guildId);
     }
 
-    setSotwSeeds(guildId, easy, medium, hard) {
+    setSotwSeeds(guildId, easy, medium, hard, tourney) {
         this.#server.sotwSeeds[guildId][0] = easy;
         this.#server.sotwSeeds[guildId][1] = medium;
         this.#server.sotwSeeds[guildId][2] = hard;
+        this.#server.sotwSeeds[guildId][3] = tourney;
         this.#saveSotwSeedData(guildId);
     }
 
@@ -396,8 +407,11 @@ module.exports = class JexDatabase {
         }
         let player = this.#players.find(x => x.username === username);
         if (player) {
-            return this.#players.findIndex(x => x.username === username);
+            let index = this.#players.findIndex(x => x.username === username);
+            console.log(`${username} found ${index}`);
+            return index;
         } else {
+            console.log(`${username} not found`);
             player = {
                 username: username,
                 twitch: null,
@@ -502,10 +516,14 @@ module.exports = class JexDatabase {
         let server = this.#server;
         this.#pool.getConnection(function(err, connection) {
             let sql = `UPDATE sotw
-                SET easy = ?, medium = ?, hard = ?
+                SET easy = ?, medium = ?, hard = ?, tourney = ?
                 WHERE server = ?`;
 
-            let data = [server.sotw[guildId][0], server.sotw[guildId][1], server.sotw[guildId][2], guildId];
+            let data = [server.sotw[guildId][0],
+                        server.sotw[guildId][1],
+                        server.sotw[guildId][2],
+                        server.sotw[guildId][3],
+                        guildId];
 
             connection.query(sql, data, (sotwError, results, fields) => {
                 if (sotwError) {
@@ -528,10 +546,14 @@ module.exports = class JexDatabase {
         let server = this.#server;
         this.#pool.getConnection(function(err, connection) {
             let sql = `UPDATE sotw
-                SET easy_seed = ?, medium_seed = ?, hard_seed = ?
+                SET easy_seed = ?, medium_seed = ?, hard_seed = ?, tourney_seed = ?
                 WHERE server = ?`;
 
-            let data = [JSON.stringify(server.sotwSeeds[guildId][0]), JSON.stringify(server.sotwSeeds[guildId][1]), JSON.stringify(server.sotwSeeds[guildId][2]), guildId];
+            let data = [JSON.stringify(server.sotwSeeds[guildId][0]),
+                        JSON.stringify(server.sotwSeeds[guildId][1]),
+                        JSON.stringify(server.sotwSeeds[guildId][2]),
+                        JSON.stringify(server.sotwSeeds[guildId][3]),
+                        guildId];
 
             connection.query(sql, data, (sotwError, results, fields) => {
                 connection.release();

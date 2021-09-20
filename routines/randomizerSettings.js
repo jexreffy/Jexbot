@@ -27,6 +27,10 @@ module.exports = (app, category) => {
                     let location = app.config['gtbkLocations'][locationIndex];
                     settings.l[location] = 'BigKeyA2:1'
                     settings.custom.item.count.BigKeyA2 = 0;
+                } else if (key === 'custom' && subkey === 'jex.ATKinAT') {
+                    settings.l[app.config['atkLocations'][0]] = 'KeyA1:1';
+                    settings.l[app.config['atkLocations'][1]] = 'KeyA1:1';
+                    settings.custom.item.count.KeyA1 = 0;
                 } else if (key === 'custom' && subkey === 'jex.uncleItem') {
                     let location = app.config['uncleLocation'];
                     let item = category.settings[key][subkey];

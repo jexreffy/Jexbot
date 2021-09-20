@@ -19,7 +19,7 @@ module.exports = class CommandRoll extends JexCommand {
     }
 
     executeCommand(context) {
-        let helpMatch = context.message.match(/^[.!](\broll help\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9%]{4,20})/i);
+        let helpMatch = context.message.match(/^[.!](\broll help\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9%]{2,20})/i);
 
         if (helpMatch && helpMatch.length > 5) {
             CommandRoll.#helpCategory(this._app, context, helpMatch[2], helpMatch[5]);
@@ -43,12 +43,12 @@ module.exports = class CommandRoll extends JexCommand {
                 rollSeed(config, race, dChannel, PLANDO_URL, plandoSettings(result), username);
             }).catch(console.error);
         } else*/ if (context.activeRace && context.activeRace.relay) {
-            let match = context.message.match(/^[.!](\broll\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9<>:]{4,20})/i);
+            let match = context.message.match(/^[.!](\broll\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9<>:]{2,20})/i);
             let game = match && match.length > 2 ? match[2] : 'alttpr';
             let category = match && match.length > 5 ? match[5] : '';
 
             if (match && match.length > 2) {
-                if (category === 'sotweasy' || category === 'sotwmedium' || category === 'sotwhard') {
+                if (category === 'sotweasy' || category === 'sotwmedium' || category === 'sotwhard' || category === 'sotwtourney') {
                     let seed = this._app.db.getSotwSeed(message.guild.id, game, category);
                     context.activeRace.legs.push(seed);
                     this._app.db.setRaceData(context.guildId, context.activeRace);
@@ -104,7 +104,7 @@ module.exports = class CommandRoll extends JexCommand {
             let settings = this._app.routines['categorySettings'](this._app, game, category);
             this.#rollSeed(this._app, context, settings);
         } else {
-            let match = context.message.match(/^[.!](\broll\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9<>:]{4,20})/i);
+            let match = context.message.match(/^[.!](\broll\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9<>:]{2,20})/i);
             let game = match && match.length > 2 ? match[2] : 'alttpr';
             let category = match && match.length > 5 ? match[5] : '';
             let categoryName = this._app.config['defaultCategory'];

@@ -59,11 +59,25 @@
                 "open",
                 "standard",
                 "casualboots",
+                "ambrosia",
+                "casualboots",
+                "standard",
+                "amrbosia",
+                "open",
+                "standard",
+                "casualboots",
                 "ambrosia"
             ],
             "sotwMedium": [
                 "mysterymedium",
                 "enemizer",
+                "randomcrystals",
+                "keysanity",
+                "enemizer",
+                "keysanity",
+                "randomcrystals",
+                "mysterymedium",
+                "enemizerboots",
                 "randomcrystals",
                 "keysanity"
             ],
@@ -71,7 +85,27 @@
                 "adkeysanity",
                 "crosskeys",
                 "mysteryladder",
+                "swordless",
+                "mysteryladder",
+                "swordless",
+                "crosskeys",
+                "adkeysanity",
+                "crosskeys",
+                "mysteryladder",
                 "swordless"
+            ],
+            "sotwTourney": [
+                "adkeysanity",
+                "fadkeysanity",
+                "mysteryladder",
+                "swordless",
+                "fadkeysanity",
+                "casualboots",
+                "keysanity",
+                "crosskeys",
+                "open",
+                "enemizerboots",
+                "sglive2021"
             ],
             "codeMap": [
                 ":Bow:812714327928078367",
@@ -126,6 +160,10 @@
     "defaultCategory": "standard",
     "referees": ["jexreffy", "Jexbot", "PhantomRyu", "ZephyrBlayze", "TjMaelstrom", "KwehstopherWarken", "KillerApp23", "Jixson", "RGBHive", "Ruzzelljr"],
     "uncleLocation": "TGluaydzIFVuY2xlOjE=",
+    "atkLocations": [
+        "Q2FzdGxlIFRvd2VyIC0gRGFyayBNYXplOjE=",
+        "Q2FzdGxlIFRvd2VyIC0gUm9vbSAwMzox"
+    ],
     "gtbkLocations": [
         "R2Fub24ncyBUb3dlciAtIEJvYidzIFRvcmNoOjE=",
         "R2Fub24ncyBUb3dlciAtIERNcyBSb29tIC0gVG9wIExlZnQ6MQ==",

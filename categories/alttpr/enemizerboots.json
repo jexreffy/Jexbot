@@ -1,0 +1,18 @@
+{
+  "category": "enemizerboots",
+  "name": "Enemizer Boots",
+  "description": "Open Start, Defeat Ganon, 7/7 Crystals, Enemies and Bosses shuffled, Starting Boots",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "eq": ["PegasusBoots"],
+    "enemizer": {
+      "boss_shuffle": "full",
+      "enemy_shuffle": "shuffled"
+    }
+  },
+  "weights": { }
+}

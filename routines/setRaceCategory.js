@@ -2,7 +2,8 @@
 module.exports = (app, context, selectedGame, selectedCategory) => {
     if (selectedCategory === 'sotweasy' ||
         selectedCategory === 'sotwmedium' ||
-        selectedCategory === 'sotwhard') {
+        selectedCategory === 'sotwhard' ||
+        selectedCategory === 'sotwtourney') {
         let seed = app.db.getSotwSeed(context.guildId, selectedCategory);
 
         let category = app.db.getCategory(selectedGame, seed.category);
