@@ -1,0 +1,24 @@
+{
+  "category": "ladders10goldrush",
+  "name": "Ladder S10 Gold Rush",
+  "description": "Open Start, 49/50 Triforce Hunt, Starting Boots, the Randomizer only ensures the game can be beaten, some items and dungeons may be inaccessible",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "accessibility": "none",
+    "eq": ["PegasusBoots"],
+    "custom": {
+      "item.Goal.Required": 49,
+      "itemCount.TriforcePiece": 50,
+      "itemCount.FiftyRupees": 4,
+      "itemCount.TwentyRupees": 12,
+      "itemCount.PieceOfHeart": 8,
+      "itemCount.TenArrows": 0,
+      "itemCount.ThreeBombs": 14
+    }
+  },
+  "weights": { }
+}

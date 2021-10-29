@@ -43,9 +43,20 @@ module.exports = class CommandRoll extends JexCommand {
                 rollSeed(config, race, dChannel, PLANDO_URL, plandoSettings(result), username);
             }).catch(console.error);
         } else*/ if (context.activeRace && context.activeRace.relay) {
+            let game = 'alttpr';
+            let category = '';
             let match = context.message.match(/^[.!](\broll\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9<>:]{2,20})/i);
-            let game = match && match.length > 2 ? match[2] : 'alttpr';
-            let category = match && match.length > 5 ? match[5] : '';
+
+            if (match && match.length() > 5) {
+                game = match[2];
+                category = match[5];
+            } else {
+                match = context.message.match(/^[.!](\broll\b) ([a-zA-Z0-9<>:]{2,20})/i);
+                if (match && match.length > 2) {
+                    game = 'alttpr';
+                    category = match[2];
+                }
+            }
 
             if (match && match.length > 2) {
                 if (category === 'sotweasy' || category === 'sotwmedium' || category === 'sotwhard' || category === 'sotwtourney') {
@@ -104,10 +115,21 @@ module.exports = class CommandRoll extends JexCommand {
             let settings = this._app.routines['categorySettings'](this._app, game, category);
             this.#rollSeed(this._app, context, settings);
         } else {
-            let match = context.message.match(/^[.!](\broll\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9<>:]{2,20})/i);
-            let game = match && match.length > 2 ? match[2] : 'alttpr';
-            let category = match && match.length > 5 ? match[5] : '';
+            let game = 'alttpr';
+            let category = '';
             let categoryName = this._app.config['defaultCategory'];
+            let match = context.message.match(/^[.!](\broll\b) ((alttpr)|(ff4fe)) ([a-zA-Z0-9<>:]{2,20})/i);
+
+            if (match && match.length > 5) {
+                game = match[2];
+                category = match[5];
+            } else {
+                match = context.message.match(/^[.!](\broll\b) ([a-zA-Z0-9<>:]{2,20})/i);
+                if (match && match.length > 2) {
+                    game = 'alttpr';
+                    category = match[2];
+                }
+            }
 
             if (game === 'ff4fe') {
                 this._app.sendToDiscordRaceChannel(context.guildId, `**Jexbot cannot currently roll FF4FE seeds.**`).then().catch(console.error);
@@ -178,20 +200,32 @@ module.exports = class CommandRoll extends JexCommand {
     }
 
     static #helpGeneral(app, context) {
-        let message = `**.roll {category}**\nALTTPR Categories:\n`;
+        let message = `**.roll {game} {category}**\nALTTPR Categories (alttpr):\n`;
 
         let categories = app.db.getCategories('alttpr');
 
         for (let i = 0; i < categories.length; i++) {
-            message += `\n\`${categories[i]}\` - ${app.db.getCategory(categories[i]).name}`;
+            message += `\n\`${categories[i]}\` - ${app.db.getCategory('alttpr', categories[i]).name}`;
+
+            if (message.length > 1900) {
+                app.sendToDiscordRaceChannel(context.guildId, message).then().catch(console.error);
+                message = "";
+            }
         }
 
-        message += `\n\nFF4FE Categories (NOTE: Cannot currently be rolled with Jexbot):\n`;
+        app.sendToDiscordRaceChannel(context.guildId, message).then().catch(console.error);
+
+        message = `FF4FE Categories (ff4fe) (NOTE: Cannot currently be rolled with Jexbot):\n`;
 
         categories = app.db.getCategories('ff4fe');
 
         for (let i = 0; i < categories.length; i++) {
-            message += `\n\`${categories[i]}\` - ${app.db.getCategory(categories[i]).name}`;
+            message += `\n\`${categories[i]}\` - ${app.db.getCategory('ff4fe', categories[i]).name}`;
+
+            if (message.length > 1900) {
+                app.sendToDiscordRaceChannel(context.guildId, message).then().catch(console.error);
+                message = "";
+            }
         }
 
         app.sendToDiscordRaceChannel(context.guildId, message).then().catch(console.error);

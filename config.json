@@ -62,7 +62,7 @@
                 "ambrosia",
                 "casualboots",
                 "standard",
-                "amrbosia",
+                "ambrosia",
                 "open",
                 "standard",
                 "casualboots",
@@ -230,7 +230,27 @@
         "What, you think I have the answer?",
         "42",
         "||Made you look||",
-        "That you guys are going to keep putting you know what that means in your messages to see what canned responses I have programmed"
+        "That you guys are going to keep putting you know what that means in your messages to see what canned responses I have programmed",
+        ":mouse_three_button: The Clicks of WallKicks :mouse_three_button:?",
+        ":athletic_shoe: The Kicks of WallKicks :athletic_shoe:?",
+        "<a:pepeD:893122725126737950> The Year of WallKicks <a:pepeD:893122725126737950>?",
+        "<:ThinkMultiDorm:544670074485735454> The I-was-on-mobile-and-fuck-that-interface-for-emojis-on-mobile-Too-damn-many-emoji-sets-with-no-search-function of WallKicks <:ThinkMultiDorm:544670074485735454>?",
+        ":bricks: The Bricks of WallKicks :bricks:?",
+        ":eggplant: The Dicks of WallKicks :eggplant:?",
+        ":beer: The Beer of WallKicks :beer:?",
+        ":cheer: The Cheer of WallKicks :cheer:?",
+        ":gear: The Gear of WallKicks :gear:?",
+        ":pear: The Pear of WallKicks :pear:?",
+        ":leer: The Leer of WallKicks :leer:?",
+        ":deer: The Deer of WallKicks :deer:?",
+        ":person_in_tuxedo: The Belvedere of WallKicks :person_in_tuxedo:?",
+        ":checkered_flag: The Wins of WallKicks :checkered_flag:?",
+        ":grin: The Grins of WallKicks :grin:?",
+        "<:RipLink:544669896433467424> The Required-Double-Dip-of-Eastern-Palace-Plays of WallKicks <:RipLink:544669896433467424>?",
+        "<:BibleThump:544669369599262720> The Tears of WallKicks <:BibleThump:544669369599262720>?",
+        "<:PhantoCane:590599035220656138> The Copyright Infringement of WallKicks <:PhantoCane:590599035220656138>?",
+        "<:MCHammer:812714328292720662> The OBJECTION! of WallKicks <:MCHammer:812714328292720662>?",
+        "<:PeepoClown:662803399363788821> The Running-This-Joke-Into-the-Ground of WallKicks <:PeepoClown:662803399363788821>?"
     ],
     "pings": [
         "Let's get ready to Rando!!!",
@@ -276,7 +296,7 @@
         "ROLLER owes NAME RICHARD beers after rolling this bullshit.",
         "ROLLER owes NAME RICHARD beers after rolling this nonsense.",
         "ROLLER will have to wait RICHARD weeks, or until NAME is not racing, before getting to roll another seed again.",
-        "ROLLER ehhh... I'm too lazy to come up with a pithy comment. NAME increased The Dick Counter is at RICHARD",
+        "ROLLER ehhh... I'm too lazy to come up with a pithy comment. NAME increased The Dick Counter to RICHARD",
         "Seed Roller: ROLLER, Current Victim: NAME, Dick Counter: RICHARD"
     ],
     "countdowns": [
@@ -377,6 +397,13 @@
             "secondLine": "||Fine, you're just giving the smarter ones a head start.||",
             "secondDelay": 1000,
             "countdown": 5
+        },
+        {
+            "firstLine": "It's Friday, so you know what that means.",
+            "firstDelay": 5000,
+            "secondLine": "Yeah, yeah, yeah...",
+            "secondDelay": 2500,
+            "countdown": 10
         }
     ],
     "sotwMessage": "Seeds of the week, brought to you by",

@@ -408,10 +408,8 @@ module.exports = class JexDatabase {
         let player = this.#players.find(x => x.username === username);
         if (player) {
             let index = this.#players.findIndex(x => x.username === username);
-            console.log(`${username} found ${index}`);
             return index;
         } else {
-            console.log(`${username} not found`);
             player = {
                 username: username,
                 twitch: null,

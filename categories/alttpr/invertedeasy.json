@@ -1,0 +1,19 @@
+{
+  "category": "invertedeasy",
+  "name": "Inverted Easy",
+  "description": "Inverted Start, Defeat Ganon",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "inverted",
+    "weapons": "assured",
+    "eq": ["BossHeartContainer", "BossHeartContainer", "BossHeartContainer", "BossHeartContainer", "BossHeartContainer"],
+    "custom": {
+      "itemCount.BossHeartContainer": 5,
+      "TwentyRupees2": 5
+    }
+  },
+  "weights": { }
+}
