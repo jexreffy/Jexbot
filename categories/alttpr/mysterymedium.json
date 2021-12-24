@@ -27,10 +27,10 @@
       "retro": 20
     },
     "goal": {
-      "ganon": 35,
-      "fast_ganon": 35,
-      "dungeons": 15,
-      "pedestal": 20,
+      "ganon": 30,
+      "fast_ganon": 30,
+      "dungeons": 20,
+      "pedestal": 15,
       "triforce-hunt": 5
     },
     "accessibility": {
@@ -39,26 +39,30 @@
       "none": 0
     },
     "dungeon_items": {
-      "standard": 50,
+      "standard": 20,
       "mc": 0,
       "mcs": 0,
-      "full": 50
+      "full": 80
     },
     "wild_maps": {
-      "true": 60,
-      "false": 40
+      "true": 70,
+      "false": 30
     },
     "wild_compasses": {
-      "true": 60,
-      "false": 40
+      "true": 70,
+      "false": 30
     },
     "wild_keys": {
-      "true": 60,
-      "false": 40
+      "true": 70,
+      "false": 30
+    },
+    "universal_keys": {
+      "true": 20,
+      "false": 80
     },
     "wild_big_keys": {
-      "true": 60,
-      "false": 40
+      "true": 70,
+      "false": 30
     },
     "tower_open": {
       "0": 5,
@@ -77,9 +81,9 @@
       "2": 0,
       "3": 10,
       "4": 10,
-      "5": 25,
-      "6": 25,
-      "7": 30,
+      "5": 20,
+      "6": 20,
+      "7": 40,
       "random": 0
     },
     "entrance_shuffle": {
@@ -133,6 +137,10 @@
       "hard": 0,
       "expert": 0
     },
+    "timer_mode": {
+      "off": 100,
+      "countdown-ohko": 0
+    },
     "starting_items": [
       {
         "item": "PegasusBoots",
@@ -146,28 +154,28 @@
       },
       {
         "item": "Hookshot",
-        "false": 90,
-        "true": 10
+        "false": 80,
+        "true": 20
       },
       {
         "item": "FireRod",
-        "false": 90,
-        "true": 10
+        "false": 80,
+        "true": 20
       },
       {
         "item": "IceRod",
-        "false": 90,
-        "true": 10
+        "false": 80,
+        "true": 20
       },
       {
         "item": "Flippers",
-        "false": 90,
-        "true": 10
+        "false": 80,
+        "true": 20
       },
       {
         "item": "MagicMirror",
-        "false": 90,
-        "true": 10
+        "false": 80,
+        "true": 20
       }
     ]
   }

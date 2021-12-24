@@ -21,16 +21,16 @@
       "advanced": 100
     },
     "mode": {
-      "standard": 40,
-      "open": 40,
-      "inverted": 10,
-      "retro": 10
+      "standard": 35,
+      "open": 35,
+      "inverted": 15,
+      "retro": 15
     },
     "goal": {
-      "ganon": 35,
-      "fast_ganon": 35,
-      "dungeons": 15,
-      "pedestal": 20,
+      "ganon": 30,
+      "fast_ganon": 30,
+      "dungeons": 20,
+      "pedestal": 15,
       "triforce-hunt": 5
     },
     "accessibility": {
@@ -39,26 +39,30 @@
       "none": 10
     },
     "dungeon_items": {
-      "standard": 30,
+      "standard": 20,
       "mc": 0,
       "mcs": 0,
-      "full": 70
+      "full": 80
     },
     "wild_maps": {
-      "true": 60,
-      "false": 40
+      "true": 70,
+      "false": 30
     },
     "wild_compasses": {
-      "true": 60,
-      "false": 40
+      "true": 70,
+      "false": 30
     },
     "wild_keys": {
-      "true": 60,
-      "false": 40
+      "true": 70,
+      "false": 30
+    },
+    "universal_keys": {
+      "true": 20,
+      "false": 80
     },
     "wild_big_keys": {
-      "true": 60,
-      "false": 40
+      "true": 70,
+      "false": 30
     },
     "tower_open": {
       "0": 5,
@@ -77,9 +81,9 @@
       "2": 0,
       "3": 10,
       "4": 10,
-      "5": 25,
-      "6": 25,
-      "7": 30,
+      "5": 20,
+      "6": 20,
+      "7": 40,
       "random": 0
     },
     "entrance_shuffle": {
@@ -106,8 +110,8 @@
       "off": 90
     },
     "weapons": {
-      "randomized": 50,
-      "assured": 20,
+      "randomized": 40,
+      "assured": 30,
       "vanilla": 20,
       "swordless": 10
     },
@@ -123,8 +127,8 @@
       "expert": 0
     },
     "enemy_damage": {
-      "default": 100,
-      "shuffled": 0,
+      "default": 80,
+      "shuffled": 20,
       "random": 0
     },
     "enemy_health": {
@@ -132,6 +136,10 @@
       "easy": 15,
       "hard": 15,
       "expert": 0
+    },
+    "timer_mode": {
+      "off": 96,
+      "countdown-ohko": 4
     },
     "starting_items": [
       {
@@ -146,28 +154,28 @@
       },
       {
         "item": "Hookshot",
-        "false": 90,
-        "true": 10
+        "false": 80,
+        "true": 20
       },
       {
         "item": "FireRod",
-        "false": 90,
-        "true": 10
+        "false": 80,
+        "true": 20
       },
       {
         "item": "IceRod",
-        "false": 90,
-        "true": 10
+        "false": 80,
+        "true": 20
       },
       {
         "item": "Flippers",
-        "false": 90,
-        "true": 10
+        "false": 80,
+        "true": 20
       },
       {
         "item": "MagicMirror",
-        "false": 90,
-        "true": 10
+        "false": 80,
+        "true": 20
       }
     ]
   }

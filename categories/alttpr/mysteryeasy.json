@@ -27,10 +27,10 @@
       "retro": 0
     },
     "goal": {
-      "ganon": 35,
-      "fast_ganon": 35,
-      "dungeons": 15,
-      "pedestal": 20,
+      "ganon": 30,
+      "fast_ganon": 30,
+      "dungeons": 20,
+      "pedestal": 15,
       "triforce-hunt": 5
     },
     "accessibility": {
@@ -45,20 +45,24 @@
       "full": 0
     },
     "wild_maps": {
-      "true": 20,
-      "false": 80
+      "true": 30,
+      "false": 70
     },
     "wild_compasses": {
-      "true": 20,
-      "false": 80
+      "true": 30,
+      "false": 70
     },
     "wild_keys": {
-      "true": 20,
-      "false": 80
+      "true": 30,
+      "false": 70
+    },
+    "universal_keys": {
+      "true": 0,
+      "false": 100
     },
     "wild_big_keys": {
-      "true": 20,
-      "false": 80
+      "true": 30,
+      "false": 70
     },
     "tower_open": {
       "0": 5,
@@ -133,6 +137,10 @@
       "hard": 0,
       "expert": 0
     },
+    "timer_mode": {
+      "off": 100,
+      "countdown-ohko": 0
+    },
     "starting_items": [
       {
         "item": "PegasusBoots",
@@ -146,28 +154,28 @@
       },
       {
         "item": "Hookshot",
-        "false": 90,
-        "true": 10
+        "false": 80,
+        "true": 20
       },
       {
         "item": "FireRod",
-        "false": 90,
-        "true": 10
+        "false": 80,
+        "true": 20
       },
       {
         "item": "IceRod",
-        "false": 90,
-        "true": 10
+        "false": 80,
+        "true": 20
       },
       {
         "item": "Flippers",
-        "false": 90,
-        "true": 10
+        "false": 80,
+        "true": 20
       },
       {
         "item": "MagicMirror",
-        "false": 90,
-        "true": 10
+        "false": 80,
+        "true": 20
       }
     ]
   }

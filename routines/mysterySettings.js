@@ -14,31 +14,44 @@ module.exports = (app, weights) => {
     settings.weapons = determineSetting(weights["weapons"]);
     settings.item.pool = determineSetting(weights["item_pool"]);
     settings.item.functionality = determineSetting(weights["item_functionality"]);
-    settings.enemizer.boss_shuffle = determineSetting(weights["boss_shuffle"]);
-    settings.enemizer.enemy_shuffle = determineSetting(weights["enemy_shuffle"]);
-    settings.enemizer.enemy_damage = determineSetting(weights["enemy_damage"]);
-    settings.enemizer.enemy_health = determineSetting(weights["enemy_health"]);
+
+    settings.custom["rom.timerMode"] = determineSetting(weights["timer_mode"]);
+    if (settings.custom["rom.timerMode"] === "countdown-ohko") {
+        settings.custom["rom.timerStart"] = "600";
+        settings.custom["item.value.BlueClock"] = "360";
+        settings.custom.item.count.BlueClock = 4;
+        settings.custom["item.value.GreenClock"] = "180";
+        settings.custom.item.count.GreenClock = 12;
+        settings.custom["item.value.RedClock"] = "240";
+        settings.custom.item.count.RedClock = 4;
+        settings.custom.item.count.PieceOfHeart -= 20;
+    } else {
+        settings.enemizer.boss_shuffle = determineSetting(weights["boss_shuffle"]);
+        settings.enemizer.enemy_shuffle = determineSetting(weights["enemy_shuffle"]);
+        settings.enemizer.enemy_damage = determineSetting(weights["enemy_damage"]);
+        settings.enemizer.enemy_health = determineSetting(weights["enemy_health"]);
+    }
 
     if (settings.goal === "triforce-hunt") {
-        settings.custom["item.Goal.Required"] = "20";
-        settings.custom.item.count.TriforcePiece = 30;
+        let goalAmount = 20 + Math.floor(Math.random() * 20);
+        settings.custom["item.Goal.Required"] = `${goalAmount}`;
+        settings.custom.item.count.TriforcePiece = goalAmount + 10;
     }
 
-    let items = [];
-    for (let i = 0; i < weights["starting_items"].length; i++) {
-        if (determineSetting(weights["starting_items"][i]) === "true") {
-            items.push(weights["starting_items"][i].item);
+    settings.entrances = determineSetting(weights["entrance_shuffle"]);
+
+    if (settings.entrances === "none") {
+        let items = [];
+        for (let i = 0; i < weights["starting_items"].length; i++) {
+            if (determineSetting(weights["starting_items"][i]) === "true") {
+                items.push(weights["starting_items"][i].item);
+            }
         }
-    }
 
-    if (items.length > 0) {
-        settings.entrances = "none";
         app.routines['processStartingEquipment'](settings, items);
-    } else {
-        settings.entrances = determineSetting(weights["entrance_shuffle"]);
     }
 
-    if (settings.entrances === "crossed") {
+    if (settings.entrances !== "none") {
         settings.dungeon_items = determineSetting(weights["dungeon_items"]);
     } else {
         settings.dungeon_items = "standard";
@@ -46,6 +59,14 @@ module.exports = (app, weights) => {
         settings.custom["region.wildCompasses"] = determineSetting(weights["wild_compasses"]) === "true";
         settings.custom["region.wildKeys"] = determineSetting(weights["wild_keys"]) === "true";
         settings.custom["region.wildMaps"] = determineSetting(weights["wild_maps"]) === "true";
+
+        if (settings.mode !== "retro") {
+            settings.custom["rom.genericKeys"] = determineSetting(weights["universal_keys"]) === "true";
+
+            if (settings.custom["rom.genericKeys"]) {
+                settings.custom["region.wildKeys"] = true;
+            }
+        }
 
         if (settings.custom["region.wildBigKeys"] || settings.custom["region.wildKeys"]) {
             settings.custom["rom.freeItemMenu"] = true;
@@ -65,7 +86,8 @@ module.exports = (app, weights) => {
         }
     }
 
-    if (settings.enemizer.enemy_shuffle === "shuffled" && settings.mode === "standard") {
+    if (settings.enemizer.enemy_shuffle === "shuffled" && settings.mode === "standard" &&
+        settings.weapons !== "assured" && settings.weapons !== "vanilla") {
         settings.weapons = "assured";
     }
 
