@@ -30,7 +30,7 @@ module.exports = class CommandNew extends JexCommand {
         this._app.routines['resetRace'](context.activeRace);
 
         context.activeRace.pingIndex = this._app.routines['getRandom'](this._app.config['pings'].length);
-        context.activeRace.countdownIndex = this._app.routines['getRandom'](this._app.config['countdowns'].length);
+        context.activeRace.countdownIndex = (category === 'ludicrousspeed') ? 3 : this._app.routines['getRandom'](this._app.config['countdowns'].length);
         context.activeRace.multistream = 'https://multistre.am/';
         context.activeRace.status = 'PRE-RACE: WAITING FOR PLAYERS TO JOIN';
 

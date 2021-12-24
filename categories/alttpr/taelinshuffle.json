@@ -1,0 +1,18 @@
+{
+  "category": "taelinshuffle",
+  "name": "Taelin Shuffle",
+  "description": "Standard Start, Pedestal Goal, 7/7 Crystals, MC Shuffle, Bosses shuffled",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "standard",
+    "goal": "pedestal",
+    "dungeon_items": "mc",
+    "enemizer": {
+      "boss_shuffle": "random"
+    }
+  },
+  "weights": { }
+}

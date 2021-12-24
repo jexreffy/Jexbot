@@ -1,6 +1,6 @@
 {
-  "category": "enemizerbosses",
-  "name": "Enemizer Boss Shuffle Only",
+  "category": "bossshuffle",
+  "name": "Boss Shuffle Only",
   "description": "Open Start, Defeat Ganon, 7/7 Crystals, Bosses shuffled",
   "gtbk": true,
   "customizer": false,

@@ -59,25 +59,11 @@
                 "open",
                 "standard",
                 "casualboots",
-                "ambrosia",
-                "casualboots",
-                "standard",
-                "ambrosia",
-                "open",
-                "standard",
-                "casualboots",
                 "ambrosia"
             ],
             "sotwMedium": [
                 "mysterymedium",
                 "enemizer",
-                "randomcrystals",
-                "keysanity",
-                "enemizer",
-                "keysanity",
-                "randomcrystals",
-                "mysterymedium",
-                "enemizerboots",
                 "randomcrystals",
                 "keysanity"
             ],
@@ -85,27 +71,13 @@
                 "adkeysanity",
                 "crosskeys",
                 "mysteryladder",
-                "swordless",
-                "mysteryladder",
-                "swordless",
-                "crosskeys",
-                "adkeysanity",
-                "crosskeys",
-                "mysteryladder",
                 "swordless"
             ],
             "sotwTourney": [
-                "adkeysanity",
-                "fadkeysanity",
-                "mysteryladder",
-                "swordless",
-                "fadkeysanity",
-                "casualboots",
-                "keysanity",
-                "crosskeys",
-                "open",
-                "enemizerboots",
-                "sglive2021"
+                "ladders10grabbag",
+                "ladders10goldrush",
+                "ladders10grabbag",
+                "ladders10goldrush"
             ],
             "codeMap": [
                 ":Bow:812714327928078367",
@@ -235,22 +207,24 @@
         ":athletic_shoe: The Kicks of WallKicks :athletic_shoe:?",
         "<a:pepeD:893122725126737950> The Year of WallKicks <a:pepeD:893122725126737950>?",
         "<:ThinkMultiDorm:544670074485735454> The I-was-on-mobile-and-fuck-that-interface-for-emojis-on-mobile-Too-damn-many-emoji-sets-with-no-search-function of WallKicks <:ThinkMultiDorm:544670074485735454>?",
-        ":bricks: The Bricks of WallKicks :bricks:?",
-        ":eggplant: The Dicks of WallKicks :eggplant:?",
-        ":beer: The Beer of WallKicks :beer:?",
-        ":cheer: The Cheer of WallKicks :cheer:?",
-        ":gear: The Gear of WallKicks :gear:?",
-        ":pear: The Pear of WallKicks :pear:?",
-        ":leer: The Leer of WallKicks :leer:?",
-        ":deer: The Deer of WallKicks :deer:?",
         ":person_in_tuxedo: The Belvedere of WallKicks :person_in_tuxedo:?",
         ":checkered_flag: The Wins of WallKicks :checkered_flag:?",
         ":grin: The Grins of WallKicks :grin:?",
         "<:RipLink:544669896433467424> The Required-Double-Dip-of-Eastern-Palace-Plays of WallKicks <:RipLink:544669896433467424>?",
-        "<:BibleThump:544669369599262720> The Tears of WallKicks <:BibleThump:544669369599262720>?",
         "<:PhantoCane:590599035220656138> The Copyright Infringement of WallKicks <:PhantoCane:590599035220656138>?",
         "<:MCHammer:812714328292720662> The OBJECTION! of WallKicks <:MCHammer:812714328292720662>?",
-        "<:PeepoClown:662803399363788821> The Running-This-Joke-Into-the-Ground of WallKicks <:PeepoClown:662803399363788821>?"
+        "<:PeepoClown:662803399363788821> The Running-This-Joke-Into-the-Ground of WallKicks <:PeepoClown:662803399363788821>?",
+        "That (adj.): being the person, thing, or idea specified, mentioned, or understood",
+        "It's Friday, then... It's Saturday... followed by Sunday...",
+        "More terrible stun prizes!",
+        "SleepyFrau is probably knitting something.",
+        "I think so, NAME, but why would anyone want to go to Pendant Thieves' Town?",
+        "NAME will need a Milla Break 45 minutes into the race.",
+        "Silverless Ganon, which means it will be SPIN AND WIN TIME!!!",
+        "No, I don't know what it means... why don't you tell me... https://forms.gle/SPfq4Vv16iQvaNzs5",
+        "Milla will complain about his palette shuffle, which will then beg the question why anyone uses palette shuffle in the first place?",
+        "Ice Palace Bomb Jump?",
+        "Byrna Fuck Dance?"
     ],
     "pings": [
         "Let's get ready to Rando!!!",
@@ -265,7 +239,8 @@
         "Deja vu - the sensation that you are doing something you have done before.",
         "Time for Shades to start pulling teeth to see who's going to be restreamed.",
         "Oh look, time for another rousing round of corporal masochism",
-        "Time to start Living on a Prayer!"
+        "Time to start Living on a Prayer!",
+        "It's Friday, Friday, Gotta get down on Friday!"
     ],
     "dickMessages": [
         "ROLLER has been blamed by NAME for our runners collective adversity RICHARD times.",
@@ -417,7 +392,6 @@
         "The Corporation for Public Broadcasting, and viewers like you.",
         "Geico. Fifteen minutes could save you 15% or more of car insurance.",
         "Robo-Caller. We have been trying to reach you regarding your car's extended warranty.",
-        "McDonald's. I'm loving it!",
-        "OnlyFans.com. Because we're only gonna be around for a few more months, so we need all the money we can get now."
+        "McDonald's. I'm loving it!"
     ]
 }

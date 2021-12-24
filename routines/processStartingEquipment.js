@@ -9,7 +9,7 @@ module.exports = (settings, items) => {
             settings.eq.splice(0, 0, items[i]);
             settings.custom.item.count.ProgressiveBow--;
             settings.custom.item.count.Arrow++;
-        } else {
+        } else if (settings.custom.item.count[items[i]] > 0) {
             settings.eq.splice(0, 0, items[i]);
             settings.custom.item.count[items[i]]--;
             settings.custom.item.count.TwentyRupees2++;

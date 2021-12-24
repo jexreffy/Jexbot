@@ -1,0 +1,14 @@
+{
+  "category": "darkwingduck",
+  "name": "Darkwing Duck",
+  "description": "Inverted Start, Defeat Ganon, Starting Flute",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "inverted",
+    "eq": ["OcarinaActive"]
+  },
+  "weights": { }
+}

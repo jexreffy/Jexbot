@@ -1,0 +1,16 @@
+{
+  "category": "retrobossshuffle",
+  "name": "Retro Boss Shuffle",
+  "description": "Open Start, Defeat Ganon, 7/7 Crystals, Universal Keys, Bow cost money to use, Random Boss Shuffle",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "retro",
+    "enemizer": {
+      "boss_shuffle": "random"
+    }
+  },
+  "weights": { }
+}

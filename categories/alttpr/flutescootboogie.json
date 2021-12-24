@@ -8,6 +8,7 @@
   "random": false,
   "settings": {
     "mode": "standard",
+    "weapons": "assured",
     "eq": [ "PegasusBoots", "OcarinaInactive" ]
   },
   "weights": { }

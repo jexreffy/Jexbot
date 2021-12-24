@@ -9,6 +9,8 @@ module.exports = (app, category) => {
 
         if (key === 'eq') {
             app.routines['processStartingEquipment'](settings, category.settings['eq']);
+        } else if (key === 'drops') {
+            settings['drops'] = category.settings['drops'];
         } else if (typeof category.settings[key] === 'object' && category.settings[key] !== null) {
             let subkeys = Object.keys(category.settings[key]);
 

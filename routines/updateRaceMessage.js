@@ -90,7 +90,7 @@ module.exports = (app, context) => {
                     userTwitch = username;
                 }
 
-                names += `${((i !== 0) ? '\n' : '')}[${username}](https://twitch.tv/"${userTwitch}) ${(!race.invitational && app.db.getPlayerTwitchBot(username) ? ' :robot:' : '')}`;
+                names += `${((i !== 0) ? '\n' : '')}[${username}](https://twitch.tv/${userTwitch}) ${(!race.invitational && app.db.getPlayerTwitchBot(username) ? ' :robot:' : '')}`;
             } else {
                 names += `${((i !== 0) ? '\n' : '')}${username}`;
             }

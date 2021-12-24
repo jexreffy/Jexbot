@@ -1,0 +1,15 @@
+{
+  "category": "beatablefastganon",
+  "name": "Beatable Fast Ganon",
+  "description": "Open Start, Fast Ganon, 7/7 Crystals, the Randomizer only ensures the game can be beaten, some items and dungeons may be inaccessible",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "accessibility": "none",
+    "goal": "fast_ganon"
+  },
+  "weights": { }
+}
