@@ -62,6 +62,10 @@ module.exports = class JexBotDiscord {
         return this.#raceChannels[guildId].messages.fetch(messageId);
     }
 
+    getChannel(guildId, channelName) {
+        return this.#guilds[guildId].channels.cache.find(channel => channel.name === channelName);
+    }
+
     getRaceChannel(guildId) {
         return this.#raceChannels[guildId];
     }

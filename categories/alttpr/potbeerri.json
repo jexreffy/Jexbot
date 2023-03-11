@@ -1,0 +1,19 @@
+{
+  "category": "potbeerri",
+  "name": "Potbeerri",
+  "description": "Open Start, All Dungeons, MC Shuffle, Boss Shuffle, Start w/ Flute, Hookshot, and Ice Rod",
+  "gtbk": false,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "goal": "dungeons",
+    "dungeon_items": "mc",
+    "enemizer": {
+      "boss_shuffle": "full"
+    },
+    "eq": ["OcarinaActive", "Hookshot", "IceRod"]
+  },
+  "weights": { }
+}

@@ -1,7 +1,7 @@
 {
-  "category": "mysterymedium",
-  "name": "Mystery Medium",
-  "description": "All settings are randomly chosen per the Seed of the Week Medium Difficulty. You must play the seed to figure out what it is.",
+  "category": "mysteryinverted",
+  "name": "Mystery Inverted",
+  "description": "Inverted Start, All other settings are randomly chosen. You must play the seed to figure out what it is.",
   "gtbk": false,
   "customizer": true,
   "mystery": true,
@@ -21,10 +21,10 @@
       "advanced": 100
     },
     "mode": {
-      "standard": 40,
-      "open": 40,
-      "inverted": 0,
-      "retro": 20
+      "standard": 0,
+      "open": 0,
+      "inverted": 100,
+      "retro": 0
     },
     "goal": {
       "ganon": 30,
@@ -34,9 +34,9 @@
       "triforce-hunt": 5
     },
     "accessibility": {
-      "items": 100,
+      "items": 90,
       "location": 0,
-      "none": 0
+      "none": 10
     },
     "dungeon_items": {
       "standard": 20,
@@ -87,38 +87,38 @@
       "random": 0
     },
     "entrance_shuffle": {
-      "none": 100,
+      "none": 70,
       "simple": 0,
-      "restricted": 0,
+      "restricted": 10,
       "full": 0,
-      "crossed": 0,
+      "crossed": 20,
       "insanity": 0
     },
     "boss_shuffle": {
-      "none": 80,
-      "simple": 10,
-      "full": 10,
+      "none": 70,
+      "simple": 0,
+      "full": 30,
       "random": 0
     },
     "enemy_shuffle": {
-      "none": 80,
-      "shuffled": 20,
+      "none": 70,
+      "shuffled": 30,
       "random": 0
     },
     "hints": {
-      "on": 50,
-      "off": 50
+      "on": 10,
+      "off": 90
     },
     "weapons": {
-      "randomized": 50,
-      "assured": 40,
-      "vanilla": 10,
-      "swordless": 0
+      "randomized": 40,
+      "assured": 30,
+      "vanilla": 20,
+      "swordless": 10
     },
     "item_pool": {
-      "normal": 70,
+      "normal": 60,
       "hard": 30,
-      "expert": 0,
+      "expert": 10,
       "crowd_control": 0
     },
     "item_functionality": {
@@ -127,14 +127,14 @@
       "expert": 0
     },
     "enemy_damage": {
-      "default": 100,
-      "shuffled": 0,
+      "default": 80,
+      "shuffled": 20,
       "random": 0
     },
     "enemy_health": {
       "default": 70,
-      "easy": 30,
-      "hard": 0,
+      "easy": 15,
+      "hard": 15,
       "expert": 0
     },
     "timer_mode": {

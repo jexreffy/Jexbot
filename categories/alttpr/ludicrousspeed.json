@@ -10,7 +10,7 @@
     "mode": "open",
     "goal": "dungeons",
     "accessibility": "none",
-    "eq": ["BossHeartContainer", "BossHeartContainer", "BossHeartContainer", "BossHeartContainer", "BossHeartContainer", "BossHeartContainer"],
+    "eq": ["BossHeartContainer", "BossHeartContainer", "BossHeartContainer"],
     "drops": {
       "0": ["auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill"],
       "1": ["auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill", "auto_fill"],

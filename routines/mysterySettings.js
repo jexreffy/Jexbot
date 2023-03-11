@@ -22,7 +22,7 @@ module.exports = (app, weights) => {
         settings.custom.item.count.BlueClock = 4;
         settings.custom["item.value.GreenClock"] = "180";
         settings.custom.item.count.GreenClock = 12;
-        settings.custom["item.value.RedClock"] = "240";
+        settings.custom["item.value.RedClock"] = "-240";
         settings.custom.item.count.RedClock = 4;
         settings.custom.item.count.PieceOfHeart -= 20;
     } else {

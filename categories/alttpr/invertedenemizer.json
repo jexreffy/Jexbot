@@ -1,0 +1,17 @@
+{
+  "category": "invertedenemizer",
+  "name": "Inverted Enemizer",
+  "description": "Inverted Start, Defeat Ganon, 7/7 Crystals, Enemies and Bosses shuffled",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "inverted",
+    "enemizer": {
+      "boss_shuffle": "random",
+      "enemy_shuffle": "shuffled"
+    }
+  },
+  "weights": { }
+}

@@ -133,6 +133,10 @@ module.exports = class JexBotApp {
         return this.#discord.findMessage(guildId, messageId);
     }
 
+    findDiscordChannel(guildId, channelName) {
+        return this.#discord.getChannel(guildId, channelName);
+    }
+
     getRacerRole(guildId) {
         return this.#discord.getRacerRole(guildId);
     }

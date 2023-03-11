@@ -25,9 +25,7 @@ module.exports = class CommandFriday extends JexCommand {
 
         let randomIndex = 0;
 
-        if (context.username === this._app.config['botOwnerName']) {
-            randomIndex = 18;
-        } else if (hasScotch) {
+        if (hasScotch) {
             randomIndex = 6;
         } else if (hasBeer) {
             randomIndex = 0;

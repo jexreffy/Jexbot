@@ -1,0 +1,39 @@
+{
+  "category": "openhard",
+  "name": "Open Hard",
+  "description": "Open Start, Defeat Ganon, 7/7 Crystals, Randomized Sword, New Hard Mode Item Pool",
+  "gtbk": true,
+  "customizer": true,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "mode": "open",
+    "weapons": "randomized",
+    "custom": {
+      "itemCount.BottleWithRandom": 0,
+      "itemCount.Bottle": 4,
+      "itemCount.ProgressiveArmor": 0,
+      "itemCount.ProgressiveBow": 0,
+      "itemCount.BowAndArrows": 1,
+      "itemCount.SilverArrowUpgrade": 1,
+      "itemCount.BossHeartContainer": 4,
+      "itemCount.PieceOfHeart": 48,
+      "itemCount.HalfMagic": 0,
+      "itemCount.OneRupee": 0,
+      "itemCount.FiveRupees": 0,
+      "itemOverflow": {
+        "replacement": {
+          "Sword": "TwentyRupees2",
+          "Bottle": "FiveRupees",
+          "Shield": "FiveRupees"
+        },
+        "count": {
+          "Sword": 3,
+          "Bottle": 1,
+          "Shield": 1
+        }
+      }
+    }
+  },
+  "weights": { }
+}

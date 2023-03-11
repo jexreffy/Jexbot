@@ -1,0 +1,17 @@
+{
+  "category": "topsyturvytorture",
+  "name": "Topsy Turvy Torture",
+  "description": "Inverted Start, Fast Ganon, Crossworld Entrance Shuffle, Swordless Dungeon Items shuffled in the full item pool",
+  "gtbk": false,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "dungeon_items": "full",
+    "goal": "fast_ganon",
+    "mode": "inverted",
+    "entrances": "crossed",
+    "weapons": "swordless"
+  },
+  "weights": { }
+}

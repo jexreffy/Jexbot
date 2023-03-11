@@ -376,7 +376,7 @@ module.exports = class JexDatabase {
                 index = 2;
                 break;
             case "sotwtourney":
-                index = 2;
+                index = 3;
                 break;
         }
 
