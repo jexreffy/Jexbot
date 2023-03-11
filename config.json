@@ -56,28 +56,32 @@
             "sotwEnabled": true,
             "sotwChannel": "lttp-jexbot",
             "sotwEasy": [
-                "open",
-                "standard",
-                "casualboots",
-                "ambrosia"
+                "standardboots",
+                "standardboots",
+                "standardboots",
+                "standardboots",
+                "openhard"
             ],
             "sotwMedium": [
-                "mysterymedium",
-                "enemizer",
-                "randomcrystals",
-                "keysanity"
+                "openhard",
+                "openhard",
+                "openhard",
+                "mcboss",
+                "mcboss"
             ],
             "sotwHard": [
-                "adkeysanity",
-                "crosskeys",
-                "mysteryladder",
-                "swordless"
+                "mcboss",
+                "mcboss",
+                "invrosia",
+                "invrosia",
+                "invrosia"
             ],
             "sotwTourney": [
-                "crosskeys",
-                "retrance",
-                "crosskeys",
-                "crosskeys"
+                "invrosia",
+                "fadkeysanity",
+                "fadkeysanity",
+                "fadkeysanity",
+                "fadkeysanity"
             ],
             "codeMap": [
                 ":Bow:812714327928078367",
