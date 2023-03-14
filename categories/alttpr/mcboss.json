@@ -1,0 +1,17 @@
+{
+  "category": "mcboss",
+  "name": "McBoss",
+  "description": "Open Start, Defeat Ganon, 7/7 Crystals, Maps & Compasses shuffled in the full item pool, Bosses shuffled",
+  "gtbk": true,
+  "customizer": false,
+  "mystery": false,
+  "random": false,
+  "settings": {
+    "dungeon_items": "mc",
+    "mode": "open",
+    "enemizer": {
+      "boss_shuffle": "random"
+    }
+  },
+  "weights": { }
+}
