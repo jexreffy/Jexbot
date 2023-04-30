@@ -1,7 +1,7 @@
 {
   "category": "fadkeysanity",
   "name": "FAD Keysanity",
-  "description": "Open Start, All Dungeons, Dungeon Items shuffled in the full item pool, CT Keys in CT",
+  "description": "Open Start, All Dungeons, Dungeon Items shuffled in the full item pool, CT Keys in CT, GTBK in GT",
   "gtbk": false,
   "customizer": true,
   "mystery": false,
@@ -11,7 +11,8 @@
     "goal": "dungeons",
     "mode": "open",
     "custom": {
-      "jex.ATKinAT": true
+      "jex.ATKinAT": true,
+      "jex.GTBKinGT": true
     }
   },
   "weights": { }
