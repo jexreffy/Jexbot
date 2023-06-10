@@ -3,6 +3,7 @@ const JexDiscord = require('../services/discord');
 const JexHttp = require('../services/http');
 const JexTwitch = require('../services/twitch');
 const fs = require('fs');
+const {join} = require("tmi.js/lib/commands");
 
 module.exports = class JexBotApp {
     #axios = require('axios');
@@ -177,8 +178,11 @@ module.exports = class JexBotApp {
             message: message.content,
             messageChannel: null,
             origination: this.DISCORD,
+            userId: message.author.id,
             username: message.author.username
         };
+
+        this.#db.addPlayerIfNotExists(context.userId, context.username);
 
         if (message.channel.name === raceChannel.name) {
             this.#processRaceCommand(context);
@@ -211,10 +215,23 @@ module.exports = class JexBotApp {
         this.#processRaceCommand(context);
     }
 
+    onHttpCommandReceived(url) {
+
+    }
+
     #processRaceCommand(context) {
         let match = context.message.match(/^[.!]([a-zA-Z0-9]{0,30})/i);
 
-        if (match && match[1] && this.#raceCommandKeys.indexOf(match[1]) >= 0) {
+        if (match && match[1] && match[1] === "jexnew") {
+            let newCommand = this.#raceCommands["new"];
+            let joinCommand = this.#raceCommands["join"];
+            let gatekeeperCommand = this.#raceCommands["gatekeeper"];
+
+            newCommand.executeCommand(context);
+            joinCommand.executeCommand(context);
+            gatekeeperCommand.executeCommand(context);
+
+        } else if (match && match[1] && this.#raceCommandKeys.indexOf(match[1]) >= 0) {
             let command = this.#raceCommands[match[1]];
 
             if (command.isCommandValid(context)) {

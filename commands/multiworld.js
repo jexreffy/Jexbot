@@ -19,7 +19,7 @@ module.exports = class CommandMultiWorld extends JexCommand {
                !context.activeRace.seedLink &&
                !context.activeRace.started &&
                (this._app.config['referees'].includes(context.username) ||
-                   context.activeRace.players.find(x => x.username === context.username));
+                   context.activeRace.players.find(x => x.discordId === context.userId));
     }
 
     executeCommand(context) {

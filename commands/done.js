@@ -15,7 +15,7 @@ module.exports = class CommandDone extends JexCommand {
     }
 
     isCommandValid(context) {
-        let player = context.activeRace.players.find(x => x.username === context.username);
+        let player = context.activeRace.players.find(x => x.discordId === context.userId);
 
         return context.origination === this._app.DISCORD &&
                context.activeRace.started &&
@@ -24,7 +24,7 @@ module.exports = class CommandDone extends JexCommand {
     }
 
     executeCommand(context) {
-        let player = context.activeRace.players.find(x => x.username === context.username);
+        let player = context.activeRace.players.find(x => x.discordId === context.userId);
 
         if (context.activeRace.teams && context.activeRace.relay) {
             let hasFinished = context.activeRace.players.filter(x => x.team === player.team && x.finished);
@@ -62,8 +62,8 @@ module.exports = class CommandDone extends JexCommand {
             this._app.routines['broadcastMessage'](this._app, context, `${context.username} has finished with a time of ${this._app.routines['getRaceTime'](time)}.`, true, true);
         }
 
-        if (this._app.db.getPlayerPB(context.username, category) > player.time) {
-            this._app.db.setPlayerPB(context.username, category, player.time);
+        if (this._app.db.getPlayerPB(context.userId, category) > player.time) {
+            this._app.db.setPlayerPB(context.userId, category, player.time);
         }
 
         if (context.activeRace.teams) {
@@ -79,12 +79,10 @@ module.exports = class CommandDone extends JexCommand {
             } else if (context.activeRace.relay) {
                 context.activeRace.legStartTime[player.team] = Date.now() + this._app.config['relayLegDelaySeconds'] * 1000;
 
-                let thisMember = this._app.findDiscordMember(context.guildId, player.username);
-                this._app.sendToDiscordRaceChannel(context.guildId, `<@${thisMember.id}> You mush let the credits run to completion **WITHOUT** fast forwarding.`);
+                this._app.sendToDiscordRaceChannel(context.guildId, `<@${player.discordId}> You mush let the credits run to completion **WITHOUT** fast forwarding.`);
 
                 let nextPlayer = context.activeRace.players.find(x => x.team === player.team && x.leg === player.leg + 1);
-                let nextMember = this._app.findDiscordMember(context.guildId, nextPlayer.username);
-                this._app.sendToDiscordRaceChannel(context.guildId, `<@${nextMember.id}> ${player.username} has finished. You will be able to start your leg of the relay in ${this._app.config['relayLegDelaySeconds'] / 60} minutes.`);
+                this._app.sendToDiscordRaceChannel(context.guildId, `<@${nextPlayer.discordId}> ${player.username} has finished. You will be able to start your leg of the relay in ${this._app.config['relayLegDelaySeconds'] / 60} minutes.`);
 
                 let allFinished = true;
 
@@ -100,8 +98,7 @@ module.exports = class CommandDone extends JexCommand {
                             context.activeRace.legStartTime[x.team] = Date.now() + (this._app.config['relayLegDelaySeconds'] + this._app.config['relayForfeitDelaySeconds']) * 1000;
 
                             let nextPlayer = context.activeRace.players.find(y => y.team === x.team && y.leg === x.leg + 1);
-                            let nextForfeit = this._app.findDiscordMember(context.guildId, nextPlayer.username);
-                            this._app.sendToDiscordRaceChannel(context.guildId, `<@${nextForfeit.id}> ${player.username} has finished. You will be able to start your leg of the relay in ${(this._app.config['relayLegDelaySeconds'] + this._app.config['relayForfeitDelaySeconds']) / 60} minutes.`);
+                            this._app.sendToDiscordRaceChannel(context.guildId, `<@${nextPlayer.discordId}> ${player.username} has finished. You will be able to start your leg of the relay in ${(this._app.config['relayLegDelaySeconds'] + this._app.config['relayForfeitDelaySeconds']) / 60} minutes.`);
                         }
                     });
                 }

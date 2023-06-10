@@ -17,7 +17,7 @@ module.exports = class CommandTwitch extends JexCommand {
     isCommandValid(context) {
         return context.origination === this._app.DISCORD &&
                !context.activeRace.started &&
-               context.activeRace.players.find(x => x.username === context.username) !== undefined;
+               context.activeRace.players.find(x => x.discordId === context.userId) !== undefined;
     }
 
     executeCommand(context) {
@@ -27,15 +27,15 @@ module.exports = class CommandTwitch extends JexCommand {
 
         let twitch = match[2];
 
-        let player = context.activeRace.players.find(x => x.username === context.username);
-        this._app.db.setPlayerTwitch(context.username, twitch);
+        this._app.db.setPlayerTwitch(context.userId, twitch);
 
-        let userTwitch = this._app.db.getPlayerTwitch(context.username);
+        let userTwitch = this._app.db.getPlayerTwitch(context.userId);
 
+        let player = context.activeRace.players.find(x => x.discordId === context.userId);
         player.twitch = `#${userTwitch}`;
 
         context.activeRace.multistream = context.activeRace.multistream.replace(new RegExp(userTwitch + '/', 'i'), "");
-        if (this._app.db.getPlayerStreaming(context.username)) context.activeRace.multistream += twitch + '/';
+        if (this._app.db.getPlayerStreaming(context.userId)) context.activeRace.multistream += twitch + '/';
 
         this._app.db.setRaceData(context.guildId, context.activeRace);
         this._app.routines['updateRaceMessage'](this._app, context);

@@ -17,11 +17,11 @@ module.exports = class CommandReady extends JexCommand {
     isCommandValid(context) {
         return context.origination === this._app.DISCORD &&
                !context.activeRace.started &&
-               context.activeRace.players.find(x => x.username === context.username) !== undefined;
+               context.activeRace.players.find(x => x.discordId === context.userId) !== undefined;
     }
 
     executeCommand(context) {
-        let player = context.activeRace.players.find(x => x.username === context.username);
+        let player = context.activeRace.players.find(x => x.discordId === context.userId);
         player.ready = true;
 
         this._app.db.setRaceData(context.guildId, context.activeRace);

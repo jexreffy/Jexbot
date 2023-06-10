@@ -39,12 +39,11 @@ module.exports = class CronRelayNext extends JexCron {
 
     #countdownNextPlayer(app, context, nextPlayer, remainingTime, delayTime) {
         (async() => {
-            let nextMember = app.findDiscordMember(context.guildId, nextPlayer.username);
             app.sendToDiscordRaceChannel(context.guildId, `${nextPlayer.username} Your leg of the relay will start in ${delayTime / 60} minutes.`).then().catch(console.error);
             let oneMinuteLeft = remainingTime - 60000;
             await app.sleep(oneMinuteLeft);
 
-            app.sendToDiscordRaceChannel(context.guildId, `<@${nextMember.id}> Your leg of the relay will start in 60 seconds.`);
+            app.sendToDiscordRaceChannel(context.guildId, `<@${nextPlayer.discordId}> Your leg of the relay will start in 60 seconds.`);
             await app.sleep(30000);
 
             app.sendToDiscordRaceChannel(context.guildId, `${nextPlayer.username} Your leg of the relay will start in 30 seconds.`);

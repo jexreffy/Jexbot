@@ -17,7 +17,7 @@ module.exports = class CommandTwitchBot extends JexCommand {
     isCommandValid(context) {
         return context.origination === this._app.DISCORD &&
                !context.activeRace.started &&
-               context.activeRace.players.find(x => x.username === context.username) !== undefined;
+               context.activeRace.players.find(x => x.discordId === context.userId) !== undefined;
     }
 
     executeCommand(context) {
@@ -27,7 +27,12 @@ module.exports = class CommandTwitchBot extends JexCommand {
 
         let isStreaming = match[2] === 'on';
 
-        this._app.db.setPlayerTwitchBot(context.username, isStreaming);
+        this._app.db.setPlayerTwitchBot(context.userId, isStreaming);
+
+        let player = context.activeRace.players.find(x => x.discordId === context.userId);
+        player.twitchBot = isStreaming;
+
+        this._app.db.setRaceData(context.guildId, context.activeRace);
         this._app.routines['updateRaceMessage'](this._app, context);
     }
 }

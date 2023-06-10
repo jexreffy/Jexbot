@@ -30,7 +30,6 @@ module.exports = class CommandTeams extends JexCommand {
         context.activeRace.teams = true;
 
         let playerCount = 2;
-        let teamCount = context.activeRace.players.length / playerCount;
 
         this._app.routines['generateTeams'](this._app, context, playerCount);
 

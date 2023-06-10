@@ -15,7 +15,7 @@ module.exports = class CommandComment extends JexCommand {
     }
 
     isCommandValid(context) {
-        let player = context.activeRace.players.find(x => x.username === context.username);
+        let player = context.activeRace.players.find(x => x.discordId === context.userId);
         let match = context.message.match(/^[.!](\bcomment\b) ([ a-zA-Z0-9,./<>?;':"{}|`~!@#$%^&*()=_+]{0,1000})/i);
 
         return context.origination === this._app.DISCORD &&
@@ -25,7 +25,7 @@ module.exports = class CommandComment extends JexCommand {
     }
 
     executeCommand(context) {
-        let player = context.activeRace.players.find(x => x.username === context.username);
+        let player = context.activeRace.players.find(x => x.discordId === context.userId);
         let match = context.message.match(/^[.!](\bcomment\b) ([ a-zA-Z0-9,./<>?;':"{}|`~!@#$%^&*()=_+]{0,1000})/i);
 
         player.comment = match[2];

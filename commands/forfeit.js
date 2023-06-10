@@ -7,7 +7,7 @@ module.exports = class CommandDone extends JexCommand {
     }
 
     get commandName() {
-        return 'forfeit';
+        return 'ff';
     }
 
     get isRaceCommand() {
@@ -15,7 +15,7 @@ module.exports = class CommandDone extends JexCommand {
     }
 
     isCommandValid(context) {
-        let player = context.activeRace.players.find(x => x.username === context.username);
+        let player = context.activeRace.players.find(x => x.discordId === context.userId);
 
         return context.origination === this._app.DISCORD &&
                context.activeRace.started &&
@@ -24,7 +24,7 @@ module.exports = class CommandDone extends JexCommand {
     }
 
     executeCommand(context) {
-        let player = context.activeRace.players.find(x => x.username === context.username);
+        let player = context.activeRace.players.find(x => x.discordId === context.userId);
 
         player.forfeited = true;
         context.activeRace.remainingPlayers -= 1;
@@ -70,9 +70,6 @@ module.exports = class CommandDone extends JexCommand {
 
                 player.time = (time / 1000) * 1000 - ((player.leg === 0) ? 0 : teamTime);
 
-                let thisMember = this._app.findDiscordMember(context.guildId, player.username);
-                this._app.sendToDiscordRaceChannel(context.guildId, `<@${thisMember.id}> You mush let the credits run to completion **WITHOUT** fast forwarding.`);
-
                 let allFinished = true;
                 let allForfeit = true;
 
@@ -89,8 +86,7 @@ module.exports = class CommandDone extends JexCommand {
                             if (player.leg === x.leg) {
                                 context.activeRace.legStartTime[player.team] = Date.now() + (this._app.config['relayLegDelaySeconds']) * 1000;
 
-                                let nextMember = this._app.findDiscordMember(context.guildId, x.username);
-                                this._app.sendToDiscordRaceChannel(context.guildId, `<@${nextMember.id}> ${player.username} has forfeited. You will be able to start your leg of the relay in ${this._app.config['relayLegDelaySeconds'] / 60} minutes.`);
+                                this._app.sendToDiscordRaceChannel(context.guildId, `<@${x.discordId}> ${player.username} has forfeited. You will be able to start your leg of the relay in ${this._app.config['relayLegDelaySeconds'] / 60} minutes.`);
                             }
                         });
                     } else {
@@ -99,8 +95,7 @@ module.exports = class CommandDone extends JexCommand {
                                 context.activeRace.legStartTime[x.team] = Date.now() + (this._app.config['relayLegDelaySeconds'] + this._app.config['relayForfeitDelaySeconds']) * 1000;
 
                                 let nextPlayer = context.activeRace.players.find(y => y.team === x.team && y.leg === x.leg + 1);
-                                let nextForfeit = this._app.findDiscordMember(context.guildId, nextPlayer.username);
-                                this._app.sendToDiscordRaceChannel(context.guildId, `<@${nextForfeit.id}> ${player.username} has finished. You will be able to start your leg of the relay in ${(this._app.config['relayLegDelaySeconds'] + this._app.config['relayForfeitDelaySeconds']) / 60} minutes.`);
+                                this._app.sendToDiscordRaceChannel(context.guildId, `<@${nextPlayer.discordId}> ${player.username} has finished. You will be able to start your leg of the relay in ${(this._app.config['relayLegDelaySeconds'] + this._app.config['relayForfeitDelaySeconds']) / 60} minutes.`);
                             }
                         });
                     }

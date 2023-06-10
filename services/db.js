@@ -66,6 +66,7 @@ module.exports = class JexDatabase {
         this.#pool.getConnection(function(err, connection) {
             connection.query(`SELECT
                     players.id as id,
+                    players.discordId as discordId,
                     players.username as username,
                     players.twitch as twitch,
                     players.streaming as streaming,
@@ -82,7 +83,7 @@ module.exports = class JexDatabase {
                 }
 
                 playerRows.forEach((playerRow) => {
-                    let player = players.find(x => x.username === playerRow.username);
+                    let player = players.find(x => x.discordId === playerRow.discordId);
 
                     if (!player) {
                         player = {};
@@ -90,6 +91,7 @@ module.exports = class JexDatabase {
                     }
 
                     player.id = playerRow.id;
+                    player.discordId = playerRow.discordId;
                     player.username = playerRow.username;
                     player.twitch = playerRow.twitch;
                     player.streaming = playerRow.streaming === 1;
@@ -143,51 +145,67 @@ module.exports = class JexDatabase {
       return this.#categoryKeys[game];
     }
 
-    checkPlayerRanked(username, category) {
-        let playerIndex = this.#getPlayerIndexByName(username);
-        if (!this.#players[playerIndex][category]) {
-            this.#players[playerIndex][category] = {};
-            this.#players[playerIndex][category].matches = 0;
-            return false;
-        }
-        return (this.#players[playerIndex][category].matches >= this.#app.config['eloPlacementMatches']);
+    isUsernameUnique(discordId, username) {
+        let found = false;
+        this.#players.forEach(player => {
+            if (player.username === username && player.discordId !== discordId) {
+                found = true;
+            }
+        });
+
+        return !found;
     }
 
-    getPlayerTwitch(username) {
-        let playerIndex = this.#getPlayerIndexByName(username);
+    getPlayerUsername(discordId) {
+        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
+        return this.#players[playerIndex].username;
+    }
+
+    setPlayerUsername(discordId, username) {
+        let unique = this.isUsernameUnique(username);
+
+        if (!unique) return;
+
+        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
+        this.#players[playerIndex].username = username;
+        this.#savePlayer(this.#players[playerIndex]);
+    }
+
+    getPlayerTwitch(discordId) {
+        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
         return this.#players[playerIndex].twitch;
     }
 
-    setPlayerTwitch(username, twitch) {
-        let playerIndex = this.#getPlayerIndexByName(username);
+    setPlayerTwitch(discordId, twitch) {
+        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
         this.#players[playerIndex].twitch = twitch;
         this.#savePlayer(this.#players[playerIndex]);
     }
 
-    getPlayerTwitchBot(username) {
-        let playerIndex = this.#getPlayerIndexByName(username);
+    getPlayerTwitchBot(discordId) {
+        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
         return this.#players[playerIndex].streaming && this.#players[playerIndex].twitchBot;
     }
 
-    setPlayerTwitchBot(username, twitchBot) {
-        let playerIndex = this.#getPlayerIndexByName(username);
+    setPlayerTwitchBot(discordId, twitchBot) {
+        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
         this.#players[playerIndex].twitchBot = twitchBot;
         this.#savePlayer(this.#players[playerIndex]);
     }
 
-    getPlayerStreaming(username) {
-        let playerIndex = this.#getPlayerIndexByName(username);
+    getPlayerStreaming(discordId) {
+        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
         return this.#players[playerIndex].streaming;
     }
 
-    setPlayerStreaming(username, streaming) {
-        let playerIndex = this.#getPlayerIndexByName(username);
+    setPlayerStreaming(discordId, streaming) {
+        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
         this.#players[playerIndex].streaming = streaming;
         this.#savePlayer(this.#players[playerIndex]);
     }
 
-    getPlayerPB(username, category) {
-        let playerIndex = this.#getPlayerIndexByName(username);
+    getPlayerPB(discordId, category) {
+        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
         if (!this.#players[playerIndex][category]) {
             this.#players[playerIndex][category] = {};
         }
@@ -203,14 +221,24 @@ module.exports = class JexDatabase {
         }
     }
 
-    setPlayerPB(username, category, pb) {
-        let playerIndex = this.#getPlayerIndexByName(username);
+    setPlayerPB(discordId, category, pb) {
+        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
         this.#players[playerIndex][category].pb = pb;
         this.#saveElo(this.#players[playerIndex], category);
     }
 
-    getPlayerElo(username, category) {
-        let playerIndex = this.#getPlayerIndexByName(username);
+    checkPlayerRanked(discordId, category) {
+        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
+        if (!this.#players[playerIndex][category]) {
+            this.#players[playerIndex][category] = {};
+            this.#players[playerIndex][category].matches = 0;
+            return false;
+        }
+        return (this.#players[playerIndex][category].matches >= this.#app.config['eloPlacementMatches']);
+    }
+
+    getPlayerElo(discordId, category) {
+        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
         if (!this.#players[playerIndex][category]) {
             this.#players[playerIndex][category] = {};
         }
@@ -226,8 +254,8 @@ module.exports = class JexDatabase {
         }
     }
 
-    adjustElo(player, category, adjustment) {
-        let playerIndex = this.#getPlayerIndexByName(player);
+    adjustElo(discordId, category, adjustment) {
+        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
         if (this.#players[playerIndex][category].elo) {
             this.#players[playerIndex][category].elo += adjustment;
         } else {
@@ -400,17 +428,26 @@ module.exports = class JexDatabase {
         this.#saveSotwSeedData(guildId);
     }
 
-    #getPlayerIndexByName(username) {
-        if (username.length < 3) {
-            console.log("Username" + username + " is shorter than 4 characters!");
+    #getPlayerIndexByDiscordId(discordId) {
+        if (discordId.length < 0) {
+            console.log("Discord ID is not valid");
             return null;
         }
-        let player = this.#players.find(x => x.username === username);
+        let player = this.#players.find(x => x.discordId === discordId);
         if (player) {
-            let index = this.#players.findIndex(x => x.username === username);
+            let index = this.#players.findIndex(x => x.discordId === discordId);
             return index;
         } else {
+            console.log(`User ${discordId} not found!`);
+            return null;
+        }
+    }
+
+    addPlayerIfNotExists(discordId, username) {
+        let player = this.#players.find(x => x.discordId === discordId);
+        if (!player) {
             player = {
+                discordId: discordId,
                 username: username,
                 twitch: null,
                 streaming: false,
@@ -420,31 +457,24 @@ module.exports = class JexDatabase {
                     matches: 0
                 }
             };
-            this.#players.push(player);
+
             this.#createPlayer(player);
-            return this.#players.findIndex(x => x.username === username);
+            this.#players.push(player);
         }
     }
 
     #createPlayer(player) {
         this.#pool.getConnection(function(err, connection) {
-            let sql = `INSERT INTO players(username, twitch, streaming, twitchBot) VALUES(?, ?, ?, ?)`;
-            let data = [player.username, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0];
+            let sql = `INSERT INTO players(discordId, username, twitch, streaming, twitchBot) VALUES(?, ?, ?, ?, ?)`;
+            let data = [player.discordId, player.username, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0];
 
             connection.query(sql, data, (error, results, fields) => {
-                if (error) throw error;
-
-                player.id = results.insertId;
-
-                let sql = `UPDATE players
-                    SET username = ?, twitch = ?, streaming = ?, twitchBot = ?
-                    WHERE id = ?`;
-                let data = [player.username, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0, player.id];
-
-                connection.query(sql, data, (error, results, fields) => {
-                    connection.release();
-                    if (error) throw error;
-                });
+                connection.release();
+                if (error) {
+                    throw error;
+                } else {
+                    player.id = results.insertId;
+                }
             });
         });
     }
@@ -455,6 +485,9 @@ module.exports = class JexDatabase {
                 SET username = ?, twitch = ?, streaming = ?, twitchBot = ?
                 WHERE id = ?`;
             let data = [player.username, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0, player.id];
+
+            console.log(sql);
+            console.log(data);
 
             connection.query(sql, data, (error, results, fields) => {
                 connection.release();

@@ -1,7 +1,8 @@
 'use strict'
 module.exports = (app, context, player) => {
+    let userId = player.discordId;
     let role = app.getRacerRole(context.guildId);
-    let member = app.findDiscordMember(context.guildId, player.username);
+    let member = app.findDiscordMember(context.guildId, userId);
     member.roles.remove(role.id).then().catch(console.error);
 
     if (context.activeRace.remainingPlayers < 1) {

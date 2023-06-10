@@ -20,6 +20,7 @@ module.exports = class CommandJoin extends JexCommand {
     }
 
     executeCommand(context) {
+        let idToAdd = null;
         let playerToAdd = null;
         let teamToAdd = -1;
 
@@ -28,24 +29,28 @@ module.exports = class CommandJoin extends JexCommand {
 
             if (match) {
                 playerToAdd = match[2];
+                let member = this._app.findDiscordMember(context.guildId, playerToAdd);
+                idToAdd = member.id;
+
                 if (context.activeRace.teams) teamToAdd = parseInt(match[3]) - 1;
             }
         } else if (!(context.activeRace.invitational || context.activeRace.locked)) {
+            idToAdd = context.userId;
             playerToAdd = context.username;
         }
 
-        if (playerToAdd) {
-            let player = context.activeRace.players.find(x => x.username === playerToAdd);
+        if (idToAdd && playerToAdd) {
+            let player = context.activeRace.players.find(x => x.discordId === idToAdd);
 
             if (!(context.activeRace.started || context.activeRace.finished || player)) {
                 if (context.activeRace.invitational) {
-                    let member = this._app.findDiscordMember(context.guildId, playerToAdd);
-                    this._app.sendToDiscordRaceChannel(context.guildId, `<@${member.id}> You have been added to an invitational race`);
+                    this._app.sendToDiscordRaceChannel(context.guildId, `<@${idToAdd}> You have been added to an invitational race`);
                 } else {
                     context.activeRace.teams = false;
                 }
 
                 let newPlayer = {
+                    discordId: idToAdd,
                     username: playerToAdd
                 };
 

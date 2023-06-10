@@ -3,25 +3,25 @@ module.exports = (app, matchPlayers, category) => {
     let adjustments = [];
     for (let i = 0; i < matchPlayers.length; i++) {
         let adjustment = 0;
-        let playerElo = app.db.getPlayerElo(matchPlayers[i].username, category);
-        let playerK = app.db.checkPlayerRanked(matchPlayers[i].username, category) ? app.config['eloK'] : app.config['eloKPlacement'];
+        let playerElo = app.db.getPlayerElo(matchPlayers[i].discordId, category);
+        let playerK = app.db.checkPlayerRanked(matchPlayers[i].discordId, category) ? app.config['eloK'] : app.config['eloKPlacement'];
 
         for (let j = 0; j < i; j++) {
             if (matchPlayers[i].forfeited && matchPlayers[j].forfeited) {
-                let opponentElo = app.db.getPlayerElo(matchPlayers[j].username, category);
+                let opponentElo = app.db.getPlayerElo(matchPlayers[j].discordId, category);
                 adjustment += calculatePoints(playerElo, opponentElo, playerK, app.config['eloN'], 0.5);
             } else {
-                let opponentElo = app.db.getPlayerElo(matchPlayers[j].username, category);
+                let opponentElo = app.db.getPlayerElo(matchPlayers[j].discordId, category);
                 adjustment += calculatePoints(playerElo, opponentElo, playerK, app.config['eloN'], 0);
             }
         }
 
         for (let j = i + 1; j < matchPlayers.length; j++) {
             if (matchPlayers[i].forfeited && matchPlayers[j].forfeited) {
-                let opponentElo = app.db.getPlayerElo(matchPlayers[j].username, category);
+                let opponentElo = app.db.getPlayerElo(matchPlayers[j].discordId, category);
                 adjustment += calculatePoints(playerElo, opponentElo, playerK, app.config['eloN'], 0.5);
             } else {
-                let opponentElo = app.db.getPlayerElo(matchPlayers[j].username, category);
+                let opponentElo = app.db.getPlayerElo(matchPlayers[j].discordId, category);
                 adjustment += calculatePoints(playerElo, opponentElo, playerK, app.config['eloN'], 1);
             }
         }
@@ -29,7 +29,7 @@ module.exports = (app, matchPlayers, category) => {
     }
 
     for (let i = 0; i < matchPlayers.length; i++) {
-        app.db.adjustElo(matchPlayers[i].username, category, adjustments[i]);
+        app.db.adjustElo(matchPlayers[i].discordId, category, adjustments[i]);
     }
 
     return adjustments;

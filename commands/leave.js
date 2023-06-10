@@ -18,11 +18,11 @@ module.exports = class CommandLeave extends JexCommand {
         return context.origination === this._app.DISCORD &&
                !context.activeRace.locked &&
                !context.activeRace.started &&
-               context.activeRace.players.find(x => x.username === context.username);
+               context.activeRace.players.find(x => x.discordId === context.userId);
     }
 
     executeCommand(context) {
-        let player = context.activeRace.players.find(x => x.username === context.username);
+        let player = context.activeRace.players.find(x => x.discordId === context.userId);
         this._app.routines['onRunnerRemoved'](this._app, context, player);
 
         let allReady = context.activeRace.players.every(x => x.ready === true);

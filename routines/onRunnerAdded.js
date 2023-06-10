@@ -1,16 +1,15 @@
 'use strict'
 module.exports = (app, context, player) => {
+    let userId = player.discordId;
     let username = player.username;
-    context.activeRace.players.push(player);
-    context.activeRace.remainingPlayers += 1;
 
     let role = app.getRacerRole(context.guildId);
-    let member = app.findDiscordMember(context.guildId, username);
+    let member = app.findDiscordMember(context.guildId, userId);
     member.roles.add(role.id).then().catch(console.error);
 
-    if (app.db.getPlayerStreaming(username)) {
-        let userTwitch = app.db.getPlayerTwitch(username);
-        let shouldConnect = app.db.getPlayerTwitchBot(username);
+    if (app.db.getPlayerStreaming(userId)) {
+        let userTwitch = app.db.getPlayerTwitch(userId);
+        let shouldConnect = app.db.getPlayerTwitchBot(userId);
 
         if (userTwitch) {
             context.activeRace.multistream += userTwitch + '/';
@@ -22,4 +21,7 @@ module.exports = (app, context, player) => {
             player.twitchBot = shouldConnect ?? false;
         }
     }
+
+    context.activeRace.players.push(player);
+    context.activeRace.remainingPlayers += 1;
 }

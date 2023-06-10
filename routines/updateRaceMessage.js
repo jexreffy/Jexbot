@@ -82,15 +82,16 @@ module.exports = (app, context) => {
                 status += `\n----------`;
             }
 
+            let userId = race.players[i].discordId;
             let username = race.players[i].username;
 
-            if (app.db.getPlayerStreaming(username)) {
-                let userTwitch = app.db.getPlayerTwitch(username);
+            if (app.db.getPlayerStreaming(userId)) {
+                let userTwitch = app.db.getPlayerTwitch(userId);
                 if (!userTwitch) {
                     userTwitch = username;
                 }
 
-                names += `${((i !== 0) ? '\n' : '')}[${username}](https://twitch.tv/${userTwitch}) ${(!race.invitational && app.db.getPlayerTwitchBot(username) ? ' :robot:' : '')}`;
+                names += `${((i !== 0) ? '\n' : '')}[${username}](https://twitch.tv/${userTwitch}) ${(!race.invitational && app.db.getPlayerTwitchBot(userId) ? ' :robot:' : '')}`;
             } else {
                 names += `${((i !== 0) ? '\n' : '')}${username}`;
             }
@@ -115,7 +116,7 @@ module.exports = (app, context) => {
     if (race.started) {
         racerCommands = "Prefixes: `.` or `!`" +
             "\n`.done` - Finishes the race for the player" +
-            "\n`.forfeit` - Forfeits the race for the player";
+            "\n`.ff` - Forfeits the race for the player";
 
         viewerCommands = "Prefixes: `.` or `!`" +
             "\n`.blueballs [0-15]` - Sets the number of blue balls Aga 1 threw" +
@@ -133,7 +134,8 @@ module.exports = (app, context) => {
             "\n`.unready` - Sets player not ready to start" +
             "\n`.roll` - Only type this if your self esteem can handle it, or understand how Random Number Generators work..." +
             "\n`.streaming {on|off}` - Sets if the player is streaming the race and should be included in the Multistream" +
-            "\n`.twitch {Twitch username}` - Change stream URL to your Twitch username if different from your Discord username";
+            "\n`.twitch {Twitch username}` - Change stream URL to your Twitch username if different from your JexBot username" +
+            "\n`.username {new username}` - Change JexBot username to something different than your Discord username";
 
         if (!race.invitational) racerCommands += "\n`.twitchbot {on|off}` - Sets if JexBot connects to the Player's Twitch stream" ;
 
