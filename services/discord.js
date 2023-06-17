@@ -1,5 +1,7 @@
 'use strict'
-const Discord = require('discord.js');
+const fs = require('node:fs');
+const path = require('node:path');
+const { Client, Collection, Events, IntentsBitField } = require('discord.js');
 
 module.exports = class JexBotDiscord {
     #app;
@@ -11,21 +13,25 @@ module.exports = class JexBotDiscord {
     #sotwChannels = {};
 
     constructor(app) {
-        let client = new Discord.Client({fetchAllMembers: true});
+        const myIntents = new IntentsBitField();
+        myIntents.add(IntentsBitField.Flags.Guilds,
+                        IntentsBitField.Flags.GuildMembers,
+                        IntentsBitField.Flags.GuildMessages,
+                        IntentsBitField.Flags.MessageContent);
+
+        let client = new Client({ intents: myIntents });
 
         this.#discordClient = client;
         this.#app = app;
 
-        client.on('disconnect', JexBotDiscord.#onDisconnect);
-        client.on('error', JexBotDiscord.#onError);
-        client.on('reconnecting', JexBotDiscord.#onReconnecting);
-        client.on('warn', JexBotDiscord.#onWarning);
+        client.on(Events.Error, JexBotDiscord.#onError);
+        client.on(Events.Warn, JexBotDiscord.#onWarning);
 
-        client.on('message', message => {
-            this.#app.onDiscordMessageReceived(message);
+        client.on(Events.MessageCreate, async interaction => {
+            this.#app.onDiscordMessageReceived(interaction);
         });
 
-        client.on('ready', () => {
+        client.once(Events.ClientReady, () => {
             const config = app.config;
             const guilds = app.guilds;
 
@@ -62,7 +68,11 @@ module.exports = class JexBotDiscord {
         return this.#raceChannels[guildId].messages.fetch(messageId);
     }
 
-    getChannel(guildId, channelName) {
+    getChannelById(guildId, channelId) {
+        return this.#guilds[guildId].channels.cache.find(channel => channel.id === channelId);
+    }
+
+    getChannelByName(guildId, channelName) {
         return this.#guilds[guildId].channels.cache.find(channel => channel.name === channelName);
     }
 
@@ -84,6 +94,10 @@ module.exports = class JexBotDiscord {
 
     sendToRaceChannel(guildId, message) {
         return this.#raceChannels[guildId].send(message);
+    }
+
+    sendEmbedToRaceChannel(guildId, embed) {
+        return this.#raceChannels[guildId].send({embeds: [embed]});
     }
 
     sendToSotwChannel(guildId, message) {

@@ -22,7 +22,7 @@ module.exports = class CommandSnark extends JexCommand {
     executeCommand(context) {
         let match = context.message.match(/^[.!](\bsnark) ([a-zA-Z0-9\-]{2,100}) ([\s\S]*)/i);
 
-        let channel = this._app.findDiscordChannel(context.guildId, match[2]);
+        let channel = this._app.findDiscordChannelByName(context.guildId, match[2]);
 
         channel.send(match[3]).then().catch(console.error);
     }

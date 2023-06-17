@@ -50,7 +50,7 @@ module.exports = class JexBotApp {
     #initializeCommands() {
         fs.readdir('./commands/', (err, files) => {
             files.forEach(file => {
-                if (file !== 'command.js') {
+                if (file !== 'command.js' && file !== 'test.js') {
                     const commandClass = require(`../commands/${file}`);
                     const command = new commandClass(this);
                     const commandName = command.commandName;
@@ -134,8 +134,12 @@ module.exports = class JexBotApp {
         return this.#discord.findMessage(guildId, messageId);
     }
 
-    findDiscordChannel(guildId, channelName) {
-        return this.#discord.getChannel(guildId, channelName);
+    findDiscordChannelById(guildId, channelName) {
+        return this.#discord.getChannelById(guildId, channelName);
+    }
+
+    findDiscordChannelByName(guildId, channelName) {
+        return this.#discord.getChannelByName(guildId, channelName);
     }
 
     getRacerRole(guildId) {
@@ -156,6 +160,10 @@ module.exports = class JexBotApp {
 
     sendToDiscordRaceChannel(guildId, message) {
         return this.#discord.sendToRaceChannel(guildId, message);
+    }
+
+    sendEmbedToDiscordRaceChannel(guildId, embed) {
+        return this.#discord.sendEmbedToRaceChannel(guildId, embed);
     }
 
     sendToDiscordSotwChannel(guildId, message) {
@@ -184,14 +192,14 @@ module.exports = class JexBotApp {
 
         this.#db.addPlayerIfNotExists(context.userId, context.username);
 
-        if (message.channel.name === raceChannel.name) {
+        if (message.channelId === raceChannel.id) {
             this.#processRaceCommand(context);
 
             if (message) {
                 message.delete().then().catch(console.error);
             }
         } else {
-            context.messageChannel = message.channel;
+            context.messageChannel = this.#discord.getChannelById(guildId, message.channelId);
             this.#processGlobalCommand(context);
         }
     }

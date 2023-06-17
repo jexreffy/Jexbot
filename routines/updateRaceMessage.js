@@ -1,11 +1,13 @@
 'use strict'
+const {EmbedBuilder} = require("discord.js");
 module.exports = (app, context) => {
     let race = context.activeRace;
 
     let message = {};
-    let embed = {};
-    embed.color = 65280;
-    embed.title = race.status;
+    let embed = new EmbedBuilder()
+
+    embed.setColor(65280);
+    embed.setTitle(race.status);
 
     let desc = "The Legend of Zelda: A Link to the Past Randomizer Race"
 
@@ -66,7 +68,7 @@ module.exports = (app, context) => {
         }
     }
 
-    embed.description = desc;
+    embed.setDescription(desc);
 
     app.routines["sortPlayers"](race.players, race.teams, race.relay);
 
@@ -147,21 +149,16 @@ module.exports = (app, context) => {
     let dt = new Date(time);
     let spaceTime = `${dt.toLocaleString('en-US', { timeZone: 'America/New_York' })}`;
 
-    embed.fields = [
-        {'name': 'Racer Commands', 'value': racerCommands, 'inline': false},
-        {'name': 'Viewer Commands', 'value': viewerCommands, 'inline': false},
-        {'name': 'Last Spaceballs Reference', 'value': spaceTime, 'inline': false},
-        {'name': 'Dick Counter', 'value': `${race.dickCount}`, 'inline': false},
-        {'name': 'Player', 'value': names, 'inline': true},
-        {'name': 'Status', 'value': status, 'inline': true}
-    ];
-
-    message = {
-        'content': "",
-        'embed': embed
-    }
+    embed.addFields(
+        {name: 'Racer Commands', value: racerCommands, inline: false},
+        {name: 'Viewer Commands', value: viewerCommands, inline: false},
+        {name: 'Last Spaceballs Reference', value: spaceTime, inline: false},
+        {name: 'Dick Counter', value: `${race.dickCount}`, inline: false},
+        {name: 'Player', value: names, inline: true},
+        {name: 'Status', value: status, inline: true}
+    );
 
     app.findDiscordMessage(context.guildId, context.activeRace.messageId).then(x => {
-        x.edit(message).then().catch(console.error);
+        x.edit({embeds: [embed]}).then().catch(console.error);
     }).catch(console.error);
 };

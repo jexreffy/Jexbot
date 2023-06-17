@@ -1,5 +1,6 @@
 'use strict'
 const JexCommand = require('../commands/command');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = class CommandNew extends JexCommand {
     constructor(app) {
@@ -36,17 +37,13 @@ module.exports = class CommandNew extends JexCommand {
 
         this._app.routines['setRaceCategory'](this._app, context, game, category);
 
-        let embed = {
-            'content': "",
-            'embed': {
-                'color': 65280,
-                'title': 'Crystal Company Race'
-            }
-        };
+        let embed = new EmbedBuilder()
+            .setColor(65280)
+            .setTitle('Crystal Company Race');
 
         //${this._app.getPingRole(guildId)}
         this._app.sendToDiscordRaceChannel(guildId, `${this._app.config['pings'][context.activeRace.pingIndex]}`).then(x => {
-            this._app.sendToDiscordRaceChannel(guildId, embed).then(x => {
+            this._app.sendEmbedToDiscordRaceChannel(guildId, embed).then(x => {
                 context.activeRace.messageId = x.id;
                 this._app.db.setRaceData(context.guildId, context.activeRace);
                 this._app.routines['updateRaceMessage'](this._app, context);

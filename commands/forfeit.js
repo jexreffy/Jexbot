@@ -29,7 +29,7 @@ module.exports = class CommandDone extends JexCommand {
         player.forfeited = true;
         context.activeRace.remainingPlayers -= 1;
 
-        this._app.routines['broadcastMessage'](this._app, context,  `${context.username} has forfeited.`, true, true);
+        this._app.routines['broadcastMessage'](this._app, context,  `${player.username} has forfeited.`, true, true);
 
         if (context.activeRace.teams && !context.activeRace.relay) {
             let anyForfeit = false;
