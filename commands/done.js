@@ -62,10 +62,6 @@ module.exports = class CommandDone extends JexCommand {
             this._app.routines['broadcastMessage'](this._app, context, `${player.username} has finished with a time of ${this._app.routines['getRaceTime'](time)}.`, true, true);
         }
 
-        if (this._app.db.getPlayerPB(context.userId, category) > player.time) {
-            this._app.db.setPlayerPB(context.userId, category, player.time);
-        }
-
         if (context.activeRace.teams) {
             let allDone = true;
             context.activeRace.players.forEach(x => {

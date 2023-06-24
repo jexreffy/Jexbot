@@ -70,13 +70,8 @@ module.exports = class JexDatabase {
                     players.username as username,
                     players.twitch as twitch,
                     players.streaming as streaming,
-                    players.twitchBot as twitchBot,
-                    elo.category as category,
-                    elo.elo as elo,
-                    elo.matches as matches,
-                    elo.pb as pb
-                  FROM players, elo
-                  WHERE players.id = elo.player_id`, (playerErr, playerRows) => {
+                    players.twitchBot as twitchBot
+                  FROM players`, (playerErr, playerRows) => {
                 if (playerErr) {
                     connection.release();
                     throw playerErr;
@@ -96,11 +91,11 @@ module.exports = class JexDatabase {
                     player.twitch = playerRow.twitch;
                     player.streaming = playerRow.streaming === 1;
                     player.twitchBot = playerRow.twitchBot === 1;
-                    player[playerRow.category] = {};
-                    player[playerRow.category].elo = playerRow.elo;
-                    player[playerRow.category].matches = playerRow.matches;
-                    player[playerRow.category].pb = playerRow.pb;
+
+                    console.log(player);
                 });
+
+                console.log("Players Cached");
 
                 connection.query(`SELECT * FROM server WHERE id = 1`, (serverErr, serverRow) => {
                     if (serverErr) {
@@ -202,149 +197,6 @@ module.exports = class JexDatabase {
         let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
         this.#players[playerIndex].streaming = streaming;
         this.#savePlayer(this.#players[playerIndex]);
-    }
-
-    getPlayerPB(discordId, category) {
-        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
-        if (!this.#players[playerIndex][category]) {
-            this.#players[playerIndex][category] = {};
-        }
-        let pb = this.#players[playerIndex][category].pb;
-        if (pb) {
-            return pb;
-        } else {
-            this.#players[playerIndex][category].elo = 1000;
-            this.#players[playerIndex][category].matches = 0;
-            this.#players[playerIndex][category].pb = 18000000;
-            this.#createElo(this.#players[playerIndex], category);
-            return 18000000;
-        }
-    }
-
-    setPlayerPB(discordId, category, pb) {
-        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
-        this.#players[playerIndex][category].pb = pb;
-        this.#saveElo(this.#players[playerIndex], category);
-    }
-
-    checkPlayerRanked(discordId, category) {
-        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
-        if (!this.#players[playerIndex][category]) {
-            this.#players[playerIndex][category] = {};
-            this.#players[playerIndex][category].matches = 0;
-            return false;
-        }
-        return (this.#players[playerIndex][category].matches >= this.#app.config['eloPlacementMatches']);
-    }
-
-    getPlayerElo(discordId, category) {
-        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
-        if (!this.#players[playerIndex][category]) {
-            this.#players[playerIndex][category] = {};
-        }
-        let elo = this.#players[playerIndex][category].elo;
-        if (elo) {
-            return elo;
-        } else {
-            this.#players[playerIndex][category].elo = 1000;
-            this.#players[playerIndex][category].matches = 0;
-            this.#players[playerIndex][category].pb = 18000000;
-            this.#createElo(this.#players[playerIndex], category);
-            return 1000;
-        }
-    }
-
-    adjustElo(discordId, category, adjustment) {
-        let playerIndex = this.#getPlayerIndexByDiscordId(discordId);
-        if (this.#players[playerIndex][category].elo) {
-            this.#players[playerIndex][category].elo += adjustment;
-        } else {
-            this.#players[playerIndex][category].elo = this.#app.config['eloDefault'] + adjustment;
-        }
-        if (this.#players[playerIndex][category].matches) {
-            this.#players[playerIndex][category].matches += 1;
-        } else {
-            this.#players[playerIndex][category].matches = 1;
-        }
-        this.#saveElo(this.#players[playerIndex], category);
-    }
-
-    getCategoryLeaderboard(category) {
-        let board = [];
-        this.#players.forEach(player => {
-            if (player[category]) {
-                if (player[category].elo && player[category].matches >= this.#app.config['eloPlacementMatches']) {
-                    board.push({
-                        username: player.username,
-                        elo: player[category].elo
-                    });
-                }
-            }
-        });
-        if (board.length === 0) {
-            console.log('no board for "' + category + '"');
-            return null;
-        }
-        board.sort((a, b) => (a.elo > b.elo) ? -1 : 1);
-        return board;
-    }
-
-    getCategoryStats(category) {
-        let board = [];
-        let stats = {
-            totalRuns: 0,
-            categoryPlayers: 0
-        };
-        this.#players.forEach(player => {
-            if (player[category]) {
-                if (player[category].elo && player[category].matches >= this.#app.config['eloPlacementMatches']) {
-                    board.push({
-                        username: player.username,
-                        elo: player[category].elo
-                    });
-                }
-                if(player[category].elo) {
-                    stats.totalRuns += player[category].matches;
-                    stats.categoryPlayers += 1;
-                }
-            }
-        });
-        if (board.length === 0) {
-            console.log('no stats for "' + category + '"');
-            return null;
-        }
-        board.sort((a, b) => (a.elo > b.elo) ? -1 : 1);
-        stats.top = board.slice(0,3);
-        return stats;
-    }
-
-    getPlayerStats(player) {
-        let stats = {};
-        stats.categories = [];
-        let playerIndex = this.#players.findIndex(x => x.username === player);
-        if (playerIndex < 0) {
-            return stats;
-        }
-        stats.twitch = 'https://www.twitch.tv/' + ((this.#players[playerIndex].twitch) ? this.#players[playerIndex].twitch : player);
-        Object.keys(this.#players[playerIndex]).forEach(key => {
-            if (key !== "id" && key !== "username" && key !== "twitch" && key !== "streaming" && key !== "twitchBot") {
-                let board = this.getCategoryLeaderboard(key);
-                let rank = 0;
-                if (board) {
-                    rank = board.findIndex(x => x.username === player) + 1;
-                }
-                if (rank < 1) {
-                    rank = 'unranked';
-                }
-                stats.categories.push({
-                    name: key,
-                    rank: rank,
-                    elo: this.#players[playerIndex][key].elo,
-                    matches: this.#players[playerIndex][key].matches
-                });
-            }
-        });
-        return stats;
     }
 
     getSpaceballs() {
@@ -451,11 +303,7 @@ module.exports = class JexDatabase {
                 username: username,
                 twitch: null,
                 streaming: false,
-                twitchBot: false,
-                standard: {
-                    elo: 1000,
-                    matches: 0
-                }
+                twitchBot: false
             };
 
             this.#createPlayer(player);
@@ -488,32 +336,6 @@ module.exports = class JexDatabase {
 
             console.log(sql);
             console.log(data);
-
-            connection.query(sql, data, (error, results, fields) => {
-                connection.release();
-                if (error) throw error;
-            });
-        });
-    }
-
-    #createElo(player, category) {
-        this.#pool.getConnection(function(err, connection) {
-            let sql = `INSERT INTO elo(player_id, category) VALUES(?, ?)`;
-            let data = [player.id, category];
-
-            connection.query(sql, data, (error, results, fields) => {
-                connection.release();
-                if (error) throw error;
-            });
-        });
-    }
-
-    #saveElo(player, category) {
-        this.#pool.getConnection(function(err, connection) {
-            let sql = `UPDATE elo
-                SET elo = ?, matches = ?, pb = ?
-                WHERE player_id = ? AND category = ?`;
-            let data = [player[category].elo, player[category].matches, player[category].pb, player.id, category];
 
             connection.query(sql, data, (error, results, fields) => {
                 connection.release();

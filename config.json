@@ -119,11 +119,6 @@
             ]
         }
     },
-    "eloK": 60,
-    "eloKPlacement": 100,
-    "eloN": 1000,
-    "eloPlacementMatches": 1,
-    "eloDefault": 1000,
     "helloInterval": 1800,
     "jokeCountdownMax": 100,
     "minimumNewCallbackSeconds": 60,

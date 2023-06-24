@@ -10,15 +10,6 @@ module.exports = (app, context, player) => {
         context.activeRace.spoilersAllowed = true;
         context.activeRace.status = 'RACE FINISHED';
 
-        if (!(context.activeRace.teams || context.activeRace.multiworld)) {
-            app.routines['sortPlayers'](context.activeRace.players, false, false);
-
-            let adjustments = app.routines['resolveMatchElo'](app, context.activeRace.players, context.activeRace.category);
-            for (let i = 0; i < context.activeRace.players.length; i++) {
-                context.activeRace.players[i].adjustment = adjustments[i];
-            }
-        }
-
         if (!context.activeRace.gtbkWinner) {
             app.routines['gtbkWinner'](app, context);
         }
