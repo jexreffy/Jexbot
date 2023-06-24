@@ -1,25 +1,25 @@
 {
   "574586257079009280": {
-    "finished": true,
-    "ladder": false,
+    "finished": false,
+    "ladder": true,
     "invitational": false,
     "teams": false,
     "multiworld": false,
     "locked": false,
     "relay": false,
-    "started": false,
-    "startedAt": null,
-    "initiatedAt": 1629751985479,
+    "started": true,
+    "startedAt": 1686983577733,
+    "initiatedAt": 1686983577733,
     "escapeItem": null,
-    "lastHello": null,
-    "pingIndex": 4,
-    "countdownIndex": 12,
+    "lastHello": 1687584310002,
+    "pingIndex": -1,
+    "countdownIndex": -1,
     "remainingPlayers": 0,
     "players": [],
     "crew": [],
     "lastCallback": null,
     "blueballs": -1,
-    "guessGameEnabled": false,
+    "guessGameEnabled": true,
     "guessGameStarted": false,
     "guessGameFinished": false,
     "gtRunner": null,
@@ -28,17 +28,17 @@
     "spoilersAllowed": false,
     "gtbkGuess": -1,
     "gatekeeper": null,
-    "game": "",
-    "category": "crosskeys",
-    "categoryName": "Crosskeys",
-    "categoryDescription": "Open Start, Fast Ganon, Crossworld Entrance Shuffle, Dungeon Items shuffled in the full item pool",
-    "messageId": "879468301980401684",
+    "game": "alttpr",
+    "category": "standard",
+    "categoryName": "Standard",
+    "categoryDescription": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals",
+    "messageId": null,
     "seedCode": null,
     "seedLink": null,
     "seedRoller": null,
-    "multistream": "https://multistre.am/",
+    "multistream": "",
     "restream": null,
-    "status": "RACE CLOSED",
+    "status": "",
     "lastDickTime": null,
     "dickCount": 0,
     "guesses": [
@@ -67,81 +67,32 @@
     ],
     "legs": [],
     "legStartTime": [],
-    "categoryToRoll": "crosskeys",
+    "categoryToRoll": "standard",
     "connected": false
   },
   "515731524616847367": {
-    "started": true,
+    "started": false,
     "finished": true,
-    "startedAt": 1622482826640,
-    "initiatedAt": 1622480230928,
-    "pingIndex": -1,
-    "countdownIndex": 4,
-    "remainingPlayers": 0,
+    "startedAt": null,
+    "initiatedAt": 1687585223103,
+    "pingIndex": 8,
+    "countdownIndex": 14,
+    "remainingPlayers": 1,
     "players": [
       {
-        "username": "PhantomRyu",
-        "team": 0,
-        "leg": 0,
-        "twitch": "#PhantomRyu",
-        "ready": true,
-        "finished": true,
-        "time": 6509496
-      },
-      {
-        "username": "Antissim",
-        "team": 0,
-        "leg": 1,
-        "ready": true,
-        "finished": true,
-        "time": 16704186.000000002
-      },
-      {
-        "username": "TjMaelstrom",
-        "team": 0,
-        "leg": 2,
-        "twitch": "#TjMaelstrom",
-        "ready": true,
-        "finished": true,
-        "time": 26664022
-      },
-      {
-        "username": "Digidude22",
-        "team": 1,
-        "leg": 0,
-        "twitch": "#Digidude22",
-        "ready": true,
-        "finished": true,
-        "time": 8419907
-      },
-      {
-        "username": "WaltherIV",
-        "team": 1,
-        "leg": 1,
-        "ready": true,
-        "finished": true,
-        "time": 16246285
-      },
-      {
-        "username": "jexreffy",
-        "team": 1,
-        "leg": 2,
-        "twitch": "#jexreffy",
-        "ready": true,
-        "finished": true,
-        "time": 27946029
+        "discordId": "263872489946349568"
       }
     ],
     "guessGameStarted": false,
-    "gatekeeper": "jexreffy",
-    "category": "",
-    "messageId": "848968356396793876",
+    "gatekeeper": null,
+    "category": "standard",
+    "messageId": "1122038493816832041",
     "seedCode": null,
     "seedLink": null,
-    "seedRoller": "JexBot",
-    "multistream": "https://multistre.am/PhantomRyu/Digidude22/bsforbonesaw/TjMaelstrom/jexreffy/",
-    "status": "RACE STARTED",
-    "dickCount": 8,
+    "seedRoller": null,
+    "multistream": "https://multistre.am/",
+    "status": "PRE-RACE: WAITING FOR PLAYERS TO JOIN",
+    "dickCount": 0,
     "seed": null,
     "guesses": [
       null,
@@ -167,11 +118,11 @@
       null,
       null
     ],
-    "lastDickTime": 1622497510393,
+    "lastDickTime": null,
     "gtRunner": null,
     "gtbk": -1,
     "escapeItem": null,
-    "lastHello": 1622509890002,
+    "lastHello": null,
     "lastCallback": null,
     "blueballs": -1,
     "gtbkWinner": null,
@@ -180,57 +131,19 @@
     "guessGameFinished": false,
     "spoilersAllowed": false,
     "game": "alttpr",
-    "categoryName": "",
-    "crew": [
-      {
-        "username": "TjMaelstrom",
-        "twitch": "#TjMaelstrom"
-      },
-      {
-        "username": "WaltherIV"
-      },
-      {
-        "username": "ZephyrBlayze"
-      },
-      {
-        "username": "Ruzzelljr"
-      },
-      {
-        "username": "Antissim"
-      },
-      {
-        "username": "tjjoll"
-      }
-    ],
-    "restream": "#TheCrystalCompany",
-    "invitational": true,
-    "teams": true,
+    "categoryName": "Standard",
+    "crew": [],
+    "restream": null,
+    "invitational": false,
+    "teams": false,
     "multiworld": false,
-    "locked": true,
-    "relay": true,
-    "legs": [
-      {
-        "category": "standard",
-        "name": "Standard",
-        "link": "<https://alttpr.com/h/KJG3E60xv3>",
-        "code": "<:mirror:812714328347246622> <:Bottle:812714328280006676> <:MoonPearl:812714328250777622> <:Boomerang:812714328222335067> <:ALotOfLove:817783033712476200>"
-      },
-      {
-        "category": "enemizer",
-        "name": "Enemizer",
-        "link": "<https://alttpr.com/h/4AvpNgDgGn>",
-        "code": "<:mirror:812714328347246622> <:Mudora:812714328230854696> <:DungeonMap:812714328448434196> <:Flippers:812714328251695105> <:Bow:812714327928078367>"
-      },
-      {
-        "category": "crosskeys",
-        "name": "Crosskeys",
-        "link": "<https://alttpr.com/h/WDvWx80Qyd>",
-        "code": "<:Mushroom:812714328317755462> <:Ether:812714328234524696> <:Mushroom:812714328317755462> <:Powder:812714328310284319> <:Mushroom:812714328317755462>"
-      }
-    ],
-    "legStartTime": [
-      0,
-      0
-    ]
+    "locked": false,
+    "relay": false,
+    "legs": [],
+    "legStartTime": [],
+    "connected": false,
+    "guessGameEnabled": true,
+    "categoryDescription": "Escape Sequence Start, Defeat Ganon, 7/7 Crystals",
+    "categoryToRoll": "standard"
   }
 }
