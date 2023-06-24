@@ -60,8 +60,12 @@ module.exports = class JexBotDiscord {
         return this.#discordClient;
     }
 
-    findMember(guildId, id) {
-        return this.#raceChannels[guildId].members.find(x => x.user.id === id);
+    findMemberById(guildId, id) {
+        return this.#guilds[guildId].members.cache.find(x => x.user.id === id);
+    }
+
+    findMemberByUsername(guildId, username) {
+        return this.#guilds[guildId].members.cache.find(x => x.user.username === username)
     }
 
     findMessage(guildId, messageId) {

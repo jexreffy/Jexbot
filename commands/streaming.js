@@ -28,16 +28,6 @@ module.exports = class CommandStreaming extends JexCommand {
         let isStreaming = match[3] === "on";
 
         this._app.db.setPlayerStreaming(context.userId, isStreaming);
-
-        let userTwitch = this._app.db.getPlayerTwitch(context.userId);
-        if (!userTwitch) {
-            userTwitch = context.username;
-        }
-
-        context.activeRace.multistream = context.activeRace.multistream.replace(new RegExp(userTwitch + '/', 'i'), "");
-        if (this._app.db.getPlayerStreaming(context.userId)) context.activeRace.multistream += userTwitch + '/';
-
-        this._app.db.setRaceData(context.guildId, context.activeRace);
         this._app.routines['updateRaceMessage'](this._app, context);
     }
 }

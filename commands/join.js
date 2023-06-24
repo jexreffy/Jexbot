@@ -21,25 +21,22 @@ module.exports = class CommandJoin extends JexCommand {
 
     executeCommand(context) {
         let idToAdd = null;
-        let playerToAdd = null;
         let teamToAdd = -1;
 
         if (context.activeRace.invitational && this._app.config['referees'].includes(context.username)) {
             let match = context.message.match(context.activeRace.teams ? /^[.!](\bjoin\b) ([a-zA-Z0-9]{4,30}) ((1)|(2))/i : /^[.!](\bjoin\b) ([a-zA-Z0-9]{4,30})/i);
 
             if (match) {
-                playerToAdd = match[2];
-                let member = this._app.findDiscordMember(context.guildId, playerToAdd);
+                let member = this._app.findDiscordMemberByUsername(context.guildId, match[2]);
                 idToAdd = member.id;
 
                 if (context.activeRace.teams) teamToAdd = parseInt(match[3]) - 1;
             }
         } else if (!(context.activeRace.invitational || context.activeRace.locked)) {
             idToAdd = context.userId;
-            playerToAdd = context.username;
         }
 
-        if (idToAdd && playerToAdd) {
+        if (idToAdd) {
             let player = context.activeRace.players.find(x => x.discordId === idToAdd);
 
             if (!(context.activeRace.started || context.activeRace.finished || player)) {
@@ -50,8 +47,7 @@ module.exports = class CommandJoin extends JexCommand {
                 }
 
                 let newPlayer = {
-                    discordId: idToAdd,
-                    username: playerToAdd
+                    discordId: idToAdd
                 };
 
                 if (teamToAdd >= 0) {

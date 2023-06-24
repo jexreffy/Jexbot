@@ -36,7 +36,7 @@ module.exports = class CommandGTStop extends JexCommand {
         let response = null;
 
         for (let i = 0; i < context.activeRace.guesses.length; i++) {
-            if (context.activeRace.guesses[i] === context.username) {
+            if (context.activeRace.guesses[i] === context.displayName) {
                 response = `${context.activeRace.guesses[i]} has already guessed ${i + 1} for the GTBK Guessing Game.`;
                 break;
             }
@@ -53,8 +53,8 @@ module.exports = class CommandGTStop extends JexCommand {
                 this._app.sendToDiscordRaceChannel(context.guildId, `**${response}**`).then().catch(console.error);
             }
         } else {
-            context.activeRace.guesses[guess - 1] = context.username;
-            response = `${context.username} has guessed ${guess} for the GTBK Guessing Game.`;
+            context.activeRace.guesses[guess - 1] = context.displayName;
+            response = `${context.displayName} has guessed ${guess} for the GTBK Guessing Game.`;
 
             if (context.activeRace.ladder || context.activeRace.invitational) {
                 this._app.sendToTwitchChannel(context.guildId, context.messageChannel, response).then().catch(console.error);

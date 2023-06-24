@@ -29,13 +29,6 @@ module.exports = class CommandUsername extends JexCommand {
 
         if (this._app.db.isUsernameUnique(username)) {
             this._app.db.setPlayerUsername(context.userId, username);
-
-            username = this._app.db.getPlayerUsername(context.userId);
-
-            let player = context.activeRace.players.find(x => x.discordId === context.userId);
-            player.username = username;
-
-            this._app.db.setRaceData(context.guildId, context.activeRace);
             this._app.routines['updateRaceMessage'](this._app, context);
         }
     }

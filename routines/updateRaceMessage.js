@@ -41,9 +41,9 @@ module.exports = (app, context) => {
 
     if (race.restream) {
         desc += `\n Restream: <https://twitch.tv/${race.restream.substr(1)}>`;
-    } else if (race.multistream) {
+    } /*else if (race.multistream) {
         desc += `\n Multistream: <${race.multistream}>`;
-    }
+    }*/
 
     if (race.escapeItem) {
         desc += `\n Escape Item: ${race.escapeItem}`;
@@ -85,7 +85,7 @@ module.exports = (app, context) => {
             }
 
             let userId = race.players[i].discordId;
-            let username = race.players[i].username;
+            let username = app.db.getPlayerUsername(userId);
 
             if (app.db.getPlayerStreaming(userId)) {
                 let userTwitch = app.db.getPlayerTwitch(userId);

@@ -103,7 +103,7 @@ module.exports = class CommandRoll extends JexCommand {
                 }
             }
         } else if (!context.activeRace.finished) {
-            this._app.sendToDiscordRaceChannel(context.guildId, `**${context.username} has sealed their fate. I'd pray to RN Jesus while the seed is rolling if I were you...**`).then().catch(console.error);
+            this._app.sendToDiscordRaceChannel(context.guildId, `**${context.displayName} has sealed their fate. I'd pray to RN Jesus while the seed is rolling if I were you...**`).then().catch(console.error);
             let game = context.activeRace.game;
             let category = context.activeRace.categoryToRoll;
 
@@ -163,7 +163,7 @@ module.exports = class CommandRoll extends JexCommand {
                 if (context.activeRace.relay) {
                     context.activeRace.legs.push(seed);
                 } else {
-                    context.activeRace.seedRoller = context.username;
+                    context.activeRace.seedRoller = context.displayName;
                     context.activeRace.seedLink = seed.link;
                     context.activeRace.seedCode = seed.code;
                 }

@@ -126,8 +126,12 @@ module.exports = class JexBotApp {
         this.#twitch.disconnectFromTwitch(guildId);
     }
 
-    findDiscordMember(guildId, username) {
-        return this.#discord.findMember(guildId, username);
+    findDiscordMemberById(guildId, id) {
+        return this.#discord.findMemberById(guildId, id);
+    }
+
+    findDiscordMemberByUsername(guildId, username) {
+        return this.#discord.findMemberById(guildId, username);
     }
 
     findDiscordMessage(guildId, messageId) {
@@ -179,6 +183,7 @@ module.exports = class JexBotApp {
 
         const guildId = message.guild.id;
         const raceChannel = this.#discord.getRaceChannel(guildId);
+        const member = this.#discord.findMemberById(guildId, message.author.id);
 
         let context = {
             activeRace: this.#db.getRaceData(guildId),
@@ -187,10 +192,11 @@ module.exports = class JexBotApp {
             messageChannel: null,
             origination: this.DISCORD,
             userId: message.author.id,
-            username: message.author.username
+            username: message.author.username,
+            displayName: member.displayName
         };
 
-        this.#db.addPlayerIfNotExists(context.userId, context.username);
+        this.#db.addPlayerIfNotExists(context.userId, context.displayName);
 
         if (message.channelId === raceChannel.id) {
             this.#processRaceCommand(context);
@@ -217,7 +223,8 @@ module.exports = class JexBotApp {
             message: message,
             messageChannel: channel,
             origination: this.TWITCH,
-            username: tags.username
+            username: tags.username,
+            displayName: tags.username
         };
 
         this.#processRaceCommand(context);

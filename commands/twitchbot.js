@@ -28,11 +28,6 @@ module.exports = class CommandTwitchBot extends JexCommand {
         let isStreaming = match[2] === 'on';
 
         this._app.db.setPlayerTwitchBot(context.userId, isStreaming);
-
-        let player = context.activeRace.players.find(x => x.discordId === context.userId);
-        player.twitchBot = isStreaming;
-
-        this._app.db.setRaceData(context.guildId, context.activeRace);
         this._app.routines['updateRaceMessage'](this._app, context);
     }
 }

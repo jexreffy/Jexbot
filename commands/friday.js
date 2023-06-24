@@ -34,7 +34,7 @@ module.exports = class CommandFriday extends JexCommand {
         }
 
         context.messageChannel.send(
-            this._app.config['friday'][randomIndex].replace('NAME', context.username)
+            this._app.config['friday'][randomIndex].replace('NAME', context.displayName)
         ).then().catch(console.error);;
     }
 }
