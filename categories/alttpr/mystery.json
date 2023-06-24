@@ -1,7 +1,7 @@
 {
-  "category": "mysteryladder",
-  "name": "Mystery Ladder",
-  "description": "All settings are randomly chosen per the ALTTPR Ladder settings. You must play the seed to figure out what it is.",
+  "category": "mystery",
+  "name": "Mystery",
+  "description": "All settings are randomly chosen per JexBot Mystery settings. You must play the seed to figure out what it is.",
   "gtbk": false,
   "customizer": true,
   "mystery": true,
@@ -118,7 +118,7 @@
     "item_pool": {
       "normal": 60,
       "hard": 30,
-      "expert": 10,
+      "expert": 0,
       "crowd_control": 0
     },
     "item_functionality": {
@@ -138,8 +138,8 @@
       "expert": 0
     },
     "timer_mode": {
-      "off": 96,
-      "countdown-ohko": 4
+      "off": 100,
+      "countdown-ohko": 0
     },
     "starting_items": [
       {

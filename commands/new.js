@@ -41,8 +41,7 @@ module.exports = class CommandNew extends JexCommand {
             .setColor(65280)
             .setTitle('Crystal Company Race');
 
-        //${this._app.getPingRole(guildId)}
-        this._app.sendToDiscordRaceChannel(guildId, `${this._app.config['pings'][context.activeRace.pingIndex]}`).then(x => {
+        this._app.sendToDiscordRaceChannel(guildId, `${this._app.getPingRole(guildId)} ${this._app.config['pings'][context.activeRace.pingIndex]}`).then(x => {
             this._app.sendEmbedToDiscordRaceChannel(guildId, embed).then(x => {
                 context.activeRace.messageId = x.id;
                 this._app.db.setRaceData(context.guildId, context.activeRace);
