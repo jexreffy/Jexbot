@@ -52,8 +52,17 @@ module.exports = class JexBotTwitch {
                 if (race.restream) channels.push(race.restream);
 
                 for (let i = 0; i < race.players.length; i++) {
-                    if (race.players[i].twitchBot) {
-                        channels.push(race.players[i].twitch);
+                    let userId = race.players[i].discordId;
+
+                    if (this.#app.db.getPlayerTwitchBot(userId)) {
+                        let username = this.#app.db.getPlayerUsername(userId);
+                        let userTwitch = this.#app.db.getPlayerTwitch(userId);
+
+                        if (!userTwitch) {
+                            userTwitch = username;
+                        }
+
+                        channels.push(userTwitch);
                     }
                 }
             }

@@ -215,10 +215,8 @@ module.exports = class JexBotApp {
 
         const guildId = this.#twitch.getGuildForChannel(channel);
 
-        let race = this.#db.getRaceData(guildId);
-
         let context = {
-            activeRace: race,
+            activeRace: this.#db.getRaceData(guildId),
             guildId: guildId,
             message: message,
             messageChannel: channel,

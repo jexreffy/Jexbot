@@ -30,10 +30,6 @@ module.exports = class CommandDick extends JexCommand {
 
         let dickIndex = this._app.routines['getRandom'](this._app.config['dickMessages'].length);
 
-        if (context.activeRace.seedRoller === 'JexBot') {
-            dickIndex--;
-        }
-
         let dickMessage = this._app.config['dickMessages'][dickIndex].replace('ROLLER', context.activeRace.seedRoller).replace('RICHARD', context.activeRace.dickCount).replace('NAME', context.displayName);
 
         this._app.routines['broadcastTwitch'](this._app, context, dickMessage, false);

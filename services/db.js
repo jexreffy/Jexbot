@@ -334,9 +334,6 @@ module.exports = class JexDatabase {
                 WHERE id = ?`;
             let data = [player.username, player.twitch, player.streaming ? 1 : 0, player.twitchBot ? 1 : 0, player.id];
 
-            console.log(sql);
-            console.log(data);
-
             connection.query(sql, data, (error, results, fields) => {
                 connection.release();
                 if (error) throw error;
