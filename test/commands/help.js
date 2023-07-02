@@ -42,7 +42,8 @@ describe('command help', function() {
                 message: `!help`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(helpCommand.isCommandValid(context)).to.be.false;
@@ -66,7 +67,8 @@ describe('command help', function() {
                 message: `!help`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(helpCommand.isCommandValid(context)).to.be.true;
@@ -89,7 +91,8 @@ describe('command help', function() {
                 message: `!help`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(helpCommand.isCommandValid(context)).to.be.true;
@@ -112,7 +115,8 @@ describe('command help', function() {
                 message: `!help`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(helpCommand.isCommandValid(context)).to.be.true;

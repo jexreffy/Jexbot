@@ -43,6 +43,7 @@ describe('command twitchBot', function() {
                     started: false,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         }
                     ]
@@ -51,7 +52,9 @@ describe('command twitchBot', function() {
                 message: `!twitchbot on`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(twitchBotCommand.isCommandValid(context)).to.be.false;
@@ -69,6 +72,7 @@ describe('command twitchBot', function() {
                     started: true,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         }
                     ]
@@ -77,7 +81,9 @@ describe('command twitchBot', function() {
                 message: `!twitchbot on`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(twitchBotCommand.isCommandValid(context)).to.be.false;
@@ -95,6 +101,7 @@ describe('command twitchBot', function() {
                     started: false,
                     players: [
                         {
+                            discordId: `1`,
                             username: 'phantomryu'
                         }
                     ]
@@ -103,12 +110,14 @@ describe('command twitchBot', function() {
                 message: `!twitchbot on`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(twitchBotCommand.isCommandValid(context)).to.be.false;
 
-            context.activeRace.players[0].username = 'jexreffy';
+            context.activeRace.players[0].discordId = `0`;
 
             expect(twitchBotCommand.isCommandValid(context)).to.be.true;
 
@@ -124,6 +133,7 @@ describe('command twitchBot', function() {
                     started: false,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         }
                     ]
@@ -132,7 +142,9 @@ describe('command twitchBot', function() {
                 message: `!twitchbot`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(twitchBotCommand.isCommandValid(context)).to.be.true;
@@ -154,6 +166,7 @@ describe('command twitchBot', function() {
                     started: false,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         }
                     ]
@@ -162,7 +175,9 @@ describe('command twitchBot', function() {
                 message: `!twitchbot on`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(twitchBotCommand.isCommandValid(context)).to.be.true;
@@ -170,7 +185,7 @@ describe('command twitchBot', function() {
             twitchBotCommand.executeCommand(context);
 
             expect(botStub.calledOnce).to.be.true;
-            expect(botStub.calledWith('jexreffy', true)).to.be.true;
+            expect(botStub.calledWith(`0`, true)).to.be.true;
             expect(updateStub.calledOnce).to.be.true;
 
             done();
@@ -185,6 +200,7 @@ describe('command twitchBot', function() {
                     started: false,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         }
                     ]
@@ -193,7 +209,9 @@ describe('command twitchBot', function() {
                 message: `!twitchbot off`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(twitchBotCommand.isCommandValid(context)).to.be.true;
@@ -201,7 +219,7 @@ describe('command twitchBot', function() {
             twitchBotCommand.executeCommand(context);
 
             expect(botStub.calledOnce).to.be.true;
-            expect(botStub.calledWith('jexreffy', false)).to.be.true;
+            expect(botStub.calledWith(`0`, false)).to.be.true;
             expect(updateStub.calledOnce).to.be.true;
 
             done();

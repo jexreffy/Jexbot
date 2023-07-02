@@ -179,11 +179,11 @@ describe('setRaceCategory', function() {
         });
 
         it('verify Seed of the Week Hard category yields correct results', function (done) {
-            let categoryKey = 'mysteryladder';
+            let categoryKey = 'mystery';
             let category = require(`../../categories/alttpr/${categoryKey}.json`);
             let categoryItems = {
-                category: "mysteryladder",
-                name: "Mystery Ladder",
+                category: "mystery",
+                name: "Mystery",
                 link: "<https://alttpr.com/h/KJG3l83zM3>",
                 code: "<:Flippers:812714328251695105> <:Mushroom:812714328317755462> <:Mudora:812714328230854696> <:Mushroom:812714328317755462> <:ALotOfLove:817783033712476200>"
             };

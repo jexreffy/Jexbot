@@ -20,15 +20,13 @@ describe('onRunnerFinished', function() {
 
     beforeEach(function () {
         mockApp.getRacerRole = function (guildId) { };
-        mockApp.findDiscordMember = function (guildId, username) { };
+        mockApp.findDiscordMemberById = function (guildId, discordId) { };
         mockApp.db = {
             setRaceData: function(guildId, race) { }
         };
         mockApp.routines = {
             broadcastMessage: function (app, context, message, bold, delay) { },
             gtbkWinner: function (app, context) { },
-            resolveMatchElo: function (app, players, category) { },
-            sortPlayers: function (players, teams, relay) { },
             updateRaceMessage: function(app, context) { }
         }
     });
@@ -47,11 +45,9 @@ describe('onRunnerFinished', function() {
 
             let removeStub = sinon.stub(member.roles, 'remove').resolves();
             let roleStub = sinon.stub(mockApp, 'getRacerRole').returns(role);
-            let memberStub = sinon.stub(mockApp, 'findDiscordMember').returns(member);
+            let memberStub = sinon.stub(mockApp, 'findDiscordMemberById').returns(member);
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let gtbkStub = sinon.stub(mockApp.routines, 'gtbkWinner');
-            let eloStub = sinon.stub(mockApp.routines, 'resolveMatchElo');
-            let sortStub = sinon.stub(mockApp.routines, 'sortPlayers');
             let updateStub = sinon.stub(mockApp.routines, 'updateRaceMessage');
 
             let context = {
@@ -67,13 +63,16 @@ describe('onRunnerFinished', function() {
                     gtbkWinner: null,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy',
                             finished: true
                         },
                         {
+                            discordId: `1`,
                             username: 'PhantomRyu'
                         },
                         {
+                            discordId: `2`,
                             username: 'TjMaelstrom'
                         }
                     ]
@@ -91,8 +90,6 @@ describe('onRunnerFinished', function() {
             expect(removeStub.calledOnce).to.be.true;
             expect(broadcastStub.notCalled).to.be.true;
             expect(gtbkStub.notCalled).to.be.true;
-            expect(eloStub.notCalled).to.be.true;
-            expect(sortStub.notCalled).to.be.true;
             expect(updateStub.calledOnce).to.be.true;
         });
 
@@ -109,11 +106,9 @@ describe('onRunnerFinished', function() {
 
             let removeStub = sinon.stub(member.roles, 'remove').resolves();
             let roleStub = sinon.stub(mockApp, 'getRacerRole').returns(role);
-            let memberStub = sinon.stub(mockApp, 'findDiscordMember').returns(member);
+            let memberStub = sinon.stub(mockApp, 'findDiscordMemberById').returns(member);
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let gtbkStub = sinon.stub(mockApp.routines, 'gtbkWinner');
-            let eloStub = sinon.stub(mockApp.routines, 'resolveMatchElo');
-            let sortStub = sinon.stub(mockApp.routines, 'sortPlayers');
             let updateStub = sinon.stub(mockApp.routines, 'updateRaceMessage');
 
             let context = {
@@ -129,21 +124,26 @@ describe('onRunnerFinished', function() {
                     gtbkWinner: null,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy',
                             finished: true
                         },
                         {
+                            discordId: `1`,
                             username: 'KillerApp23',
                             finished: true
                         },
                         {
+                            discordId: `2`,
                             username: 'Antissim',
                             finished: true
                         },
                         {
+                            discordId: `3`,
                             username: 'PhantomRyu'
                         },
                         {
+                            discordId: `4`,
                             username: 'TjMaelstrom'
                         }
                     ]
@@ -163,8 +163,6 @@ describe('onRunnerFinished', function() {
             expect(removeStub.calledOnce).to.be.true;
             expect(broadcastStub.calledOnce).to.be.true;
             expect(gtbkStub.calledOnce).to.be.true;
-            expect(eloStub.notCalled).to.be.true;
-            expect(sortStub.notCalled).to.be.true;
             expect(updateStub.calledOnce).to.be.true;
         });
 
@@ -181,11 +179,9 @@ describe('onRunnerFinished', function() {
 
             let removeStub = sinon.stub(member.roles, 'remove').resolves();
             let roleStub = sinon.stub(mockApp, 'getRacerRole').returns(role);
-            let memberStub = sinon.stub(mockApp, 'findDiscordMember').returns(member);
+            let memberStub = sinon.stub(mockApp, 'findDiscordMemberById').returns(member);
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let gtbkStub = sinon.stub(mockApp.routines, 'gtbkWinner');
-            let eloStub = sinon.stub(mockApp.routines, 'resolveMatchElo');
-            let sortStub = sinon.stub(mockApp.routines, 'sortPlayers');
             let updateStub = sinon.stub(mockApp.routines, 'updateRaceMessage');
 
             let context = {
@@ -201,21 +197,26 @@ describe('onRunnerFinished', function() {
                     gtbkWinner: 'lemming622',
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy',
                             finished: true
                         },
                         {
+                            discordId: `1`,
                             username: 'KillerApp23',
                             finished: true
                         },
                         {
+                            discordId: `2`,
                             username: 'Antissim',
                             finished: true
                         },
                         {
+                            discordId: `3`,
                             username: 'PhantomRyu'
                         },
                         {
+                            discordId: `4`,
                             username: 'TjMaelstrom'
                         }
                     ]
@@ -235,8 +236,6 @@ describe('onRunnerFinished', function() {
             expect(removeStub.calledOnce).to.be.true;
             expect(broadcastStub.calledOnce).to.be.true;
             expect(gtbkStub.notCalled).to.be.true;
-            expect(eloStub.notCalled).to.be.true;
-            expect(sortStub.notCalled).to.be.true;
             expect(updateStub.calledOnce).to.be.true;
         });
 
@@ -253,11 +252,9 @@ describe('onRunnerFinished', function() {
 
             let removeStub = sinon.stub(member.roles, 'remove').resolves();
             let roleStub = sinon.stub(mockApp, 'getRacerRole').returns(role);
-            let memberStub = sinon.stub(mockApp, 'findDiscordMember').returns(member);
+            let memberStub = sinon.stub(mockApp, 'findDiscordMemberById').returns(member);
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let gtbkStub = sinon.stub(mockApp.routines, 'gtbkWinner');
-            let eloStub = sinon.stub(mockApp.routines, 'resolveMatchElo');
-            let sortStub = sinon.stub(mockApp.routines, 'sortPlayers');
             let updateStub = sinon.stub(mockApp.routines, 'updateRaceMessage');
 
             let context = {
@@ -273,22 +270,27 @@ describe('onRunnerFinished', function() {
                     gtbkWinner: null,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy',
                             finished: true
                         },
                         {
+                            discordId: `1`,
                             username: 'PhantomRyu',
                             finished: true
                         },
                         {
+                            discordId: `2`,
                             username: 'WaltherIV',
                             finished: true
                         },
                         {
+                            discordId: `3`,
                             username: 'Wallkicks',
                             finished: true
                         },
                         {
+                            discordId: `4`,
                             username: 'TjMaelstrom'
                         }
                     ]
@@ -305,8 +307,6 @@ describe('onRunnerFinished', function() {
             expect(removeStub.calledOnce).to.be.true;
             expect(broadcastStub.notCalled).to.be.true;
             expect(gtbkStub.notCalled).to.be.true;
-            expect(eloStub.notCalled).to.be.true;
-            expect(sortStub.notCalled).to.be.true;
             expect(updateStub.calledOnce).to.be.true;
         });
 
@@ -323,11 +323,9 @@ describe('onRunnerFinished', function() {
 
             let removeStub = sinon.stub(member.roles, 'remove').resolves();
             let roleStub = sinon.stub(mockApp, 'getRacerRole').returns(role);
-            let memberStub = sinon.stub(mockApp, 'findDiscordMember').returns(member);
+            let memberStub = sinon.stub(mockApp, 'findDiscordMemberById').returns(member);
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let gtbkStub = sinon.stub(mockApp.routines, 'gtbkWinner');
-            let eloStub = sinon.stub(mockApp.routines, 'resolveMatchElo');
-            let sortStub = sinon.stub(mockApp.routines, 'sortPlayers');
             let updateStub = sinon.stub(mockApp.routines, 'updateRaceMessage');
 
             let context = {
@@ -343,14 +341,17 @@ describe('onRunnerFinished', function() {
                     gtbkWinner: null,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy',
                             finished: true
                         },
                         {
+                            discordId: `1`,
                             username: 'PhantomRyu',
                             finished: true
                         },
                         {
+                            discordId: `2`,
                             username: 'TjMaelstrom'
                         }
                     ]
@@ -367,8 +368,6 @@ describe('onRunnerFinished', function() {
             expect(removeStub.calledOnce).to.be.true;
             expect(broadcastStub.notCalled).to.be.true;
             expect(gtbkStub.notCalled).to.be.true;
-            expect(eloStub.notCalled).to.be.true;
-            expect(sortStub.notCalled).to.be.true;
             expect(updateStub.calledOnce).to.be.true;
         });
 
@@ -385,11 +384,9 @@ describe('onRunnerFinished', function() {
 
             let removeStub = sinon.stub(member.roles, 'remove').resolves();
             let roleStub = sinon.stub(mockApp, 'getRacerRole').returns(role);
-            let memberStub = sinon.stub(mockApp, 'findDiscordMember').returns(member);
+            let memberStub = sinon.stub(mockApp, 'findDiscordMemberById').returns(member);
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let gtbkStub = sinon.stub(mockApp.routines, 'gtbkWinner');
-            let eloStub = sinon.stub(mockApp.routines, 'resolveMatchElo').returns([20, 10, 0, -10, -20]);
-            let sortStub = sinon.stub(mockApp.routines, 'sortPlayers');
             let updateStub = sinon.stub(mockApp.routines, 'updateRaceMessage');
 
             let context = {
@@ -405,22 +402,27 @@ describe('onRunnerFinished', function() {
                     gtbkWinner: null,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy',
                             finished: true
                         },
                         {
+                            discordId: `1`,
                             username: 'KillerApp23',
                             finished: true
                         },
                         {
+                            discordId: `2`,
                             username: 'Antissim',
                             finished: true
                         },
                         {
+                            discordId: `3`,
                             username: 'PhantomRyu',
                             finished: true
                         },
                         {
+                            discordId: `4`,
                             username: 'TjMaelstrom',
                             finished: true
                         }
@@ -433,11 +435,6 @@ describe('onRunnerFinished', function() {
             expect(context.activeRace.finished).to.be.true;
             expect(context.activeRace.spoilersAllowed).to.be.true;
             expect(context.activeRace.status).to.equal('RACE FINISHED');
-            expect(context.activeRace.players[0].adjustment).to.equal(20);
-            expect(context.activeRace.players[1].adjustment).to.equal(10);
-            expect(context.activeRace.players[2].adjustment).to.equal(0);
-            expect(context.activeRace.players[3].adjustment).to.equal(-10);
-            expect(context.activeRace.players[4].adjustment).to.equal(-20);
 
             await mockApp.sleep(1);
 
@@ -446,8 +443,6 @@ describe('onRunnerFinished', function() {
             expect(removeStub.calledOnce).to.be.true;
             expect(broadcastStub.calledOnce).to.be.true;
             expect(gtbkStub.calledOnce).to.be.true;
-            expect(eloStub.calledOnce).to.be.true;
-            expect(sortStub.calledOnce).to.be.true;
             expect(updateStub.calledOnce).to.be.true;
         });
 
@@ -464,11 +459,9 @@ describe('onRunnerFinished', function() {
 
             let removeStub = sinon.stub(member.roles, 'remove').resolves();
             let roleStub = sinon.stub(mockApp, 'getRacerRole').returns(role);
-            let memberStub = sinon.stub(mockApp, 'findDiscordMember').returns(member);
+            let memberStub = sinon.stub(mockApp, 'findDiscordMemberById').returns(member);
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let gtbkStub = sinon.stub(mockApp.routines, 'gtbkWinner');
-            let eloStub = sinon.stub(mockApp.routines, 'resolveMatchElo').returns([20, 10, 0, -10, -20]);
-            let sortStub = sinon.stub(mockApp.routines, 'sortPlayers');
             let updateStub = sinon.stub(mockApp.routines, 'updateRaceMessage');
 
             let context = {
@@ -484,22 +477,27 @@ describe('onRunnerFinished', function() {
                     gtbkWinner: 'lemming622',
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy',
                             finished: true
                         },
                         {
+                            discordId: `1`,
                             username: 'KillerApp23',
                             finished: true
                         },
                         {
+                            discordId: `2`,
                             username: 'Antissim',
                             finished: true
                         },
                         {
+                            discordId: `3`,
                             username: 'PhantomRyu',
                             finished: true
                         },
                         {
+                            discordId: `4`,
                             username: 'TjMaelstrom',
                             finished: true
                         }
@@ -512,11 +510,6 @@ describe('onRunnerFinished', function() {
             expect(context.activeRace.finished).to.be.true;
             expect(context.activeRace.spoilersAllowed).to.be.true;
             expect(context.activeRace.status).to.equal('RACE FINISHED');
-            expect(context.activeRace.players[0].adjustment).to.equal(20);
-            expect(context.activeRace.players[1].adjustment).to.equal(10);
-            expect(context.activeRace.players[2].adjustment).to.equal(0);
-            expect(context.activeRace.players[3].adjustment).to.equal(-10);
-            expect(context.activeRace.players[4].adjustment).to.equal(-20);
 
             await mockApp.sleep(1);
 
@@ -525,8 +518,6 @@ describe('onRunnerFinished', function() {
             expect(removeStub.calledOnce).to.be.true;
             expect(broadcastStub.calledOnce).to.be.true;
             expect(gtbkStub.notCalled).to.be.true;
-            expect(eloStub.calledOnce).to.be.true;
-            expect(sortStub.calledOnce).to.be.true;
             expect(updateStub.calledOnce).to.be.true;
         });
 
@@ -543,11 +534,9 @@ describe('onRunnerFinished', function() {
 
             let removeStub = sinon.stub(member.roles, 'remove').resolves();
             let roleStub = sinon.stub(mockApp, 'getRacerRole').returns(role);
-            let memberStub = sinon.stub(mockApp, 'findDiscordMember').returns(member);
+            let memberStub = sinon.stub(mockApp, 'findDiscordMemberById').returns(member);
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let gtbkStub = sinon.stub(mockApp.routines, 'gtbkWinner');
-            let eloStub = sinon.stub(mockApp.routines, 'resolveMatchElo').returns([20, 10, 0, -10, -20]);
-            let sortStub = sinon.stub(mockApp.routines, 'sortPlayers');
             let updateStub = sinon.stub(mockApp.routines, 'updateRaceMessage');
 
             let context = {
@@ -563,22 +552,27 @@ describe('onRunnerFinished', function() {
                     gtbkWinner: null,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy',
                             finished: true
                         },
                         {
+                            discordId: `1`,
                             username: 'KillerApp23',
                             finished: true
                         },
                         {
+                            discordId: `2`,
                             username: 'Antissim',
                             finished: true
                         },
                         {
+                            discordId: `3`,
                             username: 'PhantomRyu',
                             finished: true
                         },
                         {
+                            discordId: `4`,
                             username: 'TjMaelstrom',
                             finished: true
                         }
@@ -604,8 +598,6 @@ describe('onRunnerFinished', function() {
             expect(removeStub.calledOnce).to.be.true;
             expect(broadcastStub.calledOnce).to.be.true;
             expect(gtbkStub.calledOnce).to.be.true;
-            expect(eloStub.notCalled).to.be.true;
-            expect(sortStub.notCalled).to.be.true;
             expect(updateStub.calledOnce).to.be.true;
         });
 
@@ -622,11 +614,9 @@ describe('onRunnerFinished', function() {
 
             let removeStub = sinon.stub(member.roles, 'remove').resolves();
             let roleStub = sinon.stub(mockApp, 'getRacerRole').returns(role);
-            let memberStub = sinon.stub(mockApp, 'findDiscordMember').returns(member);
+            let memberStub = sinon.stub(mockApp, 'findDiscordMemberById').returns(member);
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let gtbkStub = sinon.stub(mockApp.routines, 'gtbkWinner');
-            let eloStub = sinon.stub(mockApp.routines, 'resolveMatchElo').returns([20, 10, 0, -10, -20]);
-            let sortStub = sinon.stub(mockApp.routines, 'sortPlayers');
             let updateStub = sinon.stub(mockApp.routines, 'updateRaceMessage');
 
             let context = {
@@ -642,22 +632,27 @@ describe('onRunnerFinished', function() {
                     gtbkWinner: null,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy',
                             finished: true
                         },
                         {
+                            discordId: `1`,
                             username: 'KillerApp23',
                             finished: true
                         },
                         {
+                            discordId: `2`,
                             username: 'Antissim',
                             finished: true
                         },
                         {
+                            discordId: `3`,
                             username: 'PhantomRyu',
                             finished: true
                         },
                         {
+                            discordId: `4`,
                             username: 'TjMaelstrom',
                             finished: true
                         }
@@ -670,11 +665,6 @@ describe('onRunnerFinished', function() {
             expect(context.activeRace.finished).to.be.true;
             expect(context.activeRace.spoilersAllowed).to.be.true;
             expect(context.activeRace.status).to.equal('RACE FINISHED');
-            expect(context.activeRace.players[0].adjustment).to.be.undefined;
-            expect(context.activeRace.players[1].adjustment).to.be.undefined;
-            expect(context.activeRace.players[2].adjustment).to.be.undefined;
-            expect(context.activeRace.players[3].adjustment).to.be.undefined;
-            expect(context.activeRace.players[4].adjustment).to.be.undefined;
 
             await mockApp.sleep(1);
 
@@ -683,8 +673,6 @@ describe('onRunnerFinished', function() {
             expect(removeStub.calledOnce).to.be.true;
             expect(broadcastStub.calledOnce).to.be.true;
             expect(gtbkStub.calledOnce).to.be.true;
-            expect(eloStub.notCalled).to.be.true;
-            expect(sortStub.notCalled).to.be.true;
             expect(updateStub.calledOnce).to.be.true;
         });
     });

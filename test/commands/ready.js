@@ -45,6 +45,7 @@ describe('command ready', function() {
                     gatekeeper: null,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         }
                     ]
@@ -53,7 +54,9 @@ describe('command ready', function() {
                 message: `!ready`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(readyCommand.isCommandValid(context)).to.be.false;
@@ -72,6 +75,7 @@ describe('command ready', function() {
                     gatekeeper: null,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         }
                     ]
@@ -80,7 +84,9 @@ describe('command ready', function() {
                 message: `!unready`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(readyCommand.isCommandValid(context)).to.be.false;
@@ -99,6 +105,7 @@ describe('command ready', function() {
                     gatekeeper: null,
                     players: [
                         {
+                            discordId: `1`,
                             username: 'phantomryu'
                         }
                     ]
@@ -107,12 +114,14 @@ describe('command ready', function() {
                 message: `!ready`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(readyCommand.isCommandValid(context)).to.be.false;
 
-            context.activeRace.players[0].username = 'jexreffy';
+            context.activeRace.players[0].discordId = `0`;
 
             expect(readyCommand.isCommandValid(context)).to.be.true;
 
@@ -130,9 +139,11 @@ describe('command ready', function() {
                     gatekeeper: null,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         },
                         {
+                            discordId: `1`,
                             username: 'TjMaelstrom'
                         }
                     ]
@@ -141,7 +152,9 @@ describe('command ready', function() {
                 message: `!ready`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(readyCommand.isCommandValid(context)).to.be.true;
@@ -167,9 +180,11 @@ describe('command ready', function() {
                     gatekeeper: null,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         },
                         {
+                            discordId: `1`,
                             username: 'TjMaelstrom',
                             ready: true
                         }
@@ -179,7 +194,9 @@ describe('command ready', function() {
                 message: `!ready`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(readyCommand.isCommandValid(context)).to.be.true;
@@ -205,9 +222,11 @@ describe('command ready', function() {
                     gatekeeper: 'ZephyrBlayze',
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         },
                         {
+                            discordId: `1`,
                             username: 'TjMaelstrom',
                             ready: true
                         }
@@ -217,7 +236,9 @@ describe('command ready', function() {
                 message: `!ready`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(readyCommand.isCommandValid(context)).to.be.true;

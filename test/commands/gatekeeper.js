@@ -44,7 +44,8 @@ describe('command gatekeeper', function() {
                 message: `.gatekeeper`,
                 messageChannel: null,
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(gatekeeperCommand.isCommandValid(context)).to.be.false;
@@ -65,7 +66,8 @@ describe('command gatekeeper', function() {
                 message: `.gatekeeper`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(gatekeeperCommand.isCommandValid(context)).to.be.true;
@@ -86,12 +88,14 @@ describe('command gatekeeper', function() {
                 message: `.gatekeeper`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `TheLostCarol`
+                username: `TheLostCarol`,
+                displayName: `TheLostCarol`
             }
 
             expect(gatekeeperCommand.isCommandValid(context)).to.be.false;
 
-            context.username = 'jexreffy'
+            context.username = 'jexreffy';
+            context.displayName = 'jexreffy';
 
             expect(gatekeeperCommand.isCommandValid(context)).to.be.true;
 
@@ -110,7 +114,8 @@ describe('command gatekeeper', function() {
                 message: `.gatekeeper`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(gatekeeperCommand.isCommandValid(context)).to.be.true;

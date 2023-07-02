@@ -46,7 +46,9 @@ describe('command close', function() {
                 message: `.close`,
                 messageChannel: null,
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(closeCommand.isCommandValid(context)).to.be.false;
@@ -69,12 +71,15 @@ describe('command close', function() {
                 message: `.close`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `TheLostCarol`
+                userId: `0`,
+                username: `TheLostCarol`,
+                displayName: `TheLostCarol`
             }
 
             expect(closeCommand.isCommandValid(context)).to.be.false;
 
-            context.username = 'jexreffy'
+            context.username = 'jexreffy';
+            context.displayName = 'jexreffy';
 
             expect(closeCommand.isCommandValid(context)).to.be.true;
 
@@ -95,7 +100,9 @@ describe('command close', function() {
                 message: `.close`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(closeCommand.isCommandValid(context)).to.be.true;
@@ -123,7 +130,9 @@ describe('command close', function() {
                 message: `.close`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(closeCommand.isCommandValid(context)).to.be.true;

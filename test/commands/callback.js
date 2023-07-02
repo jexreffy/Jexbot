@@ -48,7 +48,8 @@ describe('command callback', function() {
                 message: `!callback`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(callbackCommand.isCommandValid(context)).to.be.false;
@@ -70,7 +71,8 @@ describe('command callback', function() {
                 message: `!callback`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(callbackCommand.isCommandValid(context)).to.be.false;
@@ -92,7 +94,8 @@ describe('command callback', function() {
                 message: `!callback`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(callbackCommand.isCommandValid(context)).to.be.false;
@@ -118,7 +121,8 @@ describe('command callback', function() {
                 message: `!callback`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(callbackCommand.isCommandValid(context)).to.be.true;

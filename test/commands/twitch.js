@@ -19,10 +19,7 @@ describe('command twitch', function() {
 
     beforeEach(function () {
         mockApp.db = {
-            getPlayerStreaming: function(username) { },
-            getPlayerTwitch: function(username) { },
             setPlayerTwitch: function(username, twitchOn) { },
-            setRaceData: function(guildId, race) { }
         };
         mockApp.routines = {
             updateRaceMessage: function (app, context) { }
@@ -44,9 +41,9 @@ describe('command twitch', function() {
             let context = {
                 activeRace: {
                     started: false,
-                    multistream: 'https://multistre.am/',
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         }
                     ]
@@ -55,7 +52,9 @@ describe('command twitch', function() {
                 message: `!twitch jexreffy15`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(twitchCommand.isCommandValid(context)).to.be.false;
@@ -71,9 +70,9 @@ describe('command twitch', function() {
             let context = {
                 activeRace: {
                     started: true,
-                    multistream: 'https://multistre.am/',
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         }
                     ]
@@ -82,7 +81,9 @@ describe('command twitch', function() {
                 message: `!twitch jexreffy15`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(twitchCommand.isCommandValid(context)).to.be.false;
@@ -98,9 +99,9 @@ describe('command twitch', function() {
             let context = {
                 activeRace: {
                     started: false,
-                    multistream: 'https://multistre.am/',
                     players: [
                         {
+                            discordId: `1`,
                             username: 'phantomryu'
                         }
                     ]
@@ -109,12 +110,14 @@ describe('command twitch', function() {
                 message: `!twitch jexreffy15`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(twitchCommand.isCommandValid(context)).to.be.false;
 
-            context.activeRace.players[0].username = 'jexreffy';
+            context.activeRace.players[0].discordId = `0`;
 
             expect(twitchCommand.isCommandValid(context)).to.be.true;
 
@@ -122,18 +125,14 @@ describe('command twitch', function() {
         });
 
         it('verify twitch cannot be executed if a twitch name is not provided with the command', function (done) {
-            let getStreamingStub = sinon.stub(mockApp.db, 'getPlayerStreaming').returns(true);
-            let getTwitchStub = sinon.stub(mockApp.db, 'getPlayerTwitch').returns('jexreffy15');
-            let setTwitchStub = sinon.stub(mockApp.db, 'setPlayerTwitch');
-            let setRaceStub = sinon.stub(mockApp.db, 'setRaceData');
             let updateStub = sinon.stub(mockApp.routines, 'updateRaceMessage');
 
             let context = {
                 activeRace: {
                     started: false,
-                    multistream: 'https://multistre.am/',
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         }
                     ]
@@ -142,36 +141,30 @@ describe('command twitch', function() {
                 message: `!twitch`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(twitchCommand.isCommandValid(context)).to.be.true;
 
             twitchCommand.executeCommand(context);
 
-            expect(context.activeRace.multistream).to.equal('https://multistre.am/');
-            expect(context.activeRace.players[0].twitch).to.be.undefined;
-            expect(getStreamingStub.notCalled).to.be.true;
-            expect(getTwitchStub.notCalled).to.be.true;
-            expect(setRaceStub.notCalled).to.be.true;
             expect(updateStub.notCalled).to.be.true;
 
             done();
         });
 
-        it('verify twitch executes correctly when the user is streaming', function (done) {
-            let getStreamingStub = sinon.stub(mockApp.db, 'getPlayerStreaming').returns(true);
-            let getTwitchStub = sinon.stub(mockApp.db, 'getPlayerTwitch').returns('jexreffy15');
+        it('verify twitch executes correctly', function (done) {
             let setTwitchStub = sinon.stub(mockApp.db, 'setPlayerTwitch');
-            let setRaceStub = sinon.stub(mockApp.db, 'setRaceData');
             let updateStub = sinon.stub(mockApp.routines, 'updateRaceMessage');
 
             let context = {
                 activeRace: {
                     started: false,
-                    multistream: 'https://multistre.am/',
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         }
                     ]
@@ -180,58 +173,16 @@ describe('command twitch', function() {
                 message: `!twitch jexreffy15`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(twitchCommand.isCommandValid(context)).to.be.true;
 
             twitchCommand.executeCommand(context);
 
-            expect(context.activeRace.multistream).to.equal('https://multistre.am/jexreffy15/');
-            expect(context.activeRace.players[0].twitch).to.equal('#jexreffy15');
-            expect(getStreamingStub.calledOnce).to.be.true;
-            expect(getTwitchStub.calledOnce).to.be.true;
-            expect(setTwitchStub.calledWith('jexreffy', 'jexreffy15')).to.be.true;
-            expect(setRaceStub.calledOnce).to.be.true;
-            expect(updateStub.calledOnce).to.be.true;
-
-            done();
-        });
-
-        it('verify streaming executes correctly when the user is not streaming', function (done) {
-            let getStreamingStub = sinon.stub(mockApp.db, 'getPlayerStreaming').returns(false);
-            let getTwitchStub = sinon.stub(mockApp.db, 'getPlayerTwitch').returns('jexreffy15');
-            let setTwitchStub = sinon.stub(mockApp.db, 'setPlayerTwitch');
-            let setRaceStub = sinon.stub(mockApp.db, 'setRaceData');
-            let updateStub = sinon.stub(mockApp.routines, 'updateRaceMessage');
-
-            let context = {
-                activeRace: {
-                    started: false,
-                    multistream: 'https://multistre.am/',
-                    players: [
-                        {
-                            username: 'jexreffy'
-                        }
-                    ]
-                },
-                guildId: mockApp.config.botOwnerGuild,
-                message: `!twitch jexreffy15`,
-                messageChannel: '#jexreffy',
-                origination: mockApp.DISCORD,
-                username: `jexreffy`
-            }
-
-            expect(twitchCommand.isCommandValid(context)).to.be.true;
-
-            twitchCommand.executeCommand(context);
-
-            expect(context.activeRace.multistream).to.equal('https://multistre.am/');
-            expect(context.activeRace.players[0].twitch).to.equal('#jexreffy15');
-            expect(getStreamingStub.calledOnce).to.be.true;
-            expect(getTwitchStub.calledOnce).to.be.true;
-            expect(setTwitchStub.calledWith('jexreffy', 'jexreffy15')).to.be.true;
-            expect(setRaceStub.calledOnce).to.be.true;
+            expect(setTwitchStub.calledWith(`0`, 'jexreffy15')).to.be.true;
             expect(updateStub.calledOnce).to.be.true;
 
             done();

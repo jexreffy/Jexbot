@@ -9,9 +9,6 @@
   "settings": {
     "mode": "standard",
     "eq": [ "Lamp" ],
-    "enemizer": {
-      "boss_shuffle": "full"
-    },
     "custom": {
       "jex.uncleItem": "FireRod"
     }

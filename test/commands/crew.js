@@ -50,7 +50,8 @@ describe('command crew', function() {
                 message: `!crew`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(crewCommand.isCommandValid(context)).to.be.true;
@@ -72,7 +73,8 @@ describe('command crew', function() {
                 message: `!crew`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(crewCommand.isCommandValid(context)).to.be.false;
@@ -94,12 +96,14 @@ describe('command crew', function() {
                 message: `!crew`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `TheLostCarol`
+                username: `TheLostCarol`,
+                displayName: `TheLostCarol`
             }
 
             expect(crewCommand.isCommandValid(context)).to.be.false;
 
             context.username = 'jexreffy';
+            context.displayName = 'jexreffy';
 
             expect(crewCommand.isCommandValid(context)).to.be.true;
 
@@ -121,7 +125,8 @@ describe('command crew', function() {
                 message: `!crew`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(crewCommand.isCommandValid(context)).to.be.true;
@@ -155,7 +160,8 @@ describe('command crew', function() {
                 message: `!crew TheShadesAT`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(crewCommand.isCommandValid(context)).to.be.true;

@@ -32,11 +32,9 @@ describe('command new', function() {
     let doneCommand = new CommandDone(mockApp);
 
     beforeEach(function () {
-        mockApp.findDiscordMember = function (guildId, username) {};
         mockApp.sendToDiscordRaceChannel = function (guildId, message) {};
         mockApp.db = {
-            getPlayerPB: function (username, category) {},
-            setPlayerPB: function (username, category) {},
+            getPlayerUsername: function (discordId) {},
             setRaceData: function (guildId, race) {}
         };
         mockApp.routines = {
@@ -64,9 +62,11 @@ describe('command new', function() {
                     finished: false,
                     players: [
                         {
+                            discordId: "0",
                             username: "jexreffy"
                         },
                         {
+                            discordId: "1",
                             username: "TjMaelstrom"
                         }
                     ]
@@ -75,7 +75,9 @@ describe('command new', function() {
                 message: `.done`,
                 messageChannel: null,
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: "0",
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(doneCommand.isCommandValid(context)).to.be.false;
@@ -94,9 +96,11 @@ describe('command new', function() {
                     finished: false,
                     players: [
                         {
+                            discordId: "0",
                             username: "jexreffy"
                         },
                         {
+                            discordId: "1",
                             username: "TjMaelstrom"
                         }
                     ]
@@ -105,7 +109,9 @@ describe('command new', function() {
                 message: `.done`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: "0",
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(doneCommand.isCommandValid(context)).to.be.false;
@@ -124,9 +130,11 @@ describe('command new', function() {
                     finished: true,
                     players: [
                         {
+                            discordId: "0",
                             username: "jexreffy"
                         },
                         {
+                            discordId: "1",
                             username: "TjMaelstrom"
                         }
                     ]
@@ -135,7 +143,9 @@ describe('command new', function() {
                 message: `.done`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: "0",
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(doneCommand.isCommandValid(context)).to.be.false;
@@ -154,9 +164,11 @@ describe('command new', function() {
                     finished: false,
                     players: [
                         {
+                            discordId: "0",
                             username: "jexreffy"
                         },
                         {
+                            discordId: "1",
                             username: "TjMaelstrom"
                         }
                     ]
@@ -165,12 +177,16 @@ describe('command new', function() {
                 message: `.done`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `PhantomRyu`
+                userId: "2",
+                username: `phantomryu`,
+                displayName: `PhantomRyu`
             }
 
             expect(doneCommand.isCommandValid(context)).to.be.false;
 
+            context.userId = "0";
             context.username = 'jexreffy';
+            context.displayName = 'jexreffy';
 
             expect(doneCommand.isCommandValid(context)).to.be.true;
 
@@ -184,9 +200,11 @@ describe('command new', function() {
                     finished: false,
                     players: [
                         {
+                            discordId: "0",
                             username: "jexreffy"
                         },
                         {
+                            discordId: "1",
                             username: "TjMaelstrom"
                         }
                     ]
@@ -195,7 +213,9 @@ describe('command new', function() {
                 message: `.done`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: "0",
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(doneCommand.isCommandValid(context)).to.be.true;
@@ -214,9 +234,11 @@ describe('command new', function() {
                     finished: false,
                     players: [
                         {
+                            discordId: "0",
                             username: "jexreffy"
                         },
                         {
+                            discordId: "1",
                             username: "TjMaelstrom"
                         }
                     ]
@@ -225,7 +247,9 @@ describe('command new', function() {
                 message: `.done`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: "0",
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(doneCommand.isCommandValid(context)).to.be.true;
@@ -239,8 +263,7 @@ describe('command new', function() {
 
         it('verify done executes normally for a regular race', async () => {
             let sendStub = sinon.stub(mockApp, 'sendToDiscordRaceChannel').resolves({ id: 1 });
-            let getPBStub = sinon.stub(mockApp.db, 'getPlayerPB').returns(3000000);
-            let setPBStub = sinon.stub(mockApp.db, 'setPlayerPB');
+            let getUsernameStub = sinon.stub(mockApp.db, 'getPlayerUsername').returns("jexreffy");
             let setRaceStub = sinon.stub(mockApp.db, 'setRaceData');
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let getTimeStub = sinon.stub(mockApp.routines, 'getRaceTime').returns('1:00:00');
@@ -257,9 +280,11 @@ describe('command new', function() {
                     remainingPlayers: 2,
                     players: [
                         {
+                            discordId: "0",
                             username: "jexreffy"
                         },
                         {
+                            discordId: "1",
                             username: "TjMaelstrom"
                         }
                     ]
@@ -268,7 +293,9 @@ describe('command new', function() {
                 message: `.done`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: "0",
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(doneCommand.isCommandValid(context)).to.be.true;
@@ -279,59 +306,6 @@ describe('command new', function() {
             expect(context.activeRace.players[0].finished).to.be.true;
             expect(context.activeRace.players[0].time).to.equal(3600000);
             expect(sendStub.notCalled).to.be.true;
-            expect(getPBStub.calledOnce).to.be.true;
-            expect(setPBStub.notCalled).to.be.true;
-            expect(setRaceStub.calledOnce).to.be.true;
-            expect(broadcastStub.calledOnce).to.be.true;
-            expect(getTimeStub.calledOnce).to.be.true;
-            expect(onFinishedStub.calledOnce).to.be.true;
-        });
-
-        it('verify done executes normally for a regular race with a Personal Best', async () => {
-            let sendStub = sinon.stub(mockApp, 'sendToDiscordRaceChannel').resolves({ id: 1 });
-            let getPBStub = sinon.stub(mockApp.db, 'getPlayerPB').returns(6000000);
-            let setPBStub = sinon.stub(mockApp.db, 'setPlayerPB');
-            let setRaceStub = sinon.stub(mockApp.db, 'setRaceData');
-            let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
-            let getTimeStub = sinon.stub(mockApp.routines, 'getRaceTime').returns('1:00:00');
-            let onFinishedStub = sinon.stub(mockApp.routines, 'onRunnerFinished');
-
-            let context = {
-                activeRace: {
-                    startedAt: Date.now() - 3600000,
-                    started: true,
-                    finished: false,
-                    teams: false,
-                    relay: false,
-                    category: "standard",
-                    remainingPlayers: 2,
-                    players: [
-                        {
-                            username: "jexreffy"
-                        },
-                        {
-                            username: "TjMaelstrom"
-                        }
-                    ]
-                },
-                guildId: mockApp.config.botOwnerGuild,
-                message: `.done`,
-                messageChannel: null,
-                origination: mockApp.DISCORD,
-                username: `jexreffy`
-            }
-
-            expect(doneCommand.isCommandValid(context)).to.be.true;
-
-            doneCommand.executeCommand(context);
-
-            expect(context.activeRace.remainingPlayers).to.equal(1);
-            expect(context.activeRace.players[0].finished).to.be.true;
-            expect(context.activeRace.players[0].time).to.equal(3600000);
-            expect(sendStub.notCalled).to.be.true;
-            expect(getPBStub.calledOnce).to.be.true;
-            expect(setPBStub.calledOnce).to.be.true;
-            expect(setPBStub.calledWith('jexreffy', 'standard', 3600000)).to.be.true;
             expect(setRaceStub.calledOnce).to.be.true;
             expect(broadcastStub.calledOnce).to.be.true;
             expect(getTimeStub.calledOnce).to.be.true;
@@ -340,8 +314,7 @@ describe('command new', function() {
 
         it('verify done does not declare a team finished if not all the players have finished', function (done) {
             let sendStub = sinon.stub(mockApp, 'sendToDiscordRaceChannel').resolves({ id: 1 });
-            let getPBStub = sinon.stub(mockApp.db, 'getPlayerPB').returns(3000000);
-            let setPBStub = sinon.stub(mockApp.db, 'setPlayerPB');
+            let getUsernameStub = sinon.stub(mockApp.db, 'getPlayerUsername').returns("jexreffy");
             let setRaceStub = sinon.stub(mockApp.db, 'setRaceData');
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let getTimeStub = sinon.stub(mockApp.routines, 'getRaceTime').returns('1:00:00');
@@ -358,26 +331,32 @@ describe('command new', function() {
                     remainingPlayers: 6,
                     players: [
                         {
+                            discordId: "0",
                             username: "PhantomRyu",
                             team: 0
                         },
                         {
+                            discordId: "1",
                             username: "KwehstopherWarken",
                             team: 0
                         },
                         {
+                            discordId: "2",
                             username: "TjMaelstrom",
                             team: 0
                         },
                         {
+                            discordId: "3",
                             username: "Quizbowl",
                             team: 1
                         },
                         {
+                            discordId: "4",
                             username: "Cubsrule21",
                             team: 1
                         },
                         {
+                            discordId: "5",
                             username: "jexreffy",
                             team: 1
                         }
@@ -387,7 +366,9 @@ describe('command new', function() {
                 message: `.done`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: "5",
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(doneCommand.isCommandValid(context)).to.be.true;
@@ -397,8 +378,6 @@ describe('command new', function() {
             expect(context.activeRace.remainingPlayers).to.equal(5);
             expect(context.activeRace.players[5].finished).to.be.true;
             expect(sendStub.notCalled).to.be.true;
-            expect(getPBStub.calledOnce).to.be.true;
-            expect(setPBStub.notCalled).to.be.true;
             expect(setRaceStub.calledOnce).to.be.true;
             expect(broadcastStub.calledOnce).to.be.true;
             expect(getTimeStub.calledOnce).to.be.true;
@@ -409,8 +388,7 @@ describe('command new', function() {
 
         it('verify done does declare a team finished if all the players have finished', function (done) {
             let sendStub = sinon.stub(mockApp, 'sendToDiscordRaceChannel').resolves({ id: 1 });
-            let getPBStub = sinon.stub(mockApp.db, 'getPlayerPB').returns(3000000);
-            let setPBStub = sinon.stub(mockApp.db, 'setPlayerPB');
+            let getUsernameStub = sinon.stub(mockApp.db, 'getPlayerUsername').returns("jexreffy");
             let setRaceStub = sinon.stub(mockApp.db, 'setRaceData');
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let getTimeStub = sinon.stub(mockApp.routines, 'getRaceTime').returns('1:00:00');
@@ -427,28 +405,34 @@ describe('command new', function() {
                     remainingPlayers: 6,
                     players: [
                         {
+                            discordId: "0",
                             username: "PhantomRyu",
                             team: 0
                         },
                         {
+                            discordId: "1",
                             username: "KwehstopherWarken",
                             team: 0
                         },
                         {
+                            discordId: "2",
                             username: "TjMaelstrom",
                             team: 0
                         },
                         {
+                            discordId: "3",
                             username: "Quizbowl",
                             team: 1,
                             finished: true,
                         },
                         {
+                            discordId: "4",
                             username: "Cubsrule21",
                             team: 1,
                             finished: true,
                         },
                         {
+                            discordId: "5",
                             username: "jexreffy",
                             team: 1
                         }
@@ -458,7 +442,9 @@ describe('command new', function() {
                 message: `.done`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: "5",
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(doneCommand.isCommandValid(context)).to.be.true;
@@ -468,8 +454,6 @@ describe('command new', function() {
             expect(context.activeRace.remainingPlayers).to.equal(5);
             expect(context.activeRace.players[5].finished).to.be.true;
             expect(sendStub.notCalled).to.be.true;
-            expect(getPBStub.calledOnce).to.be.true;
-            expect(setPBStub.notCalled).to.be.true;
             expect(setRaceStub.calledOnce).to.be.true;
             expect(broadcastStub.calledTwice).to.be.true;
             expect(getTimeStub.calledOnce).to.be.true;
@@ -487,31 +471,37 @@ describe('command new', function() {
                     relay: true,
                     players: [
                         {
+                            discordId: "0",
                             username: "PhantomRyu",
                             team: 0,
                             leg: 0
                         },
                         {
+                            discordId: "1",
                             username: "KwehstopherWarken",
                             team: 0,
                             leg: 1
                         },
                         {
+                            discordId: "2",
                             username: "TjMaelstrom",
                             team: 0,
                             leg: 2
                         },
                         {
+                            discordId: "3",
                             username: "Quizbowl",
                             team: 1,
                             leg: 0
                         },
                         {
+                            discordId: "4",
                             username: "Cubsrule21",
                             team: 1,
                             leg: 1
                         },
                         {
+                            discordId: "5",
                             username: "jexreffy",
                             team: 1,
                             leg: 2
@@ -527,13 +517,19 @@ describe('command new', function() {
                         {
                             category: "crosskeys"
                         }
+                    ],
+                    legStartTime: [
+                        0,
+                        0
                     ]
                 },
                 guildId: mockApp.config.botOwnerGuild,
                 message: `.done`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: "5",
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             doneCommand.executeCommand(context);
@@ -551,10 +547,8 @@ describe('command new', function() {
         });
 
         it('verify done is executed in a relay race for the first runner', function (done) {
-            let findStub = sinon.stub(mockApp, 'findDiscordMember').returns({ id: 1});
             let sendStub = sinon.stub(mockApp, 'sendToDiscordRaceChannel').resolves({ id: 1 });
-            let getPBStub = sinon.stub(mockApp.db, 'getPlayerPB').returns(3000000);
-            let setPBStub = sinon.stub(mockApp.db, 'setPlayerPB');
+            let getUsernameStub = sinon.stub(mockApp.db, 'getPlayerUsername').returns("jexreffy");
             let setRaceStub = sinon.stub(mockApp.db, 'setRaceData');
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let getTimeStub = sinon.stub(mockApp.routines, 'getRaceTime').returns('1:00:00');
@@ -571,31 +565,37 @@ describe('command new', function() {
                     remainingPlayers: 6,
                     players: [
                         {
+                            discordId: "0",
                             username: "PhantomRyu",
                             team: 0,
                             leg: 0
                         },
                         {
+                            discordId: "1",
                             username: "KwehstopherWarken",
                             team: 0,
                             leg: 1
                         },
                         {
+                            discordId: "2",
                             username: "TjMaelstrom",
                             team: 0,
                             leg: 2
                         },
                         {
+                            discordId: "3",
                             username: "jexreffy",
                             team: 1,
                             leg: 0
                         },
                         {
+                            discordId: "4",
                             username: "Cubsrule21",
                             team: 1,
                             leg: 1
                         },
                         {
+                            discordId: "5",
                             username: "Quizbowl",
                             team: 1,
                             leg: 2
@@ -621,7 +621,9 @@ describe('command new', function() {
                 message: `.done`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: "3",
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(doneCommand.isCommandValid(context)).to.be.true;
@@ -632,10 +634,7 @@ describe('command new', function() {
             expect(context.activeRace.players[3].finished).to.be.true;
             expect(context.activeRace.players[3].time).to.equal(3600000);
             expect(context.activeRace.legStartTime[1]).to.not.equal(0);
-            expect(findStub.calledTwice).to.be.true;
             expect(sendStub.calledTwice).to.be.true;
-            expect(getPBStub.calledOnce).to.be.true;
-            expect(setPBStub.notCalled).to.be.true;
             expect(setRaceStub.calledOnce).to.be.true;
             expect(broadcastStub.calledOnce).to.be.true;
             expect(getTimeStub.calledTwice).to.be.true;
@@ -645,10 +644,8 @@ describe('command new', function() {
         });
 
         it('verify done is executed in a relay race for a non-last runner', function (done) {
-            let findStub = sinon.stub(mockApp, 'findDiscordMember').returns({ id: 1});
             let sendStub = sinon.stub(mockApp, 'sendToDiscordRaceChannel').resolves({ id: 1 });
-            let getPBStub = sinon.stub(mockApp.db, 'getPlayerPB').returns(3000000);
-            let setPBStub = sinon.stub(mockApp.db, 'setPlayerPB');
+            let getUsernameStub = sinon.stub(mockApp.db, 'getPlayerUsername').returns("jexreffy");
             let setRaceStub = sinon.stub(mockApp.db, 'setRaceData');
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let getTimeStub = sinon.stub(mockApp.routines, 'getRaceTime').returns('1:00:00');
@@ -665,21 +662,25 @@ describe('command new', function() {
                     remainingPlayers: 6,
                     players: [
                         {
+                            discordId: "0",
                             username: "PhantomRyu",
                             team: 0,
                             leg: 0
                         },
                         {
+                            discordId: "1",
                             username: "KwehstopherWarken",
                             team: 0,
                             leg: 1
                         },
                         {
+                            discordId: "2",
                             username: "TjMaelstrom",
                             team: 0,
                             leg: 2
                         },
                         {
+                            discordId: "3",
                             username: "Cubsrule21",
                             team: 1,
                             leg: 0,
@@ -687,11 +688,13 @@ describe('command new', function() {
                             time: 7000000
                         },
                         {
+                            discordId: "4",
                             username: "jexreffy",
                             team: 1,
                             leg: 1
                         },
                         {
+                            discordId: "5",
                             username: "Quizbowl",
                             team: 1,
                             leg: 2
@@ -717,7 +720,9 @@ describe('command new', function() {
                 message: `.done`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: "4",
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(doneCommand.isCommandValid(context)).to.be.true;
@@ -728,10 +733,7 @@ describe('command new', function() {
             expect(context.activeRace.players[4].finished).to.be.true;
             expect(context.activeRace.players[4].time).to.equal(3600000);
             expect(context.activeRace.legStartTime[1]).to.not.equal(0);
-            expect(findStub.calledTwice).to.be.true;
             expect(sendStub.calledTwice).to.be.true;
-            expect(getPBStub.calledOnce).to.be.true;
-            expect(setPBStub.notCalled).to.be.true;
             expect(setRaceStub.calledOnce).to.be.true;
             expect(broadcastStub.calledOnce).to.be.true;
             expect(getTimeStub.calledTwice).to.be.true;
@@ -741,10 +743,8 @@ describe('command new', function() {
         });
 
         it('verify done is executed in a relay race for the last runner', function (done) {
-            let findStub = sinon.stub(mockApp, 'findDiscordMember').returns({ id: 1});
             let sendStub = sinon.stub(mockApp, 'sendToDiscordRaceChannel').resolves({ id: 1 });
-            let getPBStub = sinon.stub(mockApp.db, 'getPlayerPB').returns(3000000);
-            let setPBStub = sinon.stub(mockApp.db, 'setPlayerPB');
+            let getUsernameStub = sinon.stub(mockApp.db, 'getPlayerUsername').returns("jexreffy");
             let setRaceStub = sinon.stub(mockApp.db, 'setRaceData');
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let getTimeStub = sinon.stub(mockApp.routines, 'getRaceTime').returns('1:00:00');
@@ -761,21 +761,25 @@ describe('command new', function() {
                     remainingPlayers: 6,
                     players: [
                         {
+                            discordId: "0",
                             username: "PhantomRyu",
                             team: 0,
                             leg: 0
                         },
                         {
+                            discordId: "1",
                             username: "KwehstopherWarken",
                             team: 0,
                             leg: 1
                         },
                         {
+                            discordId: "2",
                             username: "TjMaelstrom",
                             team: 0,
                             leg: 2
                         },
                         {
+                            discordId: "3",
                             username: "Cubsrule21",
                             team: 1,
                             leg: 0,
@@ -783,6 +787,7 @@ describe('command new', function() {
                             time: 7000000
                         },
                         {
+                            discordId: "4",
                             username: "Quizbowl",
                             team: 1,
                             leg: 1,
@@ -791,6 +796,7 @@ describe('command new', function() {
                             time: 8000000
                         },
                         {
+                            discordId: "5",
                             username: "jexreffy",
                             team: 1,
                             leg: 2
@@ -816,7 +822,9 @@ describe('command new', function() {
                 message: `.done`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: "5",
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(doneCommand.isCommandValid(context)).to.be.true;
@@ -827,10 +835,7 @@ describe('command new', function() {
             expect(context.activeRace.players[5].finished).to.be.true;
             expect(context.activeRace.players[5].time).to.equal(3600000);
             expect(context.activeRace.legStartTime[1]).to.equal(0);
-            expect(findStub.notCalled).to.be.true;
             expect(sendStub.notCalled).to.be.true;
-            expect(getPBStub.calledOnce).to.be.true;
-            expect(setPBStub.notCalled).to.be.true;
             expect(setRaceStub.calledOnce).to.be.true;
             expect(broadcastStub.calledTwice).to.be.true;
             expect(getTimeStub.calledTwice).to.be.true;
@@ -840,10 +845,8 @@ describe('command new', function() {
         });
 
         it('verify in a relay race that a forfeited player on the other team starts the countdown for them', function (done) {
-            let findStub = sinon.stub(mockApp, 'findDiscordMember').returns({ id: 1});
             let sendStub = sinon.stub(mockApp, 'sendToDiscordRaceChannel').resolves({ id: 1 });
-            let getPBStub = sinon.stub(mockApp.db, 'getPlayerPB').returns(3000000);
-            let setPBStub = sinon.stub(mockApp.db, 'setPlayerPB');
+            let getUsernameStub = sinon.stub(mockApp.db, 'getPlayerUsername').returns("jexreffy");
             let setRaceStub = sinon.stub(mockApp.db, 'setRaceData');
             let broadcastStub = sinon.stub(mockApp.routines, 'broadcastMessage');
             let getTimeStub = sinon.stub(mockApp.routines, 'getRaceTime').returns('1:00:00');
@@ -860,6 +863,7 @@ describe('command new', function() {
                     remainingPlayers: 5,
                     players: [
                         {
+                            discordId: "0",
                             username: "PhantomRyu",
                             team: 0,
                             leg: 0,
@@ -867,26 +871,31 @@ describe('command new', function() {
                             forfeited: true
                         },
                         {
+                            discordId: "1",
                             username: "KwehstopherWarken",
                             team: 0,
                             leg: 1
                         },
                         {
+                            discordId: "2",
                             username: "TjMaelstrom",
                             team: 0,
                             leg: 2
                         },
                         {
+                            discordId: "3",
                             username: "jexreffy",
                             team: 1,
                             leg: 0,
                         },
                         {
+                            discordId: "4",
                             username: "Quizbowl",
                             team: 1,
                             leg: 1
                         },
                         {
+                            discordId: "5",
                             username: "Cubsrule21",
                             team: 1,
                             leg: 2
@@ -912,7 +921,9 @@ describe('command new', function() {
                 message: `.done`,
                 messageChannel: null,
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: "3",
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(doneCommand.isCommandValid(context)).to.be.true;
@@ -924,10 +935,7 @@ describe('command new', function() {
             expect(context.activeRace.players[3].time).to.equal(3600000);
             expect(context.activeRace.legStartTime[0]).to.not.equal(0);
             expect(context.activeRace.legStartTime[1]).to.not.equal(0);
-            expect(findStub.callCount).to.equal(3);
             expect(sendStub.callCount).to.equal(3);
-            expect(getPBStub.calledOnce).to.be.true;
-            expect(setPBStub.notCalled).to.be.true;
             expect(setRaceStub.calledOnce).to.be.true;
             expect(broadcastStub.calledOnce).to.be.true;
             expect(getTimeStub.calledTwice).to.be.true;

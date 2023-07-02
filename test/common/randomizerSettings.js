@@ -1027,6 +1027,32 @@ describe('randomizerSettings', function() {
             done();
         });
 
+        it('verify bossshuffle settings', function (done) {
+            let settings = randomizerSettings(mockApp, require('../../categories/alttpr/bossshuffle.json'));
+            expect(settings.allow_quickswap).to.be.true;
+            expect(settings.glitches).to.equal('none');
+            expect(settings.item_placement).to.equal('advanced');
+            expect(settings.dungeon_items).to.equal('standard');
+            expect(settings.accessibility).to.equal('items');
+            expect(settings.goal).to.equal('ganon');
+            expect(settings.crystals.tower).to.equal('7');
+            expect(settings.crystals.ganon).to.equal('7');
+            expect(settings.mode).to.equal('open');
+            expect(settings.entrances).to.equal('none');
+            expect(settings.hints).to.equal('off');
+            expect(settings.weapons).to.equal('randomized');
+            expect(settings.item.pool).to.equal('normal');
+            expect(settings.item.functionality).to.equal('normal');
+            expect(settings.tournament).to.be.true;
+            expect(settings.spoilers).to.equal('off');
+            expect(settings.lang).to.equal('en');
+            expect(settings.enemizer.boss_shuffle).to.equal('random');
+            expect(settings.enemizer.enemy_shuffle).to.equal('none');
+            expect(settings.enemizer.enemy_damage).to.equal('default');
+            expect(settings.enemizer.enemy_health).to.equal('default');
+            done();
+        });
+
         it('verify casual settings', function (done) {
             let settings = randomizerSettings(mockApp, require('../../categories/alttpr/standardassured.json'));
             expect(settings.allow_quickswap).to.be.true;
@@ -1777,32 +1803,6 @@ describe('randomizerSettings', function() {
             done();
         });
 
-        it('verify enemizerbosses settings', function (done) {
-            let settings = randomizerSettings(mockApp, require('../../categories/alttpr/enemizerbosses.json'));
-            expect(settings.allow_quickswap).to.be.true;
-            expect(settings.glitches).to.equal('none');
-            expect(settings.item_placement).to.equal('advanced');
-            expect(settings.dungeon_items).to.equal('standard');
-            expect(settings.accessibility).to.equal('items');
-            expect(settings.goal).to.equal('ganon');
-            expect(settings.crystals.tower).to.equal('7');
-            expect(settings.crystals.ganon).to.equal('7');
-            expect(settings.mode).to.equal('open');
-            expect(settings.entrances).to.equal('none');
-            expect(settings.hints).to.equal('off');
-            expect(settings.weapons).to.equal('randomized');
-            expect(settings.item.pool).to.equal('normal');
-            expect(settings.item.functionality).to.equal('normal');
-            expect(settings.tournament).to.be.true;
-            expect(settings.spoilers).to.equal('off');
-            expect(settings.lang).to.equal('en');
-            expect(settings.enemizer.boss_shuffle).to.equal('random');
-            expect(settings.enemizer.enemy_shuffle).to.equal('none');
-            expect(settings.enemizer.enemy_damage).to.equal('default');
-            expect(settings.enemizer.enemy_health).to.equal('default');
-            done();
-        });
-
         it('verify expertitempool settings', function (done) {
             let settings = randomizerSettings(mockApp, require('../../categories/alttpr/expertitempool.json'));
             expect(settings.allow_quickswap).to.be.true;
@@ -2066,7 +2066,7 @@ describe('randomizerSettings', function() {
             expect(settings.crystals.ganon).to.equal('7');
             expect(settings.mode).to.equal('standard');
             expect(settings.hints).to.equal('off');
-            expect(settings.weapons).to.equal('randomized');
+            expect(settings.weapons).to.equal('assured');
             expect(settings.item.pool).to.equal('normal');
             expect(settings.item.functionality).to.equal('normal');
             expect(settings.tournament).to.be.true;

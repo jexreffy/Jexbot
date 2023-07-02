@@ -47,7 +47,9 @@ describe('command escape', function() {
                 message: `!escape`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(escapeCommand.isCommandValid(context)).to.be.false;
@@ -69,7 +71,9 @@ describe('command escape', function() {
                 message: `!escape`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(escapeCommand.isCommandValid(context)).to.be.false;
@@ -91,7 +95,9 @@ describe('command escape', function() {
                 message: `!escape`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(escapeCommand.isCommandValid(context)).to.be.false;
@@ -116,7 +122,9 @@ describe('command escape', function() {
                 message: `!escape`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(escapeCommand.isCommandValid(context)).to.be.true;
@@ -143,7 +151,9 @@ describe('command escape', function() {
                 message: `!escape bombs`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(escapeCommand.isCommandValid(context)).to.be.true;

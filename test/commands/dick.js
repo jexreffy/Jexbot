@@ -53,7 +53,8 @@ describe('command dick', function() {
                 message: `!dick`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(dickCommand.isCommandValid(context)).to.be.true;
@@ -76,7 +77,8 @@ describe('command dick', function() {
                 message: `!dick`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(dickCommand.isCommandValid(context)).to.be.false;
@@ -99,7 +101,8 @@ describe('command dick', function() {
                 message: `!dick`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(dickCommand.isCommandValid(context)).to.be.false;
@@ -126,7 +129,8 @@ describe('command dick', function() {
                 message: `!dick`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(dickCommand.isCommandValid(context)).to.be.true;

@@ -55,7 +55,9 @@ describe('command gtguess', function() {
                 message: `!gtguess`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(gtGuessCommand.isCommandValid(context)).to.be.true;
@@ -83,7 +85,9 @@ describe('command gtguess', function() {
                 message: `!gtguess`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(gtGuessCommand.isCommandValid(context)).to.be.false;
@@ -111,7 +115,9 @@ describe('command gtguess', function() {
                 message: `!gtguess`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(gtGuessCommand.isCommandValid(context)).to.be.false;
@@ -139,7 +145,9 @@ describe('command gtguess', function() {
                 message: `!gtguess`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(gtGuessCommand.isCommandValid(context)).to.be.true;
@@ -167,7 +175,9 @@ describe('command gtguess', function() {
                 message: `!gtguess`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(gtGuessCommand.isCommandValid(context)).to.be.true;
@@ -200,7 +210,9 @@ describe('command gtguess', function() {
                 message: `!gtguess`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(gtGuessCommand.isCommandValid(context)).to.be.true;
@@ -238,7 +250,9 @@ describe('command gtguess', function() {
                 message: `!gtguess`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(gtGuessCommand.isCommandValid(context)).to.be.true;
@@ -274,7 +288,9 @@ describe('command gtguess', function() {
                 message: `!gtguess 0`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(gtGuessCommand.isCommandValid(context)).to.be.true;
@@ -337,7 +353,9 @@ describe('command gtguess', function() {
                 message: `!gtguess 1`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             for (let i = 0; i < 22; i++) {
@@ -378,7 +396,9 @@ describe('command gtguess', function() {
                 message: `!gtguess 2`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             for (let i = 0; i < 22; i++) {
@@ -419,7 +439,9 @@ describe('command gtguess', function() {
                 message: `!gtguess 5`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             for (let i = 0; i < 22; i++) {
@@ -460,7 +482,9 @@ describe('command gtguess', function() {
                 message: `!gtguess 22`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             for (let i = 0; i < 22; i++) {
@@ -501,7 +525,9 @@ describe('command gtguess', function() {
                 message: `!gtguess 17`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             for (let i = 0; i < 22; i++) {
@@ -544,7 +570,9 @@ describe('command gtguess', function() {
                 message: `!gtguess 19`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             for (let i = 0; i < 22; i++) {
@@ -587,7 +615,9 @@ describe('command gtguess', function() {
                 message: `!gtguess 15`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             for (let i = 0; i < 22; i++) {
@@ -630,7 +660,9 @@ describe('command gtguess', function() {
                 message: `!gtguess 8`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: 0,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             for (let i = 0; i < 22; i++) {

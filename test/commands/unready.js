@@ -43,6 +43,7 @@ describe('command unready', function() {
                     started: false,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         }
                     ]
@@ -51,7 +52,9 @@ describe('command unready', function() {
                 message: `!unready`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(unreadyCommand.isCommandValid(context)).to.be.false;
@@ -69,6 +72,7 @@ describe('command unready', function() {
                     started: true,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy'
                         }
                     ]
@@ -77,7 +81,9 @@ describe('command unready', function() {
                 message: `!unready`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(unreadyCommand.isCommandValid(context)).to.be.false;
@@ -95,6 +101,7 @@ describe('command unready', function() {
                     started: false,
                     players: [
                         {
+                            discordId: `1`,
                             username: 'phantomryu'
                         }
                     ]
@@ -103,12 +110,14 @@ describe('command unready', function() {
                 message: `!unready`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(unreadyCommand.isCommandValid(context)).to.be.false;
 
-            context.activeRace.players[0].username = 'jexreffy';
+            context.activeRace.players[0].discordId = `0`;
 
             expect(unreadyCommand.isCommandValid(context)).to.be.true;
 
@@ -124,6 +133,7 @@ describe('command unready', function() {
                     started: false,
                     players: [
                         {
+                            discordId: `0`,
                             username: 'jexreffy',
                             ready: true
                         }
@@ -133,7 +143,9 @@ describe('command unready', function() {
                 message: `!unready`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                userId: `0`,
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(unreadyCommand.isCommandValid(context)).to.be.true;

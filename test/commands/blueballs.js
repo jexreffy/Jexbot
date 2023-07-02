@@ -46,7 +46,8 @@ describe('command blueballs', function() {
                 message: `!blueballs 4`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(blueballsCommand.isCommandValid(context)).to.be.false;
@@ -69,7 +70,8 @@ describe('command blueballs', function() {
                 message: `!blueballs 4`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(blueballsCommand.isCommandValid(context)).to.be.true;
@@ -95,7 +97,8 @@ describe('command blueballs', function() {
                 message: `!blueballs`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(blueballsCommand.isCommandValid(context)).to.be.true;
@@ -122,7 +125,8 @@ describe('command blueballs', function() {
                 message: `!blueballs -1`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(blueballsCommand.isCommandValid(context)).to.be.true;
@@ -163,7 +167,8 @@ describe('command blueballs', function() {
                 message: `!blueballs 1`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(blueballsCommand.isCommandValid(context)).to.be.true;

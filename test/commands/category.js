@@ -42,7 +42,8 @@ describe('command category', function() {
                 message: `!category`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.DISCORD,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(categoryCommand.isCommandValid(context)).to.be.false;
@@ -66,7 +67,8 @@ describe('command category', function() {
                 message: `!category`,
                 messageChannel: '#jexreffy',
                 origination: mockApp.TWITCH,
-                username: `jexreffy`
+                username: `jexreffy`,
+                displayName: `jexreffy`
             }
 
             expect(categoryCommand.isCommandValid(context)).to.be.true;
