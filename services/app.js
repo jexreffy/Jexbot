@@ -35,18 +35,14 @@ module.exports = class JexBotApp {
     #initializeServices() {
         this.#guilds = Object.keys(this.#config['guilds']);
 
-        const connection = {
+        this.#db = new JexDatabase(this, {
             connectionLimit: 2,
             host: process.env.DB_HOST,
             port: process.env.DB_PORT,
             user: process.env.DB_USER,
             password: process.env.DB_PASS,
             database: process.env.DB_NAME
-        };
-
-        console.log(connection);
-
-        this.#db = new JexDatabase(this, connection);
+        });
         this.#discord = new JexDiscord(this);
         //this.#http = new JexHttp(this);
         this.#twitch = new JexTwitch(this);
