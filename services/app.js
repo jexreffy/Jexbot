@@ -1,6 +1,6 @@
 const JexDatabase = require('../services/db');
 const JexDiscord = require('../services/discord');
-const JexHttp = require('../services/http');
+//const JexHttp = require('../services/http');
 const JexTwitch = require('../services/twitch');
 const fs = require('fs');
 const {join} = require("tmi.js/lib/commands");
@@ -11,7 +11,7 @@ module.exports = class JexBotApp {
     #cronEvents = [];
     #db;
     #discord;
-    #http;
+    //#http;
     #globalCommandKeys = [];
     #globalCommands = {};
     #guilds = [];
@@ -38,12 +38,13 @@ module.exports = class JexBotApp {
         this.#db = new JexDatabase(this, {
             connectionLimit: 2,
             host: process.env.DB_HOST,
+            port: process.env.DB_PORT,
             user: process.env.DB_USER,
             password: process.env.DB_PASS,
             database: process.env.DB_NAME
         });
         this.#discord = new JexDiscord(this);
-        this.#http = new JexHttp(this);
+        //this.#http = new JexHttp(this);
         this.#twitch = new JexTwitch(this);
     }
 
