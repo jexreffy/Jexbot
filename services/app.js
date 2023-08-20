@@ -46,10 +46,10 @@ module.exports = class JexBotApp {
 
         console.log(connection);
 
-        //this.#db = new JexDatabase(this, connection);
-        //this.#discord = new JexDiscord(this);
+        this.#db = new JexDatabase(this, connection);
+        this.#discord = new JexDiscord(this);
         //this.#http = new JexHttp(this);
-        //this.#twitch = new JexTwitch(this);
+        this.#twitch = new JexTwitch(this);
     }
 
     #initializeCommands() {
