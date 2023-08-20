@@ -64,6 +64,12 @@ module.exports = class JexDatabase {
         let players = this.#players;
         let server = this.#server;
         this.#pool.getConnection(function(err, connection) {
+            if (err)
+            {
+                console.log(err);
+                return;
+            }
+
             connection.query(`SELECT
                     players.id as id,
                     players.discordId as discordId,
@@ -91,11 +97,7 @@ module.exports = class JexDatabase {
                     player.twitch = playerRow.twitch;
                     player.streaming = playerRow.streaming === 1;
                     player.twitchBot = playerRow.twitchBot === 1;
-
-                    console.log(player);
                 });
-
-                console.log("Players Cached");
 
                 connection.query(`SELECT * FROM server WHERE id = 1`, (serverErr, serverRow) => {
                     if (serverErr) {
