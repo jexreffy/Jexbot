@@ -1,5 +1,5 @@
 "use strict"
-const Mysql = require('mysql');
+const Mysql = require('mysql2');
 const raceDb = require('../data/race.json');
 const path = require('path');
 const fs = require('fs');
