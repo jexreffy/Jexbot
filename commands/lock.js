@@ -17,7 +17,7 @@ module.exports = class CommandLock extends JexCommand {
     isCommandValid(context) {
         return context.origination === this._app.DISCORD &&
                !context.activeRace.started &&
-               this._app.config['referees'].includes(context.username);
+               this._app.config['referees'].includes(context.userId);
     }
 
     executeCommand(context) {

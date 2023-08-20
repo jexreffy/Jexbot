@@ -18,7 +18,7 @@ module.exports = class CommandNew extends JexCommand {
     isCommandValid(context) {
         return context.origination === this._app.DISCORD &&
                context.activeRace.finished &&
-               this._app.config['referees'].includes(context.username);
+               this._app.config['referees'].includes(context.userId);
     }
 
     executeCommand(context) {
@@ -40,7 +40,7 @@ module.exports = class CommandNew extends JexCommand {
         let embed = new EmbedBuilder()
             .setColor(65280)
             .setTitle('Crystal Company Race');
-
+        
         this._app.sendToDiscordRaceChannel(guildId, `${this._app.getPingRole(guildId)} ${this._app.config['pings'][context.activeRace.pingIndex]}`).then(x => {
             this._app.sendEmbedToDiscordRaceChannel(guildId, embed).then(x => {
                 context.activeRace.messageId = x.id;

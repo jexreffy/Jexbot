@@ -16,7 +16,7 @@ module.exports = class CommandConnect extends JexCommand {
 
     isCommandValid(context) {
         return context.origination === this._app.DISCORD &&
-               this._app.config['referees'].includes(context.username);
+               this._app.config['referees'].includes(context.userId);
     }
 
     executeCommand(context) {

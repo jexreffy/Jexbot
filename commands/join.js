@@ -23,7 +23,7 @@ module.exports = class CommandJoin extends JexCommand {
         let idToAdd = null;
         let teamToAdd = -1;
 
-        if (context.activeRace.invitational && this._app.config['referees'].includes(context.username)) {
+        if (context.activeRace.invitational && this._app.config['referees'].includes(context.userId)) {
             let match = context.message.match(context.activeRace.teams ? /^[.!](\bjoin\b) ([a-zA-Z0-9]{4,30}) ((1)|(2))/i : /^[.!](\bjoin\b) ([a-zA-Z0-9]{4,30})/i);
 
             if (match) {

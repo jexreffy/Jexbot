@@ -19,7 +19,7 @@ module.exports = class CommandSeedCode extends JexCommand {
             !context.activeRace.started &&
             (!(context.activeRace.relay || context.activeRace.seedCode) ||
                 (context.activeRace.relay && !context.activeRace.legs[context.activeRace.legs - 1].code)) &&
-            this._app.config['referees'].includes(context.username);
+            this._app.config['referees'].includes(context.userId);
     }
 
     executeCommand(context) {

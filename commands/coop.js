@@ -18,7 +18,7 @@ module.exports = class CommandTeams extends JexCommand {
         return context.origination === this._app.DISCORD &&
             !context.activeRace.started &&
             !context.activeRace.invitational &&
-            this._app.config['referees'].includes(context.username);
+            this._app.config['referees'].includes(context.userId);
     }
 
     executeCommand(context) {

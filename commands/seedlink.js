@@ -19,7 +19,7 @@ module.exports = class CommandSeedLink extends JexCommand {
             !context.activeRace.started &&
             (!(context.activeRace.relay || context.activeRace.seedLink) ||
                 (context.activeRace.relay && !context.activeRace.legs[context.activeRace.legs.length - 1].link)) &&
-            this._app.config['referees'].includes(context.username);
+            this._app.config['referees'].includes(context.userId);
     }
 
     executeCommand(context) {
