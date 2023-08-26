@@ -17,7 +17,7 @@ module.exports = class CommandStart extends JexCommand {
     isCommandValid(context) {
         return context.origination === this._app.DISCORD &&
                !context.activeRace.started &&
-               context.activeRace.gatekeeper === context.username;
+               context.activeRace.gatekeeper === context.userId;
     }
 
     executeCommand(context) {
