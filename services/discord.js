@@ -10,6 +10,7 @@ module.exports = class JexBotDiscord {
     #pingRoles = {};
     #racerRoles = {};
     #raceChannels = {};
+    #logChannels = {};
     #sotwChannels = {};
 
     constructor(app) {
@@ -45,6 +46,7 @@ module.exports = class JexBotDiscord {
                 const rolesCache = guild.roles.cache;
 
                 this.#raceChannels[guildId] = channelCache.find(channel => channel.name === guildConfig.channel);
+                this.#logChannels[guildId] = channelCache.find(channel => channel.name === guildConfig.logChannel);
                 this.#sotwChannels[guildId] = guildConfig.sotwEnabled ? channelCache.find(channel => channel.name === guildConfig.sotwChannel) : null;
                 this.#pingRoles[guildId] = rolesCache.find(role => role.name === guildConfig.pingRole);
                 this.#racerRoles[guildId] = rolesCache.find(role => role.name === guildConfig.racerRole);
@@ -102,6 +104,14 @@ module.exports = class JexBotDiscord {
 
     sendEmbedToRaceChannel(guildId, embed) {
         return this.#raceChannels[guildId].send({embeds: [embed]});
+    }
+
+    sendToLogChannel(guildId, message) {
+        return this.#logChannels[guildId].send(message);
+    }
+
+    sendEmbedToLogChannel(guildId, embed) {
+        return this.#logChannels[guildId].send({embeds: [embed]});
     }
 
     sendToSotwChannel(guildId, message) {

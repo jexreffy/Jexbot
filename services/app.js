@@ -4,6 +4,7 @@ const JexDiscord = require('../services/discord');
 const JexTwitch = require('../services/twitch');
 const fs = require('fs');
 const {join} = require("tmi.js/lib/commands");
+const {EmbedBuilder} = require("discord.js");
 
 module.exports = class JexBotApp {
     #axios = require('axios');
@@ -236,22 +237,41 @@ module.exports = class JexBotApp {
     #processRaceCommand(context) {
         let match = context.message.match(/^[.!]([a-zA-Z0-9]{0,30})/i);
 
-        if (match && match[1] && match[1] === "jexnew") {
-            let newCommand = this.#raceCommands["new"];
-            let joinCommand = this.#raceCommands["join"];
-            let gatekeeperCommand = this.#raceCommands["gatekeeper"];
+        let embed = new EmbedBuilder().setTitle('Command Received')
+            .addFields(
+                {name: 'Origination', value: context.origination, inline: false},
+                {name: 'Message', value: context.message, inline: false},
+                {name: 'User ID', value: context.userId, inline: false},
+                {name: 'Username', value: context.username, inline: false},
+                {name: 'Display Name', value: context.displayName, inline: false}
+            );
 
-            newCommand.executeCommand(context);
-            joinCommand.executeCommand(context);
-            gatekeeperCommand.executeCommand(context);
-
-        } else if (match && match[1] && this.#raceCommandKeys.indexOf(match[1]) >= 0) {
+        if (match && match[1] && this.#raceCommandKeys.indexOf(match[1]) >= 0) {
             let command = this.#raceCommands[match[1]];
 
             if (command.isCommandValid(context)) {
                 command.executeCommand(context);
+
+                embed.setColor(0x57f287);
+                embed.addFields(
+                    {name: 'Result', value: 'Success', inline: false}
+                );
+            } else {
+                embed.setColor(0xED4245);
+                embed.addFields(
+                    {name: 'Result', value: 'Failed', inline: false},
+                    {name: 'Reason', value: 'Command Not Valid', inline: false}
+                );
             }
+        } else {
+            embed.setColor(0xED4245);
+            embed.addFields(
+                {name: 'Result', value: 'Failed', inline: false},
+                {name: 'Reason', value: 'Command Not Found', inline: false}
+            );
         }
+
+        this.#discord.sendEmbedToLogChannel(context.guildId, embed);
     }
 
     #processGlobalCommand(context) {
@@ -260,6 +280,20 @@ module.exports = class JexBotApp {
 
             if (command.isCommandValid(context)) {
                 command.executeCommand(context);
+
+                let embed = new EmbedBuilder().setTitle('Command Received')
+                    .setColor(0x57f287)
+                    .addFields(
+                        {name: 'Origination', value: context.origination, inline: false},
+                        {name: 'Message', value: context.message, inline: false},
+                        {name: 'User ID', value: context.userId, inline: false},
+                        {name: 'Username', value: context.username, inline: false},
+                        {name: 'Display Name', value: context.displayName, inline: false},
+                        {name: 'Result', value: 'Success', inline: false},
+                        {name: 'Reason', value: 'Global Command Received', inline: false}
+                    );
+
+                this.#discord.sendEmbedToLogChannel(context.guildId, embed);
                 break;
             }
         }

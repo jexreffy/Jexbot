@@ -38,7 +38,7 @@ module.exports = class CommandNew extends JexCommand {
         this._app.routines['setRaceCategory'](this._app, context, game, category);
 
         let embed = new EmbedBuilder()
-            .setColor(65280)
+            .setColor(0x57f287)
             .setTitle('Crystal Company Race');
         
         this._app.sendToDiscordRaceChannel(guildId, `${this._app.getPingRole(guildId)} ${this._app.config['pings'][context.activeRace.pingIndex]}`).then(x => {

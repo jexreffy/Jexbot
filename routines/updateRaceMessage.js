@@ -6,7 +6,7 @@ module.exports = (app, context) => {
     let message = {};
     let embed = new EmbedBuilder()
 
-    embed.setColor(65280);
+    embed.setColor(0x57f287);
     embed.setTitle(race.status);
 
     let desc = "The Legend of Zelda: A Link to the Past Randomizer Race"

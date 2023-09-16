@@ -21,7 +21,7 @@ module.exports = class CommandGatekeeper extends JexCommand {
     }
 
     executeCommand(context) {
-        context.activeRace.gatekeeper = context.displayName;
+        context.activeRace.gatekeeper = context.userId;
         this._app.db.setRaceData(context.guildId, context.activeRace);
 
         this._app.routines['updateRaceMessage'](this._app, context);
