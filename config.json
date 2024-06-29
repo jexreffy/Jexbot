@@ -200,7 +200,7 @@
         "What, you think I have the answer?",
         "42",
         "||Made you look||",
-        "That you guys are going to keep putting you know what that means in your messages to see what canned responses I have programmed",
+        "That you guys are going to keep putting you know what that means in your messages to see what canned responses I have programmed.",
         ":mouse_three_button: The Clicks of WallKicks :mouse_three_button:?",
         ":athletic_shoe: The Kicks of WallKicks :athletic_shoe:?",
         "<a:pepeD:893122725126737950> The Year of WallKicks <a:pepeD:893122725126737950>?",
@@ -225,7 +225,11 @@
         "Shall we play a game, NAME?",
         "You gotta ask yourself a question, NAME: 'Do I feel lucky?' Well, do ya, punk?",
         "You want answers? You want the truth?! **YOU CAN'T HANDLE THE TRUTH?!?!** You weep for the lack of Jet Seeds and curse the bots that don't roll them. You have that luxury. You have that luxury of not knowing what I know: That the randomizer doesn't give a damn who rolls the seed. And my existence, while grotesque and incomprehensible to you, gives you an easy scapegoat. You don't want the truth, because deep down in places you don't talk about at parties, you **WANT** me rolling the seed! You **NEED** me rolling the seed!",
-        "You talkin' to me? You talkin' to me? I'm the only bot here."
+        "You talkin' to me? You talkin' to me? I'm the only bot here.",
+        "NAME better get ready to Hawk Tuah given how awful the seed is going to be tonight.",
+        "I dunno...",
+        "I feel like we ask this question every Friday, and yet you still haven't figured it out yet.",
+        "Whatever it was, I didn't do it."
     ],
     "pings": [
         "Let's get ready to Rando!!!",
@@ -238,10 +242,10 @@
         "I would be careful, the seed roller is sus...",
         "Nobody blink! Triumph or Die!",
         "Deja vu - the sensation that you are doing something you have done before.",
-        "Time for Shades to start pulling teeth to see who's going to be restreamed.",
         "Oh look, time for another rousing round of corporal masochism",
         "Time to start Living on a Prayer!",
-        "It's Friday, Friday, Gotta get down on Friday!"
+        "It's Friday, Friday, Gotta get down on Friday!",
+        "Look, just get on in here..."
     ],
     "dickMessages": [
         "ROLLER has been blamed by NAME for our runners collective adversity RICHARD times.",
@@ -385,6 +389,27 @@
             "firstLine": "Merry Christmas to all...",
             "firstDelay": 1000,
             "secondLine": "Now all of you get wrecked!",
+            "secondDelay": 1000,
+            "countdown": 5
+        },
+        {
+            "firstLine": "This message will self-destruct in 5 seconds.",
+            "firstDelay": 5000,
+            "secondLine": "BANG!!!!",
+            "secondDelay": 1000,
+            "countdown": 5
+        },
+        {
+            "firstLine": "Watch Out!!!",
+            "firstDelay": 1000,
+            "secondLine": "Incoming!!!",
+            "secondDelay": 1000,
+            "countdown": 5
+        },
+        {
+            "firstLine": "Why did the chicken cross the road?",
+            "firstDelay": 5000,
+            "secondLine": "Because... ah fuck it...",
             "secondDelay": 1000,
             "countdown": 5
         }
