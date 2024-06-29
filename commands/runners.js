@@ -15,7 +15,13 @@ module.exports = class CommandRunners extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.TWITCH;
+        let result = "";
+
+        if (context.origination !== this._app.TWITCH) {
+            result = "Twitch must be origination of command";
+        }
+
+        return result;
     }
 
     executeCommand(context) {

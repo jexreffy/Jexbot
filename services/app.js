@@ -254,7 +254,7 @@ module.exports = class JexBotApp {
             let command = this.#raceCommands[match[1]];
             let result = command.isCommandValid(context);
 
-            if (result.length > 0) {
+            if (result.length <= 0) {
                 command.executeCommand(context);
 
                 embed.setColor(0x57f287);
@@ -284,7 +284,7 @@ module.exports = class JexBotApp {
             let command = this.#globalCommands[this.#globalCommandKeys[i]];
             let result = command.isCommandValid(context);
 
-            if (result.length > 0) {
+            if (result.length <= 0) {
                 command.executeCommand(context);
 
                 let embed = new EmbedBuilder().setTitle('Command Received')

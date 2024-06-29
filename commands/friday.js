@@ -15,8 +15,15 @@ module.exports = class CommandFriday extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.DISCORD &&
-               context.message.match(/(\byou know what that means\b)/i) !== null;
+        let result = "";
+
+        if (context.origination !== this._app.DISCORD) {
+            result = "Discord must be origination of command";
+        } else if (context.message.match(/(\byou know what that means\b)/i) === null) {
+            result = "Command is not valid";
+        }
+
+        return result;
     }
 
     executeCommand(context) {

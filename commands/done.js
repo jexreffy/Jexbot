@@ -15,12 +15,27 @@ module.exports = class CommandDone extends JexCommand {
     }
 
     isCommandValid(context) {
-        let player = context.activeRace.players.find(x => x.discordId === context.userId);
+        let result = "";
 
-        return context.origination === this._app.DISCORD &&
-               context.activeRace.started &&
-               !context.activeRace.finished &&
-               player != null && !player.finished && !player.forfeited;
+        if (context.origination !== this._app.DISCORD) {
+            result = "Discord must be origination of command";
+        } else if (!context.activeRace.started) {
+            result = "Current race has not started";
+        } else if (context.activeRace.finished) {
+            result = "Current race has finished";
+        } else {
+            let player = context.activeRace.players.find(x => x.discordId === context.userId);
+
+            if (player) {
+                if (player.finished || player.forfeited) {
+                    result = "Racer has already finished";
+                }
+            } else {
+                result = "Not a valid racer";
+            }
+        }
+
+        return result;
     }
 
     executeCommand(context) {

@@ -15,8 +15,15 @@ module.exports = class CommandSnark extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.DISCORD &&
-               this._app.config['botOwnerName'] === context.username;
+        let result = "";
+
+        if (context.origination !== this._app.DISCORD) {
+            result = "Discord must be origination of command";
+        } else if (this._app.config['botOwnerName'] !== context.username) {
+            result = "Only Jexreffy can speak for JexBot";
+        }
+
+        return result;
     }
 
     executeCommand(context) {

@@ -15,8 +15,15 @@ module.exports = class CommandJoin extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.DISCORD &&
-               !context.activeRace.started;
+        let result = "";
+
+        if (context.origination !== this._app.DISCORD) {
+            result = "Discord must be origination of command";
+        } else if (context.activeRace.started) {
+            result = "Current race has started";
+        }
+
+        return result;
     }
 
     executeCommand(context) {

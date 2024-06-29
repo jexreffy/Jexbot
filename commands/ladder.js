@@ -15,10 +15,19 @@ module.exports = class CommandLadder extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.DISCORD &&
-               context.activeRace.finished &&
-               this._app.config['botOwnerName'] === context.username &&
-               this._app.config['botOwnerGuild'] === context.guildId;
+        let result = "";
+
+        if (context.origination !== this._app.DISCORD) {
+            result = "Discord must be origination of command";
+        } else if (!context.activeRace.finished) {
+            result = "Current Race has not finished";
+        } else if (this._app.config['botOwnerName'] !== context.username) {
+            result = "Only Jexreffy can speak for JexBot";
+        } else if (this._app.config['botOwnerGuild'] !== context.guildId) {
+            result = "Only Jexreffy can issue this command from his Discord Server";
+        }
+
+        return result;
     }
 
     executeCommand(context) {

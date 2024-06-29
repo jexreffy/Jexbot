@@ -15,10 +15,19 @@ module.exports = class CommandEscape extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.DISCORD &&
-               !context.activeRace.escapeItem &&
-               context.activeRace.started &&
-               !context.activeRace.finished;
+        let result = "";
+
+        if (context.origination !== this._app.DISCORD) {
+            result = "Discord must be origination of command";
+        } else if (!context.activeRace.started) {
+            result = "Current race has not started";
+        } else if (context.activeRace.finished) {
+            result = "Current race has finished";
+        } else if (context.activeRace.escapeItem) {
+            result = "Escape Item has already been set";
+        }
+
+        return result;
     }
 
     executeCommand(context) {

@@ -15,7 +15,13 @@ module.exports = class CommandRoll extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.DISCORD;
+        let result = "";
+
+        if (context.origination !== this._app.DISCORD) {
+            result = "Discord must be origination of command";
+        }
+
+        return result;
     }
 
     executeCommand(context) {

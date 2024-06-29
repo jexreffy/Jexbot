@@ -15,10 +15,19 @@ module.exports = class CommandLeave extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.DISCORD &&
-               !context.activeRace.locked &&
-               !context.activeRace.started &&
-               context.activeRace.players.find(x => x.discordId === context.userId);
+        let result = "";
+
+        if (context.origination !== this._app.DISCORD) {
+            result = "Discord must be origination of command";
+        } else if (context.activeRace.locked) {
+            result = "Race has been locked";
+        } else if (context.activeRace.started) {
+            result = "Race is currently in progress";
+        } else if (context.activeRace.players.find(x => x.discordId === context.userId) === undefined) {
+            result = "User is not in the race";
+        }
+
+        return result;
     }
 
     executeCommand(context) {

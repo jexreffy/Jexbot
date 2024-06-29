@@ -15,9 +15,15 @@ module.exports = class CommandDick extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.activeRace.started &&
-               (!context.activeRace.lastDickTime ||
-                   (Math.floor((Date.now() - context.activeRace.lastDickTime)) / 1000) > this._app.config['minimumNewDickSeconds']);
+        let result = "";
+
+        if (!context.activeRace.started) {
+            result = "Current race has not started";
+        } else if (context.activeRace.lastDickTime && (Math.floor((Date.now() - context.activeRace.lastDickTime)) / 1000) > this._app.config['minimumNewDickSeconds']) {
+            result = "Command is in cooldown";
+        }
+
+        return result;
     }
 
     executeCommand(context) {

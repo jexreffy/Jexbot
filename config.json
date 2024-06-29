@@ -11,7 +11,7 @@
             "restreamChannel": "#jexreffy",
             "pingRole": "ALTTPR",
             "racerRole": "Racer",
-            "refereeRoles": "Admin",
+            "refereeRole": "Admin",
             "sotwEnabled": false,
             "codeMap": [
                 ":Bow:817965008637919293",
@@ -56,7 +56,7 @@
             "restreamChannel": "#thecrystalcompany",
             "pingRole": "LttPR",
             "racerRole": "Racer",
-            "refereeRoles": "Race Mods",
+            "refereeRole": "Race Mods",
             "sotwEnabled": true,
             "sotwChannel": "lttp-jexbot",
             "sotwEasy": [
@@ -129,7 +129,6 @@
     "relayForfeitDelaySeconds": 300,
     "defaultLeaderboardSize": 25,
     "defaultCategory": "standard",
-    "referees": ["263872489946349568", "300096480742735873", "172148578397978624", "234063405667844099", "102147944555241472", "112891568200908800"],
     "uncleLocation": "TGluaydzIFVuY2xlOjE=",
     "atkLocations": [
         "Q2FzdGxlIFRvd2VyIC0gRGFyayBNYXplOjE=",

@@ -15,11 +15,25 @@ module.exports = class CommandMultiWorld extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.DISCORD &&
-               !context.activeRace.seedLink &&
-               !context.activeRace.started &&
-               (this._app.config['referees'].includes(context.userId) ||
-                   context.activeRace.players.find(x => x.discordId === context.userId));
+        let result = "";
+
+        if (context.origination !== this._app.DISCORD) {
+            result = "Discord must be origination of command";
+        } else if (context.activeRace.seedLink) {
+            result = "Current race has had a seed set";
+        } else if (context.activeRace.started) {
+            result = "Current race has started";
+        } else {
+            let refereeRole = this._app.getRefereeRole(context.guildId);
+            let member = this._app.findDiscordMemberById(context.guildId, context.userId);
+            let hasRole = member.roles.cache.some(x => x.name === refereeRole.name);
+
+            if (!hasRole && context.activeRace.players.find(x => x.discordId !== context.userId)) {
+                result = "Only Referees or Races can setup a multiworld.";
+            }
+        }
+
+        return result;
     }
 
     executeCommand(context) {

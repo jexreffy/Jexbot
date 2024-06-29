@@ -16,12 +16,23 @@ module.exports = class CommandNew extends JexCommand {
     }
 
     isCommandValid(context) {
-        let refereeRole = this._app.getRacerRole(context.guildId);
-        let member = this._app.findDiscordMemberById(context.guildId, context.userId);
+        let result = "";
 
-        return context.origination === this._app.DISCORD &&
-               context.activeRace.finished &&
-               member.roles.cache.some(role => role.name === refereeRole.name);
+        if (context.origination !== this._app.DISCORD) {
+            result = "Discord must be origination of command";
+        } else if (!context.activeRace.finished) {
+            result = "Current race has not finished";
+        } else {
+            let refereeRole = this._app.getRefereeRole(context.guildId);
+            let member = this._app.findDiscordMemberById(context.guildId, context.userId);
+            let hasRole = member.roles.cache.some(x => x.name === refereeRole.name);
+
+            if (!hasRole) {
+                result = "User is not a referee";
+            }
+        }
+
+        return result;
     }
 
     executeCommand(context) {
@@ -43,7 +54,7 @@ module.exports = class CommandNew extends JexCommand {
         let embed = new EmbedBuilder()
             .setColor(0x57f287)
             .setTitle('Crystal Company Race');
-        
+
         this._app.sendToDiscordRaceChannel(guildId, `${this._app.getPingRole(guildId)} ${this._app.config['pings'][context.activeRace.pingIndex]}`).then(x => {
             this._app.sendEmbedToDiscordRaceChannel(guildId, embed).then(x => {
                 context.activeRace.messageId = x.id;

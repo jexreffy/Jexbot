@@ -22,7 +22,7 @@ module.exports = class CommandTwitch extends JexCommand {
         } else if (context.activeRace.started) {
             result = "Race is currently in progress";
         } else if (context.activeRace.players.find(x => x.discordId === context.userId) === undefined) {
-            result = "User is not in the database";
+            result = "User is not in the race";
         }
 
         return result;

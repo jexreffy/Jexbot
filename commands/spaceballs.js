@@ -15,7 +15,15 @@ module.exports = class CommandSpaceBalls extends JexCommand {
     }
 
     isCommandValid(context) {
-        return (Math.floor((Date.now() - this._app.db.getSpaceballs())) / 1000) > this._app.config['minimumNewSpaceballsSeconds'];
+        let result = "";
+
+        if (!context.activeRace.started) {
+            result = "Current race has not started";
+        } else if ((Math.floor((Date.now() - this._app.db.getSpaceballs())) / 1000) <= this._app.config['minimumNewSpaceballsSeconds']) {
+            result = "Command is in cooldown";
+        }
+
+        return result;
     }
 
     executeCommand(context) {

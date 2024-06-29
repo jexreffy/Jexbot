@@ -15,11 +15,21 @@ module.exports = class CommandGTStop extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.TWITCH &&
-               context.activeRace.started &&
-               !context.activeRace.finished &&
-               context.activeRace.guessGameEnabled &&
-               !context.activeRace.guessGameStarted;
+        let result = "";
+
+        if (context.origination !== this._app.TWITCH) {
+            result = "Twitch must be origination of command";
+        } else if (!context.activeRace.started) {
+            result = "Current race has not started";
+        } else if (context.activeRace.finished) {
+            result = "Current race has finished";
+        } else if (!context.activeRace.guessGameEnabled) {
+            result = "GTBK Guessing Game is not enabled for this race";
+        } else if (!context.activeRace.guessGameStarted) {
+            result = "GTBK Guessing Game has not started";
+        }
+
+        return result;
     }
 
     executeCommand(context) {
