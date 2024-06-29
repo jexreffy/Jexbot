@@ -16,7 +16,7 @@ module.exports = class JexCommand {
     }
 
     isCommandValid(context) {
-        return false;
+        return "";
     }
 
     executeCommand(context) {

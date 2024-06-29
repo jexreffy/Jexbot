@@ -16,7 +16,7 @@ module.exports = (app, context) => {
     }
 
     if (race.gatekeeper) {
-        desc += `\n Gatekeeper: ${race.gatekeeper}`;
+        desc += `\n Gatekeeper: ${race.gatekeeperDisplayName}`;
     }
 
     if (race.relay) {

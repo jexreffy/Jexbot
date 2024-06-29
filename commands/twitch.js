@@ -15,9 +15,17 @@ module.exports = class CommandTwitch extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.DISCORD &&
-               !context.activeRace.started &&
-               context.activeRace.players.find(x => x.discordId === context.userId) !== undefined;
+        let result = "";
+
+        if (context.origination !== this._app.DISCORD) {
+            result = "Discord must be origination of command";
+        } else if (context.activeRace.started) {
+            result = "Race is currently in progress";
+        } else if (context.activeRace.players.find(x => x.discordId === context.userId) === undefined) {
+            result = "User is not in the database";
+        }
+
+        return result;
     }
 
     executeCommand(context) {

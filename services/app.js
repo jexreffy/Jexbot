@@ -152,6 +152,10 @@ module.exports = class JexBotApp {
         return this.#discord.getRacerRole(guildId);
     }
 
+    getRefereeRole(guildId) {
+        return this.#discord.getRefereeRole(guildId);
+    }
+
     getPingRole(guildId) {
         return this.#discord.getPingRole(guildId);
     }
@@ -248,8 +252,9 @@ module.exports = class JexBotApp {
 
         if (match && match[1] && this.#raceCommandKeys.indexOf(match[1]) >= 0) {
             let command = this.#raceCommands[match[1]];
+            let result = command.isCommandValid(context);
 
-            if (command.isCommandValid(context)) {
+            if (result.length > 0) {
                 command.executeCommand(context);
 
                 embed.setColor(0x57f287);
@@ -260,7 +265,7 @@ module.exports = class JexBotApp {
                 embed.setColor(0xED4245);
                 embed.addFields(
                     {name: 'Result', value: 'Failed', inline: false},
-                    {name: 'Reason', value: 'Command Not Valid', inline: false}
+                    {name: 'Reason', value: result, inline: false}
                 );
             }
         } else {
@@ -277,8 +282,9 @@ module.exports = class JexBotApp {
     #processGlobalCommand(context) {
         for (let i = 0; i < this.#globalCommandKeys.length; i++) {
             let command = this.#globalCommands[this.#globalCommandKeys[i]];
+            let result = command.isCommandValid(context);
 
-            if (command.isCommandValid(context)) {
+            if (result.length > 0) {
                 command.executeCommand(context);
 
                 let embed = new EmbedBuilder().setTitle('Command Received')

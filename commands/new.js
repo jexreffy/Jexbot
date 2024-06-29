@@ -16,9 +16,12 @@ module.exports = class CommandNew extends JexCommand {
     }
 
     isCommandValid(context) {
+        let refereeRole = this._app.getRacerRole(context.guildId);
+        let member = this._app.findDiscordMemberById(context.guildId, context.userId);
+
         return context.origination === this._app.DISCORD &&
                context.activeRace.finished &&
-               this._app.config['referees'].includes(context.userId);
+               member.roles.cache.some(role => role.name === refereeRole.name);
     }
 
     executeCommand(context) {

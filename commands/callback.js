@@ -15,11 +15,20 @@ module.exports = class CommandCallback extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.TWITCH &&
-               context.activeRace.started &&
-               !context.activeRace.finished &&
-               (!context.activeRace.lastCallback ||
-                   (Math.floor((Date.now() - context.activeRace.lastCallback)) / 1000) > this._app.config['minimumNewCallbackSeconds']);
+        let result = "";
+
+        if (context.origination !== this._app.TWITCH) {
+            result = "Twitch must be origination of command";
+        } else if (!context.activeRace.started) {
+            result = "Race has not started";
+        } else if (context.activeRace.finished) {
+            result = "Race has finished";
+        } else if (context.activeRace.lastCallback &&
+            (Math.floor((Date.now() - context.activeRace.lastCallback)) / 1000) <= this._app.config['minimumNewCallbackSeconds']) {
+            result = "Callback in cooldown";
+        }
+
+        return result;
     }
 
     executeCommand(context) {

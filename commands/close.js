@@ -15,8 +15,15 @@ module.exports = class CommandClose extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.DISCORD &&
-               this._app.config['referees'].includes(context.userId);
+        let result = "";
+
+        if (context.origination !== this._app.DISCORD) {
+            result = "Discord must be origination of command";
+        } else if (!this._app.config['referees'].includes(context.userId)) {
+            result = "User is not allowed to be gatekeeper";
+        }
+
+        return result;
     }
 
     executeCommand(context) {

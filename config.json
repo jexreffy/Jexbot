@@ -11,6 +11,7 @@
             "restreamChannel": "#jexreffy",
             "pingRole": "ALTTPR",
             "racerRole": "Racer",
+            "refereeRoles": "Admin",
             "sotwEnabled": false,
             "codeMap": [
                 ":Bow:817965008637919293",
@@ -55,6 +56,7 @@
             "restreamChannel": "#thecrystalcompany",
             "pingRole": "LttPR",
             "racerRole": "Racer",
+            "refereeRoles": "Race Mods",
             "sotwEnabled": true,
             "sotwChannel": "lttp-jexbot",
             "sotwEasy": [

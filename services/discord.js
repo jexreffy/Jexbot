@@ -9,6 +9,7 @@ module.exports = class JexBotDiscord {
     #guilds = {};
     #pingRoles = {};
     #racerRoles = {};
+    #refereeRoles = {};
     #raceChannels = {};
     #logChannels = {};
     #sotwChannels = {};
@@ -50,6 +51,7 @@ module.exports = class JexBotDiscord {
                 this.#sotwChannels[guildId] = guildConfig.sotwEnabled ? channelCache.find(channel => channel.name === guildConfig.sotwChannel) : null;
                 this.#pingRoles[guildId] = rolesCache.find(role => role.name === guildConfig.pingRole);
                 this.#racerRoles[guildId] = rolesCache.find(role => role.name === guildConfig.racerRole);
+                this.#refereeRoles[guildId] = rolesCache.find(role => role.name === guildConfig.refereeRole);
             }
         });
 
@@ -96,6 +98,10 @@ module.exports = class JexBotDiscord {
 
     getRacerRole(guildId) {
         return this.#racerRoles[guildId];
+    }
+
+    getRefereeRole(guildId) {
+        return this.#refereeRoles[guildId];
     }
 
     sendToRaceChannel(guildId, message) {

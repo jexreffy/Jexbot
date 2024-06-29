@@ -15,10 +15,19 @@ module.exports = class CommandBlueBalls extends JexCommand {
     }
 
     isCommandValid(context) {
-        return context.origination === this._app.TWITCH &&
-               context.activeRace.started &&
-               !context.activeRace.finished &&
-               context.activeRace.blueballs < 0;
+        let result = "";
+
+        if (context.origination !== this._app.TWITCH) {
+            result = "Twitch must be origination of command";
+        } else if (!context.activeRace.started) {
+            result = "Race has not started";
+        } else if (context.activeRace.finished) {
+            result = "Race has finished";
+        } else if (context.activeRace.blueballs >= 0) {
+            result = "Blueballs has been set";
+        }
+
+        return result;
     }
 
     executeCommand(context) {
